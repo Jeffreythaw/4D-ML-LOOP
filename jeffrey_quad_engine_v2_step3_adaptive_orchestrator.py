@@ -995,4 +995,3 @@ if __name__ == "__main__":
         print_header("STEP 3 ADAPTIVE ORCHESTRATOR — FAILED")
         print(f"{type(exc).__name__}: {exc}", file=sys.stderr)
         raise
-PY
