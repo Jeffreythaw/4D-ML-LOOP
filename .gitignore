@@ -7,3 +7,15 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+
+# Large/generated data artifacts
+data/processed/*.parquet
+data/processed/*.pkl
+data/processed/*.pickle
+data/processed/*.feather
+data/processed/*.joblib
+*.parquet
+*.pkl
+*.pickle
+*.feather
+*.joblib
