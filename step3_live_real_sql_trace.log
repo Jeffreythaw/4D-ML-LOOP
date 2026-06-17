@@ -1,0 +1,49 @@
+2026-06-17 16:37:28,110 | INFO | jeffrey_quad_engine_v2.step2 | SQL Server connection opened.
+2026-06-17 16:37:28,110 | INFO | jeffrey_quad_engine_v2.step3 | STEP 3 adaptive loop starting. source_draw_range=4051..5493 target_range=4052..5494
+2026-06-17 16:37:34,189 | INFO | jeffrey_quad_engine_v2.step3 | DrawStep source=4051 target=4052 top5=['9981', '4706', '3650', '0654', '0740'] engines=['E4_MARKOV_TRANSITION_MASS', 'E3_POLYNOMIAL', 'E2_SET_PROJECTOR', 'E4_MARKOV_TRANSITION_MASS', 'E4_MARKOV_TRANSITION_MASS'] hit=1 adaptive=False formula_id=None roll_1M=1.0000 roll_3M=1.0000 roll_12M=1.0000 roll_24M=1.0000
+2026-06-17 16:37:40,405 | INFO | jeffrey_quad_engine_v2.step2 | SQL Server connection closed.
+IntegrityError: ('23000', "[23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Cannot insert duplicate key row in object 'dbo.FormulaRegistry' with unique index 'UX_FormulaRegistry_ActiveVersion'. The duplicate key value is (E4_ADAPTIVE_4_UNKNOWNS_AFFINE, E4_FIX_4052_TO_4053, Saturday). (2601) (SQLExecDirectW)")
+
+============================================================================
+STEP 3 ADAPTIVE ORCHESTRATOR — START
+============================================================================
+PROJECT_ROOT: /Users/kojeffrey/4D-ML-LOOP
+DB_SERVER: 124.155.205.214
+DB_DATABASE: LS
+STEP2_IMPORT: OK
+STEP3_SCOPE: DiversityGuard + AdaptiveFeedback only
+
+============================================================================
+STEP 3 ADAPTIVE ORCHESTRATOR — FAILED
+============================================================================
+Traceback (most recent call last):
+  File "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py", line 993, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py", line 982, in main
+    results = orchestrator.run_loop()
+  File "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py", line 920, in run_loop
+    result = self.run_one_step(source_draw_no)
+  File "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py", line 868, in run_one_step
+    adaptive_formula_id = self.matrix_core.solve_and_register_adaptive_formula(
+        source_draw_no=source_draw_no,
+    ...<5 lines>...
+        training_end_draw_no=target_draw_no,
+    )
+  File "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py", line 938, in solve_and_register_adaptive_formula
+    formula_id = self.gateway.register_formula(
+        formula,
+    ...<5 lines>...
+        is_active=True,
+    )
+  File "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py", line 497, in register_formula
+    formula_id = self.conn.cursor().execute(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql,
+        ^^^^
+    ...<11 lines>...
+        ),
+        ^^
+    ).fetchval()
+    ^
+pyodbc.IntegrityError: ('23000', "[23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Cannot insert duplicate key row in object 'dbo.FormulaRegistry' with unique index 'UX_FormulaRegistry_ActiveVersion'. The duplicate key value is (E4_ADAPTIVE_4_UNKNOWNS_AFFINE, E4_FIX_4052_TO_4053, Saturday). (2601) (SQLExecDirectW)")

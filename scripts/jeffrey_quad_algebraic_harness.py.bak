@@ -1,0 +1,880 @@
+from __future__ import annotations
+
+import argparse
+import gc
+import json
+from collections import defaultdict, deque
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+import pandas as pd
+
+
+DEFAULT_FEATURES_PATH = "data/processed/candidate_features_indexed.parquet"
+DEFAULT_OUT_PATH = "data/research/repair_experiments/jeffrey_quad_dynamic_temporal_backtest.csv"
+DEFAULT_REGISTRY_PATH = "data/research/repair_experiments/jeffrey_quad_formula_registry.json"
+DEFAULT_PROFILE_PATH = "data/research/repair_experiments/jeffrey_dynamic_temporal_profile.json"
+
+ENGINE_NAMES = [
+    "E1_CROSS_PAIR_LINEAR",
+    "E2_SET_PROJECTOR",
+    "E3_POLYNOMIAL",
+    "E4_MARKOV",
+]
+
+HORIZON_WINDOWS = {
+    "1W": 3,
+    "1M": 13,
+    "3M": 39,
+    "12M": 156,
+    "24M": 312,
+}
+
+
+@dataclass(frozen=True)
+class Candidate:
+    number: str
+    engine: str
+    confidence: float
+    signature: str
+    raw_math: str
+
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Jeffrey Quad-Algebraic Harness with Dynamic Temporal Verifier.")
+    p.add_argument("--features-path", default=DEFAULT_FEATURES_PATH)
+    p.add_argument("--out-path", default=DEFAULT_OUT_PATH)
+    p.add_argument("--registry-path", default=DEFAULT_REGISTRY_PATH)
+    p.add_argument("--profile-path", default=DEFAULT_PROFILE_PATH)
+    p.add_argument("--eval-start-draw-no", type=int, default=4051)
+    p.add_argument("--eval-end-draw-no", type=int, default=5494)
+    p.add_argument("--expected-prize-count", type=int, default=23)
+    p.add_argument("--top-k", type=int, default=5)
+    p.add_argument("--max-draws", type=int, default=None)
+    p.add_argument("--trace-blind-transition", action="store_true")
+    p.add_argument("--source-draw-no", type=int, default=4051)
+    p.add_argument("--target-draw-no", type=int, default=4052)
+    p.add_argument("--max-registry-formulas-per-engine", type=int, default=64)
+    p.add_argument("--recent-drift-window", type=int, default=312)
+    p.add_argument("--year-drift-lookback", type=int, default=5)
+    p.add_argument("--debug-first", type=int, default=10)
+    return p.parse_args()
+
+
+def normalize_number(x: Any) -> str:
+    s = str(x).strip().zfill(4)
+    if not s.isdigit() or len(s) != 4:
+        raise ValueError(f"invalid 4D candidate: {x!r}")
+    return s
+
+
+def numbers_to_vectors(numbers: np.ndarray | list[str]) -> np.ndarray:
+    out = np.zeros((len(numbers), 4), dtype=np.int8)
+    for i, n in enumerate(numbers):
+        s = normalize_number(n)
+        out[i] = [int(s[0]), int(s[1]), int(s[2]), int(s[3])]
+    return out
+
+
+def vectors_to_numbers(vectors: np.ndarray) -> list[str]:
+    v = np.mod(vectors, 10).astype(np.int8)
+    return [f"{int(r[0])}{int(r[1])}{int(r[2])}{int(r[3])}" for r in v]
+
+
+def digit_sum_number(number: str) -> int:
+    return sum(int(ch) for ch in normalize_number(number))
+
+
+def day_category(draw_date: str) -> str:
+    dt = pd.to_datetime(draw_date, errors="coerce")
+    if pd.isna(dt):
+        return "Special"
+    name = dt.day_name()
+    if name in {"Wednesday", "Saturday", "Sunday"}:
+        return name
+    return "Special"
+
+
+def load_draw_records(features_path: Path) -> list[dict[str, Any]]:
+    df = pd.read_parquet(
+        features_path,
+        columns=["DrawNo", "DrawIndex", "DrawDate", "CandidateNumber", "Label"],
+    )
+
+    df["CandidateNumber"] = df["CandidateNumber"].astype(str).str.strip().str.zfill(4)
+    df["DrawNo_num"] = pd.to_numeric(df["DrawNo"], errors="coerce")
+    df["DrawIndex"] = pd.to_numeric(df["DrawIndex"], errors="coerce").astype("Int32")
+    df["Label"] = pd.to_numeric(df["Label"], errors="coerce").fillna(0).astype("int8")
+    df["DrawDate"] = df["DrawDate"].astype(str)
+
+    df = df[
+        df["DrawIndex"].notna()
+        & df["CandidateNumber"].str.fullmatch(r"\d{4}", na=False)
+    ].copy()
+
+    winners = df[df["Label"] > 0][
+        ["DrawNo_num", "DrawIndex", "DrawDate", "CandidateNumber"]
+    ].copy()
+
+    winners["DrawNo"] = winners["DrawNo_num"].fillna(-1).astype("int32")
+    winners["DrawIndex"] = winners["DrawIndex"].astype("int32")
+    winners["CandidateNumber"] = winners["CandidateNumber"].astype(str).str.zfill(4)
+    winners = winners.drop(columns=["DrawNo_num"])
+    winners = winners.sort_values(["DrawIndex", "CandidateNumber"], kind="mergesort")
+
+    records: list[dict[str, Any]] = []
+
+    for draw_index, g in winners.groupby("DrawIndex", sort=True):
+        nums = g["CandidateNumber"].astype(str).str.zfill(4).to_numpy(dtype=object)
+        draw_no_vals = g["DrawNo"].astype(int).unique()
+        draw_no = int(draw_no_vals[0]) if len(draw_no_vals) else -1
+        draw_date = str(g["DrawDate"].iloc[0])
+        dt = pd.to_datetime(draw_date, errors="coerce")
+        year = int(dt.year) if not pd.isna(dt) else -1
+
+        records.append(
+            {
+                "draw_no": draw_no,
+                "draw_index": int(draw_index),
+                "draw_date": draw_date,
+                "draw_year": year,
+                "day_category": day_category(draw_date),
+                "numbers": nums,
+                "vectors": numbers_to_vectors(nums),
+                "digit_sums": np.array([digit_sum_number(x) for x in nums], dtype=np.int16),
+            }
+        )
+
+    del df, winners
+    gc.collect()
+    return records
+
+
+def matrix_signature(m: np.ndarray, b: np.ndarray) -> str:
+    mt = np.mod(np.asarray(m, dtype=np.int64), 10).astype(int).tolist()
+    bt = np.mod(np.asarray(b, dtype=np.int64), 10).astype(int).tolist()
+    return f"M={mt}|B={bt}"
+
+
+def solve_affine_lstsq(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    x64 = np.asarray(x, dtype=np.float64)
+    y64 = np.asarray(y, dtype=np.float64)
+    rows: list[np.ndarray] = []
+    targets: list[float] = []
+
+    for xv, yv in zip(x64, y64):
+        for out_pos in range(4):
+            row = np.zeros(20, dtype=np.float64)
+            row[out_pos * 4 : out_pos * 4 + 4] = xv
+            row[16 + out_pos] = 1.0
+            rows.append(row)
+            targets.append(float(yv[out_pos]))
+
+    a = np.vstack(rows)
+    t = np.array(targets, dtype=np.float64)
+    theta, *_ = np.linalg.lstsq(a, t, rcond=None)
+    theta_i = np.mod(np.rint(theta).astype(np.int64), 10)
+    return theta_i[:16].reshape(4, 4).astype(np.int16), theta_i[16:20].astype(np.int16)
+
+
+def apply_affine(vectors: np.ndarray, m: np.ndarray, b: np.ndarray) -> np.ndarray:
+    v64 = np.asarray(vectors, dtype=np.int64)
+    m64 = np.asarray(m, dtype=np.int64)
+    b64 = np.asarray(b, dtype=np.int64).reshape(1, 4)
+    return np.mod((v64 @ m64.T) + b64, 10).astype(np.int8)
+
+
+def polynomial_features(v: np.ndarray) -> np.ndarray:
+    d1, d2, d3, d4 = [int(x) for x in v]
+    return np.array(
+        [
+            d1, d2, d3, d4,
+            d1 * d2, d1 * d3, d1 * d4, d2 * d3, d2 * d4, d3 * d4,
+            d1 * d1, d2 * d2, d3 * d3, d4 * d4,
+            1,
+        ],
+        dtype=np.float64,
+    )
+
+
+def solve_polynomial(source: np.ndarray, target: np.ndarray) -> np.ndarray:
+    phi = np.vstack([polynomial_features(v) for v in source]).astype(np.float64)
+    tgt = np.asarray(target, dtype=np.float64)
+    coeffs = []
+
+    for pos in range(4):
+        theta, *_ = np.linalg.lstsq(phi, tgt[:, pos], rcond=None)
+        coeffs.append(np.mod(np.rint(theta).astype(np.int64), 10))
+
+    return np.vstack(coeffs).astype(np.int16)
+
+
+def apply_polynomial(source: np.ndarray, coeffs: np.ndarray) -> np.ndarray:
+    phi = np.vstack([polynomial_features(v) for v in source]).astype(np.int64)
+    coeffs64 = np.asarray(coeffs, dtype=np.int64)
+    return np.mod(phi @ coeffs64.T, 10).astype(np.int8)
+
+
+class JeffreyDynamicTemporalProfiler:
+    def __init__(self, records: list[dict[str, Any]], recent_window: int = 312, year_lookback: int = 5):
+        self.records = sorted(records, key=lambda r: int(r["draw_index"]))
+        self.recent_window = int(recent_window)
+        self.year_lookback = int(year_lookback)
+        self.base_profile = self._build_base_profile()
+
+    def _base_records(self) -> list[dict[str, Any]]:
+        positive = [r for r in self.records if int(r["draw_no"]) > 0]
+        first_positive_index = min([int(r["draw_index"]) for r in positive], default=10**9)
+        return [r for r in self.records if int(r["draw_no"]) <= 4050 or int(r["draw_index"]) < first_positive_index]
+
+    def _build_base_profile(self) -> dict[str, dict[str, Any]]:
+        buckets: dict[str, list[int]] = defaultdict(list)
+        buckets["ALL"] = []
+
+        for r in self._base_records():
+            cat = r["day_category"]
+            sums = [int(x) for x in r["digit_sums"]]
+            buckets[cat].extend(sums)
+            buckets["ALL"].extend(sums)
+
+        profile: dict[str, dict[str, Any]] = {}
+        for cat in ["Wednesday", "Saturday", "Sunday", "Special", "ALL"]:
+            vals = np.array(buckets.get(cat, []), dtype=np.int16)
+            if vals.size == 0:
+                vals = np.array(buckets.get("ALL", [12, 26]), dtype=np.int16)
+
+            counts = {str(i): int(np.sum(vals == i)) for i in range(37)}
+            q10 = int(np.floor(np.percentile(vals, 10)))
+            q90 = int(np.ceil(np.percentile(vals, 90)))
+            median = float(np.median(vals))
+
+            profile[cat] = {
+                "count": int(vals.size),
+                "q10": max(0, q10),
+                "q90": min(36, q90),
+                "median": median,
+                "distribution": counts,
+            }
+
+        return profile
+
+    def dynamic_bounds(self, target_record: dict[str, Any], source_draw_index: int) -> dict[str, Any]:
+        cat = target_record["day_category"]
+        target_year = int(target_record["draw_year"])
+        base = self.base_profile.get(cat) or self.base_profile["ALL"]
+
+        low = int(base["q10"])
+        high = int(base["q90"])
+        base_median = float(base["median"])
+
+        prior = [
+            r for r in self.records
+            if int(r["draw_index"]) <= int(source_draw_index)
+            and r["day_category"] == cat
+        ]
+
+        recent = prior[-self.recent_window:]
+        recent_vals: list[int] = []
+        for r in recent:
+            recent_vals.extend([int(x) for x in r["digit_sums"]])
+
+        recent_shift = 0
+        recent_median = None
+        if len(recent_vals) >= 30:
+            recent_median = float(np.median(np.array(recent_vals, dtype=np.int16)))
+            recent_shift = int(np.rint((recent_median - base_median) * 0.50))
+
+        year_vals: list[int] = []
+        if target_year > 0:
+            for r in prior:
+                yr = int(r["draw_year"])
+                if target_year - self.year_lookback <= yr < target_year:
+                    year_vals.extend([int(x) for x in r["digit_sums"]])
+
+        year_shift = 0
+        year_median = None
+        if len(year_vals) >= 30:
+            year_median = float(np.median(np.array(year_vals, dtype=np.int16)))
+            year_shift = int(np.rint((year_median - base_median) * 0.25))
+
+        low = max(0, min(36, low + recent_shift + year_shift))
+        high = max(0, min(36, high + recent_shift + year_shift))
+
+        if low > high:
+            low, high = high, low
+
+        return {
+            "day_category": cat,
+            "target_date": target_record["draw_date"],
+            "target_year": target_year,
+            "base_low": int(base["q10"]),
+            "base_high": int(base["q90"]),
+            "dynamic_low": int(low),
+            "dynamic_high": int(high),
+            "base_median": base_median,
+            "recent_median": recent_median,
+            "year_median": year_median,
+            "recent_shift": int(recent_shift),
+            "year_shift": int(year_shift),
+            "base_count": int(base["count"]),
+        }
+
+    def save(self, path: Path) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(self.base_profile, indent=2), encoding="utf-8")
+
+
+def update_registry(registry: dict[str, dict[str, Any]], engine: str, signature: str, payload: dict[str, Any], hit_count: int) -> None:
+    key = f"{engine}::{signature}"
+    if key not in registry:
+        registry[key] = {
+            "engine": engine,
+            "signature": signature,
+            "hits": 0,
+            "tested": 0,
+            "confidence": 0.0,
+            "payload": payload,
+        }
+
+    registry[key]["hits"] += int(hit_count > 0)
+    registry[key]["tested"] += 1
+    registry[key]["confidence"] = float(registry[key]["hits"] / max(1, registry[key]["tested"]))
+
+
+class TemporalFormulaTrainer:
+    def __init__(self, records: list[dict[str, Any]], expected_prize_count: int, max_per_engine: int):
+        self.records = sorted(records, key=lambda r: int(r["draw_index"]))
+        self.expected_prize_count = int(expected_prize_count)
+        self.max_per_engine = int(max_per_engine)
+        self.cursor = 0
+        self.registry: dict[str, dict[str, Any]] = {}
+        self.markov_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+
+    def train_until_source_index(self, source_draw_index: int) -> None:
+        while self.cursor < len(self.records) - 1:
+            src = self.records[self.cursor]
+            tgt = self.records[self.cursor + 1]
+
+            if int(tgt["draw_index"]) > int(source_draw_index):
+                break
+
+            self._process_transition(src, tgt)
+            self.cursor += 1
+
+    def _process_transition(self, src: dict[str, Any], tgt: dict[str, Any]) -> None:
+        if len(src["numbers"]) != self.expected_prize_count or len(tgt["numbers"]) != self.expected_prize_count:
+            return
+
+        src_v = np.asarray(src["vectors"], dtype=np.int8)
+        tgt_v = np.asarray(tgt["vectors"], dtype=np.int8)
+        tgt_set = set(normalize_number(x) for x in tgt["numbers"])
+
+        eye = np.eye(4, dtype=np.int16)
+        residual_counts: dict[str, tuple[int, np.ndarray]] = {}
+
+        for x in src_v:
+            residuals = np.mod(tgt_v.astype(np.int16) - x.reshape(1, 4).astype(np.int16), 10).astype(np.int16)
+            for b in residuals:
+                sig = matrix_signature(eye, b)
+                old = residual_counts.get(sig)
+                residual_counts[sig] = (1 if old is None else old[0] + 1, b.copy())
+
+        for sig, (support, b) in sorted(residual_counts.items(), key=lambda kv: (-kv[1][0], kv[0]))[:8]:
+            outs = set(vectors_to_numbers(apply_affine(src_v, eye, b)))
+            update_registry(
+                self.registry,
+                "E1_CROSS_PAIR_LINEAR",
+                sig,
+                {"kind": "affine", "matrix": eye.tolist(), "bias": b.astype(int).tolist(), "support": int(support)},
+                len(outs & tgt_set),
+            )
+
+        n = len(src_v)
+        for seed in range(min(24, n)):
+            src_idx = np.roll(np.arange(n), seed)[:5]
+            tgt_idx = np.roll(np.arange(n), -seed)[:5]
+            m, b = solve_affine_lstsq(src_v[src_idx], tgt_v[tgt_idx])
+            sig = "SOLVED_AFFINE|" + matrix_signature(m, b)
+            outs = set(vectors_to_numbers(apply_affine(src_v, m, b)))
+            update_registry(
+                self.registry,
+                "E1_CROSS_PAIR_LINEAR",
+                sig,
+                {"kind": "affine", "matrix": m.astype(int).tolist(), "bias": b.astype(int).tolist(), "seed": int(seed)},
+                len(outs & tgt_set),
+            )
+
+        src_center = np.rint(src_v.mean(axis=0)).astype(np.int16) % 10
+        tgt_center = np.rint(tgt_v.mean(axis=0)).astype(np.int16) % 10
+        src_cov = np.cov(src_v.astype(np.float64).T)
+        tgt_cov = np.cov(tgt_v.astype(np.float64).T)
+
+        try:
+            transform = tgt_cov @ np.linalg.pinv(src_cov)
+        except np.linalg.LinAlgError:
+            transform = np.eye(4, dtype=np.float64)
+
+        m2 = np.mod(np.rint(transform).astype(np.int64), 10).astype(np.int16)
+        b2 = np.mod(tgt_center.astype(np.int16) - (m2.astype(np.int16) @ src_center.astype(np.int16)), 10).astype(np.int16)
+        sig2 = "SET_PROJECTOR|" + matrix_signature(m2, b2)
+        outs2 = set(vectors_to_numbers(apply_affine(src_v, m2, b2)))
+        update_registry(
+            self.registry,
+            "E2_SET_PROJECTOR",
+            sig2,
+            {"kind": "affine", "matrix": m2.astype(int).tolist(), "bias": b2.astype(int).tolist()},
+            len(outs2 & tgt_set),
+        )
+
+        coeffs = solve_polynomial(src_v, tgt_v)
+        sig3 = "POLY_COEFFS=" + json.dumps(coeffs.astype(int).tolist(), sort_keys=True)
+        outs3 = set(vectors_to_numbers(apply_polynomial(src_v, coeffs)))
+        update_registry(
+            self.registry,
+            "E3_POLYNOMIAL",
+            sig3,
+            {"kind": "polynomial", "coeffs": coeffs.astype(int).tolist()},
+            len(outs3 & tgt_set),
+        )
+
+        for s in src["numbers"]:
+            s4 = normalize_number(s)
+            for t in tgt["numbers"]:
+                self.markov_counts[s4][normalize_number(t)] += 1
+
+    def trimmed_registry(self) -> dict[str, dict[str, Any]]:
+        trimmed: dict[str, dict[str, Any]] = {}
+        for engine in ENGINE_NAMES:
+            rows = [v for v in self.registry.values() if v["engine"] == engine]
+            rows = sorted(rows, key=lambda r: (-float(r["confidence"]), -int(r["hits"]), r["signature"]))[: self.max_per_engine]
+            for r in rows:
+                trimmed[f"{r['engine']}::{r['signature']}"] = r
+        return trimmed
+
+
+def generate_from_registry(
+    cur_vectors: np.ndarray,
+    cur_numbers: np.ndarray,
+    registry: dict[str, dict[str, Any]],
+    markov_counts: dict[str, dict[str, int]],
+) -> list[Candidate]:
+    candidates: list[Candidate] = []
+    cur_v = np.asarray(cur_vectors, dtype=np.int8)
+
+    for item in registry.values():
+        engine = item["engine"]
+        confidence = float(item.get("confidence", 0.0))
+        signature = item["signature"]
+        payload = item["payload"]
+
+        if payload["kind"] == "affine":
+            m = np.array(payload["matrix"], dtype=np.int16)
+            b = np.array(payload["bias"], dtype=np.int16)
+            outs_v = apply_affine(cur_v, m, b)
+            outs = vectors_to_numbers(outs_v)
+
+            x0 = cur_v[0].astype(np.int16)
+            y0 = np.mod((m.astype(np.int16) @ x0) + b, 10).astype(np.int16)
+            raw_math = f"{vectors_to_numbers(x0.reshape(1,4))[0]}: ({m.astype(int).tolist()} @ {x0.astype(int).tolist()} + {b.astype(int).tolist()}) % 10 = {y0.astype(int).tolist()} -> {vectors_to_numbers(y0.reshape(1,4))[0]}"
+
+        elif payload["kind"] == "polynomial":
+            coeffs = np.array(payload["coeffs"], dtype=np.int16)
+            outs = vectors_to_numbers(apply_polynomial(cur_v, coeffs))
+            raw_math = "poly: coeffs applied to [d1,d2,d3,d4,d1*d2,d1*d3,d1*d4,d2*d3,d2*d4,d3*d4,d1^2,d2^2,d3^2,d4^2,1] modulo 10"
+        else:
+            continue
+
+        for n in outs:
+            candidates.append(Candidate(normalize_number(n), engine, confidence, signature, raw_math))
+
+    aggregate: dict[str, int] = {}
+    for s in cur_numbers:
+        s4 = normalize_number(s)
+        for t, c in markov_counts.get(s4, {}).items():
+            aggregate[t] = aggregate.get(t, 0) + int(c)
+
+    for n, c in sorted(aggregate.items(), key=lambda kv: (-kv[1], kv[0]))[:128]:
+        candidates.append(
+            Candidate(
+                normalize_number(n),
+                "E4_MARKOV",
+                float(c),
+                f"MARKOV:{n}",
+                f"P({n}|current states) historical transition count={c}",
+            )
+        )
+
+    return candidates
+
+
+def verifier_score(number: str, temporal_context: dict[str, Any]) -> tuple[float, dict[str, Any]]:
+    n = normalize_number(number)
+    d = np.array([int(ch) for ch in n], dtype=np.int8)
+
+    odd = int(np.sum(d % 2 == 1))
+    even = 4 - odd
+    odd_even_score = 2.0 if odd == 2 else 1.0 if odd in [1, 3] else -2.0
+
+    digit_sum = int(np.sum(d.astype(np.int16)))
+    low = int(temporal_context["dynamic_low"])
+    high = int(temporal_context["dynamic_high"])
+
+    if low <= digit_sum <= high:
+        digit_sum_score = 2.5
+        sum_reason = "inside_dynamic_temporal_range"
+    elif low - 2 <= digit_sum <= high + 2:
+        digit_sum_score = 0.75
+        sum_reason = "near_dynamic_temporal_boundary"
+    else:
+        digit_sum_score = -2.0
+        sum_reason = "outside_dynamic_temporal_range"
+
+    low_digits = int(np.sum(d <= 4))
+    high_digits = 4 - low_digits
+    high_low_score = 2.0 if low_digits == 2 else 1.0 if low_digits in [1, 3] else -2.0
+
+    total = odd_even_score + digit_sum_score + high_low_score
+
+    return float(total), {
+        "candidate": n,
+        "odd": odd,
+        "even": even,
+        "digit_sum": digit_sum,
+        "dynamic_low": low,
+        "dynamic_high": high,
+        "day_category": temporal_context["day_category"],
+        "target_date": temporal_context["target_date"],
+        "sum_reason": sum_reason,
+        "odd_even_score": odd_even_score,
+        "digit_sum_score": digit_sum_score,
+        "high_low_score": high_low_score,
+        "high_digits": high_digits,
+        "low_digits": low_digits,
+    }
+
+
+def consolidate_candidates(candidates: list[Candidate], temporal_context: dict[str, Any], top_k: int) -> tuple[list[str], pd.DataFrame]:
+    agg: dict[str, dict[str, Any]] = {}
+
+    for c in candidates:
+        n = normalize_number(c.number)
+        rec = agg.setdefault(
+            n,
+            {
+                "Candidate": n,
+                "EngineScore": 0.0,
+                "Engines": set(),
+                "RawMath": [],
+            },
+        )
+        rec["EngineScore"] += float(c.confidence)
+        rec["Engines"].add(c.engine)
+        rec["RawMath"].append(c.raw_math)
+
+    rows: list[dict[str, Any]] = []
+
+    for rec in agg.values():
+        verifier, info = verifier_score(rec["Candidate"], temporal_context)
+        final = float(rec["EngineScore"]) + verifier
+        rows.append(
+            {
+                "Candidate": rec["Candidate"],
+                "EngineScore": float(rec["EngineScore"]),
+                "OddEvenScore": float(info["odd_even_score"]),
+                "DigitSumScore": float(info["digit_sum_score"]),
+                "HighLowScore": float(info["high_low_score"]),
+                "VerifierScore": float(verifier),
+                "CombinedFinalScore": final,
+                "DigitSum": int(info["digit_sum"]),
+                "DynamicLow": int(info["dynamic_low"]),
+                "DynamicHigh": int(info["dynamic_high"]),
+                "DayCategory": info["day_category"],
+                "SumReason": info["sum_reason"],
+                "EngineCount": len(rec["Engines"]),
+                "Engines": "|".join(sorted(rec["Engines"])),
+                "RawMath": " ## ".join(rec["RawMath"][:2]),
+            }
+        )
+
+    df = pd.DataFrame(rows)
+    if df.empty:
+        return [], df
+
+    df = df.sort_values(
+        ["CombinedFinalScore", "EngineCount", "EngineScore", "Candidate"],
+        ascending=[False, False, False, True],
+        kind="mergesort",
+    ).reset_index(drop=True)
+
+    return df["Candidate"].head(top_k).astype(str).str.zfill(4).tolist(), df
+
+
+def rolling_metrics(hit_history: deque[int]) -> dict[str, float]:
+    arr = np.array(hit_history, dtype=np.float32)
+    out: dict[str, float] = {}
+
+    for label, window in HORIZON_WINDOWS.items():
+        tail = arr[-window:] if len(arr) >= window else arr
+        out[f"rolling_{label}_avg_hits"] = float(np.mean(tail)) if len(tail) else 0.0
+        out[f"rolling_{label}_binary_hit_rate"] = float(np.mean(tail > 0)) if len(tail) else 0.0
+
+    return out
+
+
+def trace_blind_transition(args: argparse.Namespace) -> None:
+    records = load_draw_records(Path(args.features_path))
+    profiler = JeffreyDynamicTemporalProfiler(records, args.recent_drift_window, args.year_drift_lookback)
+    profiler.save(Path(args.profile_path))
+
+    by_draw_no = {int(r["draw_no"]): r for r in records if int(r["draw_no"]) > 0}
+    if args.source_draw_no not in by_draw_no:
+        raise ValueError(f"source draw not found: {args.source_draw_no}")
+    if args.target_draw_no not in by_draw_no:
+        raise ValueError(f"target draw not found for verification: {args.target_draw_no}")
+
+    cur = by_draw_no[args.source_draw_no]
+    target = by_draw_no[args.target_draw_no]
+
+    trainer = TemporalFormulaTrainer(records, args.expected_prize_count, args.max_registry_formulas_per_engine)
+    trainer.train_until_source_index(int(cur["draw_index"]))
+
+    registry = trainer.trimmed_registry()
+    temporal_context = profiler.dynamic_bounds(target, int(cur["draw_index"]))
+
+    candidates = generate_from_registry(cur["vectors"], cur["numbers"], registry, trainer.markov_counts)
+    top5, scoreboard = consolidate_candidates(candidates, temporal_context, args.top_k)
+
+    print("# STRICT BLIND TRANSITION TRACE WITH JEFFREY DYNAMIC TEMPORAL VERIFIER")
+    print()
+    print("| Field | Value |")
+    print("|---|---|")
+    print(f"| Source draw | `{args.source_draw_no}` |")
+    print(f"| Target draw | `{args.target_draw_no}` |")
+    print("| Calculation firewall | `TARGET WINNERS HIDDEN UNTIL FINAL VERIFICATION` |")
+    print(f"| Target date known pre-draw | `{target['draw_date']}` |")
+    print(f"| Target day category | `{temporal_context['day_category']}` |")
+    print(f"| Base day q10-q90 | `{temporal_context['base_low']}-{temporal_context['base_high']}` |")
+    print(f"| Dynamic temporal sum boundary | `{temporal_context['dynamic_low']}-{temporal_context['dynamic_high']}` |")
+    print(f"| Recent shift | `{temporal_context['recent_shift']}` |")
+    print(f"| Year drift shift | `{temporal_context['year_shift']}` |")
+    print()
+
+    print("## 1. INPUT VECTOR MATRIX")
+    nums = [normalize_number(x) for x in cur["numbers"]]
+    print("| " + " | ".join(nums) + " |")
+    for n, v in zip(nums, cur["vectors"]):
+        print(f"{n} -> {v.astype(int).tolist()}")
+    print()
+
+    print("## 2. SUB-ENGINE INNER MATHEMATICS TRACE")
+    for engine in ENGINE_NAMES:
+        print(f"\n### {engine}")
+        if engine == "E4_MARKOV":
+            pairs = []
+            for s in cur["numbers"]:
+                s4 = normalize_number(s)
+                for t, c in trainer.markov_counts.get(s4, {}).items():
+                    pairs.append((s4, normalize_number(t), int(c)))
+            print("| Source | Target | Count |")
+            print("|---|---|---:|")
+            for s4, t4, c in sorted(pairs, key=lambda x: (-x[2], x[0], x[1]))[:5]:
+                print(f"| {s4} | {t4} | {c} |")
+            continue
+
+        items = [v for v in registry.values() if v["engine"] == engine]
+        items = sorted(items, key=lambda x: (-float(x["confidence"]), -int(x["hits"]), x["signature"]))
+        if not items:
+            print("No historical formula.")
+            continue
+
+        best = items[0]
+        payload = best["payload"]
+        print(f"Signature: `{best['signature']}`")
+        print(f"Confidence: `{float(best['confidence']):.6f}` hits/tested={best['hits']}/{best['tested']}")
+
+        if payload["kind"] == "affine":
+            m = np.array(payload["matrix"], dtype=np.int16)
+            b = np.array(payload["bias"], dtype=np.int16)
+            x0 = np.asarray(cur["vectors"][0], dtype=np.int16)
+            y0 = np.mod((m.astype(np.int16) @ x0) + b, 10).astype(np.int16)
+            outs = vectors_to_numbers(apply_affine(cur["vectors"], m, b))
+            print(f"M = {m.astype(int).tolist()}")
+            print(f"B = {b.astype(int).tolist()}")
+            print(f"Dot product row: ({m.astype(int).tolist()} @ {x0.astype(int).tolist()} + {b.astype(int).tolist()}) % 10 = {y0.astype(int).tolist()} -> {vectors_to_numbers(y0.reshape(1, 4))[0]}")
+            print("Raw output pool:")
+            print("| " + " | ".join(outs) + " |")
+        elif payload["kind"] == "polynomial":
+            coeffs = np.array(payload["coeffs"], dtype=np.int16)
+            outs = vectors_to_numbers(apply_polynomial(cur["vectors"], coeffs))
+            print("Equation: y_k = coeff_k · [d1,d2,d3,d4,d1*d2,d1*d3,d1*d4,d2*d3,d2*d4,d3*d4,d1^2,d2^2,d3^2,d4^2,1] mod 10")
+            print(f"Coefficients = {coeffs.astype(int).tolist()}")
+            print("Raw output pool:")
+            print("| " + " | ".join(outs) + " |")
+
+    print("\n## 3. UNFILTERED AGGREGATION POOL")
+    unique_pool = sorted(set(c.number for c in candidates))
+    print(f"Unique raw candidates: {len(unique_pool)}")
+    print("| " + " | ".join(unique_pool) + " |")
+
+    print("\n## 4. JEFFREY DYNAMIC TEMPORAL VERIFIER SCOREBOARD")
+    print(f"Target date/day: {temporal_context['target_date']} / {temporal_context['day_category']}")
+    print(f"Dynamic DigitSum Boundary: {temporal_context['dynamic_low']}-{temporal_context['dynamic_high']}")
+    print("| Rank | Candidate | Engine Score | Odd/Even Score | Digit Sum Score | High/Low Score | Combined Final Score | Sum | Sum Reason | Engines |")
+    print("|---:|---|---:|---:|---:|---:|---:|---:|---|---|")
+    for i, r in enumerate(scoreboard.head(10).itertuples(index=False), start=1):
+        print(f"| {i} | {r.Candidate} | {r.EngineScore:.6f} | {r.OddEvenScore:.2f} | {r.DigitSumScore:.2f} | {r.HighLowScore:.2f} | {r.CombinedFinalScore:.6f} | {int(r.DigitSum)} | {r.SumReason} | {r.Engines} |")
+
+    rejected = scoreboard[scoreboard["SumReason"] == "outside_dynamic_temporal_range"].head(5)
+    print("\nRejected by dynamic temporal sum boundary examples:")
+    if rejected.empty:
+        print("none")
+    else:
+        for r in rejected.itertuples(index=False):
+            print(f"- {r.Candidate}: sum={r.DigitSum}, dynamic_boundary={r.DynamicLow}-{r.DynamicHigh}, digit_sum_score={r.DigitSumScore}")
+
+    print("\n## 5. FINAL TOP 5 LASER INFERENCE")
+    print("| " + " | ".join(top5) + " |")
+
+    actual = sorted(normalize_number(x) for x in target["numbers"])
+    hits = sorted(set(top5) & set(actual))
+
+    print("\nVerification phase: target actual winners loaded AFTER Top5 generation.")
+    print("Actual winners:")
+    print("| " + " | ".join(actual) + " |")
+    print(f"Hit Count: {len(hits)}")
+    print("Hits:")
+    print("| " + " | ".join(hits) + " |" if hits else "| none |")
+
+    Path(args.registry_path).parent.mkdir(parents=True, exist_ok=True)
+    Path(args.registry_path).write_text(json.dumps(registry, indent=2), encoding="utf-8")
+    print(f"\nSaved historical formula registry: `{args.registry_path}`")
+    print(f"Saved dynamic temporal profile: `{args.profile_path}`")
+
+
+def run_backtest(args: argparse.Namespace) -> None:
+    records = load_draw_records(Path(args.features_path))
+    profiler = JeffreyDynamicTemporalProfiler(records, args.recent_drift_window, args.year_drift_lookback)
+    profiler.save(Path(args.profile_path))
+
+    by_draw_no = {int(r["draw_no"]): r for r in records if int(r["draw_no"]) > 0}
+    source_draws = sorted(
+        d for d in by_draw_no
+        if args.eval_start_draw_no <= d <= args.eval_end_draw_no and (d + 1) in by_draw_no
+    )
+
+    if args.max_draws is not None:
+        source_draws = source_draws[: int(args.max_draws)]
+
+    trainer = TemporalFormulaTrainer(records, args.expected_prize_count, args.max_registry_formulas_per_engine)
+    hit_history: deque[int] = deque(maxlen=max(HORIZON_WINDOWS.values()))
+    rows: list[dict[str, Any]] = []
+    skipped = 0
+    valid = 0
+
+    print("# 100-STEP STRICT BLIND AUDIT WITH JEFFREY DYNAMIC TEMPORAL VERIFIER")
+    print()
+    print("| Step | Transition | TargetDate | Day | BaseBound | DynamicBound | RecentShift | YearShift | Top5 | Hits |")
+    print("|---:|---|---|---|---|---|---:|---:|---|---:|")
+
+    for step, draw_n in enumerate(source_draws, start=1):
+        cur = by_draw_no[draw_n]
+        target = by_draw_no[draw_n + 1]
+
+        if len(cur["numbers"]) != args.expected_prize_count or len(target["numbers"]) != args.expected_prize_count:
+            skipped += 1
+            continue
+
+        trainer.train_until_source_index(int(cur["draw_index"]))
+        registry = trainer.trimmed_registry()
+
+        temporal_context = profiler.dynamic_bounds(target, int(cur["draw_index"]))
+        candidates = generate_from_registry(cur["vectors"], cur["numbers"], registry, trainer.markov_counts)
+        top5, scoreboard = consolidate_candidates(candidates, temporal_context, args.top_k)
+
+        actual = set(normalize_number(x) for x in target["numbers"])
+        hits = sorted(set(top5) & actual)
+        hit_count = len(hits)
+        hit_history.append(hit_count)
+        valid += 1
+
+        roll = rolling_metrics(hit_history)
+
+        rows.append(
+            {
+                "step": step,
+                "source_draw_no": draw_n,
+                "target_draw_no": draw_n + 1,
+                "target_draw_date": target["draw_date"],
+                "target_day_category": temporal_context["day_category"],
+                "base_low": temporal_context["base_low"],
+                "base_high": temporal_context["base_high"],
+                "dynamic_low": temporal_context["dynamic_low"],
+                "dynamic_high": temporal_context["dynamic_high"],
+                "recent_shift": temporal_context["recent_shift"],
+                "year_shift": temporal_context["year_shift"],
+                "top5_candidates": "|".join(top5),
+                "hit_count": hit_count,
+                "hit_candidates": "|".join(hits),
+                "candidate_count_unique": int(scoreboard["Candidate"].nunique()) if not scoreboard.empty else 0,
+                **roll,
+            }
+        )
+
+        if step <= args.debug_first or step % 25 == 0 or step == len(source_draws):
+            print(
+                f"| {step} | {draw_n}->{draw_n + 1} | {target['draw_date']} | "
+                f"{temporal_context['day_category']} | "
+                f"{temporal_context['base_low']}-{temporal_context['base_high']} | "
+                f"{temporal_context['dynamic_low']}-{temporal_context['dynamic_high']} | "
+                f"{temporal_context['recent_shift']} | {temporal_context['year_shift']} | "
+                f"{'|'.join(top5)} | {hit_count} |"
+            )
+
+    out_path = Path(args.out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out = pd.DataFrame(rows)
+    out.to_csv(out_path, index=False)
+
+    avg_hits = float(out["hit_count"].mean()) if len(out) else 0.0
+    binary_rate = float((out["hit_count"] > 0).mean()) if len(out) else 0.0
+    zero_rate = 1.0 - binary_rate if len(out) else 0.0
+
+    print()
+    print("# Dynamic Temporal Blind Audit Summary")
+    print()
+    print("| Metric | Value |")
+    print("|---|---:|")
+    print(f"| Valid transitions | {valid} |")
+    print(f"| Skipped transitions | {skipped} |")
+    print(f"| Avg Top5 hits/transition | {avg_hits:.6f} |")
+    print(f"| Binary Top5 hit rate | {binary_rate:.6f} |")
+    print(f"| Zero-hit rate | {zero_rate:.6f} |")
+    print()
+    print(f"Saved backtest: `{out_path}`")
+    print(f"Saved dynamic temporal profile: `{args.profile_path}`")
+
+
+def main() -> None:
+    args = parse_args()
+
+    if args.trace_blind_transition:
+        trace_blind_transition(args)
+        return
+
+    run_backtest(args)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:
+        print()
+        print("# Jeffrey Quad-Algebraic Harness Error")
+        print()
+        print("| Field | Value |")
+        print("|---|---|")
+        print("| Status | `FAILED` |")
+        print(f"| Reason | `{exc}` |")
+        raise SystemExit(1)
