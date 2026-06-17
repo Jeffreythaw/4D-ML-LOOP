@@ -807,6 +807,46 @@ class Step3AdaptiveOrchestrator:
 
         return record, vectors
 
+    def predict_one_step_locked(self, source_draw_no: int) -> LockedPrediction:
+        """
+        Build and lock Top 5 candidates for source_draw_no -> target_draw_no.
+
+        This method is intended for read-only API prediction serving. It does not
+        call SP_Verify_Predictions, does not load hidden target winners, does not
+        update rolling metrics, and does not register adaptive formulas.
+        """
+        target_draw_no = source_draw_no + 1
+
+        source_record, source_vectors = self.phase2_layer.load_source_draw_vectors(
+            source_draw_no
+        )
+
+        # Leakage-safe target existence check:
+        # Only checks DrawNo existence. It must not load target WinningNumbers.
+        target_exists_row = self.gateway.conn.cursor().execute(
+            "SELECT 1 AS ExistsFlag FROM dbo.DrawHistory WHERE DrawNo = ?;",
+            (target_draw_no,),
+        ).fetchone()
+
+        if target_exists_row is None:
+            raise LookupError(
+                f"Target DrawNo {target_draw_no} does not exist for source DrawNo {source_draw_no}"
+            )
+
+        source_states = list(source_record.winning_numbers)
+
+        candidate_pool = self.pool_builder.build_candidate_pool(
+            src_vectors=source_vectors,
+            source_states=source_states,
+            day_type=source_record.day_type,
+        )
+
+        return self.ranker.select_top5(
+            candidate_pool,
+            target_draw_no=target_draw_no,
+            source_draw_no=source_draw_no,
+        )
+
     def run_one_step(self, source_draw_no: int) -> Optional[DrawStepResult]:
         target_draw_no = source_draw_no + 1
 
