@@ -19,3 +19,8 @@ data/processed/*.joblib
 *.pickle
 *.feather
 *.joblib
+
+# Frontend generated artifacts
+frontend/node_modules/
+frontend/.next/
+frontend/out/
