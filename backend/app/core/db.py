@@ -26,16 +26,15 @@ def verify_predictions_with_sql(request: VerificationRequest) -> VerificationRes
     except ImportError as exc:
         raise VerificationError("pyodbc is not installed in this backend environment.") from exc
 
-    predictions_payload = json.dumps([prediction.model_dump() for prediction in request.predictions])
+    top5_predictions = ",".join(prediction.number for prediction in request.predictions[:5])
 
     try:
         with pyodbc.connect(settings.sql_connection_string(), timeout=15) as connection:
             cursor = connection.cursor()
             cursor.execute(
-                f"EXEC {settings.sql_verify_procedure} @DrawNo=?, @DayType=?, @PredictionsJson=?",
+                f"EXEC {settings.sql_verify_procedure} @TargetDrawNo=?, @Top5Predictions=?",
                 request.draw_number,
-                request.day_type,
-                predictions_payload,
+                top5_predictions,
             )
             row = cursor.fetchone()
     except ValueError:
