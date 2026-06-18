@@ -131,7 +131,7 @@ def record_predictions_to_ledger(
     except ImportError as exc:
         raise VerificationError("pyodbc is not installed in this backend environment.") from exc
 
-    rows = list(predictions[:5])
+    rows = list(predictions)
 
     try:
         with pyodbc.connect(settings.sql_connection_string(), timeout=15) as connection:
@@ -156,6 +156,7 @@ def record_predictions_to_ledger(
                         target.Mode = source.Mode
                         AND target.SourceDrawNo = source.SourceDrawNo
                         AND target.TargetDrawNo = source.TargetDrawNo
+                        AND target.EngineSource = source.EngineSource
                         AND target.RankNo = source.RankNo
                     WHEN MATCHED THEN
                         UPDATE SET

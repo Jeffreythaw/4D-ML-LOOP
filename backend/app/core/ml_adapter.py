@@ -21,6 +21,7 @@ class PredictionAdapterResult:
     target_draw_number: int
     day_type: str
     predictions: list[PredictionCandidate]
+    ledger_predictions: list[PredictionCandidate]
 
 
 def run_existing_engine_prediction(request: PredictionRequest) -> PredictionAdapterResult:
@@ -83,11 +84,32 @@ def run_existing_engine_prediction(request: PredictionRequest) -> PredictionAdap
             )
         )
 
+
+    ledger_candidates: list[PredictionCandidate] = []
+    for item in getattr(locked, "engine_candidate_scores", ()) or ():
+        try:
+            engine_name = str(item[0])
+            rank_no = int(item[1])
+            number = str(item[2]).zfill(4)
+            score = float(item[3])
+        except (TypeError, ValueError, IndexError):
+            continue
+
+        ledger_candidates.append(
+            PredictionCandidate(
+                rank=rank_no,
+                number=number,
+                score=score,
+                source=engine_name,
+            )
+        )
+
     return PredictionAdapterResult(
         source_draw_number=source_draw_no,
         target_draw_number=int(locked.target_draw_no),
         day_type=day_type,
         predictions=candidates,
+        ledger_predictions=ledger_candidates or candidates,
     )
 
 

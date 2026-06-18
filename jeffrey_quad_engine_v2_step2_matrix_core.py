@@ -23,6 +23,7 @@ VECTOR_WIDTH = 4
 VALID_DAY_TYPES = {"Wednesday", "Saturday", "Sunday", "Special"}
 
 ENGINE_1_NAME = "E1_CROSS_PAIR_LINEAR"
+ENGINE_1_WLS_NAME = "E1_WLS_DECAY_0.98"
 ENGINE_2_NAME = "E2_SET_PROJECTOR"
 ENGINE_3_NAME = "E3_POLYNOMIAL"
 ENGINE_4_NAME = "E4_ADAPTIVE_4_UNKNOWNS_AFFINE"
@@ -603,6 +604,134 @@ class Engine1CrossPairLinear:
 
     def predict_vectors(self, src_vectors: np.ndarray, day_type: str) -> np.ndarray:
         formula = self.default_formula(day_type)
+        return affine_mod10_transform(src_vectors, formula.matrix_m, formula.bias_b)
+
+
+
+def solve_weighted_affine_mod10(
+    src_vectors: np.ndarray,
+    tgt_vectors: np.ndarray,
+    *,
+    day_type: str,
+    decay: float = 0.98,
+    formula_version: str = "E1_WLS_DECAY_0.98_V1",
+    source_draw_no: Optional[int] = None,
+) -> MatrixFormula:
+    """
+    Solve an experimental weighted affine modulo-10 transform.
+
+    The caller must provide only temporally eligible training pairs. This
+    function applies exponential decay so the newest row has weight 1.0 and
+    older rows receive decay ** age lower weight.
+    """
+    validate_day_type(day_type)
+
+    if not 0.0 < decay <= 1.0:
+        raise ValueError("decay must be in the range (0, 1].")
+
+    src_vectors = ensure_mod_int_array(src_vectors, name="src_vectors", dtype=np.int16)
+    tgt_vectors = ensure_mod_int_array(tgt_vectors, name="tgt_vectors", dtype=np.int16)
+
+    if src_vectors.ndim != 2 or src_vectors.shape[1] != VECTOR_WIDTH:
+        raise ValueError(f"src_vectors must have shape (N, {VECTOR_WIDTH}), got {src_vectors.shape}")
+
+    if tgt_vectors.ndim != 2 or tgt_vectors.shape[1] != VECTOR_WIDTH:
+        raise ValueError(f"tgt_vectors must have shape (N, {VECTOR_WIDTH}), got {tgt_vectors.shape}")
+
+    pair_count = min(src_vectors.shape[0], tgt_vectors.shape[0])
+
+    if pair_count < VECTOR_WIDTH + 1:
+        raise ValueError(
+            f"Weighted affine solver requires at least {VECTOR_WIDTH + 1} pairs, got {pair_count}"
+        )
+
+    src = src_vectors[:pair_count].astype(np.float64, copy=False)
+    tgt = tgt_vectors[:pair_count].astype(np.float64, copy=False)
+
+    design = np.hstack([src, np.ones((pair_count, 1), dtype=np.float64)])
+
+    # Oldest row gets the smallest weight. Newest row gets weight 1.0.
+    ages = np.arange(pair_count - 1, -1, -1, dtype=np.float64)
+    weights = np.power(float(decay), ages)
+    sqrt_weights = np.sqrt(weights).reshape(-1, 1)
+
+    weighted_design = design * sqrt_weights
+    weighted_target = tgt * sqrt_weights
+
+    coeff, residuals, rank, singular_values = np.linalg.lstsq(
+        weighted_design,
+        weighted_target,
+        rcond=None,
+    )
+
+    raw_m = coeff[:VECTOR_WIDTH, :].T
+    raw_b = coeff[VECTOR_WIDTH, :]
+
+    matrix_m = np.mod(np.rint(raw_m).astype(np.int32), MOD_BASE).astype(np.int16)
+    bias_b = np.mod(np.rint(raw_b).astype(np.int32), MOD_BASE).astype(np.int16)
+
+    formula = MatrixFormula(
+        engine_name=ENGINE_1_WLS_NAME,
+        formula_version=formula_version,
+        day_type=day_type,
+        matrix_m=matrix_m,
+        bias_b=bias_b,
+        metadata={
+            "solver": "weighted_np.linalg.lstsq",
+            "decay": float(decay),
+            "pair_count_used": int(pair_count),
+            "rank": int(rank),
+            "singular_values": singular_values.astype(float).tolist(),
+            "residuals": residuals.astype(float).tolist(),
+            "raw_matrix_m": raw_m.astype(float).tolist(),
+            "raw_bias_b": raw_b.astype(float).tolist(),
+            "oldest_weight": float(weights[0]),
+            "newest_weight": float(weights[-1]),
+            "source_draw_no": source_draw_no,
+        },
+    )
+
+    formula.validate()
+    return formula
+
+
+class Engine1WeightedLeastSquaresDecay:
+    engine_name = ENGINE_1_WLS_NAME
+
+    def __init__(self, *, decay: float = 0.98) -> None:
+        self.decay = float(decay)
+
+    def fit_formula(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        tgt_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: Optional[int] = None,
+    ) -> MatrixFormula:
+        return solve_weighted_affine_mod10(
+            src_vectors=src_vectors,
+            tgt_vectors=tgt_vectors,
+            day_type=day_type,
+            decay=self.decay,
+            source_draw_no=source_draw_no,
+        )
+
+    def predict_vectors(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        training_src_vectors: np.ndarray,
+        training_tgt_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: Optional[int] = None,
+    ) -> np.ndarray:
+        formula = self.fit_formula(
+            src_vectors=training_src_vectors,
+            tgt_vectors=training_tgt_vectors,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
         return affine_mod10_transform(src_vectors, formula.matrix_m, formula.bias_b)
 
 

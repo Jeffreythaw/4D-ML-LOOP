@@ -51,7 +51,7 @@ def predict(request: PredictionRequest) -> PredictionResponse:
             source_draw_no=adapter_result.source_draw_number,
             target_draw_no=adapter_result.target_draw_number,
             day_type=adapter_result.day_type,
-            predictions=predictions,
+            predictions=adapter_result.ledger_predictions,
         )
     except VerificationError as exc:
         raise HTTPException(

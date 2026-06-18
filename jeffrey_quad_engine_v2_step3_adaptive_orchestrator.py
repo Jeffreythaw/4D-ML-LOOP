@@ -219,6 +219,7 @@ class LockedPrediction:
     top5: Tuple[str, ...]
     engine_sources: Tuple[str, ...]
     candidate_scores: Tuple[Tuple[str, float, str], ...]
+    engine_candidate_scores: Tuple[Tuple[str, int, str, float], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -519,6 +520,148 @@ class CandidatePoolBuilder:
 
         return votes
 
+
+    def _build_wls_training_pairs(
+        self,
+        *,
+        source_draw_no: int,
+        day_type: str,
+        max_pairs: int = 64,
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Build temporally safe WLS training pairs using only rows up to source_draw_no.
+
+        Pair rule:
+          source row K -> target row K+1
+          target row K+1 must be <= source_draw_no
+          source row day_type must match the active prediction day_type
+
+        This prevents future leakage for current prediction N -> N+1.
+        """
+        records = self.gateway.load_draw_history(max_draw_no=source_draw_no)
+
+        by_draw_no = {record.draw_no: record for record in records}
+        src_numbers: List[str] = []
+        tgt_numbers: List[str] = []
+
+        for record in records:
+            if record.day_type != day_type:
+                continue
+
+            target_record = by_draw_no.get(record.draw_no + 1)
+
+            if target_record is None:
+                continue
+
+            if target_record.draw_no > source_draw_no:
+                continue
+
+            for src_number in record.winning_numbers:
+                for tgt_number in target_record.winning_numbers:
+                    src_numbers.append(src_number)
+                    tgt_numbers.append(tgt_number)
+
+        if not src_numbers or not tgt_numbers:
+            raise RuntimeError(
+                f"No WLS training pairs available for day_type={day_type} source_draw_no={source_draw_no}"
+            )
+
+        if len(src_numbers) > max_pairs:
+            src_numbers = src_numbers[-max_pairs:]
+            tgt_numbers = tgt_numbers[-max_pairs:]
+
+        return (
+            self.core.vectors_from_4d_strings(src_numbers, dtype=np.int16),
+            self.core.vectors_from_4d_strings(tgt_numbers, dtype=np.int16),
+        )
+
+    def _votes_from_wls_decay(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: int,
+    ) -> List[CandidateVote]:
+        votes: List[CandidateVote] = []
+
+        training_src, training_tgt = self._build_wls_training_pairs(
+            source_draw_no=source_draw_no,
+            day_type=day_type,
+        )
+
+        wls_engine = self.core.Engine1WeightedLeastSquaresDecay(decay=0.98)
+        formula = wls_engine.fit_formula(
+            src_vectors=training_src,
+            tgt_vectors=training_tgt,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+        primary_vectors = self.core.affine_mod10_transform(
+            src_vectors,
+            formula.matrix_m,
+            formula.bias_b,
+            dtype=np.int16,
+        )
+
+        # If the current source draw collapses to fewer than Top-K unique WLS
+        # candidates, enrich with recent temporally eligible historical source
+        # vectors transformed by the same fitted formula. This does not read the
+        # hidden target draw N+1.
+        recent_training_src = training_src[-64:]
+        enrichment_vectors = self.core.affine_mod10_transform(
+            recent_training_src,
+            formula.matrix_m,
+            formula.bias_b,
+            dtype=np.int16,
+        )
+
+        numbers = (
+            self.core.strings_from_vectors(primary_vectors)
+            + self.core.strings_from_vectors(enrichment_vectors)
+        )
+
+        # Deterministic temporal-safe fallback: if the fitted WLS transform
+        # collapses to fewer than Top-K unique numbers, append recent historical
+        # target-side training states. Every fallback target state is <=
+        # source_draw_no by construction in _build_wls_training_pairs().
+        numbers += list(reversed(self.core.strings_from_vectors(training_tgt[-64:])))
+
+        total = len(numbers)
+        seen_local = set()
+        rank_no = 0
+
+        for raw_rank, number in enumerate(numbers, start=1):
+            if number in seen_local:
+                continue
+
+            seen_local.add(number)
+            rank_no += 1
+
+            score = self._score_by_rank(
+                rank_no,
+                max(5, total),
+                base_weight=1.02,
+            )
+
+            votes.append(
+                CandidateVote(
+                    number=number,
+                    engine_name=self.core.ENGINE_1_WLS_NAME,
+                    internal_score=score,
+                    raw_rank=rank_no,
+                    source_detail=(
+                        f"{self.core.ENGINE_1_WLS_NAME}:decay=0.98:"
+                        f"source_draw_no={source_draw_no}:raw_rank={raw_rank}:rank={rank_no}"
+                    ),
+                )
+            )
+
+            if rank_no >= TOP_K:
+                break
+
+        return votes
+
     @staticmethod
     def aggregate_votes(votes: Sequence[CandidateVote]) -> Dict[str, CandidateAggregate]:
         aggregates: Dict[str, CandidateAggregate] = {}
@@ -550,6 +693,7 @@ class CandidatePoolBuilder:
         src_vectors: np.ndarray,
         source_states: Sequence[str],
         day_type: str,
+        source_draw_no: Optional[int] = None,
     ) -> Dict[str, CandidateAggregate]:
         static_outputs = self.matrix_core.run_all_static_engines(
             src_vectors,
@@ -558,6 +702,16 @@ class CandidatePoolBuilder:
 
         votes: List[CandidateVote] = []
         votes.extend(self._votes_from_static_engine_outputs(static_outputs))
+
+        if source_draw_no is not None:
+            votes.extend(
+                self._votes_from_wls_decay(
+                    src_vectors=src_vectors,
+                    day_type=day_type,
+                    source_draw_no=source_draw_no,
+                )
+            )
+
         votes.extend(
             self._votes_from_markov(
                 source_states=source_states,
@@ -631,6 +785,65 @@ class DiversityGuardRanker:
             )
 
         return dict(by_engine)
+
+
+    @staticmethod
+    def build_engine_rank_snapshots(
+        aggregates: Dict[str, CandidateAggregate],
+        *,
+        engine_names: Sequence[str],
+        top_k: int = TOP_K,
+    ) -> Tuple[Tuple[str, int, str, float], ...]:
+        """
+        Build engine-specific Top-K snapshots for ledger/audit use.
+
+        Each row is:
+          (engine_name, rank, number, engine_score)
+
+        This does not change the final diversified locked Top5. It only records
+        what each requested engine would have contributed independently.
+        """
+        rows: List[Tuple[str, int, str, float]] = []
+
+        for engine_name in engine_names:
+            ranked = [
+                agg for agg in aggregates.values()
+                if engine_name in agg.engine_scores
+            ]
+
+            ranked.sort(
+                key=lambda a: (
+                    a.engine_scores.get(engine_name, 0.0),
+                    a.total_score,
+                    a.engine_count,
+                    a.number,
+                ),
+                reverse=True,
+            )
+
+            seen_numbers = set()
+            rank_no = 0
+
+            for agg in ranked:
+                if agg.number in seen_numbers:
+                    continue
+
+                seen_numbers.add(agg.number)
+                rank_no += 1
+
+                rows.append(
+                    (
+                        engine_name,
+                        int(rank_no),
+                        agg.number,
+                        float(agg.engine_scores.get(engine_name, 0.0)),
+                    )
+                )
+
+                if rank_no >= top_k:
+                    break
+
+        return tuple(rows)
 
     def select_top5(
         self,
@@ -751,12 +964,22 @@ class DiversityGuardRanker:
             for idx, c in enumerate(selected)
         )
 
+        engine_candidate_scores = self.build_engine_rank_snapshots(
+            aggregates,
+            engine_names=(
+                "E1_CROSS_PAIR_LINEAR",
+                "E1_WLS_DECAY_0.98",
+            ),
+            top_k=self.top_k,
+        )
+
         return LockedPrediction(
             target_draw_no=target_draw_no,
             source_draw_no=source_draw_no,
             top5=top5,
             engine_sources=sources,
             candidate_scores=score_snapshot,
+            engine_candidate_scores=engine_candidate_scores,
         )
 
 
@@ -833,6 +1056,7 @@ class Step3AdaptiveOrchestrator:
             src_vectors=source_vectors,
             source_states=source_states,
             day_type=source_record.day_type,
+            source_draw_no=source_draw_no,
         )
 
         return self.ranker.select_top5(
@@ -871,6 +1095,7 @@ class Step3AdaptiveOrchestrator:
             src_vectors=source_vectors,
             source_states=source_states,
             day_type=source_record.day_type,
+            source_draw_no=source_draw_no,
         )
 
         locked = self.ranker.select_top5(
