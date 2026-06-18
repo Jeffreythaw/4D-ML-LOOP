@@ -8,7 +8,7 @@ DayType = Literal["Wednesday", "Saturday", "Sunday", "Special"]
 
 class PredictionRequest(BaseModel):
     draw_number: int = Field(..., ge=1)
-    day_type: DayType
+    day_type: DayType | None = None
 
 
 class PredictionCandidate(BaseModel):
@@ -27,7 +27,8 @@ class PredictionCandidate(BaseModel):
 
 class PredictionResponse(BaseModel):
     draw_number: int
-    day_type: DayType
+    target_draw_number: int | None = None
+    day_type: DayType | None = None
     predictions: list[PredictionCandidate]
     verification_status: str
 

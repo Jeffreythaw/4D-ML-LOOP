@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from importlib import import_module
 import sys
 from pathlib import Path
@@ -14,12 +15,23 @@ class PredictionAdapterError(RuntimeError):
     pass
 
 
-def run_existing_engine_prediction(request: PredictionRequest) -> list[PredictionCandidate]:
+@dataclass(frozen=True)
+class PredictionAdapterResult:
+    source_draw_number: int
+    target_draw_number: int
+    day_type: str
+    predictions: list[PredictionCandidate]
+
+
+def run_existing_engine_prediction(request: PredictionRequest) -> PredictionAdapterResult:
     """
     Read-only adapter boundary for the existing Step 2 / Step 3 NumPy engine.
 
-    request.draw_number is treated as source_draw_no. The engine predicts the
-    locked Top 5 candidates for target_draw_no = source_draw_no + 1.
+    request.draw_number is treated as source_draw_no / base draw number. The
+    engine predicts locked Top 5 candidates for target_draw_no = source_draw_no + 1.
+
+    DayType is auto-detected from dbo.DrawHistory through the existing source
+    draw loader. The UI does not need to provide DayType.
 
     This function must not verify predictions, must not load hidden target
     winners, and must not register adaptive formulas. Verification remains only
@@ -27,16 +39,22 @@ def run_existing_engine_prediction(request: PredictionRequest) -> list[Predictio
     """
     step2, step3 = _load_existing_engine_modules()
     settings = get_settings()
+    source_draw_no = int(request.draw_number)
 
     try:
         with step2.SqlServerGateway(settings.sql_connection_string()) as gateway:
             orchestrator = step3.Step3AdaptiveOrchestrator(
                 core=step2,
                 gateway=gateway,
-                start_draw_no=int(request.draw_number),
-                end_draw_no=int(request.draw_number) + 1,
+                start_draw_no=source_draw_no,
+                end_draw_no=source_draw_no + 1,
             )
-            locked = orchestrator.predict_one_step_locked(int(request.draw_number))
+            locked = orchestrator.predict_one_step_locked(source_draw_no)
+
+            source_record = gateway.load_phase2_draw(source_draw_no)
+            if source_record is None:
+                raise LookupError(f"Source DrawNo {source_draw_no} not found in dbo.DrawHistory")
+            day_type = str(source_record.day_type)
     except Exception as exc:
         raise PredictionAdapterError("Existing engine prediction failed.") from exc
 
@@ -65,7 +83,12 @@ def run_existing_engine_prediction(request: PredictionRequest) -> list[Predictio
             )
         )
 
-    return candidates
+    return PredictionAdapterResult(
+        source_draw_number=source_draw_no,
+        target_draw_number=int(locked.target_draw_no),
+        day_type=day_type,
+        predictions=candidates,
+    )
 
 
 def _load_existing_engine_modules() -> tuple[Any, Any]:

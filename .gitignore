@@ -24,3 +24,5 @@ data/processed/*.joblib
 frontend/node_modules/
 frontend/.next/
 frontend/out/
+logs/
+*.pid

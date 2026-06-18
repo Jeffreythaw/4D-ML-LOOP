@@ -16,7 +16,7 @@ router = APIRouter(tags=["predictions"])
 @router.post("/predict", response_model=PredictionResponse)
 def predict(request: PredictionRequest) -> PredictionResponse:
     try:
-        candidates = run_existing_engine_prediction(request)
+        adapter_result = run_existing_engine_prediction(request)
     except PredictionAdapterError as exc:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -26,9 +26,10 @@ def predict(request: PredictionRequest) -> PredictionResponse:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
 
     return PredictionResponse(
-        draw_number=request.draw_number,
-        day_type=request.day_type,
-        predictions=candidates[:5],
+        draw_number=adapter_result.source_draw_number,
+        target_draw_number=adapter_result.target_draw_number,
+        day_type=adapter_result.day_type,
+        predictions=adapter_result.predictions[:5],
         verification_status="not_verified",
     )
 

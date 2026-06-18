@@ -13,13 +13,19 @@ export function PredictionResult({ result, verifying, onVerify }: PredictionResu
     return <p className="muted result">No prediction requested yet.</p>;
   }
 
+  const targetDraw = result.target_draw_number ?? result.draw_number + 1;
+  const dayType = result.day_type ?? "auto-detected";
+
   return (
     <section className="result" aria-live="polite">
       <div className="result-header">
         <div>
           <h2>Top 5 predictions</h2>
           <p className="muted">
-            Draw {result.draw_number} - {result.day_type} - {result.verification_status}
+            Base Draw {result.draw_number} → Predicting Draw {targetDraw}
+          </p>
+          <p className="muted">
+            Day Type: {dayType} · Status: {result.verification_status}
           </p>
         </div>
 

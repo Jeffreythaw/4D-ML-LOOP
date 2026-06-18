@@ -9,14 +9,15 @@ export type PredictionCandidate = {
 
 export type PredictionResponse = {
   draw_number: number;
-  day_type: string;
+  target_draw_number?: number | null;
+  day_type?: string | null;
   predictions: PredictionCandidate[];
   verification_status: string;
 };
 
 export type VerificationResponse = {
   draw_number: number;
-  day_type: string;
+  day_type?: string | null;
   verification_status: string;
   hit_count: number;
   details: Record<string, unknown>;
@@ -24,14 +25,13 @@ export type VerificationResponse = {
 
 export async function predict(payload: {
   draw_number: number;
-  day_type: string;
 }): Promise<PredictionResponse> {
   return postJson<PredictionResponse>("/api/predict", payload);
 }
 
 export async function verify(payload: {
   draw_number: number;
-  day_type: string;
+  day_type?: string | null;
   predictions: PredictionCandidate[];
 }): Promise<VerificationResponse> {
   return postJson<VerificationResponse>("/api/verify", payload);

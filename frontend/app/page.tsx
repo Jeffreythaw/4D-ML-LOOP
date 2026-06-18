@@ -13,13 +13,13 @@ export default function Home() {
   const [verifying, setVerifying] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handlePredict(drawNumber: number, dayType: string) {
+  async function handlePredict(drawNumber: number) {
     setLoading(true);
     setError(null);
     setResult(null);
 
     try {
-      setResult(await predict({ draw_number: drawNumber, day_type: dayType }));
+      setResult(await predict({ draw_number: drawNumber }));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Prediction request failed.");
     } finally {
@@ -35,7 +35,7 @@ export default function Home() {
 
     try {
       const verification = await verify({
-        draw_number: result.draw_number,
+        draw_number: result.target_draw_number ?? result.draw_number + 1,
         day_type: result.day_type,
         predictions: result.predictions,
       });
@@ -56,7 +56,7 @@ export default function Home() {
       <section className="panel">
         <div className="heading">
           <h1>Jeffrey Quad Engine v2</h1>
-          <p>Frontend skeleton connected to the FastAPI adapter boundary.</p>
+          <p>Local research dashboard for read-only prediction and SQL firewall verification.</p>
         </div>
 
         <PredictionForm onSubmit={handlePredict} loading={loading} />
