@@ -22,7 +22,7 @@ export default function Home() {
 
     try {
       const latestDraw = await getLatestDraw();
-      setResult(await predict({ draw_number: latestDraw.draw_number }));
+      setResult(await predict({ draw_number: latestDraw.draw_number, mode: "Current" }));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Current prediction request failed.");
     } finally {
@@ -37,7 +37,7 @@ export default function Home() {
     setMode("historical");
 
     try {
-      setResult(await predict({ draw_number: drawNumber }));
+      setResult(await predict({ draw_number: drawNumber, mode: "Historical" }));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Historical audit request failed.");
     } finally {
@@ -54,6 +54,8 @@ export default function Home() {
     try {
       const verification = await verify({
         draw_number: result.target_draw_number ?? result.draw_number + 1,
+        source_draw_number: result.draw_number,
+        mode: "Historical",
         day_type: result.day_type,
         predictions: result.predictions,
       });

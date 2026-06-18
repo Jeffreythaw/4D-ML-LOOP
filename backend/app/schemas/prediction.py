@@ -4,10 +4,12 @@ from pydantic import BaseModel, Field, field_validator
 
 
 DayType = Literal["Wednesday", "Saturday", "Sunday", "Special"]
+PredictionMode = Literal["Current", "Historical"]
 
 
 class PredictionRequest(BaseModel):
     draw_number: int = Field(..., ge=1)
+    mode: PredictionMode = "Historical"
     day_type: DayType | None = None
 
 
@@ -35,7 +37,9 @@ class PredictionResponse(BaseModel):
 
 class VerificationRequest(BaseModel):
     draw_number: int = Field(..., ge=1)
-    day_type: DayType
+    source_draw_number: int | None = None
+    mode: PredictionMode = "Historical"
+    day_type: DayType | None = None
     predictions: list[PredictionCandidate] = Field(..., min_length=1, max_length=5)
 
 

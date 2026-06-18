@@ -44,12 +44,15 @@ export async function getLatestDraw(): Promise<LatestDrawResponse> {
 
 export async function predict(payload: {
   draw_number: number;
+  mode?: "Current" | "Historical";
 }): Promise<PredictionResponse> {
   return postJson<PredictionResponse>("/api/predict", payload);
 }
 
 export async function verify(payload: {
   draw_number: number;
+  source_draw_number?: number | null;
+  mode?: "Current" | "Historical";
   day_type?: string | null;
   predictions: PredictionCandidate[];
 }): Promise<VerificationResponse> {
