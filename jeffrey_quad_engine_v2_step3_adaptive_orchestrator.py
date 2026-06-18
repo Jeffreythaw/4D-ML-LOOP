@@ -54,6 +54,7 @@ SIM_START_DRAW_NO = 4051
 SIM_END_DRAW_NO = 5494
 
 TOP_K = 5
+META_ENSEMBLE_ENGINE_NAME = "E2_META_ENSEMBLE_RANKER"
 MIN_DISTINCT_ENGINES = 3
 
 MARKOV_TOP_N_PER_SOURCE = 25
@@ -1045,6 +1046,87 @@ class DiversityGuardRanker:
         return dict(by_engine)
 
 
+
+    @staticmethod
+    def build_meta_ensemble_rank_snapshot(
+        engine_candidate_scores: Tuple[Tuple[str, int, str, float], ...],
+        *,
+        engine_names: Sequence[str],
+        top_k: int = TOP_K,
+    ) -> Tuple[Tuple[str, int, str, float], ...]:
+        """
+        Build master Borda-count ensemble rows from underlying engine Top-K rows.
+
+        Points:
+          Rank 1 -> top_k
+          Rank 2 -> top_k - 1
+          ...
+          Rank top_k -> 1
+
+        Tie-breakers:
+          1. Higher Borda points
+          2. Better best underlying rank
+          3. Higher summed underlying score
+          4. Lexicographic number for deterministic output
+        """
+        allowed_engines = set(engine_names)
+
+        points_by_number: Dict[str, float] = {}
+        best_rank_by_number: Dict[str, int] = {}
+        score_by_number: Dict[str, float] = {}
+        first_seen_by_number: Dict[str, int] = {}
+
+        for seen_idx, item in enumerate(engine_candidate_scores):
+            try:
+                engine_name = str(item[0])
+                rank_no = int(item[1])
+                number = str(item[2]).zfill(4)
+                score = float(item[3])
+            except (TypeError, ValueError, IndexError):
+                continue
+
+            if engine_name not in allowed_engines:
+                continue
+
+            if rank_no < 1 or rank_no > top_k:
+                continue
+
+            points = float(top_k - rank_no + 1)
+            points_by_number[number] = points_by_number.get(number, 0.0) + points
+            score_by_number[number] = score_by_number.get(number, 0.0) + score
+            best_rank_by_number[number] = min(best_rank_by_number.get(number, top_k + 1), rank_no)
+            first_seen_by_number.setdefault(number, seen_idx)
+
+        ranked_numbers = sorted(
+            points_by_number,
+            key=lambda number: (
+                -points_by_number[number],
+                best_rank_by_number[number],
+                -score_by_number[number],
+                first_seen_by_number[number],
+                number,
+            ),
+        )
+
+        meta_rows: List[Tuple[str, int, str, float]] = []
+
+        for rank_no, number in enumerate(ranked_numbers[:top_k], start=1):
+            meta_rows.append(
+                (
+                    META_ENSEMBLE_ENGINE_NAME,
+                    rank_no,
+                    number,
+                    float(points_by_number[number]),
+                )
+            )
+
+        if len(meta_rows) != top_k:
+            raise RuntimeError(
+                f"{META_ENSEMBLE_ENGINE_NAME} failed to produce exactly {top_k}; got {len(meta_rows)}"
+            )
+
+        return tuple(meta_rows)
+
     @staticmethod
     def build_engine_rank_snapshots(
         aggregates: Dict[str, CandidateAggregate],
@@ -1232,6 +1314,19 @@ class DiversityGuardRanker:
             ),
             top_k=self.top_k,
         )
+
+        meta_engine_candidate_scores = self.build_meta_ensemble_rank_snapshot(
+            engine_candidate_scores,
+            engine_names=(
+                "E1_CROSS_PAIR_LINEAR",
+                "E1_WLS_DECAY_0.98",
+                "E1_MIRROR_BASE5_LSTS",
+                "E1_DELTA_ROTATION_LSTS",
+            ),
+            top_k=self.top_k,
+        )
+
+        engine_candidate_scores = engine_candidate_scores + meta_engine_candidate_scores
 
         return LockedPrediction(
             target_draw_no=target_draw_no,
