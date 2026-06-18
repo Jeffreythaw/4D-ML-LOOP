@@ -4,24 +4,42 @@ import { useState } from "react";
 
 import { PredictionForm } from "../components/PredictionForm";
 import { PredictionResult } from "../components/PredictionResult";
-import { predict, verify } from "../lib/api";
+import { getLatestDraw, predict, verify } from "../lib/api";
 import type { PredictionResponse } from "../lib/api";
 
 export default function Home() {
   const [result, setResult] = useState<PredictionResponse | null>(null);
+  const [mode, setMode] = useState<"current" | "historical" | null>(null);
   const [loading, setLoading] = useState(false);
   const [verifying, setVerifying] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handlePredict(drawNumber: number) {
+  async function handleCurrentPrediction() {
     setLoading(true);
     setError(null);
     setResult(null);
+    setMode("current");
+
+    try {
+      const latestDraw = await getLatestDraw();
+      setResult(await predict({ draw_number: latestDraw.draw_number }));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Current prediction request failed.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleHistoricalAudit(drawNumber: number) {
+    setLoading(true);
+    setError(null);
+    setResult(null);
+    setMode("historical");
 
     try {
       setResult(await predict({ draw_number: drawNumber }));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Prediction request failed.");
+      setError(err instanceof Error ? err.message : "Historical audit request failed.");
     } finally {
       setLoading(false);
     }
@@ -59,11 +77,21 @@ export default function Home() {
           <p>Local research dashboard for read-only prediction and SQL firewall verification.</p>
         </div>
 
-        <PredictionForm onSubmit={handlePredict} loading={loading} />
+        <PredictionForm
+          onCurrentPrediction={handleCurrentPrediction}
+          onHistoricalAudit={handleHistoricalAudit}
+          loading={loading}
+        />
+
+        {mode ? (
+          <p className="muted mode-label">
+            Mode: {mode === "current" ? "Current Prediction" : "Historical Audit"}
+          </p>
+        ) : null}
 
         {error ? <p className="error">{error}</p> : null}
 
-        <PredictionResult result={result} onVerify={handleVerify} verifying={verifying} />
+        <PredictionResult result={result} mode={mode} onVerify={handleVerify} verifying={verifying} />
       </section>
     </main>
   );

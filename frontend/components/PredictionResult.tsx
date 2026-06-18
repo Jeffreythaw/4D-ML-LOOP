@@ -4,11 +4,12 @@ import type { PredictionResponse } from "../lib/api";
 
 type PredictionResultProps = {
   result: PredictionResponse | null;
+  mode: "current" | "historical" | null;
   verifying: boolean;
   onVerify: () => void;
 };
 
-export function PredictionResult({ result, verifying, onVerify }: PredictionResultProps) {
+export function PredictionResult({ result, mode, verifying, onVerify }: PredictionResultProps) {
   if (!result) {
     return <p className="muted result">No prediction requested yet.</p>;
   }
@@ -29,14 +30,16 @@ export function PredictionResult({ result, verifying, onVerify }: PredictionResu
           </p>
         </div>
 
-        <button
-          className="button secondary"
-          type="button"
-          onClick={onVerify}
-          disabled={verifying || result.predictions.length === 0}
-        >
-          {verifying ? "Verifying..." : "Verify"}
-        </button>
+        {mode === "historical" ? (
+          <button
+            className="button secondary"
+            type="button"
+            onClick={onVerify}
+            disabled={verifying || result.predictions.length === 0}
+          >
+            {verifying ? "Verifying..." : "Verify"}
+          </button>
+        ) : null}
       </div>
 
       <ul className="prediction-list">

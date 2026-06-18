@@ -45,3 +45,11 @@ class VerificationResponse(BaseModel):
     verification_status: str
     hit_count: int = Field(..., ge=0)
     details: dict[str, Any] = Field(default_factory=dict)
+
+
+class LatestDrawResponse(BaseModel):
+    draw_number: int
+    target_draw_number: int
+    draw_date: str
+    day_type: DayType | None = None
+

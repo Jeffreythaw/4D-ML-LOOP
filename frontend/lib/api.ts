@@ -15,6 +15,13 @@ export type PredictionResponse = {
   verification_status: string;
 };
 
+export type LatestDrawResponse = {
+  draw_number: number;
+  target_draw_number: number;
+  draw_date: string;
+  day_type?: string | null;
+};
+
 export type VerificationResponse = {
   draw_number: number;
   day_type?: string | null;
@@ -22,6 +29,18 @@ export type VerificationResponse = {
   hit_count: number;
   details: Record<string, unknown>;
 };
+
+
+export async function getLatestDraw(): Promise<LatestDrawResponse> {
+  const response = await fetch(`${API_BASE_URL}/api/latest-draw`);
+
+  if (!response.ok) {
+    const detail = await readError(response);
+    throw new Error(detail);
+  }
+
+  return response.json() as Promise<LatestDrawResponse>;
+}
 
 export async function predict(payload: {
   draw_number: number;

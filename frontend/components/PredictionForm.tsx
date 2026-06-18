@@ -4,39 +4,64 @@ import { FormEvent, useState } from "react";
 
 type PredictionFormProps = {
   loading: boolean;
-  onSubmit: (drawNumber: number) => void;
+  onCurrentPrediction: () => void;
+  onHistoricalAudit: (drawNumber: number) => void;
 };
 
-export function PredictionForm({ loading, onSubmit }: PredictionFormProps) {
+export function PredictionForm({
+  loading,
+  onCurrentPrediction,
+  onHistoricalAudit,
+}: PredictionFormProps) {
   const [drawNumber, setDrawNumber] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleHistoricalSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    onSubmit(Number(drawNumber));
+    onHistoricalAudit(Number(drawNumber));
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <label className="field">
-        <span>Base Draw No</span>
-        <input
-          min="1"
-          required
-          type="number"
-          value={drawNumber}
-          onChange={(event) => setDrawNumber(event.target.value)}
-          placeholder="5486"
-        />
-      </label>
+    <div className="form">
+      <section className="mode-card">
+        <div>
+          <h2>Current Prediction Mode</h2>
+          <p className="muted">
+            Automatically uses the latest completed base draw from SQL and predicts the next draw.
+          </p>
+        </div>
 
-      <p className="muted">
-        The system predicts the next draw number from the selected base draw.
-        Day type is auto-detected from the database.
-      </p>
+        <button className="button" type="button" disabled={loading} onClick={onCurrentPrediction}>
+          {loading ? "Loading..." : "Predict Current Next Draw"}
+        </button>
+      </section>
 
-      <button className="button" type="submit" disabled={loading}>
-        {loading ? "Loading..." : "Predict Next Draw"}
-      </button>
-    </form>
+      <section className="mode-card">
+        <div>
+          <h2>Historical Audit Mode</h2>
+          <p className="muted">
+            Enter any base draw number to reproduce a locked Top 5 for the next draw, then verify
+            through the SQL firewall.
+          </p>
+        </div>
+
+        <form className="inline-form" onSubmit={handleHistoricalSubmit}>
+          <label className="field">
+            <span>Base Draw No</span>
+            <input
+              min="1"
+              required
+              type="number"
+              value={drawNumber}
+              onChange={(event) => setDrawNumber(event.target.value)}
+              placeholder="5486"
+            />
+          </label>
+
+          <button className="button secondary" type="submit" disabled={loading}>
+            {loading ? "Loading..." : "Run Historical Audit"}
+          </button>
+        </form>
+      </section>
+    </div>
   );
 }

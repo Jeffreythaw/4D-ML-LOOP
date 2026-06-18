@@ -1,16 +1,28 @@
 from fastapi import APIRouter, HTTPException, status
 
-from app.core.db import VerificationError, verify_predictions_with_sql
+from app.core.db import VerificationError, get_latest_draw_metadata, verify_predictions_with_sql
 from app.core.ml_adapter import PredictionAdapterError, run_existing_engine_prediction
 from app.schemas.prediction import (
     PredictionRequest,
     PredictionResponse,
+    LatestDrawResponse,
     VerificationRequest,
     VerificationResponse,
 )
 
 
 router = APIRouter(tags=["predictions"])
+
+
+@router.get("/latest-draw", response_model=LatestDrawResponse)
+def latest_draw() -> LatestDrawResponse:
+    try:
+        return get_latest_draw_metadata()
+    except VerificationError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail=str(exc),
+        ) from exc
 
 
 @router.post("/predict", response_model=PredictionResponse)

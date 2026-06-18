@@ -823,16 +823,10 @@ class Step3AdaptiveOrchestrator:
 
         # Leakage-safe target existence check:
         # Only checks DrawNo existence. It must not load target WinningNumbers.
-        target_exists_row = self.gateway.conn.cursor().execute(
-            "SELECT 1 AS ExistsFlag FROM dbo.DrawHistory WHERE DrawNo = ?;",
-            (target_draw_no,),
-        ).fetchone()
-
-        if target_exists_row is None:
-            raise LookupError(
-                f"Target DrawNo {target_draw_no} does not exist for source DrawNo {source_draw_no}"
-            )
-
+        # Prediction serving may target the next future draw, which will not yet
+        # exist in dbo.DrawHistory. This read-only path therefore must not require
+        # the target draw row to exist. Historical verification remains protected
+        # by /api/verify and dbo.SP_Verify_Predictions.
         source_states = list(source_record.winning_numbers)
 
         candidate_pool = self.pool_builder.build_candidate_pool(
