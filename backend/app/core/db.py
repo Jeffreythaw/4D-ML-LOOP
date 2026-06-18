@@ -118,8 +118,8 @@ def record_predictions_to_ledger(
     This stores prediction metadata only. It does not read winners and does not
     perform verification.
     """
-    if mode not in {"Current", "Historical", "Grand_Loop"}:
-        raise ValueError("Ledger mode must be Current, Historical, or Grand_Loop.")
+    if mode not in {"Current", "Historical", "Grand_Loop", "Engine_Grand_Loop"}:
+        raise ValueError("Ledger mode must be Current, Historical, Grand_Loop, or Engine_Grand_Loop.")
 
     if day_type not in {"Wednesday", "Saturday", "Sunday", "Special"}:
         raise ValueError("Invalid day_type for PredictionLedger.")
@@ -225,8 +225,8 @@ def update_ledger_after_verification(
     HitCount is stored at every rank row for the run so summary queries can
     group by SourceDrawNo/TargetDrawNo without reading winner data.
     """
-    if mode not in {"Current", "Historical", "Grand_Loop"}:
-        raise ValueError("Ledger mode must be Current, Historical, or Grand_Loop.")
+    if mode not in {"Current", "Historical", "Grand_Loop", "Engine_Grand_Loop"}:
+        raise ValueError("Ledger mode must be Current, Historical, Grand_Loop, or Engine_Grand_Loop.")
 
     settings = get_settings()
 
