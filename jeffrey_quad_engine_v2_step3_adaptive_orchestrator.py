@@ -751,6 +751,161 @@ class CandidatePoolBuilder:
 
         return votes
 
+
+    def _build_delta_rotation_training_sets(
+        self,
+        *,
+        source_draw_no: int,
+        day_type: str,
+        max_deltas: int = 64,
+    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """
+        Build temporally safe delta rotation training sets.
+
+        Returns:
+          training_delta_src_vectors: delta_t
+          training_delta_tgt_vectors: delta_t+1
+          latest_delta_vectors: latest known delta <= source_draw_no
+
+        Absolute transition delta rule:
+          delta = (current - previous + 10) % 10
+
+        Only uses records with target draw <= source_draw_no.
+        """
+        records = self.gateway.load_draw_history(max_draw_no=source_draw_no)
+
+        by_draw_no = {record.draw_no: record for record in records}
+        delta_vectors: List[np.ndarray] = []
+
+        for record in records:
+            if record.day_type != day_type:
+                continue
+
+            target_record = by_draw_no.get(record.draw_no + 1)
+
+            if target_record is None:
+                continue
+
+            if target_record.draw_no > source_draw_no:
+                continue
+
+            source_vectors = self.core.vectors_from_4d_strings(
+                record.winning_numbers,
+                dtype=np.int16,
+            )
+            target_vectors = self.core.vectors_from_4d_strings(
+                target_record.winning_numbers,
+                dtype=np.int16,
+            )
+
+            pair_count = min(source_vectors.shape[0], target_vectors.shape[0])
+            if pair_count <= 0:
+                continue
+
+            delta = self.core.delta_vectors_mod10(
+                source_vectors[:pair_count],
+                target_vectors[:pair_count],
+                dtype=np.int16,
+            )
+            delta_vectors.extend([row.reshape(1, -1) for row in delta])
+
+        if len(delta_vectors) < 2:
+            raise RuntimeError(
+                f"Need at least 2 delta rows for delta rotation training; "
+                f"got {len(delta_vectors)} for day_type={day_type} source_draw_no={source_draw_no}"
+            )
+
+        delta_matrix = np.vstack(delta_vectors)
+
+        if delta_matrix.shape[0] > max_deltas:
+            delta_matrix = delta_matrix[-max_deltas:]
+
+        if delta_matrix.shape[0] < 2:
+            raise RuntimeError("Delta rotation training matrix is too small after windowing")
+
+        training_delta_src = delta_matrix[:-1]
+        training_delta_tgt = delta_matrix[1:]
+        latest_delta = delta_matrix[-1:]
+
+        return training_delta_src, training_delta_tgt, latest_delta
+
+    def _votes_from_delta_rotation(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: int,
+    ) -> List[CandidateVote]:
+        votes: List[CandidateVote] = []
+
+        training_delta_src, training_delta_tgt, latest_delta = self._build_delta_rotation_training_sets(
+            source_draw_no=source_draw_no,
+            day_type=day_type,
+        )
+
+        delta_engine = self.core.Engine1DeltaRotationLsts()
+        predicted_vectors = delta_engine.predict_absolute_vectors(
+            base_vectors=src_vectors,
+            latest_delta_vectors=latest_delta,
+            training_delta_src_vectors=training_delta_src,
+            training_delta_tgt_vectors=training_delta_tgt,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+        # Enrich with recent temporally safe delta momentum projections if the
+        # primary source draw collapses to fewer than Top-K unique candidates.
+        recent_delta_inputs = training_delta_src[-64:]
+        recent_base_vectors = np.repeat(src_vectors[:1], recent_delta_inputs.shape[0], axis=0)
+        recent_projected = delta_engine.predict_absolute_vectors(
+            base_vectors=recent_base_vectors,
+            latest_delta_vectors=recent_delta_inputs,
+            training_delta_src_vectors=training_delta_src,
+            training_delta_tgt_vectors=training_delta_tgt,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+        numbers = (
+            self.core.strings_from_vectors(predicted_vectors)
+            + self.core.strings_from_vectors(recent_projected)
+        )
+
+        total = max(TOP_K, len(numbers))
+        seen_local = set()
+        rank_no = 0
+
+        for raw_rank, number in enumerate(numbers, start=1):
+            if number in seen_local:
+                continue
+
+            seen_local.add(number)
+            rank_no += 1
+
+            score = self._score_by_rank(
+                rank_no,
+                total,
+                base_weight=1.03,
+            )
+
+            votes.append(
+                CandidateVote(
+                    number=number,
+                    engine_name=self.core.ENGINE_1_DELTA_ROTATION_NAME,
+                    internal_score=float(score),
+                    raw_rank=rank_no,
+                    source_detail=(
+                        f"{self.core.ENGINE_1_DELTA_ROTATION_NAME}:"
+                        f"source_draw_no={source_draw_no}:raw_rank={raw_rank}:rank={rank_no}"
+                    ),
+                )
+            )
+
+            if rank_no >= TOP_K:
+                break
+
+        return votes
+
     @staticmethod
     def aggregate_votes(votes: Sequence[CandidateVote]) -> Dict[str, CandidateAggregate]:
         aggregates: Dict[str, CandidateAggregate] = {}
@@ -802,6 +957,13 @@ class CandidatePoolBuilder:
             )
             votes.extend(
                 self._votes_from_mirror_base5(
+                    src_vectors=src_vectors,
+                    day_type=day_type,
+                    source_draw_no=source_draw_no,
+                )
+            )
+            votes.extend(
+                self._votes_from_delta_rotation(
                     src_vectors=src_vectors,
                     day_type=day_type,
                     source_draw_no=source_draw_no,
@@ -1066,6 +1228,7 @@ class DiversityGuardRanker:
                 "E1_CROSS_PAIR_LINEAR",
                 "E1_WLS_DECAY_0.98",
                 "E1_MIRROR_BASE5_LSTS",
+                "E1_DELTA_ROTATION_LSTS",
             ),
             top_k=self.top_k,
         )

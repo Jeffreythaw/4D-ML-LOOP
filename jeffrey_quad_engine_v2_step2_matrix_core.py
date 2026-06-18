@@ -25,6 +25,7 @@ VALID_DAY_TYPES = {"Wednesday", "Saturday", "Sunday", "Special"}
 ENGINE_1_NAME = "E1_CROSS_PAIR_LINEAR"
 ENGINE_1_WLS_NAME = "E1_WLS_DECAY_0.98"
 ENGINE_1_MIRROR_BASE5_NAME = "E1_MIRROR_BASE5_LSTS"
+ENGINE_1_DELTA_ROTATION_NAME = "E1_DELTA_ROTATION_LSTS"
 ENGINE_2_NAME = "E2_SET_PROJECTOR"
 ENGINE_3_NAME = "E3_POLYNOMIAL"
 ENGINE_4_NAME = "E4_ADAPTIVE_4_UNKNOWNS_AFFINE"
@@ -608,6 +609,217 @@ class Engine1CrossPairLinear:
         return affine_mod10_transform(src_vectors, formula.matrix_m, formula.bias_b)
 
 
+
+
+
+def delta_vectors_mod10(
+    previous_vectors: np.ndarray,
+    current_vectors: np.ndarray,
+    *,
+    dtype: np.dtype = np.int16,
+) -> np.ndarray:
+    """
+    Compute digit-wise rotation/click delta:
+
+        delta = (current - previous + 10) % 10
+    """
+    previous_vectors = ensure_mod_int_array(previous_vectors, name="previous_vectors", dtype=np.int16)
+    current_vectors = ensure_mod_int_array(current_vectors, name="current_vectors", dtype=np.int16)
+
+    if previous_vectors.shape != current_vectors.shape:
+        raise ValueError(
+            f"previous_vectors and current_vectors must have same shape, "
+            f"got {previous_vectors.shape} and {current_vectors.shape}"
+        )
+
+    if previous_vectors.ndim != 2 or previous_vectors.shape[1] != VECTOR_WIDTH:
+        raise ValueError(
+            f"delta inputs must have shape (N, {VECTOR_WIDTH}), got {previous_vectors.shape}"
+        )
+
+    delta = (
+        current_vectors.astype(np.int32, copy=False)
+        - previous_vectors.astype(np.int32, copy=False)
+        + MOD_BASE
+    ) % MOD_BASE
+
+    return delta.astype(dtype, copy=False)
+
+
+def reconstruct_vectors_from_delta(
+    base_vectors: np.ndarray,
+    delta_vectors: np.ndarray,
+    *,
+    dtype: np.dtype = np.int16,
+) -> np.ndarray:
+    """
+    Reconstruct absolute vectors:
+
+        predicted = (base + delta) % 10
+    """
+    base_vectors = ensure_mod_int_array(base_vectors, name="base_vectors", dtype=np.int16)
+    delta_vectors = ensure_mod_int_array(delta_vectors, name="delta_vectors", dtype=np.int16)
+
+    if delta_vectors.ndim == 1:
+        delta_vectors = delta_vectors.reshape(1, VECTOR_WIDTH)
+
+    if base_vectors.ndim != 2 or base_vectors.shape[1] != VECTOR_WIDTH:
+        raise ValueError(f"base_vectors must have shape (N, {VECTOR_WIDTH}), got {base_vectors.shape}")
+
+    if delta_vectors.ndim != 2 or delta_vectors.shape[1] != VECTOR_WIDTH:
+        raise ValueError(f"delta_vectors must have shape (N, {VECTOR_WIDTH}), got {delta_vectors.shape}")
+
+    if delta_vectors.shape[0] == 1 and base_vectors.shape[0] > 1:
+        delta_vectors = np.repeat(delta_vectors, base_vectors.shape[0], axis=0)
+
+    if base_vectors.shape[0] != delta_vectors.shape[0]:
+        raise ValueError(
+            f"base_vectors and delta_vectors row counts must match or delta must have one row. "
+            f"got {base_vectors.shape[0]} and {delta_vectors.shape[0]}"
+        )
+
+    reconstructed = (
+        base_vectors.astype(np.int32, copy=False)
+        + delta_vectors.astype(np.int32, copy=False)
+    ) % MOD_BASE
+
+    return reconstructed.astype(dtype, copy=False)
+
+
+def solve_delta_rotation_lstsq_transition(
+    delta_src_vectors: np.ndarray,
+    delta_tgt_vectors: np.ndarray,
+    *,
+    day_type: str,
+    formula_version: str = "E1_DELTA_ROTATION_LSTS_V1",
+    source_draw_no: Optional[int] = None,
+) -> MatrixFormula:
+    """
+    Solve affine transition law in digit-delta rotation space.
+
+    The caller must provide only temporally eligible delta_t -> delta_t+1 pairs.
+    """
+    validate_day_type(day_type)
+
+    delta_src_vectors = ensure_mod_int_array(delta_src_vectors, name="delta_src_vectors", dtype=np.int16)
+    delta_tgt_vectors = ensure_mod_int_array(delta_tgt_vectors, name="delta_tgt_vectors", dtype=np.int16)
+
+    pair_count = min(delta_src_vectors.shape[0], delta_tgt_vectors.shape[0])
+
+    if pair_count < VECTOR_WIDTH + 1:
+        raise ValueError(
+            f"Delta rotation solver requires at least {VECTOR_WIDTH + 1} pairs, got {pair_count}"
+        )
+
+    src = delta_src_vectors[:pair_count].astype(np.float64, copy=False)
+    tgt = delta_tgt_vectors[:pair_count].astype(np.float64, copy=False)
+
+    design = np.hstack([src, np.ones((pair_count, 1), dtype=np.float64)])
+
+    coeff, residuals, rank, singular_values = np.linalg.lstsq(
+        design,
+        tgt,
+        rcond=None,
+    )
+
+    raw_m = coeff[:VECTOR_WIDTH, :].T
+    raw_b = coeff[VECTOR_WIDTH, :]
+
+    matrix_m = np.mod(np.rint(raw_m).astype(np.int32), MOD_BASE).astype(np.int16)
+    bias_b = np.mod(np.rint(raw_b).astype(np.int32), MOD_BASE).astype(np.int16)
+
+    formula = MatrixFormula(
+        engine_name=ENGINE_1_DELTA_ROTATION_NAME,
+        formula_version=formula_version,
+        day_type=day_type,
+        matrix_m=matrix_m,
+        bias_b=bias_b,
+        metadata={
+            "solver": "delta_rotation_np.linalg.lstsq",
+            "pair_count_used": int(pair_count),
+            "rank": int(rank),
+            "singular_values": singular_values.astype(float).tolist(),
+            "residuals": residuals.astype(float).tolist(),
+            "raw_matrix_m": raw_m.astype(float).tolist(),
+            "raw_bias_b": raw_b.astype(float).tolist(),
+            "source_draw_no": source_draw_no,
+        },
+    )
+
+    formula.validate()
+    return formula
+
+
+class Engine1DeltaRotationLsts:
+    engine_name = ENGINE_1_DELTA_ROTATION_NAME
+
+    def fit_formula(
+        self,
+        *,
+        delta_src_vectors: np.ndarray,
+        delta_tgt_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: Optional[int] = None,
+    ) -> MatrixFormula:
+        return solve_delta_rotation_lstsq_transition(
+            delta_src_vectors=delta_src_vectors,
+            delta_tgt_vectors=delta_tgt_vectors,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+    def predict_delta_vectors(
+        self,
+        *,
+        latest_delta_vectors: np.ndarray,
+        training_delta_src_vectors: np.ndarray,
+        training_delta_tgt_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: Optional[int] = None,
+    ) -> np.ndarray:
+        formula = self.fit_formula(
+            delta_src_vectors=training_delta_src_vectors,
+            delta_tgt_vectors=training_delta_tgt_vectors,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+        latest_delta_vectors = ensure_mod_int_array(
+            latest_delta_vectors,
+            name="latest_delta_vectors",
+            dtype=np.int16,
+        )
+
+        return affine_mod10_transform(
+            latest_delta_vectors,
+            formula.matrix_m,
+            formula.bias_b,
+            dtype=np.int16,
+        )
+
+    def predict_absolute_vectors(
+        self,
+        *,
+        base_vectors: np.ndarray,
+        latest_delta_vectors: np.ndarray,
+        training_delta_src_vectors: np.ndarray,
+        training_delta_tgt_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: Optional[int] = None,
+    ) -> np.ndarray:
+        predicted_delta_vectors = self.predict_delta_vectors(
+            latest_delta_vectors=latest_delta_vectors,
+            training_delta_src_vectors=training_delta_src_vectors,
+            training_delta_tgt_vectors=training_delta_tgt_vectors,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+        return reconstruct_vectors_from_delta(
+            base_vectors=base_vectors,
+            delta_vectors=predicted_delta_vectors,
+            dtype=np.int16,
+        )
 
 
 def digits_to_base5_space(vectors: np.ndarray, *, dtype: np.dtype = np.int16) -> np.ndarray:
