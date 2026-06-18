@@ -662,6 +662,95 @@ class CandidatePoolBuilder:
 
         return votes
 
+
+    def _votes_from_mirror_base5(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: int,
+    ) -> List[CandidateVote]:
+        votes: List[CandidateVote] = []
+
+        training_src, training_tgt = self._build_wls_training_pairs(
+            source_draw_no=source_draw_no,
+            day_type=day_type,
+        )
+
+        mirror_engine = self.core.Engine1MirrorBase5Lsts()
+        expanded_vectors = mirror_engine.expand_predictions(
+            src_vectors=src_vectors,
+            training_src_vectors=training_src,
+            training_tgt_vectors=training_tgt,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+        numbers = self.core.strings_from_vectors(expanded_vectors)
+
+        # Rank expansion candidates by closeness to baseline E1 output first.
+        # This uses only source draw N and the static baseline formula, no target.
+        baseline_vectors = self.matrix_core.run_engine1(src_vectors, day_type)
+        baseline_numbers = self.core.strings_from_vectors(baseline_vectors)
+        baseline_set = set(baseline_numbers)
+
+        def digit_distance(a: str, b: str) -> int:
+            return sum(abs(int(x) - int(y)) for x, y in zip(a, b))
+
+        ranked_numbers = []
+        seen_local = set()
+
+        for raw_rank, number in enumerate(numbers, start=1):
+            if number in seen_local:
+                continue
+
+            seen_local.add(number)
+
+            if baseline_numbers:
+                nearest_distance = min(digit_distance(number, base) for base in baseline_numbers)
+            else:
+                nearest_distance = 99
+
+            baseline_exact_bonus = 0 if number in baseline_set else 1
+
+            ranked_numbers.append(
+                (
+                    baseline_exact_bonus,
+                    nearest_distance,
+                    raw_rank,
+                    number,
+                )
+            )
+
+        ranked_numbers.sort(key=lambda item: (item[0], item[1], item[2], item[3]))
+
+        total = max(TOP_K, len(ranked_numbers))
+
+        for rank_no, item in enumerate(ranked_numbers[:TOP_K], start=1):
+            _, nearest_distance, raw_rank, number = item
+
+            distance_penalty = min(0.35, nearest_distance / 40.0)
+            score = max(
+                0.01,
+                self._score_by_rank(rank_no, total, base_weight=1.04) - distance_penalty,
+            )
+
+            votes.append(
+                CandidateVote(
+                    number=number,
+                    engine_name=self.core.ENGINE_1_MIRROR_BASE5_NAME,
+                    internal_score=float(score),
+                    raw_rank=rank_no,
+                    source_detail=(
+                        f"{self.core.ENGINE_1_MIRROR_BASE5_NAME}:"
+                        f"source_draw_no={source_draw_no}:raw_rank={raw_rank}:"
+                        f"rank={rank_no}:distance={nearest_distance}"
+                    ),
+                )
+            )
+
+        return votes
+
     @staticmethod
     def aggregate_votes(votes: Sequence[CandidateVote]) -> Dict[str, CandidateAggregate]:
         aggregates: Dict[str, CandidateAggregate] = {}
@@ -706,6 +795,13 @@ class CandidatePoolBuilder:
         if source_draw_no is not None:
             votes.extend(
                 self._votes_from_wls_decay(
+                    src_vectors=src_vectors,
+                    day_type=day_type,
+                    source_draw_no=source_draw_no,
+                )
+            )
+            votes.extend(
+                self._votes_from_mirror_base5(
                     src_vectors=src_vectors,
                     day_type=day_type,
                     source_draw_no=source_draw_no,
@@ -969,6 +1065,7 @@ class DiversityGuardRanker:
             engine_names=(
                 "E1_CROSS_PAIR_LINEAR",
                 "E1_WLS_DECAY_0.98",
+                "E1_MIRROR_BASE5_LSTS",
             ),
             top_k=self.top_k,
         )

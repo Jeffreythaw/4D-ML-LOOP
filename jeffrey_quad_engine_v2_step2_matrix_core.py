@@ -24,6 +24,7 @@ VALID_DAY_TYPES = {"Wednesday", "Saturday", "Sunday", "Special"}
 
 ENGINE_1_NAME = "E1_CROSS_PAIR_LINEAR"
 ENGINE_1_WLS_NAME = "E1_WLS_DECAY_0.98"
+ENGINE_1_MIRROR_BASE5_NAME = "E1_MIRROR_BASE5_LSTS"
 ENGINE_2_NAME = "E2_SET_PROJECTOR"
 ENGINE_3_NAME = "E3_POLYNOMIAL"
 ENGINE_4_NAME = "E4_ADAPTIVE_4_UNKNOWNS_AFFINE"
@@ -606,6 +607,190 @@ class Engine1CrossPairLinear:
         formula = self.default_formula(day_type)
         return affine_mod10_transform(src_vectors, formula.matrix_m, formula.bias_b)
 
+
+
+
+def digits_to_base5_space(vectors: np.ndarray, *, dtype: np.dtype = np.int16) -> np.ndarray:
+    """
+    Collapse decimal digits 0..9 into mirror/shadow Base-5 classes.
+
+    Mapping:
+      0/5 -> 0
+      1/6 -> 1
+      2/7 -> 2
+      3/8 -> 3
+      4/9 -> 4
+    """
+    vectors = ensure_mod_int_array(vectors, name="vectors", dtype=np.int16)
+    return np.mod(vectors, 5).astype(dtype, copy=False)
+
+
+def expand_base5_vector_to_base10_vectors(base5_vector: np.ndarray) -> np.ndarray:
+    """
+    Expand one 4-digit Base-5 vector into 16 mirror/shadow Base-10 variants.
+
+    Each Base-5 digit d expands to [d, d + 5].
+    """
+    base5_vector = np.asarray(base5_vector, dtype=np.int16)
+
+    if base5_vector.shape != (VECTOR_WIDTH,):
+        raise ValueError(f"base5_vector must have shape {(VECTOR_WIDTH,)}, got {base5_vector.shape}")
+
+    if np.any(base5_vector < 0) or np.any(base5_vector > 4):
+        raise ValueError("base5_vector values must be in [0..4]")
+
+    variants: List[List[int]] = [[]]
+
+    for digit in base5_vector.tolist():
+        next_variants: List[List[int]] = []
+        for prefix in variants:
+            next_variants.append(prefix + [int(digit)])
+            next_variants.append(prefix + [int(digit) + 5])
+        variants = next_variants
+
+    return ensure_mod_int_array(np.array(variants, dtype=np.int16), name="base5_expansion", dtype=np.int16)
+
+
+def expand_base5_vectors_to_base10_vectors(base5_vectors: np.ndarray) -> np.ndarray:
+    """
+    Expand N Base-5 vectors into N*16 Base-10 candidate vectors.
+    """
+    base5_vectors = np.asarray(base5_vectors, dtype=np.int16)
+
+    if base5_vectors.ndim != 2 or base5_vectors.shape[1] != VECTOR_WIDTH:
+        raise ValueError(f"base5_vectors must have shape (N, {VECTOR_WIDTH}), got {base5_vectors.shape}")
+
+    expanded = [expand_base5_vector_to_base10_vectors(row) for row in base5_vectors]
+    return ensure_mod_int_array(np.vstack(expanded), name="expanded_base10_vectors", dtype=np.int16)
+
+
+def solve_base5_lstsq_transition(
+    src_vectors: np.ndarray,
+    tgt_vectors: np.ndarray,
+    *,
+    day_type: str,
+    formula_version: str = "E1_MIRROR_BASE5_LSTS_V1",
+    source_draw_no: Optional[int] = None,
+) -> MatrixFormula:
+    """
+    Solve an affine transition law in collapsed Base-5 mirror space.
+
+    The caller must provide only temporally eligible pairs. The returned matrix
+    and bias are Base-5-class coefficients stored in MatrixFormula for audit.
+    """
+    validate_day_type(day_type)
+
+    src_base5 = digits_to_base5_space(src_vectors, dtype=np.int16)
+    tgt_base5 = digits_to_base5_space(tgt_vectors, dtype=np.int16)
+
+    pair_count = min(src_base5.shape[0], tgt_base5.shape[0])
+
+    if pair_count < VECTOR_WIDTH + 1:
+        raise ValueError(
+            f"Base5 LSTS solver requires at least {VECTOR_WIDTH + 1} pairs, got {pair_count}"
+        )
+
+    src = src_base5[:pair_count].astype(np.float64, copy=False)
+    tgt = tgt_base5[:pair_count].astype(np.float64, copy=False)
+
+    design = np.hstack([src, np.ones((pair_count, 1), dtype=np.float64)])
+
+    coeff, residuals, rank, singular_values = np.linalg.lstsq(
+        design,
+        tgt,
+        rcond=None,
+    )
+
+    raw_m = coeff[:VECTOR_WIDTH, :].T
+    raw_b = coeff[VECTOR_WIDTH, :]
+
+    matrix_m = np.mod(np.rint(raw_m).astype(np.int32), 5).astype(np.int16)
+    bias_b = np.mod(np.rint(raw_b).astype(np.int32), 5).astype(np.int16)
+
+    formula = MatrixFormula(
+        engine_name=ENGINE_1_MIRROR_BASE5_NAME,
+        formula_version=formula_version,
+        day_type=day_type,
+        matrix_m=matrix_m,
+        bias_b=bias_b,
+        metadata={
+            "solver": "base5_np.linalg.lstsq",
+            "pair_count_used": int(pair_count),
+            "rank": int(rank),
+            "singular_values": singular_values.astype(float).tolist(),
+            "residuals": residuals.astype(float).tolist(),
+            "raw_matrix_m": raw_m.astype(float).tolist(),
+            "raw_bias_b": raw_b.astype(float).tolist(),
+            "source_draw_no": source_draw_no,
+        },
+    )
+
+    # MatrixFormula.validate() enforces 0..9, so Base-5 coefficients are valid.
+    formula.validate()
+    return formula
+
+
+class Engine1MirrorBase5Lsts:
+    engine_name = ENGINE_1_MIRROR_BASE5_NAME
+
+    def fit_formula(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        tgt_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: Optional[int] = None,
+    ) -> MatrixFormula:
+        return solve_base5_lstsq_transition(
+            src_vectors=src_vectors,
+            tgt_vectors=tgt_vectors,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+    def predict_base5_vectors(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        training_src_vectors: np.ndarray,
+        training_tgt_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: Optional[int] = None,
+    ) -> np.ndarray:
+        formula = self.fit_formula(
+            src_vectors=training_src_vectors,
+            tgt_vectors=training_tgt_vectors,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+
+        src_base5 = digits_to_base5_space(src_vectors, dtype=np.int16)
+
+        projected = (
+            src_base5.astype(np.int32, copy=False)
+            @ formula.matrix_m.astype(np.int32, copy=False).T
+            + formula.bias_b.astype(np.int32, copy=False)
+        ) % 5
+
+        return projected.astype(np.int16, copy=False)
+
+    def expand_predictions(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        training_src_vectors: np.ndarray,
+        training_tgt_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: Optional[int] = None,
+    ) -> np.ndarray:
+        base5_vectors = self.predict_base5_vectors(
+            src_vectors=src_vectors,
+            training_src_vectors=training_src_vectors,
+            training_tgt_vectors=training_tgt_vectors,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+        )
+        return expand_base5_vectors_to_base10_vectors(base5_vectors)
 
 
 def solve_weighted_affine_mod10(
