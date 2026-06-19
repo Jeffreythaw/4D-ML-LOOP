@@ -1,0 +1,111 @@
+============================================================================================================================
+STEP 150E — STREAK RISK-GATED CANDIDATE PRUNING AUDIT — REPORT ONLY
+============================================================================================================================
+ProductionMathChanged: NO
+SQLSchemaChanged: NO
+FrontendChanged: NO
+ProductionPredictBehaviorChanged: NO
+Engine: E1_TEMPORAL_CONTEXT_MATCH
+TemporalFirewall: Candidate generation uses only earlier verified E1 rows and DrawHistory DrawNo <= source_draw_no.
+EvaluationOnly: Target winners are applied only after each baseline/prototype candidate set is locked.
+ReplacementPool: Prior winning numbers from the latest 12 draws ending at source_draw_no; no target rows.
+VerifiedOutcomePairs: 1447
+LedgerVsActualHitMismatchPairs: 0
+
+CURRENT FULL-LEDGER MISS STREAK STATE
+----------------------------------------------------------------------------------------------------------------------------
+CurrentSourceForNextPrediction: 5497
+CurrentTargetForNextPrediction: 5498
+CurrentFullLedgerPreMissStreak: 18
+CurrentRiskBucket: HIGH_RISK
+LiveDeploymentLocalMissStreak: 3
+Note: Full-ledger streak is the primary macro feature; live-local streak is context only.
+
+RISK BUCKET DEFINITIONS
+----------------------------------------------------------------------------------------------------------------------------
+LOW_RISK: 0-5
+MEDIUM_RISK: 6-15
+HIGH_RISK: 16-40
+EXTREME_RISK: 41+
+
+CANDIDATE FEATURE DEFINITIONS
+----------------------------------------------------------------------------------------------------------------------------
+DigitSum: Sum of four digits.
+RepeatedDigitCount: 4 minus the number of unique digits.
+OddRatio: Odd digits divided by 4. HighDigitRatio: Digits >= 5 divided by 4.
+MirrorSignature: Each digit reduced modulo 5. BoxSignature: Digits sorted ascending.
+PairRecurrence: Candidate first or last pair appears in source/current-known winner history from the latest 3 draws.
+NearMiss fields (Hamming, box, mirror) are calculated only after candidate lock against verified target actuals.
+
+BASELINE E1 TOP5 HIT RATE BY STREAK RISK BUCKET
+----------------------------------------------------------------------------------------------------------------------------
+Bucket         Rows   Draws  DrawsWithHit  RawHits  HitRate   RandomTop5  EnrichmentVsRandom
+LOW_RISK          650     130             2        2    1.538%    1.144%             1.3449
+MEDIUM_RISK       930     186             2        2    1.075%    1.144%             0.9400
+HIGH_RISK        1915     383             7        7    1.828%    1.143%             1.5988
+EXTREME_RISK     3740     748            10       10    1.337%    1.143%             1.1692
+
+HIGH/EXTREME-RISK CANDIDATE SHAPE: SUCCESSFUL HIT ROWS VS MISS ROWS
+----------------------------------------------------------------------------------------------------------------------------
+LOW_SAMPLE_WARNING: Fewer than 20 successful high-risk candidate rows exist; pattern estimates are sparse/noisy.
+HIT_ROWS: Rows=17 AvgDigitSum=17.4706 AvgRepeatedDigits=0.4118 RepeatedDigitRate=0.4118 OddRatio=0.4559 HighDigitRatio=0.5147 PairRecurrenceRate=1.0000
+  NearMissAfterLock: AvgHamming=0.0000 AvgBoxDistance=0.0000 AvgMirrorHamming=0.0000
+  MirrorDistributionTop10: {'1004': 1, '3004': 1, '2131': 1, '4321': 1, '1242': 1, '4031': 1, '3440': 1, '0434': 1, '0044': 1, '1032': 1}
+  TopFirstPairs: [('60', 2), ('10', 1), ('80', 1), ('26', 1), ('43', 1), ('12', 1), ('40', 1), ('84', 1), ('54', 1), ('05', 1)]
+  TopLastPairs: [('09', 2), ('76', 2), ('95', 2), ('31', 1), ('47', 1), ('86', 1), ('34', 1), ('49', 1), ('32', 1), ('75', 1)]
+MISS_ROWS: Rows=5638 AvgDigitSum=17.6999 AvgRepeatedDigits=0.5724 RepeatedDigitRate=0.4860 OddRatio=0.4966 HighDigitRatio=0.4919 PairRecurrenceRate=0.9370
+  NearMissAfterLock: AvgHamming=2.2134 AvgBoxDistance=1.2760 AvgMirrorHamming=1.5121
+  MirrorDistributionTop10: {'0000': 75, '4020': 43, '4101': 36, '3143': 35, '4123': 32, '0200': 31, '3220': 30, '0434': 30, '3224': 29, '4340': 27}
+  TopFirstPairs: [('52', 92), ('20', 89), ('40', 88), ('07', 87), ('92', 85), ('55', 81), ('82', 80), ('50', 80), ('65', 78), ('42', 76)]
+  TopLastPairs: [('00', 126), ('25', 93), ('23', 88), ('78', 88), ('39', 87), ('53', 83), ('55', 83), ('05', 81), ('40', 81), ('41', 80)]
+
+REPORT-ONLY PRUNING PROTOTYPE COMPARISON
+----------------------------------------------------------------------------------------------------------------------------
+Policy                       AllDraws  AllHitRate  AllRawHits  HighRiskDraws  HighRiskHitRate  HighRiskRawHits  DeltaVsBase  Changed  Limited
+BASELINE                         1447    1.451%          21           1131    1.503%              17      0.000pp        0        0
+RISK_SUPPRESS_REPEATS            1447    1.451%          21           1131    1.503%              17      0.000pp      378        0
+RISK_SUM_BAND                    1447    1.659%          24           1131    1.768%              20      0.265pp      832      280
+RISK_MIRROR_PRIOR                1447    1.451%          21           1131    1.503%              17      0.000pp      851      280
+RISK_PAIR_RECURRENCE             1447    1.520%          22           1131    1.592%              18      0.088pp      309        0
+HYBRID_RISK_GATE                 1447    0.829%          12           1131    0.707%               8     -0.796pp     1131      280
+
+PrototypeLimitation: Production E1 persists only Top5. Replacements here come from a leakage-safe recent historical winner pool,
+not from a persisted deeper E1 candidate pool. Any apparent gain must be treated as exploratory and non-production.
+
+RECENT LIVE WINDOW
+----------------------------------------------------------------------------------------------------------------------------
+5494->5495 PreMiss=15 Bucket=MEDIUM_RISK BASELINE=['5941', '9554', '6201', '0000', '7006'] RawHits=0
+  RISK_SUPPRESS_REPEATS: Candidates=['5941', '9554', '6201', '0000', '7006'] RawHits=0 Limitation=NO_OP_BELOW_HIGH_RISK
+  RISK_SUM_BAND: Candidates=['5941', '9554', '6201', '0000', '7006'] RawHits=0 Limitation=NO_OP_BELOW_HIGH_RISK
+  RISK_MIRROR_PRIOR: Candidates=['5941', '9554', '6201', '0000', '7006'] RawHits=0 Limitation=NO_OP_BELOW_HIGH_RISK
+  RISK_PAIR_RECURRENCE: Candidates=['5941', '9554', '6201', '0000', '7006'] RawHits=0 Limitation=NO_OP_BELOW_HIGH_RISK
+  HYBRID_RISK_GATE: Candidates=['5941', '9554', '6201', '0000', '7006'] RawHits=0 Limitation=NO_OP_BELOW_HIGH_RISK
+5495->5496 PreMiss=16 Bucket=HIGH_RISK BASELINE=['8044', '4443', '0550', '1294', '0368'] RawHits=0
+  RISK_SUPPRESS_REPEATS: Candidates=['8044', '1294', '0368', '0376', '3671'] RawHits=0 Limitation=NONE
+  RISK_SUM_BAND: Candidates=['8044', '4443', '1294', '0368', '3671'] RawHits=0 Limitation=NONE
+  RISK_MIRROR_PRIOR: Candidates=['9106', '4371', '8059', '3995', '1858'] RawHits=0 Limitation=NONE
+  RISK_PAIR_RECURRENCE: Candidates=['8044', '4443', '0550', '1294', '0368'] RawHits=0 Limitation=NONE
+  HYBRID_RISK_GATE: Candidates=['0376', '0625', '1545', '3671', '5315'] RawHits=0 Limitation=NONE
+5496->5497 PreMiss=17 Bucket=HIGH_RISK BASELINE=['4796', '5024', '9418', '8044', '7452'] RawHits=0
+  RISK_SUPPRESS_REPEATS: Candidates=['4796', '5024', '9418', '8044', '7452'] RawHits=0 Limitation=NONE
+  RISK_SUM_BAND: Candidates=['8044', '7452', '3185', '3671', '6812'] RawHits=0 Limitation=NONE
+  RISK_MIRROR_PRIOR: Candidates=['6088', '9106', '4371', '8059', '3995'] RawHits=0 Limitation=NONE
+  RISK_PAIR_RECURRENCE: Candidates=['5024', '9418', '8044', '7452', '0949'] RawHits=0 Limitation=NONE
+  HYBRID_RISK_GATE: Candidates=['0669', '2086', '3185', '4048', '4345'] RawHits=0 Limitation=NONE
+5497->5498 PreMiss=18 Bucket=HIGH_RISK VerificationStatus=UNVERIFIED CandidateSource=READ_ONLY_PRODUCTION_ADAPTER:5497->5498
+  TargetAvailableInDrawHistory: NO
+  BASELINE: Candidates=['7006', '4723', '3193', '9098', '2698']
+  RISK_SUPPRESS_REPEATS: Candidates=['7006', '4723', '3193', '9098', '2698'] Limitation=NONE
+  RISK_SUM_BAND: Candidates=['7006', '4723', '3193', '6065', '6515'] Limitation=NONE
+  RISK_MIRROR_PRIOR: Candidates=['2071', '6088', '9106', '4371', '8059'] Limitation=NONE
+  RISK_PAIR_RECURRENCE: Candidates=['7006', '3193', '2698', '7776', '0374'] Limitation=NONE
+  HYBRID_RISK_GATE: Candidates=['0374', '1389', '2426', '2658', '3066'] Limitation=NONE
+
+FINAL RECOMMENDATION
+----------------------------------------------------------------------------------------------------------------------------
+Recommendation: DO NOT PROMOTE
+Reason: best apparent prototype RISK_SUM_BAND improves high-risk hit rate by 0.265pp but does not clear evidence guards; successful high-risk candidate rows are low-sample; replacement candidates are reconstructed from historical winners, not a persisted deep E1 pool.
+NextStep: Persist a leakage-safe deeper E1 candidate pool, then rerun the same fixed gates on a locked forward holdout.
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_150e_streak_risk_gated_pruning_audit.txt
+JSONL_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_150e_streak_risk_gated_pruning_rows.jsonl
