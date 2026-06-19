@@ -34,7 +34,7 @@ def latest_draw() -> LatestDrawResponse:
 @router.post("/predict", response_model=PredictionResponse)
 def predict(request: PredictionRequest) -> PredictionResponse:
     try:
-        adapter_result = run_existing_engine_prediction(request)
+        adapter_result = run_existing_engine_prediction(request, allow_fallback=True)
     except PredictionAdapterError as exc:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,

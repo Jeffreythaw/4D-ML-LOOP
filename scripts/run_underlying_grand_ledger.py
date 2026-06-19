@@ -175,9 +175,9 @@ def extract_underlying_candidates(
 
 
 def fetch_summary(source_start: int, source_end: int) -> Dict[str, EngineGroupSummary]:
-    placeholders = ",".join(["?"] * len(ENGINES))
+    engine_placeholders = "?, ?, ?, ?"
 
-    query = f"""
+    query = """
         WITH EngineGroups AS (
             SELECT
                 EngineSource,
@@ -187,7 +187,7 @@ def fetch_summary(source_start: int, source_end: int) -> Dict[str, EngineGroupSu
                 COUNT(*) AS LedgerRows
             FROM dbo.PredictionLedger
             WHERE Mode = ?
-              AND EngineSource IN ({placeholders})
+              AND EngineSource IN (?, ?, ?, ?)
               AND SourceDrawNo BETWEEN ? AND ?
               AND TargetDrawNo BETWEEN ? AND ?
               AND VerificationStatus = 'Verified'

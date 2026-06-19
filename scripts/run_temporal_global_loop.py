@@ -37,6 +37,8 @@ UNDERLYING_ENGINES = (
 )
 TOP_K = 5
 DEFAULT_START_SOURCE_DRAW_NO = 4050
+TEMPORAL_COLD_START_MIN_MATCHES = 5
+TEMPORAL_COLD_START_FALLBACK_ENGINE = "E1_DELTA_ROTATION_LSTS"
 
 TIER_A_WEIGHT = 4.0
 TIER_B_WEIGHT = 3.0
@@ -338,6 +340,15 @@ def build_temporal_candidates(
     )
 
     selected = ranked_numbers[:TOP_K]
+
+    if len(observations) < TEMPORAL_COLD_START_MIN_MATCHES:
+        for item in grouped.get(TEMPORAL_COLD_START_FALLBACK_ENGINE, []):
+            number = str(item.number).zfill(4)
+            if number not in selected:
+                selected.append(number)
+            if len(selected) == TOP_K:
+                break
+
     if len(selected) < TOP_K:
         for value in range(10000):
             number = f"{value:04d}"

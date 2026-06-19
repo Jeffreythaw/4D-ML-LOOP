@@ -10,6 +10,9 @@ from app.schemas.prediction import PredictionCandidate, PredictionRequest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
+FALLBACK_ENGINE_SOURCE = "E0_STABILIZED_BASELINE_FALLBACK"
+FALLBACK_TOP_K = 5
+
 
 class PredictionAdapterError(RuntimeError):
     pass
@@ -24,7 +27,7 @@ class PredictionAdapterResult:
     ledger_predictions: list[PredictionCandidate]
 
 
-def run_existing_engine_prediction(request: PredictionRequest) -> PredictionAdapterResult:
+def run_existing_engine_prediction(request: PredictionRequest, *, allow_fallback: bool = False) -> PredictionAdapterResult:
     """
     Read-only adapter boundary for the existing Step 2 / Step 3 NumPy engine.
 
@@ -57,6 +60,11 @@ def run_existing_engine_prediction(request: PredictionRequest) -> PredictionAdap
                 raise LookupError(f"Source DrawNo {source_draw_no} not found in dbo.DrawHistory")
             day_type = str(source_record.day_type)
     except Exception as exc:
+        if allow_fallback:
+            return _build_stabilized_fallback_result(
+                source_draw_no=source_draw_no,
+                reason=exc,
+            )
         raise PredictionAdapterError("Existing engine prediction failed.") from exc
 
     score_by_number: dict[str, float | None] = {}
@@ -110,6 +118,55 @@ def run_existing_engine_prediction(request: PredictionRequest) -> PredictionAdap
         day_type=day_type,
         predictions=candidates,
         ledger_predictions=ledger_candidates or candidates,
+    )
+
+
+def _build_stabilized_fallback_result(
+    *,
+    source_draw_no: int,
+    reason: Exception,
+) -> PredictionAdapterResult:
+    """
+    Last-resort fail-safe for /api/predict stability.
+
+    This fallback is deterministic, target-blind, and uses only the source draw
+    number. It is not intended to improve accuracy; it prevents API crashes when
+    a solver/module/database anomaly occurs before the normal engine can return.
+    """
+    seed = abs(int(source_draw_no)) % 10000
+    offsets = (0, 137, 271, 409, 733, 997, 1229, 1531, 1877, 2213)
+
+    numbers: list[str] = []
+    for offset in offsets:
+        candidate = f"{(seed + offset) % 10000:04d}"
+        if candidate not in numbers:
+            numbers.append(candidate)
+        if len(numbers) == FALLBACK_TOP_K:
+            break
+
+    value = 0
+    while len(numbers) < FALLBACK_TOP_K:
+        candidate = f"{value:04d}"
+        if candidate not in numbers:
+            numbers.append(candidate)
+        value += 1
+
+    candidates = [
+        PredictionCandidate(
+            rank=rank_no,
+            number=number,
+            score=0.0,
+            source=FALLBACK_ENGINE_SOURCE,
+        )
+        for rank_no, number in enumerate(numbers, start=1)
+    ]
+
+    return PredictionAdapterResult(
+        source_draw_number=int(source_draw_no),
+        target_draw_number=int(source_draw_no) + 1,
+        day_type="Special",
+        predictions=candidates,
+        ledger_predictions=candidates,
     )
 
 
