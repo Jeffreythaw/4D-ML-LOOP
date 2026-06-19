@@ -12,6 +12,7 @@ load_dotenv(BACKEND_ENV_PATH, override=False)
 
 class Settings(BaseSettings):
     sql_server_host: str = Field(default="", validation_alias="SQL_SERVER_HOST")
+    sql_server_port: int | None = Field(default=None, validation_alias="SQL_SERVER_PORT")
     sql_server_database: str = Field(default="", validation_alias="SQL_SERVER_DATABASE")
     sql_server_username: str = Field(default="", validation_alias="SQL_SERVER_USERNAME")
     sql_server_password: str = Field(default="", validation_alias="SQL_SERVER_PASSWORD")
@@ -47,9 +48,13 @@ class Settings(BaseSettings):
         if missing:
             raise ValueError(f"Missing SQL configuration: {', '.join(missing)}")
 
+        server = self.sql_server_host
+        if self.sql_server_port is not None and "," not in server:
+            server = f"{server},{self.sql_server_port}"
+
         return (
             f"DRIVER={{{self.sql_server_driver}}};"
-            f"SERVER={self.sql_server_host};"
+            f"SERVER={server};"
             f"DATABASE={self.sql_server_database};"
             f"UID={self.sql_server_username};"
             f"PWD={self.sql_server_password};"

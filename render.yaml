@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: 4d-ml-loop-api
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    autoDeploy: true
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: SQL_SERVER_HOST
+        sync: false
+      - key: SQL_SERVER_PORT
+        value: "1433"
+      - key: SQL_SERVER_DATABASE
+        sync: false
+      - key: SQL_SERVER_USERNAME
+        sync: false
+      - key: SQL_SERVER_PASSWORD
+        sync: false
+      - key: SQL_SERVER_DRIVER
+        value: ODBC Driver 18 for SQL Server
+      - key: SQL_ENCRYPT
+        value: "yes"
+      - key: SQL_TRUST_SERVER_CERTIFICATE
+        value: "no"
+      - key: SQL_VERIFY_PROCEDURE
+        value: dbo.SP_Verify_Predictions
+      - key: FRONTEND_URL
+        sync: false
