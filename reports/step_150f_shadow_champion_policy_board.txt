@@ -1,0 +1,172 @@
+============================================================================================================================================
+STEP 150F — SHADOW CHAMPION POLICY BOARD — REPORT ONLY
+============================================================================================================================================
+ProductionMathChanged: NO
+APIChanged: NO
+FrontendChanged: NO
+SQLSchemaChanged: NO
+DeploymentChanged: NO
+Engine: E1_TEMPORAL_CONTEXT_MATCH
+TemporalFirewall: Every policy uses DrawHistory DrawNo <= SourceDrawNo and policy priors with TargetDrawNo <= SourceDrawNo.
+CandidateLock: Target winners are read only after all policy Top5 sets for that source are fixed.
+SQLAuthority: Stored PredictionLedger E1 Top5 and verification status drive the historical ledger and miss streak.
+ReplacementWarning: Historical winner candidates are leakage-safe but shadow-only; production does not persist a deeper E1 pool.
+VerifiedOutcomePairs: 1447
+LedgerVsActualHitMismatchPairs: 0
+
+CURRENT LIVE MACRO STATE
+--------------------------------------------------------------------------------------------------------------------------------------------
+CurrentSourceDrawNo: 5497
+CurrentTargetDrawNo: 5498
+CurrentFullLedgerPreMissStreak: 18
+CurrentRiskBucket: HIGH_RISK
+CurrentTargetStatus: UNVERIFIED
+CurrentBaselineSource: READ_ONLY_PRODUCTION_ADAPTER
+RiskUse: suppression/caution only; no streak recovery boost.
+
+SOURCE STRUCTURAL FEATURE CONTRACT
+--------------------------------------------------------------------------------------------------------------------------------------------
+Features: digit-sum distribution, mirror-class distribution, first/last pair cloud, repeated-digit rate, odd/even ratio,
+high/low ratio, and pair recurrence over prior 1/3/5 source-known draws.
+CurrentSourceProfile: {"digit_sum_distribution": {"4": 1, "7": 1, "10": 1, "12": 1, "13": 2, "14": 5, "15": 2, "17": 2, "19": 1, "20": 1, "21": 3, "27": 1, "28": 1, "35": 1}, "first_pair_cloud": ["03", "11", "13", "20", "22", "24", "26", "30", "33", "38", "42", "45", "60", "63", "65", "66", "74", "77", "82", "89", "99"], "high_low_ratio": 0.45652173913043476, "last_pair_cloud": ["05", "10", "11", "12", "15", "19", "22", "26", "31", "34", "49", "55", "58", "63", "64", "65", "66", "71", "74", "76", "89", "99"], "mirror_class_distribution": {"0324": 1, "1010": 3, "1111": 1, "1113": 1, "1322": 1, "1334": 1, "2021": 1, "2103": 1, "2200": 1, "2221": 1, "2412": 1, "2421": 1, "3011": 1, "3022": 1, "3214": 1, "3331": 1, "3334": 1, "3444": 1, "4000": 1, "4244": 1, "4414": 1}, "odd_even_ratio": 0.4891304347826087, "pair_recurrence_1": 34, "pair_recurrence_3": 71, "pair_recurrence_5": 89, "repeated_digit_rate": 0.6956521739130435}
+
+POLICY PERFORMANCE SUMMARY — FULL VERIFIED RANGE
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                          1447        21      21  1.451%   0.0145  1.143%   1.269   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                 1447        23      23  1.589%   0.0159  1.143%   1.390   +0.138pp     280 2273      0
+PAIR_RECURRENCE_SHADOW               1447        18      18  1.244%   0.0124  1.143%   1.088   -0.207pp       0 4907      0
+MIRROR_BOX_REPAIR_SHADOW             1447        21      21  1.451%   0.0145  1.143%   1.269   +0.000pp       0 5654      0
+STREAK_RISK_SUPPRESSION_SHADOW       1447        18      19  1.244%   0.0131  1.143%   1.088   -0.207pp       8 5426      0
+HYBRID_GUARD_SHADOW                  1447        22      22  1.520%   0.0152  1.143%   1.330   +0.069pp     280 3566      0
+
+POLICY PERFORMANCE SUMMARY — PHASE 2 (SOURCE >= 4050)
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                          1447        21      21  1.451%   0.0145  1.143%   1.269   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                 1447        23      23  1.589%   0.0159  1.143%   1.390   +0.138pp     280 2273      0
+PAIR_RECURRENCE_SHADOW               1447        18      18  1.244%   0.0124  1.143%   1.088   -0.207pp       0 4907      0
+MIRROR_BOX_REPAIR_SHADOW             1447        21      21  1.451%   0.0145  1.143%   1.269   +0.000pp       0 5654      0
+STREAK_RISK_SUPPRESSION_SHADOW       1447        18      19  1.244%   0.0131  1.143%   1.088   -0.207pp       8 5426      0
+HYBRID_GUARD_SHADOW                  1447        22      22  1.520%   0.0152  1.143%   1.330   +0.069pp     280 3566      0
+
+POLICY PERFORMANCE SUMMARY — RECENT 365
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                           365         6       6  1.644%   0.0164  1.144%   1.438   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                  365         4       4  1.096%   0.0110  1.144%   0.958   -0.548pp       0  702      0
+PAIR_RECURRENCE_SHADOW                365         6       6  1.644%   0.0164  1.144%   1.438   +0.000pp       0 1208      0
+MIRROR_BOX_REPAIR_SHADOW              365         6       6  1.644%   0.0164  1.144%   1.438   +0.000pp       0 1389      0
+STREAK_RISK_SUPPRESSION_SHADOW        365         4       4  1.096%   0.0110  1.144%   0.958   -0.548pp       0 1344      0
+HYBRID_GUARD_SHADOW                   365         6       6  1.644%   0.0164  1.144%   1.438   +0.000pp       0  848      0
+
+POLICY PERFORMANCE SUMMARY — RECENT 90
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                            90         1       1  1.111%   0.0111  1.144%   0.972   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                   90         1       1  1.111%   0.0111  1.144%   0.972   +0.000pp       0  144      0
+PAIR_RECURRENCE_SHADOW                 90         1       1  1.111%   0.0111  1.144%   0.972   +0.000pp       0  295      0
+MIRROR_BOX_REPAIR_SHADOW               90         0       0  0.000%   0.0000  1.144%   0.000   -1.111pp       0  350      0
+STREAK_RISK_SUPPRESSION_SHADOW         90         1       1  1.111%   0.0111  1.144%   0.972   +0.000pp       0  342      0
+HYBRID_GUARD_SHADOW                    90         1       1  1.111%   0.0111  1.144%   0.972   +0.000pp       0  222      0
+
+POLICY PERFORMANCE SUMMARY — RECENT 47
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                            47         1       1  2.128%   0.0213  1.143%   1.862   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                   47         0       0  0.000%   0.0000  1.143%   0.000   -2.128pp       0   62      0
+PAIR_RECURRENCE_SHADOW                 47         0       0  0.000%   0.0000  1.143%   0.000   -2.128pp       0  126      0
+MIRROR_BOX_REPAIR_SHADOW               47         0       0  0.000%   0.0000  1.143%   0.000   -2.128pp       0  155      0
+STREAK_RISK_SUPPRESSION_SHADOW         47         1       1  2.128%   0.0213  1.143%   1.862   +0.000pp       0  151      0
+HYBRID_GUARD_SHADOW                    47         1       1  2.128%   0.0213  1.143%   1.862   +0.000pp       0   97      0
+
+POLICY PERFORMANCE SUMMARY — HIGH_RISK / EXTREME_RISK ONLY
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                          1131        17      17  1.503%   0.0150  1.143%   1.315   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                 1131        19      19  1.680%   0.0168  1.143%   1.469   +0.177pp     280 2273      0
+PAIR_RECURRENCE_SHADOW               1131        14      14  1.238%   0.0124  1.143%   1.083   -0.265pp       0 4907      0
+MIRROR_BOX_REPAIR_SHADOW             1131        17      17  1.503%   0.0150  1.143%   1.315   +0.000pp       0 5654      0
+STREAK_RISK_SUPPRESSION_SHADOW       1131        14      15  1.238%   0.0133  1.143%   1.083   -0.265pp       8 5426      0
+HYBRID_GUARD_SHADOW                  1131        18      18  1.592%   0.0159  1.143%   1.392   +0.088pp     280 3566      0
+
+POLICY PERFORMANCE SUMMARY — HIGH_RISK + MONTH JUNE
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                            79         1       1  1.266%   0.0127  1.144%   1.106   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                   79         2       2  2.532%   0.0253  1.144%   2.213   +1.266pp      14  152      0
+PAIR_RECURRENCE_SHADOW                 79         0       0  0.000%   0.0000  1.144%   0.000   -1.266pp       0  351      0
+MIRROR_BOX_REPAIR_SHADOW               79         0       0  0.000%   0.0000  1.144%   0.000   -1.266pp       0  395      0
+STREAK_RISK_SUPPRESSION_SHADOW         79         1       2  1.266%   0.0253  1.144%   1.106   +0.000pp       0  371      0
+HYBRID_GUARD_SHADOW                    79         0       0  0.000%   0.0000  1.144%   0.000   -1.266pp      14  251      0
+
+POLICY PERFORMANCE SUMMARY — HIGH_RISK + WEEKEND_SPACE
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                           379         5       5  1.319%   0.0132  1.144%   1.154   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                  379         7       7  1.847%   0.0185  1.144%   1.615   +0.528pp      94  759      0
+PAIR_RECURRENCE_SHADOW                379         4       4  1.055%   0.0106  1.144%   0.923   -0.264pp       0 1651      0
+MIRROR_BOX_REPAIR_SHADOW              379        10      10  2.639%   0.0264  1.144%   2.307   +1.319pp       0 1895      0
+STREAK_RISK_SUPPRESSION_SHADOW        379         5       5  1.319%   0.0132  1.144%   1.154   +0.000pp       3 1826      0
+HYBRID_GUARD_SHADOW                   379         8       8  2.111%   0.0211  1.144%   1.846   +0.792pp      94 1180      0
+
+POLICY PERFORMANCE SUMMARY — HIGH_RISK + MIDWEEK_SPECIAL_SPACE
+--------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Rows  HitDraws RawHits HitRate Raw/Draw Random  Enrich DeltaBase LowSmpl Repl NoSafe
+BASELINE_E1                           752        12      12  1.596%   0.0160  1.143%   1.396   +0.000pp       0    0      0
+RISK_SUM_BAND_SHADOW                  752        12      12  1.596%   0.0160  1.143%   1.396   +0.000pp     186 1514      0
+PAIR_RECURRENCE_SHADOW                752        10      10  1.330%   0.0133  1.143%   1.163   -0.266pp       0 3256      0
+MIRROR_BOX_REPAIR_SHADOW              752         7       7  0.931%   0.0093  1.143%   0.814   -0.665pp       0 3759      0
+STREAK_RISK_SUPPRESSION_SHADOW        752         9      10  1.197%   0.0133  1.143%   1.047   -0.399pp       5 3600      0
+HYBRID_GUARD_SHADOW                   752        10      10  1.330%   0.0133  1.143%   1.163   -0.266pp     186 2386      0
+
+EXACT LIVE WINDOW — 5494→5497
+--------------------------------------------------------------------------------------------------------------------------------------------
+5494->5495 Risk=MEDIUM_RISK PreMiss=15 ActualPrizeCount=23 Baseline=['5941', '9554', '6201', '0000', '7006']
+  BASELINE_E1: Top5=['5941', '9554', '6201', '0000', '7006'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Hits=0 MinCircular=12 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=1 Limitation=NONE
+  RISK_SUM_BAND_SHADOW: Top5=['5941', '9554', '6201', '0000', '7006'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Hits=0 MinCircular=12 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=1 Limitation=NO_OP_BELOW_HIGH_RISK
+  PAIR_RECURRENCE_SHADOW: Top5=['5941', '9554', '6201', '0000', '7006'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Hits=0 MinCircular=12 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=1 Limitation=NO_OP_BELOW_HIGH_RISK
+  MIRROR_BOX_REPAIR_SHADOW: Top5=['5941', '9554', '6201', '0000', '7006'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Hits=0 MinCircular=12 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=1 Limitation=NO_OP_BELOW_HIGH_RISK
+  STREAK_RISK_SUPPRESSION_SHADOW: Top5=['5941', '9554', '6201', '0000', '7006'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Hits=0 MinCircular=12 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=1 Limitation=NO_OP_BELOW_HIGH_RISK
+  HYBRID_GUARD_SHADOW: Top5=['5941', '9554', '6201', '0000', '7006'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Hits=0 MinCircular=12 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=1 Limitation=NO_OP_BELOW_HIGH_RISK
+5495->5496 Risk=HIGH_RISK PreMiss=16 ActualPrizeCount=23 Baseline=['8044', '4443', '0550', '1294', '0368']
+  BASELINE_E1: Top5=['8044', '4443', '0550', '1294', '0368'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Hits=0 MinCircular=10 MinHamming=1 MaxBoxOverlap=4 MirrorExactHidden=0 Limitation=NONE
+  RISK_SUM_BAND_SHADOW: Top5=['0368', '1294', '8044', '4443', '0376'] Families=['SUM_BAND_BASELINE', 'SUM_BAND_BASELINE', 'SUM_BAND_BASELINE', 'SUM_BAND_BASELINE', 'SUM_BAND_HISTORICAL'] Hits=0 MinCircular=10 MinHamming=1 MaxBoxOverlap=4 MirrorExactHidden=0 Limitation=EMPIRICAL_HIGH_RISK_SUM_BAND=12-21;PRIOR_HITS=17
+  PAIR_RECURRENCE_SHADOW: Top5=['0376', '0368', '0136', '0550', '0625'] Families=['PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_BASELINE', 'PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_BASELINE', 'PAIR_RECURRENCE_HISTORICAL'] Hits=0 MinCircular=29 MinHamming=2 MaxBoxOverlap=4 MirrorExactHidden=0 Limitation=NONE
+  MIRROR_BOX_REPAIR_SHADOW: Top5=['0050', '0500', '0555', '5550', '0448'] Families=['MIRROR_REPAIR', 'MIRROR_REPAIR', 'MIRROR_REPAIR', 'MIRROR_REPAIR', 'BOX_REPAIR'] Hits=0 MinCircular=43 MinHamming=2 MaxBoxOverlap=4 MirrorExactHidden=0 Limitation=STRICT_REPAIR_CAP=30;BASELINE_DERIVED_ONLY
+  STREAK_RISK_SUPPRESSION_SHADOW: Top5=['3509', '8059', '9106', '5315', '6264'] Families=['RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL'] Hits=0 MinCircular=54 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=0 Limitation=NONE
+  HYBRID_GUARD_SHADOW: Top5=['8044', '0448', '0050', '0368', '0376'] Families=['BASELINE_E1', 'HYBRID::BOX_REPAIR', 'HYBRID::MIRROR_REPAIR', 'HYBRID::SUM_BAND_BASELINE', 'HYBRID::PAIR_RECURRENCE_HISTORICAL'] Hits=0 MinCircular=29 MinHamming=2 MaxBoxOverlap=4 MirrorExactHidden=0 Limitation=MAX_2_PER_FAMILY;MIN_3_DISTINCT_IF_AVAILABLE
+5496->5497 Risk=HIGH_RISK PreMiss=17 ActualPrizeCount=23 Baseline=['4796', '5024', '9418', '8044', '7452']
+  BASELINE_E1: Top5=['4796', '5024', '9418', '8044', '7452'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Hits=0 MinCircular=40 MinHamming=1 MaxBoxOverlap=3 MirrorExactHidden=0 Limitation=NONE
+  RISK_SUM_BAND_SHADOW: Top5=['7452', '8044', '3185', '2086', '4048'] Families=['SUM_BAND_BASELINE', 'SUM_BAND_BASELINE', 'SUM_BAND_HISTORICAL', 'SUM_BAND_HISTORICAL', 'SUM_BAND_HISTORICAL'] Hits=0 MinCircular=15 MinHamming=1 MaxBoxOverlap=3 MirrorExactHidden=0 Limitation=EMPIRICAL_HIGH_RISK_SUM_BAND=12-21;PRIOR_HITS=17
+  PAIR_RECURRENCE_SHADOW: Top5=['0949', '0405', '0669', '1210', '2086'] Families=['PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_HISTORICAL'] Hits=0 MinCircular=15 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=0 Limitation=NONE
+  MIRROR_BOX_REPAIR_SHADOW: Top5=['0024', '5029', '5074', '5524', '0448'] Families=['MIRROR_REPAIR', 'MIRROR_REPAIR', 'MIRROR_REPAIR', 'MIRROR_REPAIR', 'BOX_REPAIR'] Hits=0 MinCircular=60 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=0 Limitation=STRICT_REPAIR_CAP=30;BASELINE_DERIVED_ONLY
+  STREAK_RISK_SUPPRESSION_SHADOW: Top5=['3509', '8059', '9106', '2086', '4048'] Families=['RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL'] Hits=0 MinCircular=15 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=0 Limitation=NONE
+  HYBRID_GUARD_SHADOW: Top5=['4796', '0448', '0024', '0949', '3509'] Families=['BASELINE_E1', 'HYBRID::BOX_REPAIR', 'HYBRID::MIRROR_REPAIR', 'HYBRID::PAIR_RECURRENCE_HISTORICAL', 'HYBRID::RISK_SHAPE_HISTORICAL'] Hits=0 MinCircular=60 MinHamming=2 MaxBoxOverlap=3 MirrorExactHidden=0 Limitation=MAX_2_PER_FAMILY;MIN_3_DISTINCT_IF_AVAILABLE
+
+CURRENT UNVERIFIED 5497→5498 CANDIDATE BOARD
+--------------------------------------------------------------------------------------------------------------------------------------------
+Status: UNVERIFIED
+No target verification is performed when the target is absent from DrawHistory.
+BASELINE_E1: Top5=['7006', '4723', '3193', '9098', '2698'] Families=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1'] Sources=['stored_rank_1', 'stored_rank_2', 'stored_rank_3', 'stored_rank_4', 'stored_rank_5'] Limitation=NONE
+RISK_SUM_BAND_SHADOW: Top5=['3193', '4723', '7006', '6065', '6515'] Families=['SUM_BAND_BASELINE', 'SUM_BAND_BASELINE', 'SUM_BAND_BASELINE', 'SUM_BAND_HISTORICAL', 'SUM_BAND_HISTORICAL'] Sources=['BASELINE_E1', 'BASELINE_E1', 'BASELINE_E1', 'HISTORICAL_WINNER_DRAW_5497', 'HISTORICAL_WINNER_DRAW_5497'] Limitation=EMPIRICAL_HIGH_RISK_SUM_BAND=12-21;PRIOR_HITS=17
+PAIR_RECURRENCE_SHADOW: Top5=['7776', '0374', '1111', '1389', '2071'] Families=['PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_HISTORICAL', 'PAIR_RECURRENCE_HISTORICAL'] Sources=['HISTORICAL_WINNER_DRAW_5490', 'HISTORICAL_WINNER_DRAW_5497', 'HISTORICAL_WINNER_DRAW_5497', 'HISTORICAL_WINNER_DRAW_5497', 'HISTORICAL_WINNER_DRAW_5497'] Limitation=NONE
+MIRROR_BOX_REPAIR_SHADOW: Top5=['2689', '2869', '2896', '2968', '2986'] Families=['BOX_REPAIR', 'BOX_REPAIR', 'BOX_REPAIR', 'BOX_REPAIR', 'BOX_REPAIR'] Sources=['capped_box_perm_of_2698', 'capped_box_perm_of_2698', 'capped_box_perm_of_2698', 'capped_box_perm_of_2698', 'capped_box_perm_of_2698'] Limitation=STRICT_REPAIR_CAP=30;BASELINE_DERIVED_ONLY
+STREAK_RISK_SUPPRESSION_SHADOW: Top5=['3509', '8059', '9106', '1111', '2086'] Families=['RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL', 'RISK_SHAPE_HISTORICAL'] Sources=['HISTORICAL_WINNER_DRAW_5487', 'HISTORICAL_WINNER_DRAW_5492', 'HISTORICAL_WINNER_DRAW_5494', 'HISTORICAL_WINNER_DRAW_5497', 'HISTORICAL_WINNER_DRAW_5496'] Limitation=NONE
+HYBRID_GUARD_SHADOW: Top5=['7006', '2689', '7776', '3193', '3509'] Families=['BASELINE_E1', 'HYBRID::BOX_REPAIR', 'HYBRID::PAIR_RECURRENCE_HISTORICAL', 'HYBRID::SUM_BAND_BASELINE', 'HYBRID::RISK_SHAPE_HISTORICAL'] Sources=['stored_rank_1', 'capped_box_perm_of_2698', 'HISTORICAL_WINNER_DRAW_5490', 'BASELINE_E1', 'HISTORICAL_WINNER_DRAW_5487'] Limitation=MAX_2_PER_FAMILY;MIN_3_DISTINCT_IF_AVAILABLE
+
+PROMOTION GUARD REVIEW
+--------------------------------------------------------------------------------------------------------------------------------------------
+Minimum broad claim rows: 100. Minimum risk-bucket claim rows: 30.
+Recent-90 and recent-47 may not underperform baseline.
+Historical-winner replacement dependence remains shadow-only.
+Temporal firewall and candidate-lock checks: PASS by construction; candidate/prior maxima are emitted per JSONL row.
+
+FINAL PROMOTION DECISION
+--------------------------------------------------------------------------------------------------------------------------------------------
+Decision: DO NOT PROMOTE
+Reason: Future shadow prototype candidate(s): HYBRID_GUARD_SHADOW. Production promotion remains blocked because the observed edge is small and reconstructed replacement sources remain shadow-only.
+Production action: NONE.
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_150f_shadow_champion_policy_board.txt
+JSONL_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_150f_shadow_champion_policy_board_rows.jsonl
