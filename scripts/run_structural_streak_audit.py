@@ -727,10 +727,10 @@ def main() -> int:
     lines.append("DecisionRules:")
     lines.append("  If current full-ledger PreMissStreak analog clusters show elevated renewal probability, use streak as primary macro weight.")
     lines.append("  If structural analog hit rate does not exceed the global same-streak hit rate, do not promote.")
-    lines.append("  If repair patterns are stable among hit analogs, Step 150E may build a report-only streak-weighted repair prototype.")
+    lines.append("  If repair patterns are stable among hit analogs, a later prototype may test them report-only.")
     lines.append("NextStep: Inspect analog renewal probabilities and repair patterns before designing Step 150E.")
 
-    REPORT_PATH.write_text("\n".join(lines), encoding="utf-8")
+    REPORT_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     with JSONL_PATH.open("w", encoding="utf-8") as fh:
         for row in all_json_rows:

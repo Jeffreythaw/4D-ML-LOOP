@@ -356,5 +356,5 @@ ProductionSwitchRecommendedNow: NO
 DecisionRules:
   If current full-ledger PreMissStreak analog clusters show elevated renewal probability, use streak as primary macro weight.
   If structural analog hit rate does not exceed the global same-streak hit rate, do not promote.
-  If repair patterns are stable among hit analogs, Step 150E may build a report-only streak-weighted repair prototype.
+  If repair patterns are stable among hit analogs, a later prototype may test them report-only.
 NextStep: Inspect analog renewal probabilities and repair patterns before designing Step 150E.
