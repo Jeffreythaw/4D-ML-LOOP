@@ -1,0 +1,92 @@
+====================================================================================================================================================================
+STEP 151B — BASELINE-PROTECTED SHADOW HYBRID V2 — REPORT ONLY
+====================================================================================================================================================================
+EngineName: E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED
+ProductionMathChanged: NO
+APIChanged: NO
+FrontendChanged: NO
+SQLSchemaChanged: NO
+DeploymentChanged: NO
+ProductionIntegration: NONE
+
+STEP 151A FAILURE SUMMARY
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+V1 full verified: 1.037% vs baseline 1.451% (-0.415pp).
+V1 high-risk: 0.973% vs baseline 1.503% (-0.531pp).
+V1 recent 90 and recent 47: 0 hits.
+Diagnosis: excessive historical-winner fallback diluted the baseline.
+V2 response: keep at least four baseline candidates, permit at most one strictly guarded replacement, and disable historical-winner fallback.
+
+CURRENT LIVE SOURCE / TARGET
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LatestSourceDrawNo: 5497
+TargetDrawNo: 5498
+TargetAvailable: NO
+VerificationStatus: UNVERIFIED
+FullLedgerPreMissStreak: 18
+RiskBucket: HIGH_RISK
+BaselineTop5: ['7006', '4723', '3193', '9098', '2698']
+V2Top5: ['7006', '4723', '3193', '1308', '2698']
+BaselineKeptCount: 4
+ReplacementUsed: YES
+ReplacementDetail: {'removed': '9098', 'added': '1308', 'supports': ['RISK_SUM_BAND_SUPPORT', 'PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'], 'reason': 'Replaced weakest baseline rank 4; replacement score 77.333 vs baseline score 56.000.', 'source_kind': 'PRIOR_E1_CANDIDATE'}
+Step150FHybridComparison: ['7006', '2689', '7776', '3193', '3509']
+Warnings: ['BASELINE_FROM_LOCKED_STEP_150F']
+CandidateDetails:
+  Rank=1 Number=7006 Family=BASELINE_E1 Score=75.000000 Supports=['RISK_SUM_BAND_SUPPORT', 'PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] HistoryMax=5497 Reason=locked Step 150F baseline; protected baseline rank 1
+  Rank=2 Number=4723 Family=BASELINE_E1 Score=67.000000 Supports=['RISK_SUM_BAND_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] HistoryMax=5497 Reason=locked Step 150F baseline; protected baseline rank 2
+  Rank=3 Number=3193 Family=BASELINE_E1 Score=69.000000 Supports=['RISK_SUM_BAND_SUPPORT', 'PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] HistoryMax=5497 Reason=locked Step 150F baseline; protected baseline rank 3
+  Rank=4 Number=1308 Family=V2_REPLACEMENT Score=77.333333 Supports=['RISK_SUM_BAND_SUPPORT', 'PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] HistoryMax=5382 Reason=PRIOR_E1_CANDIDATE; historical appearances=6; hit_rate=0.33333
+  Rank=5 Number=2698 Family=BASELINE_E1 Score=58.000000 Supports=['PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] HistoryMax=5497 Reason=locked Step 150F baseline; protected baseline rank 5
+
+HISTORICAL BACKTEST SUMMARY
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Window                               Rows HitDraws RawHits HitRate Baseline DeltaBase V1Rate DeltaV1 Random Enrich Attempts Used ReplHits KeptAvg Warnings
+FULL_VERIFIED                         1447       25      25  1.728%   1.451%   +0.276pp  1.037%  +0.691pp  1.143%  1.511   647170  710        4   4.509     1111
+HIGH_RISK_ONLY                        1131       21      21  1.857%   1.503%   +0.354pp  0.973%  +0.884pp  1.143%  1.624   647170  710        4   4.372      479
+
+WINDOW BREAKDOWN
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Window                               Rows HitDraws RawHits HitRate Baseline DeltaBase V1Rate DeltaV1 Random Enrich Attempts Used ReplHits KeptAvg Warnings
+RECENT_365                             365        7       7  1.918%   1.644%   +0.274pp  1.096%  +0.822pp  1.144%  1.677   234002  189        1   4.482      271
+RECENT_90                               90        2       2  2.222%   1.111%   +1.111pp  0.000%  +2.222pp  1.144%  1.943    61112   50        1   4.444       60
+RECENT_47                               47        1       1  2.128%   2.128%   +0.000pp  0.000%  +2.128pp  1.143%  1.862    27164   24        0   4.489       39
+HIGH_RISK_MONTH_JUNE                    79        1       1  1.266%   1.266%   +0.000pp  1.266%  +0.000pp  1.144%  1.106    47178   41        0   4.481       47
+HIGH_RISK_WEEKEND_SPACE                379        7       7  1.847%   1.319%   +0.528pp  1.055%  +0.792pp  1.144%  1.615   216993  233        2   4.385      171
+HIGH_RISK_MIDWEEK_SPECIAL              752       14      14  1.862%   1.596%   +0.266pp  0.931%  +0.931pp  1.143%  1.628   430177  477        2   4.366      308
+
+REPLACEMENT DIAGNOSTICS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ReplacementAttempts: 647170
+ReplacementsUsed: 710
+ReplacementsThatImprovedExactHit: 4
+ReplacementsThatRemovedBaselineHit: 0
+MostCommonSupports: [('PAIR_RECURRENCE_SUPPORT', 710), ('MIRROR_BOX_SUPPORT', 710), ('RECENT_STRUCTURE_SUPPORT', 710), ('RISK_SUM_BAND_SUPPORT', 608), ('BASELINE_REPAIR_SUPPORT', 303)]
+MostCommonWarnings: [('NO_REPLACEMENT_PASSED_4_SUPPORTS', 337), ('NO_REPLACEMENT_BELOW_HIGH_RISK', 316), ('NO_REPLACEMENT_SCORE_MARGIN', 288), ('BASELINE_RISK_BUCKET_ADVANTAGE_GUARD', 104), ('RANK1_PROTECTION', 66)]
+
+LIVE 5494→5497 AUDIT
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Source Target Risk        PreMiss BaselineTop5                            V2Top5                                  Kept Repl V2Hits BaseHits V1Hits Status Warnings
+  5494   5495 MEDIUM_RISK      15 ['5941', '9554', '6201', '0000', '7006'] ['5941', '9554', '6201', '0000', '7006']    5 False      0        0      0 VERIFIED   ['NO_REPLACEMENT_BELOW_HIGH_RISK', 'NO_REPLACEMENT_PASSED_4_SUPPORTS']
+  5495   5496 HIGH_RISK        16 ['8044', '4443', '0550', '1294', '0368'] ['8044', '4443', '1308', '1294', '0368']    4 True      0        0      0 VERIFIED   ['NONE']
+  5496   5497 HIGH_RISK        17 ['4796', '5024', '9418', '8044', '7452'] ['4796', '5024', '9418', '8044', '7452']    5 False      0        0      0 VERIFIED   ['NO_REPLACEMENT_SCORE_MARGIN']
+  5497   5498 HIGH_RISK        18 ['7006', '4723', '3193', '9098', '2698'] ['7006', '4723', '3193', '1308', '2698']    4 True   NULL     NULL   NULL UNVERIFIED ['BASELINE_FROM_LOCKED_STEP_150F']
+
+TEMPORAL FIREWALL VALIDATION
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CandidateHistoryViolations: 0
+TargetLeakageChecksFailed: 0
+InvalidTop5Checks: 0
+DuplicateTop5Checks: 0
+TemporalFirewallValidation: PASS
+
+FINAL RECOMMENDATION
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NonInferiorityVsBaseline: PASS
+NonInferiorityFailures: ['NONE']
+MeaningfulWindowsBeatingBaseline: 4
+ProductionSwitchRecommendedNow: NO
+NextStep: Review Step 151B before deciding Step 151C locked live prediction generation
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_151b_baseline_protected_shadow_hybrid_v2_report.txt
+JSONL_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_151b_baseline_protected_shadow_hybrid_v2_rows.jsonl
