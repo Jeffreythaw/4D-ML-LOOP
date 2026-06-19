@@ -20,12 +20,12 @@ RUN apt-get update \
     && ACCEPT_EULA=Y apt-get install -y --no-install-recommends msodbcsql18 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY backend/requirements.txt /app/backend/requirements.txt
+COPY requirements.txt /app/backend/requirements.txt
 RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
-COPY backend/app /app/backend/app
-COPY jeffrey_quad_engine_v2_step2_matrix_core.py /app/
-COPY jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py /app/
+COPY app /app/backend/app
+COPY jeffrey_quad_engine_v2_step2_matrix_core.py.source /app/jeffrey_quad_engine_v2_step2_matrix_core.py
+COPY jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source /app/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py
 
 EXPOSE 10000
 

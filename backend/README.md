@@ -28,8 +28,14 @@ Set real SQL Server credentials only in `.env` or the deployment platform secret
 Do not deploy this Python service to Vercel in phase one. Deploy it separately as a persistent Python service with the required ODBC driver installed and environment variables supplied by the host.
 
 For Render, use the repository-root `render.yaml`. It builds `backend/Dockerfile`
-with the repository root as Docker context because the API imports the approved
-Step 2 and Step 3 engine modules from the repository root.
+with `backend/` as Docker context. Tracked deployment copies of the approved
+Step 2 and Step 3 engine modules live in `backend/` so the service remains
+self-contained when Render configures the service root directory as `backend`.
+
+When either root engine module changes, update its matching backend
+`*.py.source` deployment copy before release and verify both pairs with `cmp`.
+The Docker image restores the `.py` filenames under `/app` so the existing
+runtime imports remain unchanged.
 
 Required Render environment variables:
 

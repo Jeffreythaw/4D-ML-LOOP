@@ -1,13 +1,13 @@
 services:
   - type: web
-    name: 4d-ml-loop-api
+    name: 4d-ml-loop-backend
     runtime: docker
     plan: free
     region: singapore
     branch: main
     autoDeploy: true
     dockerfilePath: ./backend/Dockerfile
-    dockerContext: .
+    dockerContext: ./backend
     healthCheckPath: /health
     envVars:
       - key: SQL_SERVER_HOST
