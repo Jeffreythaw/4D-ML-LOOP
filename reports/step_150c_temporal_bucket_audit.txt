@@ -1,0 +1,211 @@
+================================================================================================================
+STEP 150C — TEMPORAL BUCKET NORMALIZATION & SUPPORT GUARD AUDIT
+================================================================================================================
+Mode: REPORT ONLY
+ProductionMathChanged: NO
+SQLSchemaChanged: NO
+FrontendChanged: NO
+RecentWindow: 5450->5497
+RecentSupportWindow: 365 draws
+CasesLoaded: 47
+RuntimeMapping:
+  Saturday/Sunday   -> WEEKEND_SPACE
+  Wednesday/Special -> MIDWEEK_SPECIAL_SPACE
+
+DAYTYPE SUPPORT IN FULL DRAW HISTORY
+----------------------------------------------------------------------------------------------------------------
+  Special      Rows=29
+  Saturday     Rows=16
+  Wednesday    Rows=2
+  Sunday       Rows=1
+
+================================================================================================================
+THRESHOLD = 10
+================================================================================================================
+exact:
+  RowsChecked: 47
+  BaselineTop5HitDraws: 1
+  exactTop5HitDraws: 0
+  exactTop100CoverageDraws: 7
+  BaselineRawHits: 1
+  exactTop5RawHits: 0
+  exactTop100RawHits: 7
+  BaselineTop5HitRate: 2.1277%
+  exactTop5HitRate: 0.0000%
+  exactTop100CoverageRate: 14.8936%
+
+normalized:
+  RowsChecked: 47
+  BaselineTop5HitDraws: 1
+  normalizedTop5HitDraws: 0
+  normalizedTop100CoverageDraws: 6
+  BaselineRawHits: 1
+  normalizedTop5RawHits: 0
+  normalizedTop100RawHits: 6
+  BaselineTop5HitRate: 2.1277%
+  normalizedTop5HitRate: 0.0000%
+  normalizedTop100CoverageRate: 12.7660%
+
+  NormalizedFallbackCount: 3 / 47
+
+  DAYTYPE BREAKDOWN
+    Saturday     Rows=16  AvgExactSupport=2015.50 AvgRecentSupport= 121.06 Fallbacks=0   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=2 
+    Special      Rows=28  AvgExactSupport= 948.50 AvgRecentSupport= 243.00 Fallbacks=0   BaselineHitDraws=1  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=4 
+    Sunday       Rows=1   AvgExactSupport=1589.00 AvgRecentSupport=   0.00 Fallbacks=1   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=0 
+    Wednesday    Rows=2   AvgExactSupport= 850.50 AvgRecentSupport=   0.50 Fallbacks=2   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=0 
+
+  LIVE 5495->5496 AND 5496->5497
+    5495->5496 DayType=Sunday ExactSupport=1589 RecentExactSupport=0 Bucket=WEEKEND_SPACE BucketSupport=3613 RecentBucketSupport=122 Selected=RUNTIME_BUCKET:WEEKEND_SPACE
+      BaselineTop5=8044,4443,0550,1294,0368 Hit=0 MinCirc=1 MinHam=1 MaxBox=4
+      ExactTop5=0689,0682,1528,5573,7042 Hit=0 Top100Hit=1 MinCirc=2 MinHam=1 MaxBox=4
+      NormalizedTop5=0136,0735,5478,5827,6943 Hit=0 Top100Hit=0 MinCirc=5 MinHam=2 MaxBox=4
+    5496->5497 DayType=Wednesday ExactSupport=851 RecentExactSupport=1 Bucket=MIDWEEK_SPECIAL_SPACE BucketSupport=1814 RecentBucketSupport=242 Selected=RUNTIME_BUCKET:MIDWEEK_SPECIAL_SPACE
+      BaselineTop5=4796,5024,9418,8044,7452 Hit=0 MinCirc=4 MinHam=1 MaxBox=3
+      ExactTop5=0173,2225,2601,1046,9046 Hit=0 Top100Hit=0 MinCirc=3 MinHam=1 MaxBox=3
+      NormalizedTop5=0173,0171,1516,2553,0313 Hit=0 Top100Hit=0 MinCirc=3 MinHam=2 MaxBox=3
+
+================================================================================================================
+THRESHOLD = 30
+================================================================================================================
+exact:
+  RowsChecked: 47
+  BaselineTop5HitDraws: 1
+  exactTop5HitDraws: 0
+  exactTop100CoverageDraws: 7
+  BaselineRawHits: 1
+  exactTop5RawHits: 0
+  exactTop100RawHits: 7
+  BaselineTop5HitRate: 2.1277%
+  exactTop5HitRate: 0.0000%
+  exactTop100CoverageRate: 14.8936%
+
+normalized:
+  RowsChecked: 47
+  BaselineTop5HitDraws: 1
+  normalizedTop5HitDraws: 0
+  normalizedTop100CoverageDraws: 6
+  BaselineRawHits: 1
+  normalizedTop5RawHits: 0
+  normalizedTop100RawHits: 6
+  BaselineTop5HitRate: 2.1277%
+  normalizedTop5HitRate: 0.0000%
+  normalizedTop100CoverageRate: 12.7660%
+
+  NormalizedFallbackCount: 3 / 47
+
+  DAYTYPE BREAKDOWN
+    Saturday     Rows=16  AvgExactSupport=2015.50 AvgRecentSupport= 121.06 Fallbacks=0   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=2 
+    Special      Rows=28  AvgExactSupport= 948.50 AvgRecentSupport= 243.00 Fallbacks=0   BaselineHitDraws=1  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=4 
+    Sunday       Rows=1   AvgExactSupport=1589.00 AvgRecentSupport=   0.00 Fallbacks=1   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=0 
+    Wednesday    Rows=2   AvgExactSupport= 850.50 AvgRecentSupport=   0.50 Fallbacks=2   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=0 
+
+  LIVE 5495->5496 AND 5496->5497
+    5495->5496 DayType=Sunday ExactSupport=1589 RecentExactSupport=0 Bucket=WEEKEND_SPACE BucketSupport=3613 RecentBucketSupport=122 Selected=RUNTIME_BUCKET:WEEKEND_SPACE
+      BaselineTop5=8044,4443,0550,1294,0368 Hit=0 MinCirc=1 MinHam=1 MaxBox=4
+      ExactTop5=0689,0682,1528,5573,7042 Hit=0 Top100Hit=1 MinCirc=2 MinHam=1 MaxBox=4
+      NormalizedTop5=0136,0735,5478,5827,6943 Hit=0 Top100Hit=0 MinCirc=5 MinHam=2 MaxBox=4
+    5496->5497 DayType=Wednesday ExactSupport=851 RecentExactSupport=1 Bucket=MIDWEEK_SPECIAL_SPACE BucketSupport=1814 RecentBucketSupport=242 Selected=RUNTIME_BUCKET:MIDWEEK_SPECIAL_SPACE
+      BaselineTop5=4796,5024,9418,8044,7452 Hit=0 MinCirc=4 MinHam=1 MaxBox=3
+      ExactTop5=0173,2225,2601,1046,9046 Hit=0 Top100Hit=0 MinCirc=3 MinHam=1 MaxBox=3
+      NormalizedTop5=0173,0171,1516,2553,0313 Hit=0 Top100Hit=0 MinCirc=3 MinHam=2 MaxBox=3
+
+================================================================================================================
+THRESHOLD = 50
+================================================================================================================
+exact:
+  RowsChecked: 47
+  BaselineTop5HitDraws: 1
+  exactTop5HitDraws: 0
+  exactTop100CoverageDraws: 7
+  BaselineRawHits: 1
+  exactTop5RawHits: 0
+  exactTop100RawHits: 7
+  BaselineTop5HitRate: 2.1277%
+  exactTop5HitRate: 0.0000%
+  exactTop100CoverageRate: 14.8936%
+
+normalized:
+  RowsChecked: 47
+  BaselineTop5HitDraws: 1
+  normalizedTop5HitDraws: 0
+  normalizedTop100CoverageDraws: 6
+  BaselineRawHits: 1
+  normalizedTop5RawHits: 0
+  normalizedTop100RawHits: 6
+  BaselineTop5HitRate: 2.1277%
+  normalizedTop5HitRate: 0.0000%
+  normalizedTop100CoverageRate: 12.7660%
+
+  NormalizedFallbackCount: 3 / 47
+
+  DAYTYPE BREAKDOWN
+    Saturday     Rows=16  AvgExactSupport=2015.50 AvgRecentSupport= 121.06 Fallbacks=0   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=2 
+    Special      Rows=28  AvgExactSupport= 948.50 AvgRecentSupport= 243.00 Fallbacks=0   BaselineHitDraws=1  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=4 
+    Sunday       Rows=1   AvgExactSupport=1589.00 AvgRecentSupport=   0.00 Fallbacks=1   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=0 
+    Wednesday    Rows=2   AvgExactSupport= 850.50 AvgRecentSupport=   0.50 Fallbacks=2   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=0 
+
+  LIVE 5495->5496 AND 5496->5497
+    5495->5496 DayType=Sunday ExactSupport=1589 RecentExactSupport=0 Bucket=WEEKEND_SPACE BucketSupport=3613 RecentBucketSupport=122 Selected=RUNTIME_BUCKET:WEEKEND_SPACE
+      BaselineTop5=8044,4443,0550,1294,0368 Hit=0 MinCirc=1 MinHam=1 MaxBox=4
+      ExactTop5=0689,0682,1528,5573,7042 Hit=0 Top100Hit=1 MinCirc=2 MinHam=1 MaxBox=4
+      NormalizedTop5=0136,0735,5478,5827,6943 Hit=0 Top100Hit=0 MinCirc=5 MinHam=2 MaxBox=4
+    5496->5497 DayType=Wednesday ExactSupport=851 RecentExactSupport=1 Bucket=MIDWEEK_SPECIAL_SPACE BucketSupport=1814 RecentBucketSupport=242 Selected=RUNTIME_BUCKET:MIDWEEK_SPECIAL_SPACE
+      BaselineTop5=4796,5024,9418,8044,7452 Hit=0 MinCirc=4 MinHam=1 MaxBox=3
+      ExactTop5=0173,2225,2601,1046,9046 Hit=0 Top100Hit=0 MinCirc=3 MinHam=1 MaxBox=3
+      NormalizedTop5=0173,0171,1516,2553,0313 Hit=0 Top100Hit=0 MinCirc=3 MinHam=2 MaxBox=3
+
+================================================================================================================
+THRESHOLD = 100
+================================================================================================================
+exact:
+  RowsChecked: 47
+  BaselineTop5HitDraws: 1
+  exactTop5HitDraws: 0
+  exactTop100CoverageDraws: 7
+  BaselineRawHits: 1
+  exactTop5RawHits: 0
+  exactTop100RawHits: 7
+  BaselineTop5HitRate: 2.1277%
+  exactTop5HitRate: 0.0000%
+  exactTop100CoverageRate: 14.8936%
+
+normalized:
+  RowsChecked: 47
+  BaselineTop5HitDraws: 1
+  normalizedTop5HitDraws: 0
+  normalizedTop100CoverageDraws: 6
+  BaselineRawHits: 1
+  normalizedTop5RawHits: 0
+  normalizedTop100RawHits: 6
+  BaselineTop5HitRate: 2.1277%
+  normalizedTop5HitRate: 0.0000%
+  normalizedTop100CoverageRate: 12.7660%
+
+  NormalizedFallbackCount: 3 / 47
+
+  DAYTYPE BREAKDOWN
+    Saturday     Rows=16  AvgExactSupport=2015.50 AvgRecentSupport= 121.06 Fallbacks=0   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=2 
+    Special      Rows=28  AvgExactSupport= 948.50 AvgRecentSupport= 243.00 Fallbacks=0   BaselineHitDraws=1  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=4 
+    Sunday       Rows=1   AvgExactSupport=1589.00 AvgRecentSupport=   0.00 Fallbacks=1   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=0 
+    Wednesday    Rows=2   AvgExactSupport= 850.50 AvgRecentSupport=   0.50 Fallbacks=2   BaselineHitDraws=0  ExactHitDraws=0  NormHitDraws=0  NormTop100Coverage=0 
+
+  LIVE 5495->5496 AND 5496->5497
+    5495->5496 DayType=Sunday ExactSupport=1589 RecentExactSupport=0 Bucket=WEEKEND_SPACE BucketSupport=3613 RecentBucketSupport=122 Selected=RUNTIME_BUCKET:WEEKEND_SPACE
+      BaselineTop5=8044,4443,0550,1294,0368 Hit=0 MinCirc=1 MinHam=1 MaxBox=4
+      ExactTop5=0689,0682,1528,5573,7042 Hit=0 Top100Hit=1 MinCirc=2 MinHam=1 MaxBox=4
+      NormalizedTop5=0136,0735,5478,5827,6943 Hit=0 Top100Hit=0 MinCirc=5 MinHam=2 MaxBox=4
+    5496->5497 DayType=Wednesday ExactSupport=851 RecentExactSupport=1 Bucket=MIDWEEK_SPECIAL_SPACE BucketSupport=1814 RecentBucketSupport=242 Selected=RUNTIME_BUCKET:MIDWEEK_SPECIAL_SPACE
+      BaselineTop5=4796,5024,9418,8044,7452 Hit=0 MinCirc=4 MinHam=1 MaxBox=3
+      ExactTop5=0173,2225,2601,1046,9046 Hit=0 Top100Hit=0 MinCirc=3 MinHam=1 MaxBox=3
+      NormalizedTop5=0173,0171,1516,2553,0313 Hit=0 Top100Hit=0 MinCirc=3 MinHam=2 MaxBox=3
+
+================================================================================================================
+FINAL STEP 150C CONCLUSION
+================================================================================================================
+ProductionMathChanged: NO
+ProductionSwitchRecommendedNow: NO
+InterpretationRules:
+  If normalized Top5 beats baseline and improves live near-miss distance, continue to hardened prototype.
+  If normalized Top100 remains random-like or live Top100 remains zero, bucket normalization alone is insufficient.
+  SQL DayType values must not be mass-updated; derived runtime buckets should remain runtime-only.
+NextStep: Inspect Step 150C output before deciding Step 150D.
