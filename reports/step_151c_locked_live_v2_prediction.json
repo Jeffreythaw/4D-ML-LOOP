@@ -1,0 +1,213 @@
+{
+  "baseline_kept_count": 4,
+  "baseline_top5": [
+    "7006",
+    "4723",
+    "3193",
+    "9098",
+    "2698"
+  ],
+  "candidate_details": [
+    {
+      "family": "BASELINE_E1",
+      "history_max_draw_no": 5497,
+      "number": "7006",
+      "rank": 1,
+      "reason": "locked Step 150F baseline; protected baseline rank 1",
+      "score": 75.0,
+      "supports": [
+        "RISK_SUM_BAND_SUPPORT",
+        "PAIR_RECURRENCE_SUPPORT",
+        "MIRROR_BOX_SUPPORT",
+        "RECENT_STRUCTURE_SUPPORT"
+      ]
+    },
+    {
+      "family": "BASELINE_E1",
+      "history_max_draw_no": 5497,
+      "number": "4723",
+      "rank": 2,
+      "reason": "locked Step 150F baseline; protected baseline rank 2",
+      "score": 67.0,
+      "supports": [
+        "RISK_SUM_BAND_SUPPORT",
+        "MIRROR_BOX_SUPPORT",
+        "RECENT_STRUCTURE_SUPPORT"
+      ]
+    },
+    {
+      "family": "BASELINE_E1",
+      "history_max_draw_no": 5497,
+      "number": "3193",
+      "rank": 3,
+      "reason": "locked Step 150F baseline; protected baseline rank 3",
+      "score": 69.0,
+      "supports": [
+        "RISK_SUM_BAND_SUPPORT",
+        "PAIR_RECURRENCE_SUPPORT",
+        "MIRROR_BOX_SUPPORT",
+        "RECENT_STRUCTURE_SUPPORT"
+      ]
+    },
+    {
+      "family": "V2_REPLACEMENT",
+      "history_max_draw_no": 5382,
+      "number": "1308",
+      "rank": 4,
+      "reason": "PRIOR_E1_CANDIDATE; historical appearances=6; hit_rate=0.33333",
+      "score": 77.333333,
+      "supports": [
+        "RISK_SUM_BAND_SUPPORT",
+        "PAIR_RECURRENCE_SUPPORT",
+        "MIRROR_BOX_SUPPORT",
+        "RECENT_STRUCTURE_SUPPORT"
+      ]
+    },
+    {
+      "family": "BASELINE_E1",
+      "history_max_draw_no": 5497,
+      "number": "2698",
+      "rank": 5,
+      "reason": "locked Step 150F baseline; protected baseline rank 5",
+      "score": 58.0,
+      "supports": [
+        "PAIR_RECURRENCE_SUPPORT",
+        "MIRROR_BOX_SUPPORT",
+        "RECENT_STRUCTURE_SUPPORT"
+      ]
+    }
+  ],
+  "candidate_lock_canonical_json": "{\"candidate_details\":[{\"family\":\"BASELINE_E1\",\"history_max_draw_no\":5497,\"number\":\"7006\",\"rank\":1,\"reason\":\"locked Step 150F baseline; protected baseline rank 1\",\"score\":75.0,\"supports\":[\"RISK_SUM_BAND_SUPPORT\",\"PAIR_RECURRENCE_SUPPORT\",\"MIRROR_BOX_SUPPORT\",\"RECENT_STRUCTURE_SUPPORT\"]},{\"family\":\"BASELINE_E1\",\"history_max_draw_no\":5497,\"number\":\"4723\",\"rank\":2,\"reason\":\"locked Step 150F baseline; protected baseline rank 2\",\"score\":67.0,\"supports\":[\"RISK_SUM_BAND_SUPPORT\",\"MIRROR_BOX_SUPPORT\",\"RECENT_STRUCTURE_SUPPORT\"]},{\"family\":\"BASELINE_E1\",\"history_max_draw_no\":5497,\"number\":\"3193\",\"rank\":3,\"reason\":\"locked Step 150F baseline; protected baseline rank 3\",\"score\":69.0,\"supports\":[\"RISK_SUM_BAND_SUPPORT\",\"PAIR_RECURRENCE_SUPPORT\",\"MIRROR_BOX_SUPPORT\",\"RECENT_STRUCTURE_SUPPORT\"]},{\"family\":\"V2_REPLACEMENT\",\"history_max_draw_no\":5382,\"number\":\"1308\",\"rank\":4,\"reason\":\"PRIOR_E1_CANDIDATE; historical appearances=6; hit_rate=0.33333\",\"score\":77.333333,\"supports\":[\"RISK_SUM_BAND_SUPPORT\",\"PAIR_RECURRENCE_SUPPORT\",\"MIRROR_BOX_SUPPORT\",\"RECENT_STRUCTURE_SUPPORT\"]},{\"family\":\"BASELINE_E1\",\"history_max_draw_no\":5497,\"number\":\"2698\",\"rank\":5,\"reason\":\"locked Step 150F baseline; protected baseline rank 5\",\"score\":58.0,\"supports\":[\"PAIR_RECURRENCE_SUPPORT\",\"MIRROR_BOX_SUPPORT\",\"RECENT_STRUCTURE_SUPPORT\"]}],\"engine_name\":\"E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED\",\"source_draw_no\":5497,\"target_draw_no\":5498,\"top5\":[\"7006\",\"4723\",\"3193\",\"1308\",\"2698\"]}",
+  "candidate_lock_created_at_local": "2026-06-20T01:17:36.778244+08:00",
+  "candidate_lock_created_at_utc": "2026-06-19T17:17:36.778244+00:00",
+  "candidate_lock_hash": "8df8e0125f3dc08d08c1c0be4da3640c64fcbf4f8c8fec3879dc67be88e443bf",
+  "candidate_lock_payload": {
+    "candidate_details": [
+      {
+        "family": "BASELINE_E1",
+        "history_max_draw_no": 5497,
+        "number": "7006",
+        "rank": 1,
+        "reason": "locked Step 150F baseline; protected baseline rank 1",
+        "score": 75.0,
+        "supports": [
+          "RISK_SUM_BAND_SUPPORT",
+          "PAIR_RECURRENCE_SUPPORT",
+          "MIRROR_BOX_SUPPORT",
+          "RECENT_STRUCTURE_SUPPORT"
+        ]
+      },
+      {
+        "family": "BASELINE_E1",
+        "history_max_draw_no": 5497,
+        "number": "4723",
+        "rank": 2,
+        "reason": "locked Step 150F baseline; protected baseline rank 2",
+        "score": 67.0,
+        "supports": [
+          "RISK_SUM_BAND_SUPPORT",
+          "MIRROR_BOX_SUPPORT",
+          "RECENT_STRUCTURE_SUPPORT"
+        ]
+      },
+      {
+        "family": "BASELINE_E1",
+        "history_max_draw_no": 5497,
+        "number": "3193",
+        "rank": 3,
+        "reason": "locked Step 150F baseline; protected baseline rank 3",
+        "score": 69.0,
+        "supports": [
+          "RISK_SUM_BAND_SUPPORT",
+          "PAIR_RECURRENCE_SUPPORT",
+          "MIRROR_BOX_SUPPORT",
+          "RECENT_STRUCTURE_SUPPORT"
+        ]
+      },
+      {
+        "family": "V2_REPLACEMENT",
+        "history_max_draw_no": 5382,
+        "number": "1308",
+        "rank": 4,
+        "reason": "PRIOR_E1_CANDIDATE; historical appearances=6; hit_rate=0.33333",
+        "score": 77.333333,
+        "supports": [
+          "RISK_SUM_BAND_SUPPORT",
+          "PAIR_RECURRENCE_SUPPORT",
+          "MIRROR_BOX_SUPPORT",
+          "RECENT_STRUCTURE_SUPPORT"
+        ]
+      },
+      {
+        "family": "BASELINE_E1",
+        "history_max_draw_no": 5497,
+        "number": "2698",
+        "rank": 5,
+        "reason": "locked Step 150F baseline; protected baseline rank 5",
+        "score": 58.0,
+        "supports": [
+          "PAIR_RECURRENCE_SUPPORT",
+          "MIRROR_BOX_SUPPORT",
+          "RECENT_STRUCTURE_SUPPORT"
+        ]
+      }
+    ],
+    "engine_name": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+    "source_draw_no": 5497,
+    "target_draw_no": 5498,
+    "top5": [
+      "7006",
+      "4723",
+      "3193",
+      "1308",
+      "2698"
+    ]
+  },
+  "engine_name": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+  "exact_hit_count": null,
+  "firewall_validation": {
+    "candidate_history_violations": 0,
+    "duplicate_candidate_count": 0,
+    "invalid_candidate_count": 0,
+    "target_leakage_status": "PASS_GENERATED_BEFORE_TARGET_QUERY",
+    "temporal_firewall_ok": true
+  },
+  "full_ledger_pre_miss_streak": 18,
+  "near_miss_diagnostics": null,
+  "prediction_ledger_write_performed": false,
+  "production_write_performed": false,
+  "replacement_detail": {
+    "added": "1308",
+    "reason": "Replaced weakest baseline rank 4; replacement score 77.333 vs baseline score 56.000.",
+    "removed": "9098",
+    "source_kind": "PRIOR_E1_CANDIDATE",
+    "supports": [
+      "RISK_SUM_BAND_SUPPORT",
+      "PAIR_RECURRENCE_SUPPORT",
+      "MIRROR_BOX_SUPPORT",
+      "RECENT_STRUCTURE_SUPPORT"
+    ]
+  },
+  "replacement_used": true,
+  "risk_bucket": "HIGH_RISK",
+  "source_draw_metadata": {
+    "day_type": "Wednesday",
+    "draw_date": "2026-06-17",
+    "draw_no": 5497
+  },
+  "source_draw_no": 5497,
+  "target_available": false,
+  "target_draw_no": 5498,
+  "temporal_firewall_ok": true,
+  "top5": [
+    "7006",
+    "4723",
+    "3193",
+    "1308",
+    "2698"
+  ],
+  "verification_status": "UNVERIFIED",
+  "warnings": [
+    "BASELINE_FROM_LOCKED_STEP_150F"
+  ]
+}

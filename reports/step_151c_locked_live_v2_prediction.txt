@@ -1,0 +1,75 @@
+============================================================================================================================================================
+STEP 151C — LOCKED LIVE V2 PREDICTION — REPORT ONLY
+============================================================================================================================================================
+EngineName: E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED
+ProductionMathChanged: NO
+APIChanged: NO
+FrontendChanged: NO
+SQLSchemaChanged: NO
+DeploymentChanged: NO
+PredictionLedgerWritePerformed: NO
+ProductionWritePerformed: NO
+
+SOURCE / TARGET
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+SourceDrawNo: 5497
+TargetDrawNo: 5498
+SourceDrawDate: 2026-06-17
+SourceDayType: Wednesday
+TargetAvailable: NO
+
+V2 MACRO STATE
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+FullLedgerPreMissStreak: 18
+RiskBucket: HIGH_RISK
+BaselineTop5: ['7006', '4723', '3193', '9098', '2698']
+V2Top5: ['7006', '4723', '3193', '1308', '2698']
+BaselineKeptCount: 4
+ReplacementUsed: YES
+ReplacementDetail: {'removed': '9098', 'added': '1308', 'supports': ['RISK_SUM_BAND_SUPPORT', 'PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'], 'reason': 'Replaced weakest baseline rank 4; replacement score 77.333 vs baseline score 56.000.', 'source_kind': 'PRIOR_E1_CANDIDATE'}
+Warnings: ['BASELINE_FROM_LOCKED_STEP_150F']
+
+LOCKED TOP5
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Rank Number Family           Score      Supports                                             Reason
+   1 7006   BASELINE_E1       75.000000 ['RISK_SUM_BAND_SUPPORT', 'PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] locked Step 150F baseline; protected baseline rank 1
+   2 4723   BASELINE_E1       67.000000 ['RISK_SUM_BAND_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] locked Step 150F baseline; protected baseline rank 2
+   3 3193   BASELINE_E1       69.000000 ['RISK_SUM_BAND_SUPPORT', 'PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] locked Step 150F baseline; protected baseline rank 3
+   4 1308   V2_REPLACEMENT    77.333333 ['RISK_SUM_BAND_SUPPORT', 'PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] PRIOR_E1_CANDIDATE; historical appearances=6; hit_rate=0.33333
+   5 2698   BASELINE_E1       58.000000 ['PAIR_RECURRENCE_SUPPORT', 'MIRROR_BOX_SUPPORT', 'RECENT_STRUCTURE_SUPPORT'] locked Step 150F baseline; protected baseline rank 5
+
+CANDIDATE LOCK
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+CandidateLockHash: 8df8e0125f3dc08d08c1c0be4da3640c64fcbf4f8c8fec3879dc67be88e443bf
+CandidateLockCreatedAtLocal: 2026-06-20T01:17:36.778244+08:00
+CandidateLockCreatedAtUTC: 2026-06-19T17:17:36.778244+00:00
+CandidateSource: E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED
+CanonicalPayloadFilePath: /Users/kojeffrey/4D-ML-LOOP/reports/step_151c_locked_live_v2_prediction.json
+CanonicalPayloadEncoding: sorted keys, compact separators, UTF-8
+ProductionWritePerformed: NO
+PredictionLedgerWritePerformed: NO
+
+VERIFICATION STATUS
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+VerificationStatus: UNVERIFIED
+ExactHitCount: NULL
+NearMissDiagnostics: NULL
+Decision: WAIT_FOR_TARGET_RESULT
+ProductionSwitchRecommendedNow: NO
+
+TEMPORAL FIREWALL VALIDATION
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+CandidateHistoryViolations: 0
+InvalidCandidateCount: 0
+DuplicateCandidateCount: 0
+TargetLeakageStatus: PASS_GENERATED_BEFORE_TARGET_QUERY
+TemporalFirewallOK: YES
+
+FINAL
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+LOCKED_LIVE_V2_PREDICTION_READY
+Do not publish as production until human approval.
+ProductionSwitchRecommendedNow: NO
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_151c_locked_live_v2_prediction.txt
+LOCK_PAYLOAD_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_151c_locked_live_v2_prediction.json
