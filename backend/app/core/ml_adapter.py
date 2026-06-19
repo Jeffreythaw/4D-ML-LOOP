@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from app.core.config import get_settings
+from app.core.temporal_context_engine import run_temporal_context_prediction
 from app.schemas.prediction import PredictionCandidate, PredictionRequest
 
 
@@ -110,6 +111,21 @@ def run_existing_engine_prediction(request: PredictionRequest, *, allow_fallback
                 score=score,
                 source=engine_name,
             )
+        )
+
+    if request.mode == "Current":
+        temporal_result = run_temporal_context_prediction(
+            source_draw_no=source_draw_no,
+            target_draw_no=int(locked.target_draw_no),
+            underlying_candidates=ledger_candidates or candidates,
+        )
+
+        return PredictionAdapterResult(
+            source_draw_number=temporal_result.source_draw_number,
+            target_draw_number=temporal_result.target_draw_number,
+            day_type=temporal_result.day_type,
+            predictions=temporal_result.predictions,
+            ledger_predictions=temporal_result.predictions,
         )
 
     return PredictionAdapterResult(
