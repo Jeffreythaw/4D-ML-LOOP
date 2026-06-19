@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 
 from app.core.db import (
     VerificationError,
+    clear_prediction_ledger_run,
     get_latest_draw_metadata,
     record_predictions_to_ledger,
     update_ledger_after_verification,
@@ -46,6 +47,13 @@ def predict(request: PredictionRequest) -> PredictionResponse:
     predictions = adapter_result.predictions[:5]
 
     try:
+        if request.mode == "Current":
+            clear_prediction_ledger_run(
+                mode=request.mode,
+                source_draw_no=adapter_result.source_draw_number,
+                target_draw_no=adapter_result.target_draw_number,
+            )
+
         record_predictions_to_ledger(
             mode=request.mode,
             source_draw_no=adapter_result.source_draw_number,

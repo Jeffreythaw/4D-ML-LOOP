@@ -9,6 +9,24 @@ class VerificationError(RuntimeError):
     pass
 
 
+LEDGER_MODES = {
+    "Current",
+    "Historical",
+    "Grand_Loop",
+    "Engine_Grand_Loop",
+    "Weighted_Grand_Loop",
+    "Temporal_Global_Loop",
+}
+
+
+def _validate_ledger_mode(mode: str) -> None:
+    if mode not in LEDGER_MODES:
+        raise ValueError(
+            "Ledger mode must be Current, Historical, Grand_Loop, "
+            "Engine_Grand_Loop, Weighted_Grand_Loop, or Temporal_Global_Loop."
+        )
+
+
 def verify_predictions_with_sql(request: VerificationRequest) -> VerificationResponse:
     """
     Verify predictions only through the approved SQL Server verification layer.
@@ -118,18 +136,7 @@ def record_predictions_to_ledger(
     This stores prediction metadata only. It does not read winners and does not
     perform verification.
     """
-    if mode not in {
-        "Current",
-        "Historical",
-        "Grand_Loop",
-        "Engine_Grand_Loop",
-        "Weighted_Grand_Loop",
-        "Temporal_Global_Loop",
-    }:
-        raise ValueError(
-            "Ledger mode must be Current, Historical, Grand_Loop, "
-            "Engine_Grand_Loop, Weighted_Grand_Loop, or Temporal_Global_Loop."
-        )
+    _validate_ledger_mode(mode)
 
     if day_type not in {"Wednesday", "Saturday", "Sunday", "Special"}:
         raise ValueError("Invalid day_type for PredictionLedger.")
@@ -222,6 +229,47 @@ def record_predictions_to_ledger(
         raise VerificationError("SQL prediction ledger upsert failed.") from exc
 
 
+def clear_prediction_ledger_run(
+    *,
+    mode: str,
+    source_draw_no: int,
+    target_draw_no: int,
+) -> int | None:
+    """
+    Delete ledger rows only for one exact mode/source/target prediction run.
+    """
+    _validate_ledger_mode(mode)
+    settings = get_settings()
+
+    try:
+        import pyodbc  # type: ignore
+    except ImportError as exc:
+        raise VerificationError("pyodbc is not installed in this backend environment.") from exc
+
+    try:
+        with pyodbc.connect(settings.sql_connection_string(), timeout=15) as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                """
+                DELETE FROM dbo.PredictionLedger
+                WHERE
+                    Mode = ?
+                    AND SourceDrawNo = ?
+                    AND TargetDrawNo = ?;
+                """,
+                mode,
+                int(source_draw_no),
+                int(target_draw_no),
+            )
+            deleted_rows = cursor.rowcount
+            connection.commit()
+            return deleted_rows if deleted_rows >= 0 else None
+    except ValueError:
+        raise
+    except Exception as exc:
+        raise VerificationError("SQL prediction ledger cleanup failed.") from exc
+
+
 def update_ledger_after_verification(
     *,
     mode: str,
@@ -235,18 +283,7 @@ def update_ledger_after_verification(
     HitCount is stored at every rank row for the run so summary queries can
     group by SourceDrawNo/TargetDrawNo without reading winner data.
     """
-    if mode not in {
-        "Current",
-        "Historical",
-        "Grand_Loop",
-        "Engine_Grand_Loop",
-        "Weighted_Grand_Loop",
-        "Temporal_Global_Loop",
-    }:
-        raise ValueError(
-            "Ledger mode must be Current, Historical, Grand_Loop, "
-            "Engine_Grand_Loop, Weighted_Grand_Loop, or Temporal_Global_Loop."
-        )
+    _validate_ledger_mode(mode)
 
     settings = get_settings()
 
