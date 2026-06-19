@@ -73,10 +73,24 @@ export default function Home() {
 
   return (
     <main className="shell">
+      <div className="ambient ambient-one" aria-hidden="true" />
+      <div className="ambient ambient-two" aria-hidden="true" />
+
       <section className="panel">
         <div className="heading">
-          <h1>Jeffrey Quad Engine v2</h1>
-          <p>Local research dashboard for read-only prediction and SQL firewall verification.</p>
+          <div className="brand-mark" aria-hidden="true">
+            JQ
+          </div>
+          <div className="heading-copy">
+            <div className="title-row">
+              <h1>Jeffrey Quad Engine v2</h1>
+              <span className="status-badge">
+                <span className="status-dot" aria-hidden="true" />
+                Temporal Master Online
+              </span>
+            </div>
+            <p>Read-only prediction with SQL firewall verification.</p>
+          </div>
         </div>
 
         <PredictionForm
@@ -86,12 +100,20 @@ export default function Home() {
         />
 
         {mode ? (
-          <p className="muted mode-label">
-            Mode: {mode === "current" ? "Current Prediction" : "Historical Audit"}
-          </p>
+          <div className="mode-label" aria-live="polite">
+            <span className="mode-label-dot" aria-hidden="true" />
+            {mode === "current" ? "Current Prediction Mode" : "Historical Audit Mode"}
+          </div>
         ) : null}
 
-        {error ? <p className="error">{error}</p> : null}
+        {error ? (
+          <div className="error" role="alert">
+            <span className="error-icon" aria-hidden="true">
+              !
+            </span>
+            <span>{error}</span>
+          </div>
+        ) : null}
 
         <PredictionResult result={result} mode={mode} onVerify={handleVerify} verifying={verifying} />
       </section>
