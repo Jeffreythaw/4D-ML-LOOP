@@ -1,0 +1,41 @@
+==============================================================================================================================================
+STEP 150G — LIVE SHADOW BOARD VERIFICATION HARNESS — REPORT ONLY
+==============================================================================================================================================
+ProductionMathChanged: NO
+APIChanged: NO
+FrontendChanged: NO
+SQLSchemaChanged: NO
+DeploymentChanged: NO
+SourceDrawNo: 5497
+TargetDrawNo: 5498
+CurrentFullLedgerPreMissStreak: 18
+CurrentRiskBucket: HIGH_RISK
+LiveDeploymentLocalMissStreak: 3
+RiskUse: suppression/caution only; no streak recovery boost
+CandidateLock: Step 150F constants only; target winners never alter candidate sets.
+
+LOCKED SHADOW BOARD
+----------------------------------------------------------------------------------------------------------------------------------------------
+Policy                              Locked Top5
+BASELINE_E1                         7006,4723,3193,9098,2698
+RISK_SUM_BAND_SHADOW                3193,4723,7006,6065,6515
+PAIR_RECURRENCE_SHADOW              7776,0374,1111,1389,2071
+MIRROR_BOX_REPAIR_SHADOW            2689,2869,2896,2968,2986
+STREAK_RISK_SUPPRESSION_SHADOW      3509,8059,9106,1111,2086
+HYBRID_GUARD_SHADOW                 7006,2689,7776,3193,3509
+
+TARGET AVAILABILITY CHECK
+----------------------------------------------------------------------------------------------------------------------------------------------
+TargetAvailableInDrawHistory: NO
+Every policy status: UNVERIFIED
+SQLStoredProcedureCheck: NOT_RUN_TARGET_UNAVAILABLE
+Local deterministic comparison: NOT_RUN_TARGET_UNAVAILABLE
+
+WAIT_FOR_5498_RESULT
+----------------------------------------------------------------------------------------------------------------------------------------------
+Decision: WAIT_FOR_5498_RESULT
+No verification or near-miss claim is made before target 5498 exists.
+ProductionSwitchRecommendedNow: NO
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_150g_live_shadow_board_verification.txt
+JSONL_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_150g_live_shadow_board_verification_rows.jsonl
