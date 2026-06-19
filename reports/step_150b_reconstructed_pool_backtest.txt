@@ -1,0 +1,48 @@
+==============================================================================================================
+STEP 150B — RECONSTRUCTED CANDIDATE POOL + RESIDUAL PROTOTYPE BACKTEST
+==============================================================================================================
+Mode: REPORT ONLY
+ProductionMathChanged: NO
+ProductionSwitchRecommendedNow: NO
+
+GLOBAL BACKTEST SUMMARY
+--------------------------------------------------------------------------------------------------------------
+RowsChecked: 1437
+BaselineDrawsWithHit: 21 (1.4614%)
+PrototypeDrawsWithHit: 17 (1.1830%)
+BaselineRawHits: 21
+PrototypeRawHits: 17
+ReconstructedPoolTop10Coverage: 32 (2.2269%)
+ReconstructedPoolTop25Coverage: 88 (6.1239%)
+ReconstructedPoolTop50Coverage: 173 (12.0390%)
+ReconstructedPoolTop100Coverage: 314 (21.8511%)
+
+DAYTYPE BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+Saturday     Rows=479   BaselineHitDraws=7    ( 1.461%) PrototypeHitDraws=6    ( 1.253%) PoolTop100Coverage=109  (22.756%)
+Special      Rows=955   BaselineHitDraws=14   ( 1.466%) PrototypeHitDraws=11   ( 1.152%) PoolTop100Coverage=205  (21.466%)
+Sunday       Rows=1     BaselineHitDraws=0    ( 0.000%) PrototypeHitDraws=0    ( 0.000%) PoolTop100Coverage=0    ( 0.000%)
+Wednesday    Rows=2     BaselineHitDraws=0    ( 0.000%) PrototypeHitDraws=0    ( 0.000%) PoolTop100Coverage=0    ( 0.000%)
+
+PROTOTYPE FAMILY USAGE
+--------------------------------------------------------------------------------------------------------------
+TEMPORAL_BASE            Used=4735   AppearedInHitDraws=57   
+PAIR_REPAIR              Used=1476   AppearedInHitDraws=15   
+MIRROR_EXPANSION         Used=728    AppearedInHitDraws=9    
+BOX_REPAIR               Used=151    AppearedInHitDraws=3    
+RESIDUAL_DELTA           Used=95     AppearedInHitDraws=1    
+
+LIVE MISS WINDOW — 5494..5496
+--------------------------------------------------------------------------------------------------------------
+5494->5495 DayType=Saturday Baseline=5941,9554,6201,0000,7006 Hit=0 Prototype=5941,9532,9554,6201,0000 Families=TEMPORAL_BASE,PAIR_REPAIR,TEMPORAL_BASE,TEMPORAL_BASE,TEMPORAL_BASE ProtoHit=0 Pool10/25/50/100=0/0/0/0
+5495->5496 DayType=Sunday Baseline=8044,4443,0550,1294,0368 Hit=0 Prototype=8044,0863,4644,4443,0550 Families=TEMPORAL_BASE,MIRROR_EXPANSION,RESIDUAL_DELTA,TEMPORAL_BASE,TEMPORAL_BASE ProtoHit=0 Pool10/25/50/100=0/0/0/0
+5496->5497 DayType=Wednesday Baseline=4796,5024,9418,8044,7452 Hit=0 Prototype=4796,9246,7653,5024,9418 Families=TEMPORAL_BASE,MIRROR_EXPANSION,RESIDUAL_DELTA,TEMPORAL_BASE,TEMPORAL_BASE ProtoHit=0 Pool10/25/50/100=0/0/0/0
+
+DIAGNOSIS
+--------------------------------------------------------------------------------------------------------------
+Prototype underperforms baseline on exact Top5 hit-draw count in this reconstructed audit.
+Reconstructed Top100 coverage exceeds baseline Top5 coverage, indicating ranking/repair opportunity.
+
+PromotionRecommendation:
+  Do NOT switch production Current mode yet.
+  Use this report to decide whether Step 150C should harden the residual ranker.
