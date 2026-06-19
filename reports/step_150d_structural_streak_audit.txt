@@ -1,0 +1,360 @@
+======================================================================================================================
+STEP 150D — STRUCTURAL & STREAK REGIME ANALOG AUDIT
+======================================================================================================================
+Mode: REPORT ONLY
+ProductionMathChanged: NO
+SQLSchemaChanged: NO
+PrimaryDriver: Engine Pre-Draw Miss-Streak Renewal
+StructuralFeatures: DigitSumCloud, MirrorClassFootprint, PairRecurrence, ShapeMetrics
+
+ENGINE LEDGER STATE
+----------------------------------------------------------------------------------------------------------------------
+Engine: E1_TEMPORAL_CONTEXT_MATCH
+VerifiedOutcomePairs: 1447
+OutcomeSourceRange: 4050..5496
+
+GLOBAL RENEWAL TABLE BY PRE-DRAW MISS STREAK
+----------------------------------------------------------------------------------------------------------------------
+PreMissStreak=0    Samples=22    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=1    Samples=22    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=2    Samples=22    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=3    Samples=22    NextHitDraws=1    RawHits=1    NextHitRate=  4.545%
+PreMissStreak=4    Samples=21    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=5    Samples=21    NextHitDraws=1    RawHits=1    NextHitRate=  4.762%
+PreMissStreak=6    Samples=20    NextHitDraws=1    RawHits=1    NextHitRate=  5.000%
+PreMissStreak=7    Samples=19    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=8    Samples=19    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=9    Samples=19    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=10   Samples=19    NextHitDraws=1    RawHits=1    NextHitRate=  5.263%
+PreMissStreak=11   Samples=18    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=12   Samples=18    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=13   Samples=18    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=14   Samples=18    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=15   Samples=18    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=16   Samples=18    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=17   Samples=18    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=18   Samples=17    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=19   Samples=17    NextHitDraws=1    RawHits=1    NextHitRate=  5.882%
+PreMissStreak=20   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=21   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=22   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=23   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=24   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=25   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=26   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=27   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=28   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=29   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=30   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=31   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=32   Samples=16    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=33   Samples=16    NextHitDraws=1    RawHits=1    NextHitRate=  6.250%
+PreMissStreak=34   Samples=15    NextHitDraws=1    RawHits=1    NextHitRate=  6.667%
+PreMissStreak=35   Samples=14    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=36   Samples=14    NextHitDraws=1    RawHits=1    NextHitRate=  7.143%
+PreMissStreak=37   Samples=13    NextHitDraws=2    RawHits=2    NextHitRate= 15.385%
+PreMissStreak=38   Samples=11    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=39   Samples=11    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=40   Samples=11    NextHitDraws=1    RawHits=1    NextHitRate=  9.091%
+PreMissStreak=41   Samples=10    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=42   Samples=10    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=43   Samples=10    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=44   Samples=10    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=45   Samples=10    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=46   Samples=10    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=47   Samples=10    NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=48   Samples=10    NextHitDraws=1    RawHits=1    NextHitRate= 10.000%
+PreMissStreak=49   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=50   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=51   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=52   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=53   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=54   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=55   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=56   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=57   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=58   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=59   Samples=9     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=60   Samples=9     NextHitDraws=1    RawHits=1    NextHitRate= 11.111%
+PreMissStreak=61   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=62   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=63   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=64   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=65   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=66   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=67   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=68   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=69   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=70   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=71   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=72   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=73   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=74   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=75   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=76   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=77   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=78   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=79   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=80   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=81   Samples=8     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=82   Samples=8     NextHitDraws=2    RawHits=2    NextHitRate= 25.000%
+PreMissStreak=83   Samples=6     NextHitDraws=1    RawHits=1    NextHitRate= 16.667%
+PreMissStreak=84   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=85   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=86   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=87   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=88   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=89   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=90   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=91   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=92   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=93   Samples=5     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=94   Samples=5     NextHitDraws=1    RawHits=1    NextHitRate= 20.000%
+PreMissStreak=95   Samples=4     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=96   Samples=4     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=97   Samples=4     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=98   Samples=4     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=99   Samples=4     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=100  Samples=4     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=101  Samples=4     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=102  Samples=4     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=103  Samples=4     NextHitDraws=1    RawHits=1    NextHitRate= 25.000%
+PreMissStreak=104  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=105  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=106  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=107  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=108  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=109  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=110  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=111  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=112  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=113  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=114  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=115  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=116  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=117  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=118  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=119  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=120  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=121  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=122  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=123  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=124  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=125  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=126  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=127  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=128  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=129  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=130  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=131  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=132  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=133  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=134  Samples=3     NextHitDraws=0    RawHits=0    NextHitRate=  0.000%
+PreMissStreak=135  Samples=3     NextHitDraws=1    RawHits=1    NextHitRate= 33.333%
+
+CURRENT LIVE STREAK STATE
+----------------------------------------------------------------------------------------------------------------------
+CurrentLiveSourceForNextPrediction: 5497
+ComputedCurrentFullLedgerPreMissStreakBeforeNextDraw: 18
+LiveDeploymentLocalMissStreak: 3
+Note: Full-ledger streak is the primary macro feature for this audit; live-local streak is reported only for context.
+
+======================================================================================================================
+LIVE STRUCTURAL ANALOG PROFILE — SOURCE 5495
+======================================================================================================================
+SourceDayType=Saturday SqlWeekday=Saturday Month=6 RuntimeBucket=WEEKEND_SPACE
+PreDrawMissStreak=16 OutcomeKnownInLedger=True MeanDigitSum=17.5652 RepeatedDigitRate=0.3913 OddDigitRate=0.5217 HighDigitRate=0.5109 PairRecurrence3=0.7632
+
+ANALOG CLUSTER RENEWAL PROBABILITIES
+----------------------------------------------------------------------------------------------------------------------
+StreakDelta<= 0 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=25  Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=50  Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=100 Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+
+StreakDelta<= 1 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=100 Samples=52  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+
+StreakDelta<= 2 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=100 Samples=87  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+
+StreakDelta<= 3 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=100 Samples=100 NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+
+TOP 25 STRUCTURAL + STREAK ANALOGS
+----------------------------------------------------------------------------------------------------------------------
+01. 5029->5030 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.44321 DigitSumD=0.78261 MirrorD=0.17391 PairD=0.85000 ShapeD=0.06443 MonthMatch=1 BucketMatch=0
+02. 5234->5235 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.47476 DigitSumD=0.86957 MirrorD=0.15217 PairD=0.83376 ShapeD=0.01640 MonthMatch=0 BucketMatch=0
+03. 5328->5329 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.49535 DigitSumD=0.86957 MirrorD=0.32609 PairD=0.84712 ShapeD=0.04176 MonthMatch=0 BucketMatch=1
+04. 4884->4885 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.50205 DigitSumD=1.04348 MirrorD=0.15217 PairD=0.89141 ShapeD=0.06337 MonthMatch=0 BucketMatch=1
+05. 5411->5412 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.52818 DigitSumD=0.78261 MirrorD=0.30435 PairD=0.93023 ShapeD=0.04330 MonthMatch=0 BucketMatch=0
+06. 4789->4790 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.52939 DigitSumD=1.04348 MirrorD=0.13043 PairD=0.89012 ShapeD=0.03431 MonthMatch=0 BucketMatch=0
+07. 4127->4128 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.53352 DigitSumD=0.95652 MirrorD=0.30435 PairD=0.87738 ShapeD=0.06869 MonthMatch=1 BucketMatch=0
+08. 4464->4465 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.53389 DigitSumD=1.04348 MirrorD=0.32609 PairD=0.83376 ShapeD=0.03377 MonthMatch=0 BucketMatch=1
+09. 4164->4165 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.53857 DigitSumD=1.13043 MirrorD=0.17391 PairD=0.92965 ShapeD=0.05686 MonthMatch=0 BucketMatch=1
+10. 4247->4248 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.54092 DigitSumD=1.04348 MirrorD=0.15217 PairD=0.90476 ShapeD=0.04103 MonthMatch=0 BucketMatch=0
+11. 5078->5079 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.54424 DigitSumD=1.04348 MirrorD=0.17391 PairD=0.87537 ShapeD=0.06175 MonthMatch=0 BucketMatch=0
+12. 4426->4427 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.54577 DigitSumD=0.86957 MirrorD=0.28261 PairD=0.91750 ShapeD=0.07112 MonthMatch=0 BucketMatch=0
+13. 4925->4926 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.55575 DigitSumD=0.86957 MirrorD=0.30435 PairD=0.93023 ShapeD=0.07246 MonthMatch=0 BucketMatch=0
+14. 4391->4392 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.59231 DigitSumD=1.13043 MirrorD=0.21739 PairD=0.91750 ShapeD=0.07555 MonthMatch=0 BucketMatch=0
+15. 4066->4067 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.60202 DigitSumD=1.13043 MirrorD=0.23913 PairD=0.92965 ShapeD=0.07630 MonthMatch=0 BucketMatch=0
+16. 5272->5273 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.62190 DigitSumD=1.21739 MirrorD=0.21739 PairD=0.94239 ShapeD=0.08368 MonthMatch=0 BucketMatch=0
+17. 5098->5099 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.62213 DigitSumD=1.47826 MirrorD=0.10870 PairD=0.86264 ShapeD=0.02147 MonthMatch=0 BucketMatch=0
+18. 5028->5029 Mode=Temporal_Global_Loop   PreMiss=15  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.71645 DigitSumD=1.04348 MirrorD=0.13043 PairD=0.91750 ShapeD=0.03537 MonthMatch=1 BucketMatch=1
+19. 4926->4927 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.71892 DigitSumD=0.86957 MirrorD=0.17391 PairD=0.91389 ShapeD=0.05442 MonthMatch=0 BucketMatch=1
+20. 4126->4127 Mode=Temporal_Global_Loop   PreMiss=15  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.74259 DigitSumD=0.86957 MirrorD=0.21739 PairD=0.87738 ShapeD=0.10317 MonthMatch=1 BucketMatch=0
+21. 5410->5411 Mode=Temporal_Global_Loop   PreMiss=15  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.74976 DigitSumD=0.78261 MirrorD=0.23913 PairD=0.87537 ShapeD=0.06761 MonthMatch=0 BucketMatch=0
+22. 4392->4393 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.75095 DigitSumD=0.95652 MirrorD=0.17391 PairD=0.93023 ShapeD=0.08546 MonthMatch=0 BucketMatch=1
+23. 4885->4886 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.75425 DigitSumD=0.86957 MirrorD=0.15217 PairD=0.90414 ShapeD=0.07583 MonthMatch=0 BucketMatch=0
+24. 4248->4249 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.75905 DigitSumD=0.95652 MirrorD=0.30435 PairD=0.83526 ShapeD=0.04900 MonthMatch=0 BucketMatch=1
+25. 5079->5080 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.76808 DigitSumD=1.04348 MirrorD=0.21739 PairD=0.87738 ShapeD=0.06326 MonthMatch=0 BucketMatch=1
+
+POST-STREAK REPAIR PATTERNS AMONG HIT ANALOGS
+----------------------------------------------------------------------------------------------------------------------
+StreakDelta<= 0 | HitAnalogSamples=0 AvgDigitSumDelta=NULL AvgPairOverlap=NULL AvgMirrorL1=NULL
+StreakDelta<= 1 | HitAnalogSamples=0 AvgDigitSumDelta=NULL AvgPairOverlap=NULL AvgMirrorL1=NULL
+StreakDelta<= 2 | HitAnalogSamples=0 AvgDigitSumDelta=NULL AvgPairOverlap=NULL AvgMirrorL1=NULL
+
+======================================================================================================================
+LIVE STRUCTURAL ANALOG PROFILE — SOURCE 5496
+======================================================================================================================
+SourceDayType=Sunday SqlWeekday=Sunday Month=6 RuntimeBucket=WEEKEND_SPACE
+PreDrawMissStreak=17 OutcomeKnownInLedger=True MeanDigitSum=17.3478 RepeatedDigitRate=0.6522 OddDigitRate=0.4457 HighDigitRate=0.4565 PairRecurrence3=0.7500
+
+ANALOG CLUSTER RENEWAL PROBABILITIES
+----------------------------------------------------------------------------------------------------------------------
+StreakDelta<= 0 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=25  Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=50  Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=100 Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+
+StreakDelta<= 1 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=100 Samples=52  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+
+StreakDelta<= 2 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=100 Samples=87  NextHitDraws=1   RawHits=1   NextHitRate=  1.149% RawHitsPerDraw=0.0115
+
+StreakDelta<= 3 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=100 Samples=100 NextHitDraws=1   RawHits=1   NextHitRate=  1.000% RawHitsPerDraw=0.0100
+
+TOP 25 STRUCTURAL + STREAK ANALOGS
+----------------------------------------------------------------------------------------------------------------------
+01. 5079->5080 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.43391 DigitSumD=0.86957 MirrorD=0.06522 PairD=0.89141 ShapeD=0.07053 MonthMatch=0 BucketMatch=1
+02. 5030->5031 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.46582 DigitSumD=0.86957 MirrorD=0.13043 PairD=0.89012 ShapeD=0.08384 MonthMatch=1 BucketMatch=0
+03. 4128->4129 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.49533 DigitSumD=0.95652 MirrorD=0.19565 PairD=0.91630 ShapeD=0.04213 MonthMatch=0 BucketMatch=1
+04. 4392->4393 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.51007 DigitSumD=0.95652 MirrorD=0.26087 PairD=0.87738 ShapeD=0.06665 MonthMatch=0 BucketMatch=1
+05. 4885->4886 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.52020 DigitSumD=0.86957 MirrorD=0.19565 PairD=0.86402 ShapeD=0.14054 MonthMatch=0 BucketMatch=0
+06. 5273->5274 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.53174 DigitSumD=0.86957 MirrorD=0.19565 PairD=0.94239 ShapeD=0.10028 MonthMatch=0 BucketMatch=0
+07. 5329->5330 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.55358 DigitSumD=0.95652 MirrorD=0.26087 PairD=0.90227 ShapeD=0.05310 MonthMatch=0 BucketMatch=0
+08. 4165->4166 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.56193 DigitSumD=1.04348 MirrorD=0.15217 PairD=0.92965 ShapeD=0.11495 MonthMatch=0 BucketMatch=0
+09. 4248->4249 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.56632 DigitSumD=1.21739 MirrorD=0.21739 PairD=0.90476 ShapeD=0.05284 MonthMatch=0 BucketMatch=1
+10. 5235->5236 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.56860 DigitSumD=1.30435 MirrorD=0.17391 PairD=0.89141 ShapeD=0.03742 MonthMatch=0 BucketMatch=1
+11. 4790->4791 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.56989 DigitSumD=0.95652 MirrorD=0.28261 PairD=0.91750 ShapeD=0.08302 MonthMatch=0 BucketMatch=0
+12. 4427->4428 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.57829 DigitSumD=1.13043 MirrorD=0.17391 PairD=0.91750 ShapeD=0.07066 MonthMatch=0 BucketMatch=0
+13. 4926->4927 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.58747 DigitSumD=1.39130 MirrorD=0.15217 PairD=0.89141 ShapeD=0.05570 MonthMatch=0 BucketMatch=1
+14. 4067->4068 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.58813 DigitSumD=1.04348 MirrorD=0.32609 PairD=0.88753 ShapeD=0.03778 MonthMatch=0 BucketMatch=0
+15. 5099->5100 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.62450 DigitSumD=1.30435 MirrorD=0.17391 PairD=0.91750 ShapeD=0.08430 MonthMatch=0 BucketMatch=0
+16. 5412->5413 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.63127 DigitSumD=1.39130 MirrorD=0.28261 PairD=0.87537 ShapeD=0.09909 MonthMatch=0 BucketMatch=1
+17. 4465->4466 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.64352 DigitSumD=1.30435 MirrorD=0.23913 PairD=0.94239 ShapeD=0.05048 MonthMatch=0 BucketMatch=0
+18. 5274->5275 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.70301 DigitSumD=0.86957 MirrorD=0.13043 PairD=0.89012 ShapeD=0.06981 MonthMatch=0 BucketMatch=1
+19. 5031->5032 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.70539 DigitSumD=1.04348 MirrorD=0.06522 PairD=0.92965 ShapeD=0.06273 MonthMatch=1 BucketMatch=1
+20. 5029->5030 Mode=Temporal_Global_Loop   PreMiss=16  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.70725 DigitSumD=0.95652 MirrorD=0.06522 PairD=0.83526 ShapeD=0.09870 MonthMatch=1 BucketMatch=0
+21. 5495->5496 Mode=Current                PreMiss=16  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.71860 DigitSumD=1.04348 MirrorD=0.15217 PairD=0.86264 ShapeD=0.08210 MonthMatch=1 BucketMatch=1
+22. 4428->4429 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.73181 DigitSumD=1.04348 MirrorD=0.17391 PairD=0.90227 ShapeD=0.06597 MonthMatch=1 BucketMatch=1
+23. 5100->5101 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.75092 DigitSumD=1.04348 MirrorD=0.17391 PairD=0.84928 ShapeD=0.07778 MonthMatch=0 BucketMatch=1
+24. 4249->4250 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.75616 DigitSumD=0.78261 MirrorD=0.26087 PairD=0.91750 ShapeD=0.01438 MonthMatch=0 BucketMatch=0
+25. 4068->4069 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.75970 DigitSumD=0.95652 MirrorD=0.26087 PairD=0.90414 ShapeD=0.03135 MonthMatch=0 BucketMatch=1
+
+POST-STREAK REPAIR PATTERNS AMONG HIT ANALOGS
+----------------------------------------------------------------------------------------------------------------------
+StreakDelta<= 0 | HitAnalogSamples=0 AvgDigitSumDelta=NULL AvgPairOverlap=NULL AvgMirrorL1=NULL
+StreakDelta<= 1 | HitAnalogSamples=0 AvgDigitSumDelta=NULL AvgPairOverlap=NULL AvgMirrorL1=NULL
+StreakDelta<= 2 | HitAnalogSamples=1 AvgDigitSumDelta=-1.1304 AvgPairOverlap=0.3250 AvgMirrorL1=0.1957
+  TopMirrorTransitions: 0404->0213:1, 0404->0312:1, 0404->2342:1, 0404->0042:1, 0404->1312:1
+
+======================================================================================================================
+LIVE STRUCTURAL ANALOG PROFILE — SOURCE 5497
+======================================================================================================================
+SourceDayType=Wednesday SqlWeekday=Wednesday Month=6 RuntimeBucket=MIDWEEK_SPECIAL_SPACE
+PreDrawMissStreak=18 OutcomeKnownInLedger=False MeanDigitSum=16.7391 RepeatedDigitRate=0.6957 OddDigitRate=0.4891 HighDigitRate=0.4565 PairRecurrence3=0.8235
+
+ANALOG CLUSTER RENEWAL PROBABILITIES
+----------------------------------------------------------------------------------------------------------------------
+StreakDelta<= 0 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=25  Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=50  Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 0 | TopK=100 Samples=17  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+
+StreakDelta<= 1 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 1 | TopK=100 Samples=52  NextHitDraws=1   RawHits=1   NextHitRate=  1.923% RawHitsPerDraw=0.0192
+
+StreakDelta<= 2 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 2 | TopK=100 Samples=86  NextHitDraws=1   RawHits=1   NextHitRate=  1.163% RawHitsPerDraw=0.0116
+
+StreakDelta<= 3 | TopK=10  Samples=10  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=25  Samples=25  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=50  Samples=50  NextHitDraws=0   RawHits=0   NextHitRate=  0.000% RawHitsPerDraw=0.0000
+StreakDelta<= 3 | TopK=100 Samples=100 NextHitDraws=1   RawHits=1   NextHitRate=  1.000% RawHitsPerDraw=0.0100
+
+TOP 25 STRUCTURAL + STREAK ANALOGS
+----------------------------------------------------------------------------------------------------------------------
+01. 4428->4429 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.48542 DigitSumD=0.95652 MirrorD=0.10870 PairD=0.93023 ShapeD=0.05561 MonthMatch=1 BucketMatch=0
+02. 4129->4130 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.49005 DigitSumD=0.95652 MirrorD=0.21739 PairD=0.83526 ShapeD=0.08446 MonthMatch=0 BucketMatch=1
+03. 5236->5237 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.49584 DigitSumD=1.04348 MirrorD=0.13043 PairD=0.91750 ShapeD=0.03235 MonthMatch=0 BucketMatch=1
+04. 4886->4887 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.50557 DigitSumD=1.13043 MirrorD=0.08696 PairD=0.87738 ShapeD=0.08765 MonthMatch=0 BucketMatch=1
+05. 4068->4069 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.51643 DigitSumD=0.95652 MirrorD=0.19565 PairD=0.83526 ShapeD=0.04895 MonthMatch=0 BucketMatch=0
+06. 4166->4167 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.51694 DigitSumD=1.13043 MirrorD=0.17391 PairD=0.81974 ShapeD=0.08609 MonthMatch=0 BucketMatch=1
+07. 5330->5331 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.53039 DigitSumD=1.21739 MirrorD=0.10870 PairD=0.86264 ShapeD=0.08886 MonthMatch=0 BucketMatch=1
+08. 4393->4394 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.53563 DigitSumD=1.04348 MirrorD=0.26087 PairD=0.87805 ShapeD=0.08492 MonthMatch=0 BucketMatch=1
+09. 4249->4250 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.56071 DigitSumD=1.30435 MirrorD=0.15217 PairD=0.89012 ShapeD=0.03221 MonthMatch=0 BucketMatch=1
+10. 5100->5101 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.57589 DigitSumD=1.04348 MirrorD=0.21739 PairD=0.91750 ShapeD=0.10215 MonthMatch=0 BucketMatch=0
+11. 5413->5414 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.57918 DigitSumD=1.13043 MirrorD=0.28261 PairD=0.89012 ShapeD=0.14632 MonthMatch=0 BucketMatch=1
+12. 4466->4467 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.60895 DigitSumD=1.21739 MirrorD=0.32609 PairD=0.91750 ShapeD=0.08702 MonthMatch=0 BucketMatch=1
+13. 4927->4928 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.61345 DigitSumD=1.30435 MirrorD=0.32609 PairD=0.87738 ShapeD=0.05094 MonthMatch=0 BucketMatch=1
+14. 5274->5275 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.61578 DigitSumD=1.13043 MirrorD=0.34783 PairD=0.85000 ShapeD=0.08161 MonthMatch=0 BucketMatch=0
+15. 5080->5081 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.63212 DigitSumD=1.39130 MirrorD=0.30435 PairD=0.86264 ShapeD=0.08667 MonthMatch=0 BucketMatch=1
+16. 4791->4792 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.64087 DigitSumD=1.21739 MirrorD=0.30435 PairD=0.90414 ShapeD=0.09592 MonthMatch=0 BucketMatch=0
+17. 5031->5032 Mode=Temporal_Global_Loop   PreMiss=18  StreakDelta=0  NextHit=0 HitCount=0  Dist=0.66588 DigitSumD=1.47826 MirrorD=0.30435 PairD=0.87537 ShapeD=0.08081 MonthMatch=1 BucketMatch=0
+18. 5030->5031 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.71703 DigitSumD=1.04348 MirrorD=0.15217 PairD=0.86402 ShapeD=0.07252 MonthMatch=1 BucketMatch=1
+19. 4069->4070 Mode=Temporal_Global_Loop   PreMiss=19  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.73411 DigitSumD=1.04348 MirrorD=0.13043 PairD=0.84712 ShapeD=0.06165 MonthMatch=0 BucketMatch=1
+20. 4394->4395 Mode=Temporal_Global_Loop   PreMiss=19  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.73560 DigitSumD=1.04348 MirrorD=0.13043 PairD=0.86402 ShapeD=0.04795 MonthMatch=0 BucketMatch=1
+21. 4250->4251 Mode=Temporal_Global_Loop   PreMiss=19  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.74735 DigitSumD=1.04348 MirrorD=0.15217 PairD=0.83076 ShapeD=0.11568 MonthMatch=0 BucketMatch=1
+22. 4429->4430 Mode=Temporal_Global_Loop   PreMiss=19  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.74753 DigitSumD=1.13043 MirrorD=0.13043 PairD=0.90476 ShapeD=0.09799 MonthMatch=1 BucketMatch=1
+23. 4790->4791 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.75823 DigitSumD=1.04348 MirrorD=0.19565 PairD=0.83376 ShapeD=0.10110 MonthMatch=0 BucketMatch=1
+24. 4792->4793 Mode=Temporal_Global_Loop   PreMiss=19  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.76542 DigitSumD=1.13043 MirrorD=0.13043 PairD=0.87738 ShapeD=0.07167 MonthMatch=0 BucketMatch=1
+25. 5329->5330 Mode=Temporal_Global_Loop   PreMiss=17  StreakDelta=1  NextHit=0 HitCount=0  Dist=0.76631 DigitSumD=0.95652 MirrorD=0.26087 PairD=0.90414 ShapeD=0.06442 MonthMatch=0 BucketMatch=1
+
+POST-STREAK REPAIR PATTERNS AMONG HIT ANALOGS
+----------------------------------------------------------------------------------------------------------------------
+StreakDelta<= 0 | HitAnalogSamples=0 AvgDigitSumDelta=NULL AvgPairOverlap=NULL AvgMirrorL1=NULL
+StreakDelta<= 1 | HitAnalogSamples=1 AvgDigitSumDelta=-1.1304 AvgPairOverlap=0.3250 AvgMirrorL1=0.1957
+  TopMirrorTransitions: 0404->0213:1, 0404->0312:1, 0404->2342:1, 0404->0042:1, 0404->1312:1
+StreakDelta<= 2 | HitAnalogSamples=1 AvgDigitSumDelta=-1.1304 AvgPairOverlap=0.3250 AvgMirrorL1=0.1957
+  TopMirrorTransitions: 0404->0213:1, 0404->0312:1, 0404->2342:1, 0404->0042:1, 0404->1312:1
+
+======================================================================================================================
+FINAL STEP 150D CONCLUSION
+======================================================================================================================
+ProductionMathChanged: NO
+ProductionSwitchRecommendedNow: NO
+DecisionRules:
+  If current full-ledger PreMissStreak analog clusters show elevated renewal probability, use streak as primary macro weight.
+  If structural analog hit rate does not exceed the global same-streak hit rate, do not promote.
+  If repair patterns are stable among hit analogs, Step 150E may build a report-only streak-weighted repair prototype.
+NextStep: Inspect analog renewal probabilities and repair patterns before designing Step 150E.
