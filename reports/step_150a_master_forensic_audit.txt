@@ -1,0 +1,364 @@
+
+==============================================================================================================
+STEP 150A — MASTER FORENSIC & STREAK ANALYTICS AUDIT
+==============================================================================================================
+GeneratedAt: 2026-06-19T15:42:19
+Mode: REPORT ONLY
+ProductionMathChanged: NO
+FrontendChanged: NO
+SQLSchemaChanged: NO
+
+==============================================================================================================
+1. SQL DRAW HISTORY STATE
+==============================================================================================================
+DrawHistoryRange: 69..5497
+DrawHistoryRows: 5429
+
+Latest DrawHistory Rows:
+  DrawNo=5497 | DrawDate=2026-06-17 | DayType=Wednesday | Winners=4505,3831,8219,1111,1389,2071,2658,4249,6510,6515,6663,7412,7776,0374,2255,2426,3022,3066,...
+  DrawNo=5496 | DrawDate=2026-06-14 | DayType=Sunday | Winners=4048,6689,6318,0405,1210,3160,4345,4433,6088,8476,9291,9397,9750,0669,0949,2086,2251,3185,...
+  DrawNo=5495 | DrawDate=2026-06-13 | DayType=Saturday | Winners=5478,8081,6943,0136,0376,1350,3478,5827,6189,6812,7436,8039,8665,0625,1007,1545,2122,2241,...
+  DrawNo=5494 | DrawDate=2026-06-10 | DayType=Wednesday | Winners=0173,1046,1622,2225,2601,5822,2553,2903,5970,3014,6293,4175,7177,6341,7415,6672,8931,7434,...
+  DrawNo=5493 | DrawDate=2026-06-06 | DayType=Saturday | Winners=0247,0735,0910,1076,1094,1166,1440,4591,9296,1700,5178,2146,5193,2385,5754,2839,7638,7878,...
+  DrawNo=5492 | DrawDate=2026-06-05 | DayType=Special | Winners=0014,0546,5974,0196,0313,0940,0465,2056,4220,0871,2419,4063,4371,4638,4866,6146,6153,7680,...
+  DrawNo=5491 | DrawDate=2026-06-02 | DayType=Special | Winners=0126,0637,2414,0171,3753,8613,0949,2868,4160,1212,4542,1375,5459,2292,5865,2354,6360,3121,...
+  DrawNo=5490 | DrawDate=2026-05-30 | DayType=Saturday | Winners=0564,1332,1869,1041,2810,7776,2266,3424,8675,3995,5533,4402,5536,6648,8424,7367,8596,8811,...
+  DrawNo=5489 | DrawDate=2026-05-29 | DayType=Special | Winners=0326,0802,9806,0376,1076,9130,0590,2124,4930,0592,3375,1039,4025,2055,5959,2677,7425,5658,...
+  DrawNo=5488 | DrawDate=2026-05-26 | DayType=Special | Winners=0334,0508,1516,0727,1858,6093,0846,1415,4099,1723,4216,2143,4368,3741,7116,6599,7122,7281,...
+
+==============================================================================================================
+2. PREDICTION LEDGER AVAILABLE RANGE
+==============================================================================================================
+  Mode=Current                Engine=E1_TEMPORAL_CONTEXT_MATCH            SourceRange=5494..5496 Rows=15
+  Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 SourceRange=4050..5493 Rows=7220
+  Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               SourceRange=4050..5493 Rows=7220
+  Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 SourceRange=4050..5493 Rows=7220
+  Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    SourceRange=4050..5493 Rows=7220
+  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              SourceRange=4050..5493 Rows=7220
+  Mode=Historical             Engine=E1_CROSS_PAIR_LINEAR                 SourceRange=5444..5497 Rows=270
+  Mode=Historical             Engine=E1_DELTA_ROTATION_LSTS               SourceRange=5444..5497 Rows=270
+  Mode=Historical             Engine=E1_MIRROR_BASE5_LSTS                 SourceRange=5444..5497 Rows=270
+  Mode=Historical             Engine=E1_WLS_DECAY_0.98                    SourceRange=5444..5497 Rows=270
+  Mode=Historical             Engine=E2_META_ENSEMBLE_RANKER              SourceRange=5486..5497 Rows=25
+  Mode=Historical             Engine=E3_POLYNOMIAL                        SourceRange=5486..5486 Rows=1
+  Mode=Historical             Engine=E4_MARKOV_TRANSITION_MASS            SourceRange=5486..5486 Rows=3
+  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            SourceRange=4050..5493 Rows=7220
+  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     SourceRange=4050..5493 Rows=7220
+
+Note: Streak analytics use available PredictionLedger only. No fake 40-year ledger is assumed.
+
+==============================================================================================================
+3. THREE LIVE MISSES — LEDGER CONFIRMATION
+==============================================================================================================
+
+Current 5494 -> 5495
+  ('Current', 5494, 5495, 1, '5941', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5494, 5495, 2, '9554', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5494, 5495, 3, '6201', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5494, 5495, 4, '0000', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5494, 5495, 5, '7006', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  RowCount=5 Engines=['E1_TEMPORAL_CONTEXT_MATCH'] Statuses=['Pending'] HitCounts=['None']
+
+Current 5495 -> 5496
+  ('Current', 5495, 5496, 1, '8044', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5495, 5496, 2, '4443', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5495, 5496, 3, '0550', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5495, 5496, 4, '1294', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5495, 5496, 5, '0368', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  RowCount=5 Engines=['E1_TEMPORAL_CONTEXT_MATCH'] Statuses=['Pending'] HitCounts=['None']
+
+Current 5496 -> 5497
+  ('Current', 5496, 5497, 1, '4796', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5496, 5497, 2, '5024', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5496, 5497, 3, '9418', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5496, 5497, 4, '8044', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  ('Current', 5496, 5497, 5, '7452', 'E1_TEMPORAL_CONTEXT_MATCH', 'Pending', None)
+  RowCount=5 Engines=['E1_TEMPORAL_CONTEXT_MATCH'] Statuses=['Pending'] HitCounts=['None']
+
+==============================================================================================================
+4. DEEP FORENSIC & CRYPTO NEAR-MISS METRICS
+==============================================================================================================
+
+--------------------------------------------------------------------------------------------------------------
+CASE: Source 5494 -> Target 5495
+--------------------------------------------------------------------------------------------------------------
+ActualDigitSumDistribution: {7: 1, 8: 1, 9: 2, 10: 1, 13: 1, 14: 1, 15: 2, 16: 1, 17: 3, 20: 2, 22: 3, 24: 2, 25: 1, 27: 1, 31: 1}
+
+Prediction 5941 | DigitSum=19 | MirrorSig=0441
+  ClosestNormal: Actual=6943 CircDist=3 Hamming=2 SumDelta=3 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=6943 ActualMirror=1443 MirrorExact=NO MirrorHamming=2 NormalCirc=3
+  ClosestBox: Actual=1545 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=3
+
+Prediction 9554 | DigitSum=23 | MirrorSig=4004
+  ClosestNormal: Actual=1545 CircDist=4 Hamming=3 SumDelta=8 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=5055 ActualMirror=0000 MirrorExact=NO MirrorHamming=2 NormalCirc=10
+  ClosestBox: Actual=1545 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=3
+
+Prediction 6201 | DigitSum=9 | MirrorSig=1201
+  ClosestNormal: Actual=6189 CircDist=5 Hamming=3 SumDelta=15 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=2241 ActualMirror=2241 MirrorExact=NO MirrorHamming=2 NormalCirc=8
+  ClosestBox: Actual=6812 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=3
+
+Prediction 0000 | DigitSum=0 | MirrorSig=0000
+  ClosestNormal: Actual=1007 CircDist=4 Hamming=2 SumDelta=8 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=5055 ActualMirror=0000 MirrorExact=YES MirrorHamming=0 NormalCirc=15
+  ClosestBox: Actual=1007 BoxExact=NO BoxOverlap=2/4 BoxDistance=2 Hamming=2
+
+Prediction 7006 | DigitSum=13 | MirrorSig=2001
+  ClosestNormal: Actual=1007 CircDist=5 Hamming=2 SumDelta=5 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=1007 ActualMirror=1002 MirrorExact=NO MirrorHamming=2 NormalCirc=5
+  ClosestBox: Actual=1007 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=2
+
+--------------------------------------------------------------------------------------------------------------
+CASE: Source 5495 -> Target 5496
+--------------------------------------------------------------------------------------------------------------
+ActualDigitSumDistribution: {4: 1, 8: 1, 9: 1, 10: 3, 14: 1, 15: 1, 16: 3, 17: 1, 18: 1, 21: 3, 22: 2, 23: 1, 24: 1, 25: 1, 28: 1, 29: 1}
+
+Prediction 8044 | DigitSum=16 | MirrorSig=3044
+  ClosestNormal: Actual=7035 CircDist=3 Hamming=3 SumDelta=1 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=4048 ActualMirror=4043 MirrorExact=NO MirrorHamming=2 NormalCirc=8
+  ClosestBox: Actual=4048 BoxExact=YES BoxOverlap=4/4 BoxDistance=0 Hamming=2
+
+Prediction 4443 | DigitSum=15 | MirrorSig=4443
+  ClosestNormal: Actual=4433 CircDist=1 Hamming=1 SumDelta=1 FirstPair=YES LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=4433 ActualMirror=4433 MirrorExact=NO MirrorHamming=1 NormalCirc=1
+  ClosestBox: Actual=4433 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=1
+
+Prediction 0550 | DigitSum=10 | MirrorSig=0000
+  ClosestNormal: Actual=9750 CircDist=3 Hamming=2 SumDelta=11 FirstPair=NO LastPair=YES SwappedPair=NO
+  ClosestMirror: Actual=0405 ActualMirror=0400 MirrorExact=NO MirrorHamming=1 NormalCirc=11
+  ClosestBox: Actual=0405 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=3
+
+Prediction 1294 | DigitSum=16 | MirrorSig=1244
+  ClosestNormal: Actual=9291 CircDist=5 Hamming=2 SumDelta=5 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=9291 ActualMirror=4241 MirrorExact=NO MirrorHamming=2 NormalCirc=5
+  ClosestBox: Actual=9291 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=2
+
+Prediction 0368 | DigitSum=17 | MirrorSig=0313
+  ClosestNormal: Actual=0669 CircDist=4 Hamming=2 SumDelta=4 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=6318 ActualMirror=1313 MirrorExact=NO MirrorHamming=1 NormalCirc=9
+  ClosestBox: Actual=6318 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=2
+
+--------------------------------------------------------------------------------------------------------------
+CASE: Source 5496 -> Target 5497
+--------------------------------------------------------------------------------------------------------------
+ActualDigitSumDistribution: {4: 1, 7: 1, 10: 1, 12: 1, 13: 2, 14: 5, 15: 2, 17: 2, 19: 1, 20: 1, 21: 3, 27: 1, 28: 1, 35: 1}
+
+Prediction 4796 | DigitSum=26 | MirrorSig=4241
+  ClosestNormal: Actual=4505 CircDist=4 Hamming=3 SumDelta=12 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=4249 ActualMirror=4244 MirrorExact=NO MirrorHamming=1 NormalCirc=13
+  ClosestBox: Actual=9964 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=4
+
+Prediction 5024 | DigitSum=11 | MirrorSig=0024
+  ClosestNormal: Actual=3022 CircDist=4 Hamming=2 SumDelta=4 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=0374 ActualMirror=0324 MirrorExact=NO MirrorHamming=1 NormalCirc=13
+  ClosestBox: Actual=4505 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=4
+
+Prediction 9418 | DigitSum=22 | MirrorSig=4413
+  ClosestNormal: Actual=8219 CircDist=4 Hamming=3 SumDelta=2 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=9964 ActualMirror=4414 MirrorExact=NO MirrorHamming=1 NormalCirc=14
+  ClosestBox: Actual=8219 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=3
+
+Prediction 8044 | DigitSum=16 | MirrorSig=3044
+  ClosestNormal: Actual=9964 CircDist=4 Hamming=3 SumDelta=12 FirstPair=NO LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=8999 ActualMirror=3444 MirrorExact=NO MirrorHamming=1 NormalCirc=11
+  ClosestBox: Actual=0374 BoxExact=NO BoxOverlap=2/4 BoxDistance=2 Hamming=3
+
+Prediction 7452 | DigitSum=18 | MirrorSig=2402
+  ClosestNormal: Actual=7412 CircDist=4 Hamming=1 SumDelta=4 FirstPair=YES LastPair=NO SwappedPair=NO
+  ClosestMirror: Actual=7412 ActualMirror=2412 MirrorExact=NO MirrorHamming=1 NormalCirc=4
+  ClosestBox: Actual=7412 BoxExact=NO BoxOverlap=3/4 BoxDistance=1 Hamming=1
+
+FORENSIC AGGREGATE:
+  MirrorExactHiddenHits=1
+  BoxExactHits=1
+  HammingDistance<=1 NearMisses=2
+  PairStructureNearMisses=3
+
+==============================================================================================================
+5. CANDIDATE POOL CUTOFF & DEPTH AUDIT
+==============================================================================================================
+Method: uses persisted PredictionLedger candidate rows. If full Top100 pools were not persisted, this section is marked as limited.
+
+CandidateDepthCoverage Source 5494 -> Target 5495:
+  E1_CROSS_PAIR_LINEAR: no actuals in persisted depth 5
+  E1_DELTA_ROTATION_LSTS: no actuals in persisted depth 5
+  E1_MIRROR_BASE5_LSTS: no actuals in persisted depth 5
+  E1_TEMPORAL_CONTEXT_MATCH: no actuals in persisted depth 5
+  E1_WLS_DECAY_0.98: no actuals in persisted depth 5
+  E2_META_ENSEMBLE_RANKER: no actuals in persisted depth 5
+  Diagnosis: generation/repair issue likely OR pool depth not persisted. Requires reconstructed Top100 instrumentation.
+
+CandidateDepthCoverage Source 5495 -> Target 5496:
+  E1_CROSS_PAIR_LINEAR: no actuals in persisted depth 5
+  E1_DELTA_ROTATION_LSTS: no actuals in persisted depth 5
+  E1_MIRROR_BASE5_LSTS: no actuals in persisted depth 5
+  E1_TEMPORAL_CONTEXT_MATCH: no actuals in persisted depth 5
+  E1_WLS_DECAY_0.98: no actuals in persisted depth 5
+  E2_META_ENSEMBLE_RANKER: no actuals in persisted depth 5
+  Diagnosis: generation/repair issue likely OR pool depth not persisted. Requires reconstructed Top100 instrumentation.
+
+CandidateDepthCoverage Source 5496 -> Target 5497:
+  E1_CROSS_PAIR_LINEAR: no actuals in persisted depth 5
+  E1_DELTA_ROTATION_LSTS: no actuals in persisted depth 5
+  E1_MIRROR_BASE5_LSTS: no actuals in persisted depth 5
+  E1_TEMPORAL_CONTEXT_MATCH: no actuals in persisted depth 5
+  E1_WLS_DECAY_0.98: no actuals in persisted depth 5
+  E2_META_ENSEMBLE_RANKER: no actuals in persisted depth 5
+  Diagnosis: generation/repair issue likely OR pool depth not persisted. Requires reconstructed Top100 instrumentation.
+
+==============================================================================================================
+6. HIT-MISS STREAK DURATION DATABASE
+==============================================================================================================
+TotalStreakBlocks=224
+
+Top Miss Streak Blocks:
+  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            MissLength=318  Blocks=1
+  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              MissLength=313  Blocks=1
+  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     MissLength=313  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               MissLength=311  Blocks=1
+  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              MissLength=295  Blocks=1
+  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     MissLength=279  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 MissLength=248  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               MissLength=230  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 MissLength=210  Blocks=1
+  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              MissLength=196  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 MissLength=195  Blocks=1
+  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     MissLength=194  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 MissLength=182  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 MissLength=171  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    MissLength=167  Blocks=1
+  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              MissLength=165  Blocks=1
+  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     MissLength=165  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 MissLength=164  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    MissLength=163  Blocks=1
+  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              MissLength=163  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 MissLength=161  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 MissLength=155  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    MissLength=155  Blocks=1
+  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              MissLength=152  Blocks=1
+  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     MissLength=152  Blocks=1
+  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            MissLength=143  Blocks=1
+  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     MissLength=143  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               MissLength=137  Blocks=1
+  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            MissLength=135  Blocks=1
+  Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    MissLength=126  Blocks=1
+
+Top Hit Streak Blocks:
+  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            HitLength=1    Blocks=21
+  Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               HitLength=1    Blocks=18
+  Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    HitLength=1    Blocks=18
+  Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 HitLength=1    Blocks=14
+  Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 HitLength=1    Blocks=13
+  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     HitLength=1    Blocks=11
+  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              HitLength=1    Blocks=9
+  Mode=Historical             Engine=E1_DELTA_ROTATION_LSTS               HitLength=1    Blocks=1
+  Mode=Historical             Engine=E1_WLS_DECAY_0.98                    HitLength=1    Blocks=1
+
+==============================================================================================================
+7. HIT-MISS STREAK RECOVERY FREQUENCY
+==============================================================================================================
+Top Recovery Patterns, sample>=3:
+  Scope=MONTH    Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 PriorMissStreak=4   Coord=M8           Samples=3    NextHits=1    NextHitRate= 33.33% LOW_SAMPLE
+  Scope=MONTH    Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=10  Coord=M1           Samples=3    NextHits=1    NextHitRate= 33.33% LOW_SAMPLE
+  Scope=MONTH    Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     PriorMissStreak=7   Coord=M3           Samples=3    NextHits=1    NextHitRate= 33.33% LOW_SAMPLE
+  Scope=YEAR     Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=9   Coord=Y2019        Samples=3    NextHits=1    NextHitRate= 33.33% LOW_SAMPLE
+  Scope=YEAR     Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              PriorMissStreak=7   Coord=Y2025        Samples=3    NextHits=1    NextHitRate= 33.33% LOW_SAMPLE
+  Scope=YEAR     Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=6   Coord=Y2025        Samples=3    NextHits=1    NextHitRate= 33.33% LOW_SAMPLE
+  Scope=MONTH    Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=3   Coord=M9           Samples=4    NextHits=1    NextHitRate= 25.00% LOW_SAMPLE
+  Scope=YEAR     Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 PriorMissStreak=3   Coord=Y2025        Samples=4    NextHits=1    NextHitRate= 25.00% LOW_SAMPLE
+  Scope=YEAR     Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=10  Coord=Y2023        Samples=4    NextHits=1    NextHitRate= 25.00% LOW_SAMPLE
+  Scope=YEAR     Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=10  Coord=Y2023        Samples=4    NextHits=1    NextHitRate= 25.00% LOW_SAMPLE
+  Scope=YEAR     Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 PriorMissStreak=4   Coord=Y2025        Samples=5    NextHits=1    NextHitRate= 20.00% LOW_SAMPLE
+  Scope=YEAR     Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=3   Coord=Y2023        Samples=5    NextHits=1    NextHitRate= 20.00% LOW_SAMPLE
+  Scope=DAYTYPE  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=5   Coord=Saturday     Samples=7    NextHits=1    NextHitRate= 14.29% LOW_SAMPLE
+  Scope=DAYTYPE  Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=10  Coord=Saturday     Samples=9    NextHits=1    NextHitRate= 11.11% LOW_SAMPLE
+  Scope=DAYTYPE  Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              PriorMissStreak=7   Coord=Special      Samples=9    NextHits=1    NextHitRate= 11.11% LOW_SAMPLE
+  Scope=DAYTYPE  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=10  Coord=Saturday     Samples=9    NextHits=1    NextHitRate= 11.11% LOW_SAMPLE
+  Scope=DAYTYPE  Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 PriorMissStreak=4   Coord=Special      Samples=10   NextHits=1    NextHitRate= 10.00%
+  Scope=DAYTYPE  Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     PriorMissStreak=7   Coord=Special      Samples=10   NextHits=1    NextHitRate= 10.00%
+  Scope=GLOBAL   Mode=Grand_Loop             Engine=E2_META_ENSEMBLE_RANKER              PriorMissStreak=7   Coord=ALL          Samples=10   NextHits=1    NextHitRate= 10.00%
+  Scope=GLOBAL   Mode=Weighted_Grand_Loop    Engine=E2_WEIGHTED_META_ENSEMBLE_RANKER     PriorMissStreak=7   Coord=ALL          Samples=12   NextHits=1    NextHitRate=  8.33%
+  Scope=DAYTYPE  Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 PriorMissStreak=3   Coord=Special      Samples=14   NextHits=1    NextHitRate=  7.14%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_MIRROR_BASE5_LSTS                 PriorMissStreak=3   Coord=ALL          Samples=14   NextHits=1    NextHitRate=  7.14%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_CROSS_PAIR_LINEAR                 PriorMissStreak=4   Coord=ALL          Samples=15   NextHits=1    NextHitRate=  6.67%
+  Scope=DAYTYPE  Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=9   Coord=Special      Samples=16   NextHits=1    NextHitRate=  6.25%
+  Scope=DAYTYPE  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=6   Coord=Special      Samples=16   NextHits=1    NextHitRate=  6.25%
+  Scope=DAYTYPE  Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=3   Coord=Special      Samples=18   NextHits=1    NextHitRate=  5.56%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=10  Coord=ALL          Samples=18   NextHits=1    NextHitRate=  5.56%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=9   Coord=ALL          Samples=19   NextHits=1    NextHitRate=  5.26%
+  Scope=GLOBAL   Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=10  Coord=ALL          Samples=19   NextHits=1    NextHitRate=  5.26%
+  Scope=GLOBAL   Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=6   Coord=ALL          Samples=20   NextHits=1    NextHitRate=  5.00%
+  Scope=GLOBAL   Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=5   Coord=ALL          Samples=21   NextHits=1    NextHitRate=  4.76%
+  Scope=GLOBAL   Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=3   Coord=ALL          Samples=22   NextHits=1    NextHitRate=  4.55%
+  Scope=GLOBAL   Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=1   Coord=ALL          Samples=22   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=2   Coord=ALL          Samples=22   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Temporal_Global_Loop   Engine=E1_TEMPORAL_CONTEXT_MATCH            PriorMissStreak=4   Coord=ALL          Samples=21   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=1   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=2   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=3   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=4   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=5   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=6   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=7   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=8   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=9   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_DELTA_ROTATION_LSTS               PriorMissStreak=10  Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=1   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=2   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=3   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=4   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+  Scope=GLOBAL   Mode=Engine_Grand_Loop      Engine=E1_WLS_DECAY_0.98                    PriorMissStreak=5   Coord=ALL          Samples=19   NextHits=0    NextHitRate=  0.00%
+
+Current Live Miss Streak Context:
+  E1_TEMPORAL_CONTEXT_MATCH Current live streak: 3 misses observed.
+  Use recovery table above to evaluate whether miss-streak momentum has enough samples.
+  Low-sample contexts are not promotion-grade.
+
+==============================================================================================================
+8. DIAGNOSIS MATRIX
+==============================================================================================================
+Generation Issue:
+  If actual prizes are absent from persisted or reconstructed Top100 pools.
+Ranking/Cutoff Issue:
+  If actual prizes appear below Top5 but inside Top25/Top50/Top100.
+Mirror Expansion Issue:
+  If mirror class exact/near matches are frequent while exact hits fail.
+Box Repair Issue:
+  If digit multiset overlap is high but positional exact hits fail.
+
+Initial Evidence:
+  - 0000 vs 5055 is a Base-5 Mirror exact hidden hit.
+  - 4443 vs 4433 is a pair/box/hamming near miss.
+  - Three live exact misses justify residual audit, not blind production switch.
+
+==============================================================================================================
+9. E2_LIVE_RESIDUAL_META_RANKER — DRAFT BLUEPRINT
+==============================================================================================================
+Proposed streams:
+  1. Temporal Base Stream: existing E1_TEMPORAL_CONTEXT_MATCH candidates.
+  2. Mirror Expansion Stream: expand candidates across Base-5 mirror equivalence classes.
+  3. Box Repair Stream: reorder/repair high-overlap digit baskets.
+  4. Residual Delta Stream: apply common digit-wise circular deltas from recent misses.
+  5. Pair Repair Stream: preserve strong first/last-pair signals and repair the opposite pair.
+  6. Streak Momentum Stream: weight engines after historically recoverable miss streak lengths.
+  7. Diversity Guard: final Top5 must not be monopolized by one signal family.
+
+Promotion criteria:
+  - Must beat baseline on honest rolling backtest.
+  - Must preserve temporal firewall.
+  - Must not use target winner before lock.
+  - Must pass ledger integrity audit.
+  - Must not change production Current mode until approved.
+
+==============================================================================================================
+10. FINAL STEP 150A CONCLUSION
+==============================================================================================================
+ProductionMathChanged: NO
+ProductionSwitchRecommendedNow: NO
+ResidualPrototypeRecommended: YES
+CandidateTop100InstrumentationRecommended: YES
+MirrorClassExpansionRecommended: YES
+BoxRepairLayerRecommended: YES
+StreakMomentumMatrixRecommended: YES
+NextStep: STEP 150B — reconstructed candidate-pool instrumentation and residual prototype backtest.
