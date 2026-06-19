@@ -1,4 +1,7 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+const configuredApiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "");
+const API_BASE_URL =
+  configuredApiBaseUrl ??
+  (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "");
 
 export type PredictionCandidate = {
   rank: number;
@@ -32,6 +35,7 @@ export type VerificationResponse = {
 
 
 export async function getLatestDraw(): Promise<LatestDrawResponse> {
+  assertApiBaseUrlConfigured();
   const response = await fetch(`${API_BASE_URL}/api/latest-draw`);
 
   if (!response.ok) {
@@ -60,6 +64,7 @@ export async function verify(payload: {
 }
 
 async function postJson<T>(path: string, payload: unknown): Promise<T> {
+  assertApiBaseUrlConfigured();
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: "POST",
     headers: {
@@ -74,6 +79,12 @@ async function postJson<T>(path: string, payload: unknown): Promise<T> {
   }
 
   return response.json() as Promise<T>;
+}
+
+function assertApiBaseUrlConfigured(): void {
+  if (!API_BASE_URL) {
+    throw new Error("NEXT_PUBLIC_API_BASE_URL is not configured.");
+  }
 }
 
 async function readError(response: Response): Promise<string> {
