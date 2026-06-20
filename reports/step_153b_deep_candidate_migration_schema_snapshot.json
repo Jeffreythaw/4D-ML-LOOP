@@ -1,0 +1,314 @@
+{
+  "columns": [
+    {
+      "column_id": 1,
+      "data_type": "bigint",
+      "identity": true,
+      "max_length": 8,
+      "name": "DeepCandidateId",
+      "nullable": false
+    },
+    {
+      "column_id": 2,
+      "data_type": "nvarchar",
+      "identity": false,
+      "max_length": 200,
+      "name": "EngineSource",
+      "nullable": false
+    },
+    {
+      "column_id": 3,
+      "data_type": "nvarchar",
+      "identity": false,
+      "max_length": 200,
+      "name": "EngineVersion",
+      "nullable": false
+    },
+    {
+      "column_id": 4,
+      "data_type": "nvarchar",
+      "identity": false,
+      "max_length": 200,
+      "name": "Mode",
+      "nullable": false
+    },
+    {
+      "column_id": 5,
+      "data_type": "int",
+      "identity": false,
+      "max_length": 4,
+      "name": "SourceDrawNo",
+      "nullable": false
+    },
+    {
+      "column_id": 6,
+      "data_type": "int",
+      "identity": false,
+      "max_length": 4,
+      "name": "TargetDrawNo",
+      "nullable": false
+    },
+    {
+      "column_id": 7,
+      "data_type": "int",
+      "identity": false,
+      "max_length": 4,
+      "name": "CandidateRank",
+      "nullable": false
+    },
+    {
+      "column_id": 8,
+      "data_type": "char",
+      "identity": false,
+      "max_length": 4,
+      "name": "CandidateNumber",
+      "nullable": false
+    },
+    {
+      "column_id": 9,
+      "data_type": "float",
+      "identity": false,
+      "max_length": 8,
+      "name": "CandidateScore",
+      "nullable": true
+    },
+    {
+      "column_id": 10,
+      "data_type": "nvarchar",
+      "identity": false,
+      "max_length": 200,
+      "name": "CandidateFamily",
+      "nullable": true
+    },
+    {
+      "column_id": 11,
+      "data_type": "nvarchar",
+      "identity": false,
+      "max_length": 400,
+      "name": "GenerationMethod",
+      "nullable": true
+    },
+    {
+      "column_id": 12,
+      "data_type": "nvarchar",
+      "identity": false,
+      "max_length": -1,
+      "name": "FeatureJson",
+      "nullable": true
+    },
+    {
+      "column_id": 13,
+      "data_type": "char",
+      "identity": false,
+      "max_length": 64,
+      "name": "CandidateBatchHash",
+      "nullable": false
+    },
+    {
+      "column_id": 14,
+      "data_type": "char",
+      "identity": false,
+      "max_length": 64,
+      "name": "CandidateRowHash",
+      "nullable": false
+    },
+    {
+      "column_id": 15,
+      "data_type": "int",
+      "identity": false,
+      "max_length": 4,
+      "name": "TemporalCutoffDrawNo",
+      "nullable": false
+    },
+    {
+      "column_id": 16,
+      "data_type": "bit",
+      "identity": false,
+      "max_length": 1,
+      "name": "TargetAvailableAtGeneration",
+      "nullable": false
+    },
+    {
+      "column_id": 17,
+      "data_type": "nvarchar",
+      "identity": false,
+      "max_length": 80,
+      "name": "VerificationStatus",
+      "nullable": false
+    },
+    {
+      "column_id": 18,
+      "data_type": "int",
+      "identity": false,
+      "max_length": 4,
+      "name": "HitCount",
+      "nullable": true
+    },
+    {
+      "column_id": 19,
+      "data_type": "datetime2",
+      "identity": false,
+      "max_length": 8,
+      "name": "CreatedAtUtc",
+      "nullable": false
+    }
+  ],
+  "columns_status": "PASS",
+  "constraints": [
+    {
+      "definition": "(len([CandidateNumber])=(4) AND NOT [CandidateNumber] like '%[^0-9]%')",
+      "name": "CK_DeepCandidateLedger_CandidateNumber",
+      "type": "CHECK_CONSTRAINT"
+    },
+    {
+      "definition": "([CandidateRank]>=(1) AND [CandidateRank]<=(50))",
+      "name": "CK_DeepCandidateLedger_CandidateRank",
+      "type": "CHECK_CONSTRAINT"
+    },
+    {
+      "definition": "([TemporalCutoffDrawNo]=[SourceDrawNo])",
+      "name": "CK_DeepCandidateLedger_TemporalCutoff",
+      "type": "CHECK_CONSTRAINT"
+    },
+    {
+      "definition": "(sysutcdatetime())",
+      "name": "DF_DeepCandidateLedger_CreatedAtUtc",
+      "type": "DEFAULT_CONSTRAINT"
+    },
+    {
+      "definition": "((0))",
+      "name": "DF_DeepCandidateLedger_TargetAvailableAtGeneration",
+      "type": "DEFAULT_CONSTRAINT"
+    },
+    {
+      "definition": "(N'Unverified')",
+      "name": "DF_DeepCandidateLedger_VerificationStatus",
+      "type": "DEFAULT_CONSTRAINT"
+    },
+    {
+      "definition": null,
+      "name": "PK_DeepCandidateLedger",
+      "type": "PRIMARY_KEY_CONSTRAINT"
+    },
+    {
+      "definition": null,
+      "name": "UQ_DeepCandidateLedger_BatchNumber",
+      "type": "UNIQUE_CONSTRAINT"
+    },
+    {
+      "definition": null,
+      "name": "UQ_DeepCandidateLedger_BatchRank",
+      "type": "UNIQUE_CONSTRAINT"
+    }
+  ],
+  "constraints_status": "PASS",
+  "data_write_performed": false,
+  "db_write_performed": true,
+  "destructive_sql_guard_details": {
+    "active_sql_contains_create_table": true,
+    "commented_rollback_ignored": true,
+    "status": "PASS",
+    "violations": []
+  },
+  "destructive_sql_guard_status": "PASS",
+  "error": null,
+  "indexes": [
+    {
+      "columns": [
+        "CandidateBatchHash"
+      ],
+      "name": "IX_DeepCandidateLedger_BatchHash",
+      "primary_key": false,
+      "unique": false,
+      "unique_constraint": false
+    },
+    {
+      "columns": [
+        "CandidateNumber"
+      ],
+      "name": "IX_DeepCandidateLedger_CandidateNumber",
+      "primary_key": false,
+      "unique": false,
+      "unique_constraint": false
+    },
+    {
+      "columns": [
+        "EngineSource",
+        "Mode"
+      ],
+      "name": "IX_DeepCandidateLedger_EngineMode",
+      "primary_key": false,
+      "unique": false,
+      "unique_constraint": false
+    },
+    {
+      "columns": [
+        "SourceDrawNo",
+        "TargetDrawNo"
+      ],
+      "name": "IX_DeepCandidateLedger_SourceTarget",
+      "primary_key": false,
+      "unique": false,
+      "unique_constraint": false
+    },
+    {
+      "columns": [
+        "VerificationStatus"
+      ],
+      "name": "IX_DeepCandidateLedger_VerificationStatus",
+      "primary_key": false,
+      "unique": false,
+      "unique_constraint": false
+    },
+    {
+      "columns": [
+        "DeepCandidateId"
+      ],
+      "name": "PK_DeepCandidateLedger",
+      "primary_key": true,
+      "unique": true,
+      "unique_constraint": false
+    },
+    {
+      "columns": [
+        "EngineSource",
+        "EngineVersion",
+        "Mode",
+        "SourceDrawNo",
+        "TargetDrawNo",
+        "CandidateNumber"
+      ],
+      "name": "UQ_DeepCandidateLedger_BatchNumber",
+      "primary_key": false,
+      "unique": true,
+      "unique_constraint": true
+    },
+    {
+      "columns": [
+        "EngineSource",
+        "EngineVersion",
+        "Mode",
+        "SourceDrawNo",
+        "TargetDrawNo",
+        "CandidateRank"
+      ],
+      "name": "UQ_DeepCandidateLedger_BatchRank",
+      "primary_key": false,
+      "unique": true,
+      "unique_constraint": true
+    }
+  ],
+  "indexes_status": "PASS",
+  "migration_execution_status": "EXECUTED",
+  "production_changed": false,
+  "row_count_after": 0,
+  "row_count_status": "PASS",
+  "table_exists_after": true,
+  "table_exists_before": false,
+  "transaction_status": "COMMITTED",
+  "verification_failures": {
+    "columns": [],
+    "constraints": [],
+    "indexes": []
+  }
+}
