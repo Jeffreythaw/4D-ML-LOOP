@@ -1,0 +1,182 @@
+================================================================================================================================================================================
+STEP 155 — RENEWAL-AWARE ANTI-DROP META LAYER AUDIT — REPORT ONLY
+================================================================================================================================================================================
+ProductionMathChanged: NO
+APIChanged: NO
+FrontendChanged: NO
+SQLSchemaChanged: NO
+DBWritePerformed: NO
+ExistingTablesOnly: YES
+DeepCandidateLedgerUsed: NO
+
+SOURCE DISCOVERY
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DrawRange: [69, 5497]
+DrawRows: 5429
+PredictionLedgerRows: 51664
+ResolvedFinalStream: ['E1_TEMPORAL_CONTEXT_MATCH', 'Temporal_Global_Loop']
+ResolvedUnderlyingStreams: {'Delta': ['E1_DELTA_ROTATION_LSTS', 'Engine_Grand_Loop'], 'WLS': ['E1_WLS_DECAY_0.98', 'Engine_Grand_Loop'], 'Linear': ['E1_CROSS_PAIR_LINEAR', 'Engine_Grand_Loop']}
+LedgerVolumeByEngineMode: {'E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop': 7220, 'E1_CROSS_PAIR_LINEAR::Historical': 270, 'E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop': 7220, 'E1_DELTA_ROTATION_LSTS::Historical': 270, 'E1_MIRROR_BASE5_LSTS::Engine_Grand_Loop': 7220, 'E1_MIRROR_BASE5_LSTS::Historical': 270, 'E1_TEMPORAL_CONTEXT_MATCH::Current': 15, 'E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop': 7220, 'E1_WLS_DECAY_0.98::Engine_Grand_Loop': 7220, 'E1_WLS_DECAY_0.98::Historical': 270, 'E2_META_ENSEMBLE_RANKER::Grand_Loop': 7220, 'E2_META_ENSEMBLE_RANKER::Historical': 25, 'E2_WEIGHTED_META_ENSEMBLE_RANKER::Weighted_Grand_Loop': 7220, 'E3_POLYNOMIAL::Historical': 1, 'E4_MARKOV_TRANSITION_MASS::Historical': 3}
+RankColumn: RankNo
+ScoreColumn: Score
+HitCountColumn: HitCount
+VerificationStatusColumn: VerificationStatus
+
+BASELINE TEMPORAL METRICS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+{'rows': 1444, 'temporal_hit_draws': 21, 'temporal_raw_hits': 21, 'temporal_hit_rate': 0.014542936288088643, 'delta_raw_omitted_hit_opportunities': 18, 'wls_raw_omitted_hit_opportunities': 18, 'linear_raw_omitted_hit_opportunities': 14, 'total_raw_omitted_hit_opportunities': 50, 'unique_omitted_target_number_opportunities': 50, 'random_expected_top5_hit_rate': 0.011434867966417947, 'temporal_enrichment_vs_random': 1.2718062273039363}
+
+POLICY COMPARISON GLOBAL MATRIX
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Policy                                  Rows Hits Raw HitRate DeltaHit DeltaRaw Attempt Used RescueHit Lost Net HarmRate BenefitRate Kept Random Enrich Decision
+NO_RESCUE_BASELINE                      1444   21  21   1.4543%        0        0       0    0         0    0   0  0.0000%     0.0000% 5.00  1.1435% 1.2718 REJECT_NO_EDGE
+ANY_UNDERLYING_SCORE_RESCUE             1444   18  18   1.2465%       -3       -3    1444 1444         4    7  -3  0.4848%     0.2770% 4.00  1.1435% 1.0901 REJECT_HARMFUL
+SPECIAL_DAYTYPE_RESCUE                  1444   17  17   1.1773%       -4       -4     962  962         1    5  -4  0.5198%     0.1040% 4.33  1.1435% 1.0296 REJECT_HARMFUL
+AUGUST_CONTEXT_RESCUE                   1444   20  20   1.3850%       -1       -1     129  129         0    1  -1  0.7752%     0.0000% 4.91  1.1435% 1.2112 REJECT_HARMFUL
+TEMPORAL_RISK_STREAK_RESCUE_21_30       1444   21  21   1.4543%        0        0     160  160         0    0   0  0.0000%     0.0000% 4.89  1.1435% 1.2718 REJECT_NO_EDGE
+TEMPORAL_RISK_STREAK_RESCUE_21_50       1444   18  18   1.2465%       -3       -3     395  395         1    4  -3  1.0127%     0.2532% 4.73  1.1435% 1.0901 REJECT_HARMFUL
+DELTA_WLS_PRIORITY_RESCUE               1444   18  18   1.2465%       -3       -3    1444 1444         4    7  -3  0.4848%     0.2770% 4.00  1.1435% 1.0901 REJECT_HARMFUL
+PAIR_00_CONTEXT_RESCUE                  1444   17  17   1.1773%       -4       -4    1444 1388         2    6  -4  0.4323%     0.1441% 4.04  1.1435% 1.0296 REJECT_HARMFUL
+COMBINED_SAFE_RESCUE_V1                 1444   18  18   1.2465%       -3       -3    1444 1444         4    7  -3  0.4848%     0.2770% 4.00  1.1435% 1.0901 REJECT_HARMFUL
+COMBINED_STRICT_RESCUE_V2               1444   16  16   1.1080%       -5       -5    1444 1427         2    7  -5  0.4905%     0.1402% 4.01  1.1435% 0.9690 REJECT_HARMFUL
+
+RECENT 365 / 90 / 47 MATRIX
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Window     Policy                                  Hits DeltaHit Raw DeltaRaw Used Lost Harm
+RECENT_365 NO_RESCUE_BASELINE                         6        0   6        0    0    0    0
+RECENT_365 ANY_UNDERLYING_SCORE_RESCUE                5       -1   5       -1  365    3    3
+RECENT_365 SPECIAL_DAYTYPE_RESCUE                     4       -2   4       -2  242    2    2
+RECENT_365 AUGUST_CONTEXT_RESCUE                      6        0   6        0   30    0    0
+RECENT_365 TEMPORAL_RISK_STREAK_RESCUE_21_30          6        0   6        0   40    0    0
+RECENT_365 TEMPORAL_RISK_STREAK_RESCUE_21_50          5       -1   5       -1  109    2    2
+RECENT_365 DELTA_WLS_PRIORITY_RESCUE                  5       -1   5       -1  365    3    3
+RECENT_365 PAIR_00_CONTEXT_RESCUE                     5       -1   5       -1  349    2    2
+RECENT_365 COMBINED_SAFE_RESCUE_V1                    5       -1   5       -1  365    3    3
+RECENT_365 COMBINED_STRICT_RESCUE_V2                  4       -2   4       -2  358    3    3
+RECENT_90  NO_RESCUE_BASELINE                         1        0   1        0    0    0    0
+RECENT_90  ANY_UNDERLYING_SCORE_RESCUE                1        0   1        0   90    0    0
+RECENT_90  SPECIAL_DAYTYPE_RESCUE                     1        0   1        0   59    0    0
+RECENT_90  AUGUST_CONTEXT_RESCUE                      1        0   1        0    0    0    0
+RECENT_90  TEMPORAL_RISK_STREAK_RESCUE_21_30          1        0   1        0   10    0    0
+RECENT_90  TEMPORAL_RISK_STREAK_RESCUE_21_50          1        0   1        0   30    0    0
+RECENT_90  DELTA_WLS_PRIORITY_RESCUE                  1        0   1        0   90    0    0
+RECENT_90  PAIR_00_CONTEXT_RESCUE                     1        0   1        0   86    0    0
+RECENT_90  COMBINED_SAFE_RESCUE_V1                    1        0   1        0   90    0    0
+RECENT_90  COMBINED_STRICT_RESCUE_V2                  1        0   1        0   86    0    0
+RECENT_47  NO_RESCUE_BASELINE                         1        0   1        0    0    0    0
+RECENT_47  ANY_UNDERLYING_SCORE_RESCUE                1        0   1        0   47    0    0
+RECENT_47  SPECIAL_DAYTYPE_RESCUE                     1        0   1        0   30    0    0
+RECENT_47  AUGUST_CONTEXT_RESCUE                      1        0   1        0    0    0    0
+RECENT_47  TEMPORAL_RISK_STREAK_RESCUE_21_30          1        0   1        0    0    0    0
+RECENT_47  TEMPORAL_RISK_STREAK_RESCUE_21_50          1        0   1        0    0    0    0
+RECENT_47  DELTA_WLS_PRIORITY_RESCUE                  1        0   1        0   47    0    0
+RECENT_47  PAIR_00_CONTEXT_RESCUE                     1        0   1        0   45    0    0
+RECENT_47  COMBINED_SAFE_RESCUE_V1                    1        0   1        0   47    0    0
+RECENT_47  COMBINED_STRICT_RESCUE_V2                  1        0   1        0   44    0    0
+
+CONTEXT BREAKDOWN MATRIX
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Context                    Policy                                  Rows Hits DeltaHit Raw DeltaRaw Used Lost Harm
+SPECIAL_DAYTYPE            NO_RESCUE_BASELINE                       962   14        0  14        0    0    0    0
+SPECIAL_DAYTYPE            ANY_UNDERLYING_SCORE_RESCUE              962   10       -4  10       -4  962    5    5
+SPECIAL_DAYTYPE            SPECIAL_DAYTYPE_RESCUE                   962   10       -4  10       -4  962    5    5
+SPECIAL_DAYTYPE            AUGUST_CONTEXT_RESCUE                    962   13       -1  13       -1   88    1    1
+SPECIAL_DAYTYPE            TEMPORAL_RISK_STREAK_RESCUE_21_30        962   14        0  14        0  108    0    0
+SPECIAL_DAYTYPE            TEMPORAL_RISK_STREAK_RESCUE_21_50        962   11       -3  11       -3  264    3    3
+SPECIAL_DAYTYPE            DELTA_WLS_PRIORITY_RESCUE                962   10       -4  10       -4  962    5    5
+SPECIAL_DAYTYPE            PAIR_00_CONTEXT_RESCUE                   962   11       -3  11       -3  922    4    4
+SPECIAL_DAYTYPE            COMBINED_SAFE_RESCUE_V1                  962   10       -4  10       -4  962    5    5
+SPECIAL_DAYTYPE            COMBINED_STRICT_RESCUE_V2                962   10       -4  10       -4  962    5    5
+SATURDAY_DAYTYPE           NO_RESCUE_BASELINE                       481    7        0   7        0    0    0    0
+SATURDAY_DAYTYPE           ANY_UNDERLYING_SCORE_RESCUE              481    8        1   8        1  481    2    2
+SATURDAY_DAYTYPE           SPECIAL_DAYTYPE_RESCUE                   481    7        0   7        0    0    0    0
+SATURDAY_DAYTYPE           AUGUST_CONTEXT_RESCUE                    481    7        0   7        0   41    0    0
+SATURDAY_DAYTYPE           TEMPORAL_RISK_STREAK_RESCUE_21_30        481    7        0   7        0   52    0    0
+SATURDAY_DAYTYPE           TEMPORAL_RISK_STREAK_RESCUE_21_50        481    7        0   7        0  131    1    1
+SATURDAY_DAYTYPE           DELTA_WLS_PRIORITY_RESCUE                481    8        1   8        1  481    2    2
+SATURDAY_DAYTYPE           PAIR_00_CONTEXT_RESCUE                   481    6       -1   6       -1  465    2    2
+SATURDAY_DAYTYPE           COMBINED_SAFE_RESCUE_V1                  481    8        1   8        1  481    2    2
+SATURDAY_DAYTYPE           COMBINED_STRICT_RESCUE_V2                481    6       -1   6       -1  464    2    2
+AUGUST                     NO_RESCUE_BASELINE                       120    3        0   3        0    0    0    0
+AUGUST                     ANY_UNDERLYING_SCORE_RESCUE              120    2       -1   2       -1  120    1    1
+AUGUST                     SPECIAL_DAYTYPE_RESCUE                   120    2       -1   2       -1   80    1    1
+AUGUST                     AUGUST_CONTEXT_RESCUE                    120    2       -1   2       -1  120    1    1
+AUGUST                     TEMPORAL_RISK_STREAK_RESCUE_21_30        120    3        0   3        0   11    0    0
+AUGUST                     TEMPORAL_RISK_STREAK_RESCUE_21_50        120    2       -1   2       -1   26    1    1
+AUGUST                     DELTA_WLS_PRIORITY_RESCUE                120    2       -1   2       -1  120    1    1
+AUGUST                     PAIR_00_CONTEXT_RESCUE                   120    2       -1   2       -1  115    1    1
+AUGUST                     COMBINED_SAFE_RESCUE_V1                  120    2       -1   2       -1  120    1    1
+AUGUST                     COMBINED_STRICT_RESCUE_V2                120    2       -1   2       -1  120    1    1
+TEMPORAL_STREAK_21_30      NO_RESCUE_BASELINE                       160    0        0   0        0    0    0    0
+TEMPORAL_STREAK_21_30      ANY_UNDERLYING_SCORE_RESCUE              160    0        0   0        0  160    0    0
+TEMPORAL_STREAK_21_30      SPECIAL_DAYTYPE_RESCUE                   160    0        0   0        0  108    0    0
+TEMPORAL_STREAK_21_30      AUGUST_CONTEXT_RESCUE                    160    0        0   0        0   11    0    0
+TEMPORAL_STREAK_21_30      TEMPORAL_RISK_STREAK_RESCUE_21_30        160    0        0   0        0  160    0    0
+TEMPORAL_STREAK_21_30      TEMPORAL_RISK_STREAK_RESCUE_21_50        160    0        0   0        0  160    0    0
+TEMPORAL_STREAK_21_30      DELTA_WLS_PRIORITY_RESCUE                160    0        0   0        0  160    0    0
+TEMPORAL_STREAK_21_30      PAIR_00_CONTEXT_RESCUE                   160    0        0   0        0  154    0    0
+TEMPORAL_STREAK_21_30      COMBINED_SAFE_RESCUE_V1                  160    0        0   0        0  160    0    0
+TEMPORAL_STREAK_21_30      COMBINED_STRICT_RESCUE_V2                160    0        0   0        0  160    0    0
+TEMPORAL_STREAK_31_50      NO_RESCUE_BASELINE                       235    7        0   7        0    0    0    0
+TEMPORAL_STREAK_31_50      ANY_UNDERLYING_SCORE_RESCUE              235    4       -3   4       -3  235    4    4
+TEMPORAL_STREAK_31_50      SPECIAL_DAYTYPE_RESCUE                   235    4       -3   4       -3  156    3    3
+TEMPORAL_STREAK_31_50      AUGUST_CONTEXT_RESCUE                    235    6       -1   6       -1   16    1    1
+TEMPORAL_STREAK_31_50      TEMPORAL_RISK_STREAK_RESCUE_21_30        235    7        0   7        0    0    0    0
+TEMPORAL_STREAK_31_50      TEMPORAL_RISK_STREAK_RESCUE_21_50        235    4       -3   4       -3  235    4    4
+TEMPORAL_STREAK_31_50      DELTA_WLS_PRIORITY_RESCUE                235    4       -3   4       -3  235    4    4
+TEMPORAL_STREAK_31_50      PAIR_00_CONTEXT_RESCUE                   235    4       -3   4       -3  228    4    4
+TEMPORAL_STREAK_31_50      COMBINED_SAFE_RESCUE_V1                  235    4       -3   4       -3  235    4    4
+TEMPORAL_STREAK_31_50      COMBINED_STRICT_RESCUE_V2                235    4       -3   4       -3  235    4    4
+TEMPORAL_STREAK_51_PLUS    NO_RESCUE_BASELINE                       650    9        0   9        0    0    0    0
+TEMPORAL_STREAK_51_PLUS    ANY_UNDERLYING_SCORE_RESCUE              650    9        0   9        0  650    2    2
+TEMPORAL_STREAK_51_PLUS    SPECIAL_DAYTYPE_RESCUE                   650    7       -2   7       -2  433    2    2
+TEMPORAL_STREAK_51_PLUS    AUGUST_CONTEXT_RESCUE                    650    9        0   9        0   68    0    0
+TEMPORAL_STREAK_51_PLUS    TEMPORAL_RISK_STREAK_RESCUE_21_30        650    9        0   9        0    0    0    0
+TEMPORAL_STREAK_51_PLUS    TEMPORAL_RISK_STREAK_RESCUE_21_50        650    9        0   9        0    0    0    0
+TEMPORAL_STREAK_51_PLUS    DELTA_WLS_PRIORITY_RESCUE                650    9        0   9        0  650    2    2
+TEMPORAL_STREAK_51_PLUS    PAIR_00_CONTEXT_RESCUE                   650    9        0   9        0  625    1    1
+TEMPORAL_STREAK_51_PLUS    COMBINED_SAFE_RESCUE_V1                  650    9        0   9        0  650    2    2
+TEMPORAL_STREAK_51_PLUS    COMBINED_STRICT_RESCUE_V2                650    7       -2   7       -2  645    2    2
+
+FALSE NEGATIVE RECOVERY MATRIX
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NO_RESCUE_BASELINE: eligible=52 outside_pool=0 recovered=0 still_missed=52 baseline_hits_lost=0 net_recovery=0 by_source={} by_daytype={} by_month={} by_streak={} by_structure={}
+ANY_UNDERLYING_SCORE_RESCUE: eligible=52 outside_pool=0 recovered=4 still_missed=48 baseline_hits_lost=7 net_recovery=-3 by_source={'Delta': 3, 'WLS': 1} by_daytype={'Special': 1, 'Saturday': 3} by_month={'4': 1, '3': 2, '2': 1} by_streak={'0-20': 1, '51+': 2, '31-50': 1} by_structure={'OTHER': 3, '00_PAIR_OR_DOUBLE_ZERO': 1}
+SPECIAL_DAYTYPE_RESCUE: eligible=52 outside_pool=0 recovered=1 still_missed=51 baseline_hits_lost=5 net_recovery=-4 by_source={'Delta': 1} by_daytype={'Special': 1} by_month={'4': 1} by_streak={'0-20': 1} by_structure={'OTHER': 1}
+AUGUST_CONTEXT_RESCUE: eligible=52 outside_pool=0 recovered=0 still_missed=52 baseline_hits_lost=1 net_recovery=-1 by_source={} by_daytype={} by_month={} by_streak={} by_structure={}
+TEMPORAL_RISK_STREAK_RESCUE_21_30: eligible=52 outside_pool=0 recovered=0 still_missed=52 baseline_hits_lost=0 net_recovery=0 by_source={} by_daytype={} by_month={} by_streak={} by_structure={}
+TEMPORAL_RISK_STREAK_RESCUE_21_50: eligible=52 outside_pool=0 recovered=1 still_missed=51 baseline_hits_lost=4 net_recovery=-3 by_source={'WLS': 1} by_daytype={'Saturday': 1} by_month={'2': 1} by_streak={'31-50': 1} by_structure={'00_PAIR_OR_DOUBLE_ZERO': 1}
+DELTA_WLS_PRIORITY_RESCUE: eligible=52 outside_pool=0 recovered=4 still_missed=48 baseline_hits_lost=7 net_recovery=-3 by_source={'Delta': 3, 'WLS': 1} by_daytype={'Special': 1, 'Saturday': 3} by_month={'4': 1, '3': 2, '2': 1} by_streak={'0-20': 1, '51+': 2, '31-50': 1} by_structure={'OTHER': 3, '00_PAIR_OR_DOUBLE_ZERO': 1}
+PAIR_00_CONTEXT_RESCUE: eligible=52 outside_pool=0 recovered=2 still_missed=50 baseline_hits_lost=6 net_recovery=-4 by_source={'WLS': 2} by_daytype={'Special': 1, 'Saturday': 1} by_month={'6': 1, '2': 1} by_streak={'51+': 1, '31-50': 1} by_structure={'00_PAIR_OR_DOUBLE_ZERO': 2}
+COMBINED_SAFE_RESCUE_V1: eligible=52 outside_pool=0 recovered=4 still_missed=48 baseline_hits_lost=7 net_recovery=-3 by_source={'Delta': 3, 'WLS': 1} by_daytype={'Special': 1, 'Saturday': 3} by_month={'4': 1, '3': 2, '2': 1} by_streak={'0-20': 1, '51+': 2, '31-50': 1} by_structure={'OTHER': 3, '00_PAIR_OR_DOUBLE_ZERO': 1}
+COMBINED_STRICT_RESCUE_V2: eligible=52 outside_pool=0 recovered=2 still_missed=50 baseline_hits_lost=7 net_recovery=-5 by_source={'Delta': 1, 'WLS': 1} by_daytype={'Special': 1, 'Saturday': 1} by_month={'4': 1, '2': 1} by_streak={'0-20': 1, '31-50': 1} by_structure={'OTHER': 1, '00_PAIR_OR_DOUBLE_ZERO': 1}
+
+HARM MATRIX
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NO_RESCUE_BASELINE: baseline_hits_lost=0 harmful_replacements=0 swap_both_hit=0 harm_by_source={} harm_by_daytype={} harm_by_month={}
+ANY_UNDERLYING_SCORE_RESCUE: baseline_hits_lost=7 harmful_replacements=7 swap_both_hit=0 harm_by_source={'Delta': 7} harm_by_daytype={'Special': 5, 'Saturday': 2} harm_by_month={'2': 1, '7': 1, '8': 1, '10': 2, '11': 1, '3': 1}
+SPECIAL_DAYTYPE_RESCUE: baseline_hits_lost=5 harmful_replacements=5 swap_both_hit=0 harm_by_source={'Delta': 5} harm_by_daytype={'Special': 5} harm_by_month={'2': 1, '7': 1, '8': 1, '3': 1, '10': 1}
+AUGUST_CONTEXT_RESCUE: baseline_hits_lost=1 harmful_replacements=1 swap_both_hit=0 harm_by_source={'Delta': 1} harm_by_daytype={'Special': 1} harm_by_month={'8': 1}
+TEMPORAL_RISK_STREAK_RESCUE_21_30: baseline_hits_lost=0 harmful_replacements=0 swap_both_hit=0 harm_by_source={} harm_by_daytype={} harm_by_month={}
+TEMPORAL_RISK_STREAK_RESCUE_21_50: baseline_hits_lost=4 harmful_replacements=4 swap_both_hit=0 harm_by_source={'Delta': 4} harm_by_daytype={'Special': 3, 'Saturday': 1} harm_by_month={'7': 1, '8': 1, '11': 1, '3': 1}
+DELTA_WLS_PRIORITY_RESCUE: baseline_hits_lost=7 harmful_replacements=7 swap_both_hit=0 harm_by_source={'Delta': 7} harm_by_daytype={'Special': 5, 'Saturday': 2} harm_by_month={'2': 1, '7': 1, '8': 1, '10': 2, '11': 1, '3': 1}
+PAIR_00_CONTEXT_RESCUE: baseline_hits_lost=6 harmful_replacements=6 swap_both_hit=0 harm_by_source={'WLS': 6} harm_by_daytype={'Special': 4, 'Saturday': 2} harm_by_month={'2': 1, '7': 1, '8': 1, '10': 1, '11': 1, '3': 1}
+COMBINED_SAFE_RESCUE_V1: baseline_hits_lost=7 harmful_replacements=7 swap_both_hit=0 harm_by_source={'Delta': 7} harm_by_daytype={'Special': 5, 'Saturday': 2} harm_by_month={'2': 1, '7': 1, '8': 1, '10': 2, '11': 1, '3': 1}
+COMBINED_STRICT_RESCUE_V2: baseline_hits_lost=7 harmful_replacements=7 swap_both_hit=0 harm_by_source={'Delta': 6, 'WLS': 1} harm_by_daytype={'Special': 5, 'Saturday': 2} harm_by_month={'2': 1, '7': 1, '8': 1, '10': 2, '11': 1, '3': 1}
+
+BEST POLICY DISCUSSION
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BestPolicyByNetResult: TEMPORAL_RISK_STREAK_RESCUE_21_30
+BestPolicyMetrics: {'policy': 'TEMPORAL_RISK_STREAK_RESCUE_21_30', 'rows_evaluated': 1444, 'baseline_hit_draws': 21, 'hit_draws': 21, 'delta_hit_draws_vs_temporal': 0, 'baseline_raw_hits': 21, 'raw_hits': 21, 'delta_raw_hits_vs_temporal': 0, 'hit_rate': 0.014542936288088643, 'rescues_attempted': 160, 'rescues_used': 160, 'rescue_candidates_that_hit': 0, 'baseline_hits_lost_due_to_replacement': 0, 'harmful_replacements': 0, 'beneficial_replacements': 0, 'net_hit_gain': 0, 'replacement_harm_rate': 0.0, 'replacement_benefit_rate': 0.0, 'average_temporal_candidates_kept': 4.889196675900277, 'random_expected_top5_hit_rate': 0.011434867966417947, 'enrichment_vs_random': 1.2718062273039363, 'decision': 'REJECT_NO_EDGE'}
+BestPolicyDecision: {'decision': 'REJECT_NO_EDGE', 'reason': 'No measurable anti-drop benefit.'}
+AllPolicyDecisions: {'NO_RESCUE_BASELINE': {'decision': 'REJECT_NO_EDGE', 'reason': 'Reference baseline; no rescue rule is applied.'}, 'ANY_UNDERLYING_SCORE_RESCUE': {'decision': 'REJECT_HARMFUL', 'reason': 'The policy removes at least one baseline hit or reduces a required recent-window hit count.'}, 'SPECIAL_DAYTYPE_RESCUE': {'decision': 'REJECT_HARMFUL', 'reason': 'The policy removes at least one baseline hit or reduces a required recent-window hit count.'}, 'AUGUST_CONTEXT_RESCUE': {'decision': 'REJECT_HARMFUL', 'reason': 'The policy removes at least one baseline hit or reduces a required recent-window hit count.'}, 'TEMPORAL_RISK_STREAK_RESCUE_21_30': {'decision': 'REJECT_NO_EDGE', 'reason': 'No measurable anti-drop benefit.'}, 'TEMPORAL_RISK_STREAK_RESCUE_21_50': {'decision': 'REJECT_HARMFUL', 'reason': 'The policy removes at least one baseline hit or reduces a required recent-window hit count.'}, 'DELTA_WLS_PRIORITY_RESCUE': {'decision': 'REJECT_HARMFUL', 'reason': 'The policy removes at least one baseline hit or reduces a required recent-window hit count.'}, 'PAIR_00_CONTEXT_RESCUE': {'decision': 'REJECT_HARMFUL', 'reason': 'The policy removes at least one baseline hit or reduces a required recent-window hit count.'}, 'COMBINED_SAFE_RESCUE_V1': {'decision': 'REJECT_HARMFUL', 'reason': 'The policy removes at least one baseline hit or reduces a required recent-window hit count.'}, 'COMBINED_STRICT_RESCUE_V2': {'decision': 'REJECT_HARMFUL', 'reason': 'The policy removes at least one baseline hit or reduces a required recent-window hit count.'}}
+CausalityWarning: This is a retrospective source-side what-if audit. Target winners were used only after each simulated Top5 was locked.
+
+FINAL RECOMMENDATION
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ProductionSwitchRecommendedNow: NO
+NextStep: reject direct Top5 replacement; evaluate a non-destructive shadow Top6 or abstention design using the same source-side signals
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_155_renewal_aware_anti_drop_audit.txt
+MATRICES_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_155_renewal_aware_anti_drop_matrices.json
+ROWS_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_155_renewal_aware_anti_drop_rows.jsonl
