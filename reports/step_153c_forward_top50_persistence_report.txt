@@ -1,0 +1,112 @@
+======================================================================================================================================================================
+STEP 153C — FORWARD TOP50 CANDIDATE PERSISTENCE
+======================================================================================================================================================================
+ProductionMathChanged: NO
+APIChanged: NO
+FrontendChanged: NO
+DeploymentChanged: NO
+PredictionLedgerWritePerformed: NO
+DeepCandidateLedgerWritePerformed: YES
+
+SOURCE / TARGET
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SourceDrawNo: 5497
+TargetDrawNo: 5498
+SourceDate: 2026-06-17
+SourceDayType: Wednesday
+TargetAvailableAtGeneration: NO
+
+BATCH SUMMARY
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EngineSource                                      Version                       Mode          Intended Inserted Existing Status                 BatchHash
+E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED       v2.0                          ForwardTop50        50       50        0 INSERTED               030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e
+E1_TEMPORAL_CONTEXT_MATCH                         persisted-ledger-anchor       ForwardTop50         0        0        0 UNAVAILABLE            NO_SAFE_PERSISTED_FORWARD_CANDIDATES
+E1_DELTA                                          safe-reconstructed-preview    ForwardTop50         5        5        0 INSERTED               d0c2d33695a5e1c270e4724790146fabdf6f203c0ac0f73d3b33653c533d182f
+E1_WLS                                            safe-reconstructed-preview    ForwardTop50         5        5        0 INSERTED               fcf5521c94b261a535964b100853092169d150c2e819078fcd44ec77d73522e7
+E1_LINEAR                                         safe-reconstructed-preview    ForwardTop50         5        5        0 INSERTED               d43fdff9f32ff14b76346486b2af124a8a2b5c7b2602a002a6ee89d2ee1d2881
+
+V2 TOP50 PREVIEW
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Rank Number Family                    Score        ShortReason
+   1 7006   BASELINE_E1                 999.000000 locked Step 150F baseline; protected baseline rank 1
+   2 4723   BASELINE_E1                 998.000000 locked Step 150F baseline; protected baseline rank 2
+   3 3193   BASELINE_E1                 997.000000 locked Step 150F baseline; protected baseline rank 3
+   4 1308   V2_REPLACEMENT              996.000000 PRIOR_E1_CANDIDATE; historical appearances=6; hit_rate=0.33333
+   5 2698   BASELINE_E1                 995.000000 locked Step 150F baseline; protected baseline rank 5
+   6 4231   SAFE_LEDGER_CANDIDATE       136.238325 persisted ledger candidate; appearances=7; latest_source=5497; best_rank=1
+   7 9465   SAFE_LEDGER_CANDIDATE       135.833317 persisted ledger candidate; appearances=18; latest_source=5497; best_rank=1
+   8 5550   SAFE_LEDGER_CANDIDATE       135.000000 persisted ledger candidate; appearances=297; latest_source=5497; best_rank=1
+   9 5005   SAFE_LEDGER_CANDIDATE       134.000000 persisted ledger candidate; appearances=414; latest_source=5497; best_rank=1
+  10 0550   SAFE_LEDGER_CANDIDATE       133.000000 persisted ledger candidate; appearances=482; latest_source=5497; best_rank=1
+  11 5055   SAFE_LEDGER_CANDIDATE       131.000000 persisted ledger candidate; appearances=410; latest_source=5497; best_rank=1
+  12 5500   SAFE_LEDGER_CANDIDATE       131.000000 persisted ledger candidate; appearances=437; latest_source=5497; best_rank=1
+  13 2468   SAFE_LEDGER_CANDIDATE       129.793686 persisted ledger candidate; appearances=10; latest_source=5497; best_rank=1
+  14 7913   SAFE_LEDGER_CANDIDATE       126.175278 persisted ledger candidate; appearances=5; latest_source=5497; best_rank=1
+  15 5050   SAFE_LEDGER_CANDIDATE       124.000000 persisted ledger candidate; appearances=416; latest_source=5497; best_rank=1
+  16 9319   SAFE_LEDGER_CANDIDATE       123.184835 persisted ledger candidate; appearances=4; latest_source=5497; best_rank=2
+  17 0000   SAFE_LEDGER_CANDIDATE       123.000000 persisted ledger candidate; appearances=3959; latest_source=5497; best_rank=1
+  18 5315   SAFE_LEDGER_CANDIDATE       122.775014 persisted ledger candidate; appearances=5; latest_source=5497; best_rank=2
+  19 6187   SAFE_LEDGER_CANDIDATE       119.237730 persisted ledger candidate; appearances=6; latest_source=5497; best_rank=1
+  20 7745   SAFE_LEDGER_CANDIDATE       118.673511 persisted ledger candidate; appearances=1; latest_source=5497; best_rank=4
+  21 9447   SAFE_LEDGER_CANDIDATE       117.375278 persisted ledger candidate; appearances=5; latest_source=5497; best_rank=1
+  22 9378   SAFE_LEDGER_CANDIDATE       117.358883 persisted ledger candidate; appearances=3; latest_source=5497; best_rank=3
+  23 0139   SAFE_LEDGER_CANDIDATE       116.895837 persisted ledger candidate; appearances=2; latest_source=5497; best_rank=1
+  24 9949   SAFE_LEDGER_CANDIDATE       116.158883 persisted ledger candidate; appearances=3; latest_source=5497; best_rank=2
+  25 4843   SAFE_LEDGER_CANDIDATE       113.285488 persisted ledger candidate; appearances=1; latest_source=5497; best_rank=3
+  26 4950   PAIR_RECURRENCE             101.933567 persisted ledger candidate; appearances=20; latest_source=5496; best_rank=1
+  27 4992   PAIR_RECURRENCE             101.143628 persisted ledger candidate; appearances=30; latest_source=5402; best_rank=1
+  28 6301   PAIR_RECURRENCE             101.017500 persisted ledger candidate; appearances=19; latest_source=5366; best_rank=1
+  29 2431   PAIR_RECURRENCE             100.918423 persisted ledger candidate; appearances=18; latest_source=5451; best_rank=1
+  30 8055   PAIR_RECURRENCE             100.775248 persisted ledger candidate; appearances=35; latest_source=5336; best_rank=1
+  31 4501   PAIR_RECURRENCE             100.535354 persisted ledger candidate; appearances=16; latest_source=5386; best_rank=1
+  32 9405   PAIR_RECURRENCE             100.184238 persisted ledger candidate; appearances=21; latest_source=5462; best_rank=1
+  33 2008   PAIR_RECURRENCE             100.155158 persisted ledger candidate; appearances=14; latest_source=5369; best_rank=1
+  34 1315   PAIR_RECURRENCE             100.147542 persisted ledger candidate; appearances=14; latest_source=5327; best_rank=1
+  35 3142   PAIR_RECURRENCE             100.137573 persisted ledger candidate; appearances=14; latest_source=5200; best_rank=1
+  36 4042   PAIR_RECURRENCE             100.034819 persisted ledger candidate; appearances=13; latest_source=5464; best_rank=1
+  37 7182   PAIR_RECURRENCE              99.945762 persisted ledger candidate; appearances=20; latest_source=5170; best_rank=1
+  38 4213   PAIR_RECURRENCE              99.749643 persisted ledger candidate; appearances=12; latest_source=5425; best_rank=1
+  39 1360   PAIR_RECURRENCE              99.739293 persisted ledger candidate; appearances=12; latest_source=5408; best_rank=1
+  40 3340   PAIR_RECURRENCE              99.728746 persisted ledger candidate; appearances=12; latest_source=5380; best_rank=1
+  41 6310   PAIR_RECURRENCE              99.711942 persisted ledger candidate; appearances=12; latest_source=5264; best_rank=1
+  42 3858   PAIR_RECURRENCE              99.587347 persisted ledger candidate; appearances=13; latest_source=5441; best_rank=1
+  43 1009   PAIR_RECURRENCE              99.527019 persisted ledger candidate; appearances=10; latest_source=5486; best_rank=1
+  44 8200   PAIR_RECURRENCE              99.515326 persisted ledger candidate; appearances=11; latest_source=5432; best_rank=1
+  45 3304   PAIR_RECURRENCE              99.493181 persisted ledger candidate; appearances=11; latest_source=5394; best_rank=2
+  46 4510   PAIR_RECURRENCE              99.481931 persisted ledger candidate; appearances=11; latest_source=5351; best_rank=2
+  47 2251   PAIR_RECURRENCE              99.478389 persisted ledger candidate; appearances=11; latest_source=5329; best_rank=1
+  48 1027   PAIR_RECURRENCE              99.474044 persisted ledger candidate; appearances=11; latest_source=5291; best_rank=1
+  49 4060   PAIR_RECURRENCE              99.471113 persisted ledger candidate; appearances=11; latest_source=5254; best_rank=2
+  50 8358   PAIR_RECURRENCE              99.423880 persisted ledger candidate; appearances=12; latest_source=5467; best_rank=1
+
+VALIDATION
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Top5LockMatch: True
+V2RowCount50: True
+V2UniqueCandidates: True
+V2NumericFourDigit: True
+Top20NonSyntheticCount: 20
+V2SyntheticCount: 0
+TemporalCutoffValidation: True
+BatchHashValidation: True
+RowHashValidation: True
+IdempotencyStatus: {'E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED': 'INSERTED', 'E1_DELTA': 'INSERTED', 'E1_WLS': 'INSERTED', 'E1_LINEAR': 'INSERTED'}
+PredictionLedgerCountBefore: 51664
+PredictionLedgerCountAfter: 51664
+PredictionLedgerUnchanged: True
+
+LIMITATIONS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+E1_TEMPORAL_CONTEXT_MATCH has no persisted 5497→5498 ledger batch, so no Temporal rows were fabricated.
+E1_DELTA, E1_WLS, and E1_LINEAR persist only their locked Top5 because no deeper engine ranks exist.
+Only V2 extends to Top50; the extension is source-safe and contains no target-winner input.
+
+FINAL
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ForwardTop50PersistenceReady: YES
+ProductionSwitchRecommendedNow: NO
+NextStep: Step 153D verify persisted Top50 after target result appears
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_153c_forward_top50_persistence_report.txt
+BATCH_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_153c_forward_top50_persistence_batch.json
+ROWS_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_153c_forward_top50_persistence_rows.jsonl

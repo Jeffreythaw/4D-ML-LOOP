@@ -1,0 +1,3622 @@
+{
+  "batches": [
+    {
+      "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+      "canonical_batch_payload": {
+        "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+        "engine_version": "v2.0",
+        "mode": "ForwardTop50",
+        "rows": [
+          {
+            "candidate_family": "BASELINE_E1",
+            "candidate_number": "7006",
+            "candidate_rank": 1,
+            "candidate_score": 999.0,
+            "feature_json": {
+              "reason": "locked Step 150F baseline; protected baseline rank 1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+              "source_rank": 1,
+              "supports": [
+                "RISK_SUM_BAND_SUPPORT",
+                "PAIR_RECURRENCE_SUPPORT",
+                "MIRROR_BOX_SUPPORT",
+                "RECENT_STRUCTURE_SUPPORT"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "LOCKED_V2_TOP5"
+          },
+          {
+            "candidate_family": "BASELINE_E1",
+            "candidate_number": "4723",
+            "candidate_rank": 2,
+            "candidate_score": 998.0,
+            "feature_json": {
+              "reason": "locked Step 150F baseline; protected baseline rank 2",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+              "source_rank": 2,
+              "supports": [
+                "RISK_SUM_BAND_SUPPORT",
+                "MIRROR_BOX_SUPPORT",
+                "RECENT_STRUCTURE_SUPPORT"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "LOCKED_V2_TOP5"
+          },
+          {
+            "candidate_family": "BASELINE_E1",
+            "candidate_number": "3193",
+            "candidate_rank": 3,
+            "candidate_score": 997.0,
+            "feature_json": {
+              "reason": "locked Step 150F baseline; protected baseline rank 3",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+              "source_rank": 3,
+              "supports": [
+                "RISK_SUM_BAND_SUPPORT",
+                "PAIR_RECURRENCE_SUPPORT",
+                "MIRROR_BOX_SUPPORT",
+                "RECENT_STRUCTURE_SUPPORT"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "LOCKED_V2_TOP5"
+          },
+          {
+            "candidate_family": "V2_REPLACEMENT",
+            "candidate_number": "1308",
+            "candidate_rank": 4,
+            "candidate_score": 996.0,
+            "feature_json": {
+              "reason": "PRIOR_E1_CANDIDATE; historical appearances=6; hit_rate=0.33333",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+              "source_rank": 4,
+              "supports": [
+                "RISK_SUM_BAND_SUPPORT",
+                "PAIR_RECURRENCE_SUPPORT",
+                "MIRROR_BOX_SUPPORT",
+                "RECENT_STRUCTURE_SUPPORT"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "LOCKED_V2_TOP5"
+          },
+          {
+            "candidate_family": "BASELINE_E1",
+            "candidate_number": "2698",
+            "candidate_rank": 5,
+            "candidate_score": 995.0,
+            "feature_json": {
+              "reason": "locked Step 150F baseline; protected baseline rank 5",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+              "source_rank": 5,
+              "supports": [
+                "PAIR_RECURRENCE_SUPPORT",
+                "MIRROR_BOX_SUPPORT",
+                "RECENT_STRUCTURE_SUPPORT"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "LOCKED_V2_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "4231",
+            "candidate_rank": 6,
+            "candidate_score": 136.23832462504,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=7; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9465",
+            "candidate_rank": 7,
+            "candidate_score": 135.833316937499,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=18; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 2,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "5550",
+            "candidate_rank": 8,
+            "candidate_score": 135.0,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=297; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "5005",
+            "candidate_rank": 9,
+            "candidate_score": 134.0,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=414; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 2,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "0550",
+            "candidate_rank": 10,
+            "candidate_score": 133.0,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=482; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 3,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "5055",
+            "candidate_rank": 11,
+            "candidate_score": 131.0,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=410; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 5,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "5500",
+            "candidate_rank": 12,
+            "candidate_score": 131.0,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=437; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 5,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "2468",
+            "candidate_rank": 13,
+            "candidate_score": 129.793685818395,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=10; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 4,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "7913",
+            "candidate_rank": 14,
+            "candidate_score": 126.175278407684,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=5; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 5,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "5050",
+            "candidate_rank": 15,
+            "candidate_score": 124.0,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=416; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 4,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9319",
+            "candidate_rank": 16,
+            "candidate_score": 123.184835476433,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=4; latest_source=5497; best_rank=2",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR",
+              "source_rank": 3,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "0000",
+            "candidate_rank": 17,
+            "candidate_score": 123.0,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=3959; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_5",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "5315",
+            "candidate_rank": 18,
+            "candidate_score": 122.775013507022,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=5; latest_source=5497; best_rank=2",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_WLS_DECAY_0.98",
+              "source_rank": 4,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "6187",
+            "candidate_rank": 19,
+            "candidate_score": 119.237730447166,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=6; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 2,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "7745",
+            "candidate_rank": 20,
+            "candidate_score": 118.673511309122,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=1; latest_source=5497; best_rank=4",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS",
+              "source_rank": 4,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9447",
+            "candidate_rank": 21,
+            "candidate_score": 117.375278407684,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=5; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER",
+              "source_rank": 5,
+              "supports": [
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9378",
+            "candidate_rank": 22,
+            "candidate_score": 117.35888308336,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=3; latest_source=5497; best_rank=3",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_WLS_DECAY_0.98,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 3,
+              "supports": [
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "0139",
+            "candidate_rank": 23,
+            "candidate_score": 116.895836866004,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=2; latest_source=5497; best_rank=1",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9949",
+            "candidate_rank": 24,
+            "candidate_score": 116.15888308336,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=3; latest_source=5497; best_rank=2",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_WLS_DECAY_0.98,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 2,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "4843",
+            "candidate_rank": 25,
+            "candidate_score": 113.285488053308,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=1; latest_source=5497; best_rank=3",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS",
+              "source_rank": 3,
+              "supports": [
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "4950",
+            "candidate_rank": 26,
+            "candidate_score": 101.93356731317,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=20; latest_source=5496; best_rank=1",
+              "source_candidate_draw_no": 5496,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_MIRROR_BASE5_LSTS,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "4992",
+            "candidate_rank": 27,
+            "candidate_score": 101.143628280122,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=30; latest_source=5402; best_rank=1",
+              "source_candidate_draw_no": 5402,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "6301",
+            "candidate_rank": 28,
+            "candidate_score": 101.017499850965,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=19; latest_source=5366; best_rank=1",
+              "source_candidate_draw_no": 5366,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "2431",
+            "candidate_rank": 29,
+            "candidate_score": 100.918423320478,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=18; latest_source=5451; best_rank=1",
+              "source_candidate_draw_no": 5451,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "8055",
+            "candidate_rank": 30,
+            "candidate_score": 100.775248173393,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=35; latest_source=5336; best_rank=1",
+              "source_candidate_draw_no": 5336,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "4501",
+            "candidate_rank": 31,
+            "candidate_score": 100.535354317883,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=16; latest_source=5386; best_rank=1",
+              "source_candidate_draw_no": 5386,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "9405",
+            "candidate_rank": 32,
+            "candidate_score": 100.184238471186,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=21; latest_source=5462; best_rank=1",
+              "source_candidate_draw_no": 5462,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_MIRROR_BASE5_LSTS,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "2008",
+            "candidate_rank": 33,
+            "candidate_score": 100.155158355245,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=14; latest_source=5369; best_rank=1",
+              "source_candidate_draw_no": 5369,
+              "source_engine": "E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "1315",
+            "candidate_rank": 34,
+            "candidate_score": 100.147542416172,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=14; latest_source=5327; best_rank=1",
+              "source_candidate_draw_no": 5327,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "3142",
+            "candidate_rank": 35,
+            "candidate_score": 100.137573422099,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=14; latest_source=5200; best_rank=1",
+              "source_candidate_draw_no": 5200,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "4042",
+            "candidate_rank": 36,
+            "candidate_score": 100.034819047669,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=13; latest_source=5464; best_rank=1",
+              "source_candidate_draw_no": 5464,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "7182",
+            "candidate_rank": 37,
+            "candidate_score": 99.945762435121,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=20; latest_source=5170; best_rank=1",
+              "source_candidate_draw_no": 5170,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "4213",
+            "candidate_rank": 38,
+            "candidate_score": 99.749642592933,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=12; latest_source=5425; best_rank=1",
+              "source_candidate_draw_no": 5425,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "1360",
+            "candidate_rank": 39,
+            "candidate_score": 99.739292516829,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=12; latest_source=5408; best_rank=1",
+              "source_candidate_draw_no": 5408,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "3340",
+            "candidate_rank": 40,
+            "candidate_score": 99.728746377469,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=12; latest_source=5380; best_rank=1",
+              "source_candidate_draw_no": 5380,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "6310",
+            "candidate_rank": 41,
+            "candidate_score": 99.711942089479,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=12; latest_source=5264; best_rank=1",
+              "source_candidate_draw_no": 5264,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "3858",
+            "candidate_rank": 42,
+            "candidate_score": 99.587347427442,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=13; latest_source=5441; best_rank=1",
+              "source_candidate_draw_no": 5441,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "1009",
+            "candidate_rank": 43,
+            "candidate_score": 99.527019151728,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=10; latest_source=5486; best_rank=1",
+              "source_candidate_draw_no": 5486,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "8200",
+            "candidate_rank": 44,
+            "candidate_score": 99.51532600997,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=11; latest_source=5432; best_rank=1",
+              "source_candidate_draw_no": 5432,
+              "source_engine": "E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "3304",
+            "candidate_rank": 45,
+            "candidate_score": 99.493181487826,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=11; latest_source=5394; best_rank=2",
+              "source_candidate_draw_no": 5394,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH",
+              "source_rank": 2,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "4510",
+            "candidate_rank": 46,
+            "candidate_score": 99.481930833718,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=11; latest_source=5351; best_rank=2",
+              "source_candidate_draw_no": 5351,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 2,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "2251",
+            "candidate_rank": 47,
+            "candidate_score": 99.478388588417,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=11; latest_source=5329; best_rank=1",
+              "source_candidate_draw_no": 5329,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "1027",
+            "candidate_rank": 48,
+            "candidate_score": 99.474043620862,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=11; latest_source=5291; best_rank=1",
+              "source_candidate_draw_no": 5291,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "4060",
+            "candidate_rank": 49,
+            "candidate_score": 99.471113391987,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=11; latest_source=5254; best_rank=2",
+              "source_candidate_draw_no": 5254,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 2,
+              "supports": [
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          },
+          {
+            "candidate_family": "PAIR_RECURRENCE",
+            "candidate_number": "8358",
+            "candidate_rank": 50,
+            "candidate_score": 99.423880330449,
+            "feature_json": {
+              "reason": "persisted ledger candidate; appearances=12; latest_source=5467; best_rank=1",
+              "source_candidate_draw_no": 5467,
+              "source_engine": "E1_CROSS_PAIR_LINEAR,E1_MIRROR_BASE5_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+              "source_rank": 1,
+              "supports": [
+                "MIRROR_BOX_HISTORY",
+                "PAIR_RECURRENCE_1",
+                "PAIR_RECURRENCE_3",
+                "PAIR_RECURRENCE_5",
+                "RECENT_STRUCTURE",
+                "RISK_SUM_BAND"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED"
+          }
+        ],
+        "source_draw_no": 5497,
+        "target_draw_no": 5498,
+        "temporal_cutoff_draw_no": 5497
+      },
+      "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+      "engine_version": "v2.0",
+      "mode": "ForwardTop50",
+      "rows": [
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "BASELINE_E1",
+          "candidate_number": "7006",
+          "candidate_rank": 1,
+          "candidate_row_hash": "5f0e1e2fde01c0593e3bacb5bd2703b96eaf125bf463fbef5d338048906f660b",
+          "candidate_score": 999.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "locked Step 150F baseline; protected baseline rank 1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+            "source_rank": 1,
+            "supports": [
+              "RISK_SUM_BAND_SUPPORT",
+              "PAIR_RECURRENCE_SUPPORT",
+              "MIRROR_BOX_SUPPORT",
+              "RECENT_STRUCTURE_SUPPORT"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "LOCKED_V2_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "BASELINE_E1",
+          "candidate_number": "4723",
+          "candidate_rank": 2,
+          "candidate_row_hash": "a9f421b90b4a5eff0560df639a404a3def25cfde30f0cd2569a2b64999d9b3a2",
+          "candidate_score": 998.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "locked Step 150F baseline; protected baseline rank 2",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+            "source_rank": 2,
+            "supports": [
+              "RISK_SUM_BAND_SUPPORT",
+              "MIRROR_BOX_SUPPORT",
+              "RECENT_STRUCTURE_SUPPORT"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "LOCKED_V2_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "BASELINE_E1",
+          "candidate_number": "3193",
+          "candidate_rank": 3,
+          "candidate_row_hash": "e7ff31cb970fcadfc8187f439d862d33a371b6f957319f10f67fa1677f8636ee",
+          "candidate_score": 997.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "locked Step 150F baseline; protected baseline rank 3",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+            "source_rank": 3,
+            "supports": [
+              "RISK_SUM_BAND_SUPPORT",
+              "PAIR_RECURRENCE_SUPPORT",
+              "MIRROR_BOX_SUPPORT",
+              "RECENT_STRUCTURE_SUPPORT"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "LOCKED_V2_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "V2_REPLACEMENT",
+          "candidate_number": "1308",
+          "candidate_rank": 4,
+          "candidate_row_hash": "bd2730296c352d4694b51f3a8183dba1e385d5517543bcd587476c9971d83d38",
+          "candidate_score": 996.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "PRIOR_E1_CANDIDATE; historical appearances=6; hit_rate=0.33333",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+            "source_rank": 4,
+            "supports": [
+              "RISK_SUM_BAND_SUPPORT",
+              "PAIR_RECURRENCE_SUPPORT",
+              "MIRROR_BOX_SUPPORT",
+              "RECENT_STRUCTURE_SUPPORT"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "LOCKED_V2_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "BASELINE_E1",
+          "candidate_number": "2698",
+          "candidate_rank": 5,
+          "candidate_row_hash": "ec65d287290ca953187ec421b5017b00870e1ad31764bb78bea6c352d88ee03b",
+          "candidate_score": 995.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "locked Step 150F baseline; protected baseline rank 5",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+            "source_rank": 5,
+            "supports": [
+              "PAIR_RECURRENCE_SUPPORT",
+              "MIRROR_BOX_SUPPORT",
+              "RECENT_STRUCTURE_SUPPORT"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "LOCKED_V2_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "4231",
+          "candidate_rank": 6,
+          "candidate_row_hash": "0e0c2bcddfd295a19251e9850428832fde20f974a6af4d33b2d608a64f66919b",
+          "candidate_score": 136.23832462504,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=7; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9465",
+          "candidate_rank": 7,
+          "candidate_row_hash": "f0530c21243779f55212aed2661c57722d97d0656ef6c99524ec503d06b8755d",
+          "candidate_score": 135.833316937499,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=18; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 2,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "5550",
+          "candidate_rank": 8,
+          "candidate_row_hash": "e5d9de08687432eece42fef4bcfd132e36815674121eb970195baeb209497768",
+          "candidate_score": 135.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=297; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "5005",
+          "candidate_rank": 9,
+          "candidate_row_hash": "fe186232abe2b533b0e0f5abf03cc8435aab24560bfc2cd47bea60f3b9a3c284",
+          "candidate_score": 134.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=414; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 2,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "0550",
+          "candidate_rank": 10,
+          "candidate_row_hash": "15a92a004345a29545f3074f6de9824d6ef02f9fdeabc05a6dc8f6d6a62a2e58",
+          "candidate_score": 133.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=482; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 3,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "5055",
+          "candidate_rank": 11,
+          "candidate_row_hash": "2a3aa0a37b61879b4333b7229bb40f75e09d659d2c209febb95c7b3ae3d28b38",
+          "candidate_score": 131.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=410; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 5,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "5500",
+          "candidate_rank": 12,
+          "candidate_row_hash": "16c5f77b80c9a2d1956f44d722ee0fab97f9b02ffa3de0bfde592d384269522a",
+          "candidate_score": 131.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=437; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 5,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "2468",
+          "candidate_rank": 13,
+          "candidate_row_hash": "909d27a7143924601f4d335a0a4e62698445fb8aed5aa1c0de57c98639300645",
+          "candidate_score": 129.793685818395,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=10; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 4,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "7913",
+          "candidate_rank": 14,
+          "candidate_row_hash": "03b7fbad718c814db60bd506cba80e1add709b34fb5d976c6858e39ac4666bf5",
+          "candidate_score": 126.175278407684,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=5; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 5,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "5050",
+          "candidate_rank": 15,
+          "candidate_row_hash": "934781cd82d9a776310998658b51fdf3e9e2847bcb3b6015b43a04cca5b2b289",
+          "candidate_score": 124.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=416; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 4,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9319",
+          "candidate_rank": 16,
+          "candidate_row_hash": "95a04b18671e8dfc52be288268eb655b69c5b5851182b82d33e689a73d03b2df",
+          "candidate_score": 123.184835476433,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=4; latest_source=5497; best_rank=2",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR",
+            "source_rank": 3,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "0000",
+          "candidate_rank": 17,
+          "candidate_row_hash": "b1c9779b57a8c87322dd8f9e1188d4ae0547754755e94170f22891e6d65cbb7d",
+          "candidate_score": 123.0,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=3959; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_5",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "5315",
+          "candidate_rank": 18,
+          "candidate_row_hash": "9abfe2bbaeb37961d6c12b0930734563e452eba61a2c28f43281a65b73e30f20",
+          "candidate_score": 122.775013507022,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=5; latest_source=5497; best_rank=2",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_WLS_DECAY_0.98",
+            "source_rank": 4,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "6187",
+          "candidate_rank": 19,
+          "candidate_row_hash": "23e053cc336c5ea07dbe0fb9f9d3b23ee95da89fdae9eb7aeb4812ab252b9204",
+          "candidate_score": 119.237730447166,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=6; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 2,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "7745",
+          "candidate_rank": 20,
+          "candidate_row_hash": "1bb3142fd9fd9e1facc9bf027d670ea8958ca04a31d571e9f32d6ff330f92f84",
+          "candidate_score": 118.673511309122,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=1; latest_source=5497; best_rank=4",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS",
+            "source_rank": 4,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9447",
+          "candidate_rank": 21,
+          "candidate_row_hash": "9d2222cebbe15941096e1372733003c951a7dbd24b2b03168b705a26e5b6ade1",
+          "candidate_score": 117.375278407684,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=5; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER",
+            "source_rank": 5,
+            "supports": [
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9378",
+          "candidate_rank": 22,
+          "candidate_row_hash": "2faa149b8202c515fd42b22adbdbfea52bcfc5d7dd89ead6bbe91012700f47e8",
+          "candidate_score": 117.35888308336,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=3; latest_source=5497; best_rank=3",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_WLS_DECAY_0.98,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 3,
+            "supports": [
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "0139",
+          "candidate_rank": 23,
+          "candidate_row_hash": "fba70b15d899fec229b6ea4c36918134759e8dc2e60c825676ac7b328a331454",
+          "candidate_score": 116.895836866004,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=2; latest_source=5497; best_rank=1",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9949",
+          "candidate_rank": 24,
+          "candidate_row_hash": "acdc085bc9ad85b2575be7b257088636dd99e7a95a2b27e461483563b278cf54",
+          "candidate_score": 116.15888308336,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=3; latest_source=5497; best_rank=2",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_WLS_DECAY_0.98,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 2,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "4843",
+          "candidate_rank": 25,
+          "candidate_row_hash": "6a51795746a3dde0f11006a3eef3f276ffa06590fad3c1b5ff97190fb57b0f9b",
+          "candidate_score": 113.285488053308,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=1; latest_source=5497; best_rank=3",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS",
+            "source_rank": 3,
+            "supports": [
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "CURRENT_SOURCE_PERSISTED_ENGINE_CANDIDATE",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "4950",
+          "candidate_rank": 26,
+          "candidate_row_hash": "bf187f0ef8e03e1c80dfb73895526f766fd654b151dec98f8c347771813c8b84",
+          "candidate_score": 101.93356731317,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=20; latest_source=5496; best_rank=1",
+            "source_candidate_draw_no": 5496,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_MIRROR_BASE5_LSTS,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "4992",
+          "candidate_rank": 27,
+          "candidate_row_hash": "eaef1350ff728c1eb9df17cb4c9fff7ae6886cf9be21daa7d1209a3a0de4d5cf",
+          "candidate_score": 101.143628280122,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=30; latest_source=5402; best_rank=1",
+            "source_candidate_draw_no": 5402,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "6301",
+          "candidate_rank": 28,
+          "candidate_row_hash": "fa5c3ba1ce8dac8f8e97d03cfc68a602d7ae1a99ce924ff68ce10d14b6f0d581",
+          "candidate_score": 101.017499850965,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=19; latest_source=5366; best_rank=1",
+            "source_candidate_draw_no": 5366,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "2431",
+          "candidate_rank": 29,
+          "candidate_row_hash": "10ada2b20923ebac3166f66953ff03c7078e52b3a6c70b0a4ed8274090a1ba99",
+          "candidate_score": 100.918423320478,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=18; latest_source=5451; best_rank=1",
+            "source_candidate_draw_no": 5451,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "8055",
+          "candidate_rank": 30,
+          "candidate_row_hash": "d373f2bc94d950c8f0bd8f51e18642a5f7c8b3adac0ef813cd7fca473cd4a825",
+          "candidate_score": 100.775248173393,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=35; latest_source=5336; best_rank=1",
+            "source_candidate_draw_no": 5336,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "4501",
+          "candidate_rank": 31,
+          "candidate_row_hash": "8bfab3b071da1ab1b9a2a9b82874c4d9126f7a10453c4ae75fb2f9912bcc7946",
+          "candidate_score": 100.535354317883,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=16; latest_source=5386; best_rank=1",
+            "source_candidate_draw_no": 5386,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "9405",
+          "candidate_rank": 32,
+          "candidate_row_hash": "5b356d1f282ef3b59a91eac3c7d514494a6eae532395fefe506e38fcb5b14365",
+          "candidate_score": 100.184238471186,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=21; latest_source=5462; best_rank=1",
+            "source_candidate_draw_no": 5462,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_MIRROR_BASE5_LSTS,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "2008",
+          "candidate_rank": 33,
+          "candidate_row_hash": "43765bfb2e08db2f90503af8b7e9cb17455f391b70dc084020a571fedb29059b",
+          "candidate_score": 100.155158355245,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=14; latest_source=5369; best_rank=1",
+            "source_candidate_draw_no": 5369,
+            "source_engine": "E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "1315",
+          "candidate_rank": 34,
+          "candidate_row_hash": "741edb69cc97ac2874089947fe23962ad3c47c9500b7ee7127f1578beccc8cbf",
+          "candidate_score": 100.147542416172,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=14; latest_source=5327; best_rank=1",
+            "source_candidate_draw_no": 5327,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "3142",
+          "candidate_rank": 35,
+          "candidate_row_hash": "a23d6975aff2087230131cb4645235679ee9296fab040784f345dba9316cd320",
+          "candidate_score": 100.137573422099,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=14; latest_source=5200; best_rank=1",
+            "source_candidate_draw_no": 5200,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "4042",
+          "candidate_rank": 36,
+          "candidate_row_hash": "11f65104697b5af50f82cd1dca0df2ba7cf5c3a0c26afb41ada67d489d622a98",
+          "candidate_score": 100.034819047669,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=13; latest_source=5464; best_rank=1",
+            "source_candidate_draw_no": 5464,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "7182",
+          "candidate_rank": 37,
+          "candidate_row_hash": "8b4a1cda8013d8dbae4e774fbefa436cf41106a01d631dede8458e33a8f79039",
+          "candidate_score": 99.945762435121,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=20; latest_source=5170; best_rank=1",
+            "source_candidate_draw_no": 5170,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "4213",
+          "candidate_rank": 38,
+          "candidate_row_hash": "2b5e4de94a1cc58101c8963aebd84891f7c273415f3d9ea4fae303bbd81d2f9c",
+          "candidate_score": 99.749642592933,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=12; latest_source=5425; best_rank=1",
+            "source_candidate_draw_no": 5425,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "1360",
+          "candidate_rank": 39,
+          "candidate_row_hash": "8e3b5a23f228fe62eeffccc1790416e11cf58ba9ec46c802c48614fe84d9f981",
+          "candidate_score": 99.739292516829,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=12; latest_source=5408; best_rank=1",
+            "source_candidate_draw_no": 5408,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "3340",
+          "candidate_rank": 40,
+          "candidate_row_hash": "261e560b85c1bccda2a6ad85a953079ca140a9f954cfd6f92420147ccbce8382",
+          "candidate_score": 99.728746377469,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=12; latest_source=5380; best_rank=1",
+            "source_candidate_draw_no": 5380,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "6310",
+          "candidate_rank": 41,
+          "candidate_row_hash": "7c86126c63aeceb21af4ab64fb2cfc03e5f636fca6f63a52164c960437ea98c3",
+          "candidate_score": 99.711942089479,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=12; latest_source=5264; best_rank=1",
+            "source_candidate_draw_no": 5264,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "3858",
+          "candidate_rank": 42,
+          "candidate_row_hash": "071b4a8f6fe467fea279575912a2af3f3a831588d29c406e95ae3035ded1e06e",
+          "candidate_score": 99.587347427442,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=13; latest_source=5441; best_rank=1",
+            "source_candidate_draw_no": 5441,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_MIRROR_BASE5_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "1009",
+          "candidate_rank": 43,
+          "candidate_row_hash": "1d8f098b6f9541bb39b8d28beb003f65a6a06887df8fa9669e96fc70441e3613",
+          "candidate_score": 99.527019151728,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=10; latest_source=5486; best_rank=1",
+            "source_candidate_draw_no": 5486,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "8200",
+          "candidate_rank": 44,
+          "candidate_row_hash": "0ed15956136a0ef87845a95a3db18d70012c9de387b7a905b591754a46ff065c",
+          "candidate_score": 99.51532600997,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=11; latest_source=5432; best_rank=1",
+            "source_candidate_draw_no": 5432,
+            "source_engine": "E1_TEMPORAL_CONTEXT_MATCH,E1_WLS_DECAY_0.98",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "3304",
+          "candidate_rank": 45,
+          "candidate_row_hash": "0dea2126b55157cac35703fadd812759d3d8ff93ba1e8af6619f1e8b47bed3c3",
+          "candidate_score": 99.493181487826,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=11; latest_source=5394; best_rank=2",
+            "source_candidate_draw_no": 5394,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH",
+            "source_rank": 2,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "4510",
+          "candidate_rank": 46,
+          "candidate_row_hash": "0e3333e244718ec0191aab8b76bbf82081472588823ce629acc9c667ff4c38b0",
+          "candidate_score": 99.481930833718,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=11; latest_source=5351; best_rank=2",
+            "source_candidate_draw_no": 5351,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 2,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "2251",
+          "candidate_rank": 47,
+          "candidate_row_hash": "280caeafc781b6fc0d16025003f8649bc02de343c93d36b2a53976acbc91ddb8",
+          "candidate_score": 99.478388588417,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=11; latest_source=5329; best_rank=1",
+            "source_candidate_draw_no": 5329,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "1027",
+          "candidate_rank": 48,
+          "candidate_row_hash": "00f6023a9e02ef8af681f945f747c131dd626f5fcc3bd05ca4422e45a141c798",
+          "candidate_score": 99.474043620862,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=11; latest_source=5291; best_rank=1",
+            "source_candidate_draw_no": 5291,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_TEMPORAL_CONTEXT_MATCH,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "4060",
+          "candidate_rank": 49,
+          "candidate_row_hash": "f644265ec594c3da849adf4f04481d1181aa13208040f60c054e0699125b582b",
+          "candidate_score": 99.471113391987,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=11; latest_source=5254; best_rank=2",
+            "source_candidate_draw_no": 5254,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_DELTA_ROTATION_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 2,
+            "supports": [
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+          "candidate_family": "PAIR_RECURRENCE",
+          "candidate_number": "8358",
+          "candidate_rank": 50,
+          "candidate_row_hash": "1c4d8eabe30aef7a4ff066e189adaef742599d99a8bb4ab67c16e5bf474d938e",
+          "candidate_score": 99.423880330449,
+          "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+          "engine_version": "v2.0",
+          "feature_json": {
+            "reason": "persisted ledger candidate; appearances=12; latest_source=5467; best_rank=1",
+            "source_candidate_draw_no": 5467,
+            "source_engine": "E1_CROSS_PAIR_LINEAR,E1_MIRROR_BASE5_LSTS,E2_META_ENSEMBLE_RANKER,E2_WEIGHTED_META_ENSEMBLE_RANKER",
+            "source_rank": 1,
+            "supports": [
+              "MIRROR_BOX_HISTORY",
+              "PAIR_RECURRENCE_1",
+              "PAIR_RECURRENCE_3",
+              "PAIR_RECURRENCE_5",
+              "RECENT_STRUCTURE",
+              "RISK_SUM_BAND"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "PRIOR_LEDGER_CANDIDATE_PAIR_SUPPORTED",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        }
+      ],
+      "source_draw_no": 5497,
+      "target_draw_no": 5498
+    },
+    {
+      "candidate_batch_hash": "d0c2d33695a5e1c270e4724790146fabdf6f203c0ac0f73d3b33653c533d182f",
+      "canonical_batch_payload": {
+        "engine_source": "E1_DELTA",
+        "engine_version": "safe-reconstructed-preview",
+        "mode": "ForwardTop50",
+        "rows": [
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "0139",
+            "candidate_rank": 1,
+            "candidate_score": 1.03,
+            "feature_json": {
+              "reason": "persisted E1_DELTA_ROTATION_LSTS rank 1 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS",
+              "source_rank": 1,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9465",
+            "candidate_rank": 2,
+            "candidate_score": 1.018023255814,
+            "feature_json": {
+              "reason": "persisted E1_DELTA_ROTATION_LSTS rank 2 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS",
+              "source_rank": 2,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "4843",
+            "candidate_rank": 3,
+            "candidate_score": 1.006046511628,
+            "feature_json": {
+              "reason": "persisted E1_DELTA_ROTATION_LSTS rank 3 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS",
+              "source_rank": 3,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "7745",
+            "candidate_rank": 4,
+            "candidate_score": 0.994069767442,
+            "feature_json": {
+              "reason": "persisted E1_DELTA_ROTATION_LSTS rank 4 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS",
+              "source_rank": 4,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "7913",
+            "candidate_rank": 5,
+            "candidate_score": 0.982093023256,
+            "feature_json": {
+              "reason": "persisted E1_DELTA_ROTATION_LSTS rank 5 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_DELTA_ROTATION_LSTS",
+              "source_rank": 5,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          }
+        ],
+        "source_draw_no": 5497,
+        "target_draw_no": 5498,
+        "temporal_cutoff_draw_no": 5497
+      },
+      "engine_source": "E1_DELTA",
+      "engine_version": "safe-reconstructed-preview",
+      "mode": "ForwardTop50",
+      "rows": [
+        {
+          "candidate_batch_hash": "d0c2d33695a5e1c270e4724790146fabdf6f203c0ac0f73d3b33653c533d182f",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "0139",
+          "candidate_rank": 1,
+          "candidate_row_hash": "b7cf97070cf129e6591cbeadc9dfa37edf1342d94a6762cd0fd6c2e8f673ba1c",
+          "candidate_score": 1.03,
+          "engine_source": "E1_DELTA",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_DELTA_ROTATION_LSTS rank 1 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS",
+            "source_rank": 1,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "d0c2d33695a5e1c270e4724790146fabdf6f203c0ac0f73d3b33653c533d182f",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9465",
+          "candidate_rank": 2,
+          "candidate_row_hash": "af46906aaa153f089f3566d2f8964df1c18eca832bc804718ac89d569feb719b",
+          "candidate_score": 1.018023255814,
+          "engine_source": "E1_DELTA",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_DELTA_ROTATION_LSTS rank 2 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS",
+            "source_rank": 2,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "d0c2d33695a5e1c270e4724790146fabdf6f203c0ac0f73d3b33653c533d182f",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "4843",
+          "candidate_rank": 3,
+          "candidate_row_hash": "1f16cea8340e67bbb192bc01c4549c1252a7bacd02f5d66d0fd00a87394c6fd2",
+          "candidate_score": 1.006046511628,
+          "engine_source": "E1_DELTA",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_DELTA_ROTATION_LSTS rank 3 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS",
+            "source_rank": 3,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "d0c2d33695a5e1c270e4724790146fabdf6f203c0ac0f73d3b33653c533d182f",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "7745",
+          "candidate_rank": 4,
+          "candidate_row_hash": "160cf7ff60824f9533b516fdd69227d1acdf11bfe183a76681d013e5c7957e31",
+          "candidate_score": 0.994069767442,
+          "engine_source": "E1_DELTA",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_DELTA_ROTATION_LSTS rank 4 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS",
+            "source_rank": 4,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "d0c2d33695a5e1c270e4724790146fabdf6f203c0ac0f73d3b33653c533d182f",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "7913",
+          "candidate_rank": 5,
+          "candidate_row_hash": "5944f0d5a804c703fe3d0cdcfc46ab44f8ba283c244d5c3914c4aa4edeb6dcdc",
+          "candidate_score": 0.982093023256,
+          "engine_source": "E1_DELTA",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_DELTA_ROTATION_LSTS rank 5 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_DELTA_ROTATION_LSTS",
+            "source_rank": 5,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        }
+      ],
+      "source_draw_no": 5497,
+      "target_draw_no": 5498
+    },
+    {
+      "candidate_batch_hash": "fcf5521c94b261a535964b100853092169d150c2e819078fcd44ec77d73522e7",
+      "canonical_batch_payload": {
+        "engine_source": "E1_WLS",
+        "engine_version": "safe-reconstructed-preview",
+        "mode": "ForwardTop50",
+        "rows": [
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "0000",
+            "candidate_rank": 1,
+            "candidate_score": 1.02,
+            "feature_json": {
+              "reason": "persisted E1_WLS_DECAY_0.98 rank 1 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_WLS_DECAY_0.98",
+              "source_rank": 1,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9949",
+            "candidate_rank": 2,
+            "candidate_score": 1.013245033113,
+            "feature_json": {
+              "reason": "persisted E1_WLS_DECAY_0.98 rank 2 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_WLS_DECAY_0.98",
+              "source_rank": 2,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9378",
+            "candidate_rank": 3,
+            "candidate_score": 1.006490066225,
+            "feature_json": {
+              "reason": "persisted E1_WLS_DECAY_0.98 rank 3 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_WLS_DECAY_0.98",
+              "source_rank": 3,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "5315",
+            "candidate_rank": 4,
+            "candidate_score": 0.999735099338,
+            "feature_json": {
+              "reason": "persisted E1_WLS_DECAY_0.98 rank 4 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_WLS_DECAY_0.98",
+              "source_rank": 4,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "5055",
+            "candidate_rank": 5,
+            "candidate_score": 0.99298013245,
+            "feature_json": {
+              "reason": "persisted E1_WLS_DECAY_0.98 rank 5 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_WLS_DECAY_0.98",
+              "source_rank": 5,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          }
+        ],
+        "source_draw_no": 5497,
+        "target_draw_no": 5498,
+        "temporal_cutoff_draw_no": 5497
+      },
+      "engine_source": "E1_WLS",
+      "engine_version": "safe-reconstructed-preview",
+      "mode": "ForwardTop50",
+      "rows": [
+        {
+          "candidate_batch_hash": "fcf5521c94b261a535964b100853092169d150c2e819078fcd44ec77d73522e7",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "0000",
+          "candidate_rank": 1,
+          "candidate_row_hash": "afcce466410403d3a0f469baaf1079f70f8cb334565271ae5691d2cad1c7886e",
+          "candidate_score": 1.02,
+          "engine_source": "E1_WLS",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_WLS_DECAY_0.98 rank 1 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_WLS_DECAY_0.98",
+            "source_rank": 1,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "fcf5521c94b261a535964b100853092169d150c2e819078fcd44ec77d73522e7",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9949",
+          "candidate_rank": 2,
+          "candidate_row_hash": "bd468f15a3c23e43ad2c415c3811eec8c95bbbd08b57235bb86daf5d3612cf22",
+          "candidate_score": 1.013245033113,
+          "engine_source": "E1_WLS",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_WLS_DECAY_0.98 rank 2 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_WLS_DECAY_0.98",
+            "source_rank": 2,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "fcf5521c94b261a535964b100853092169d150c2e819078fcd44ec77d73522e7",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9378",
+          "candidate_rank": 3,
+          "candidate_row_hash": "187dd708e1d9a8cbca1b8fe5fdee06d1a12fe6ed1f870586d74c0ec7a0fce91d",
+          "candidate_score": 1.006490066225,
+          "engine_source": "E1_WLS",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_WLS_DECAY_0.98 rank 3 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_WLS_DECAY_0.98",
+            "source_rank": 3,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "fcf5521c94b261a535964b100853092169d150c2e819078fcd44ec77d73522e7",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "5315",
+          "candidate_rank": 4,
+          "candidate_row_hash": "0fcbe0dba2fce913883ebdc24d34926b96807c1b84c1050b0f187d8cbc42d737",
+          "candidate_score": 0.999735099338,
+          "engine_source": "E1_WLS",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_WLS_DECAY_0.98 rank 4 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_WLS_DECAY_0.98",
+            "source_rank": 4,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "fcf5521c94b261a535964b100853092169d150c2e819078fcd44ec77d73522e7",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "5055",
+          "candidate_rank": 5,
+          "candidate_row_hash": "9877d65bb32176b6641761b8a44b4ba493c2dc899bc2ba373e150923e448ec40",
+          "candidate_score": 0.99298013245,
+          "engine_source": "E1_WLS",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_WLS_DECAY_0.98 rank 5 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_WLS_DECAY_0.98",
+            "source_rank": 5,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        }
+      ],
+      "source_draw_no": 5497,
+      "target_draw_no": 5498
+    },
+    {
+      "candidate_batch_hash": "d43fdff9f32ff14b76346486b2af124a8a2b5c7b2602a002a6ee89d2ee1d2881",
+      "canonical_batch_payload": {
+        "engine_source": "E1_LINEAR",
+        "engine_version": "safe-reconstructed-preview",
+        "mode": "ForwardTop50",
+        "rows": [
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "4231",
+            "candidate_rank": 1,
+            "candidate_score": 1.0,
+            "feature_json": {
+              "reason": "persisted E1_CROSS_PAIR_LINEAR rank 1 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR",
+              "source_rank": 1,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "6187",
+            "candidate_rank": 2,
+            "candidate_score": 0.95652173913,
+            "feature_json": {
+              "reason": "persisted E1_CROSS_PAIR_LINEAR rank 2 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR",
+              "source_rank": 2,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9319",
+            "candidate_rank": 3,
+            "candidate_score": 0.913043478261,
+            "feature_json": {
+              "reason": "persisted E1_CROSS_PAIR_LINEAR rank 3 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR",
+              "source_rank": 3,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "2468",
+            "candidate_rank": 4,
+            "candidate_score": 0.869565217391,
+            "feature_json": {
+              "reason": "persisted E1_CROSS_PAIR_LINEAR rank 4 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR",
+              "source_rank": 4,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          },
+          {
+            "candidate_family": "SAFE_LEDGER_CANDIDATE",
+            "candidate_number": "9447",
+            "candidate_rank": 5,
+            "candidate_score": 0.826086956522,
+            "feature_json": {
+              "reason": "persisted E1_CROSS_PAIR_LINEAR rank 5 mode Historical",
+              "source_candidate_draw_no": 5497,
+              "source_engine": "E1_CROSS_PAIR_LINEAR",
+              "source_rank": 5,
+              "supports": [
+                "PERSISTED_LEDGER_LOCK"
+              ],
+              "synthetic": false,
+              "temporal_cutoff_draw_no": 5497
+            },
+            "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5"
+          }
+        ],
+        "source_draw_no": 5497,
+        "target_draw_no": 5498,
+        "temporal_cutoff_draw_no": 5497
+      },
+      "engine_source": "E1_LINEAR",
+      "engine_version": "safe-reconstructed-preview",
+      "mode": "ForwardTop50",
+      "rows": [
+        {
+          "candidate_batch_hash": "d43fdff9f32ff14b76346486b2af124a8a2b5c7b2602a002a6ee89d2ee1d2881",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "4231",
+          "candidate_rank": 1,
+          "candidate_row_hash": "76f8754ef1225acfc06f199c80c05f59cdeeac40e0bfe98efb4497486391fc61",
+          "candidate_score": 1.0,
+          "engine_source": "E1_LINEAR",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_CROSS_PAIR_LINEAR rank 1 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR",
+            "source_rank": 1,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "d43fdff9f32ff14b76346486b2af124a8a2b5c7b2602a002a6ee89d2ee1d2881",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "6187",
+          "candidate_rank": 2,
+          "candidate_row_hash": "f99541688a57d4f986e1d5b2f8a7cc43ba8b16d09eed73bb8ac8fa769961cbde",
+          "candidate_score": 0.95652173913,
+          "engine_source": "E1_LINEAR",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_CROSS_PAIR_LINEAR rank 2 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR",
+            "source_rank": 2,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "d43fdff9f32ff14b76346486b2af124a8a2b5c7b2602a002a6ee89d2ee1d2881",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9319",
+          "candidate_rank": 3,
+          "candidate_row_hash": "f35e83e44206fe0990be4912e12584567a0fb53e221b7d2212ecab1ea088b06e",
+          "candidate_score": 0.913043478261,
+          "engine_source": "E1_LINEAR",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_CROSS_PAIR_LINEAR rank 3 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR",
+            "source_rank": 3,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "d43fdff9f32ff14b76346486b2af124a8a2b5c7b2602a002a6ee89d2ee1d2881",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "2468",
+          "candidate_rank": 4,
+          "candidate_row_hash": "71de9592b9049f4d86d7543ccb67dd578b8512536fd50821fa8ce95c0181c2bc",
+          "candidate_score": 0.869565217391,
+          "engine_source": "E1_LINEAR",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_CROSS_PAIR_LINEAR rank 4 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR",
+            "source_rank": 4,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        },
+        {
+          "candidate_batch_hash": "d43fdff9f32ff14b76346486b2af124a8a2b5c7b2602a002a6ee89d2ee1d2881",
+          "candidate_family": "SAFE_LEDGER_CANDIDATE",
+          "candidate_number": "9447",
+          "candidate_rank": 5,
+          "candidate_row_hash": "4292843cb9d1c77a171f53bb6c34cd075b94f9dc4b4a33cce954478c659b9750",
+          "candidate_score": 0.826086956522,
+          "engine_source": "E1_LINEAR",
+          "engine_version": "safe-reconstructed-preview",
+          "feature_json": {
+            "reason": "persisted E1_CROSS_PAIR_LINEAR rank 5 mode Historical",
+            "source_candidate_draw_no": 5497,
+            "source_engine": "E1_CROSS_PAIR_LINEAR",
+            "source_rank": 5,
+            "supports": [
+              "PERSISTED_LEDGER_LOCK"
+            ],
+            "synthetic": false,
+            "temporal_cutoff_draw_no": 5497
+          },
+          "generation_method": "COPIED_FROM_LOCKED_PREDICTION_LEDGER_TOP5",
+          "hit_count": null,
+          "mode": "ForwardTop50",
+          "source_draw_no": 5497,
+          "target_available_at_generation": false,
+          "target_draw_no": 5498,
+          "temporal_cutoff_draw_no": 5497,
+          "verification_status": "Unverified"
+        }
+      ],
+      "source_draw_no": 5497,
+      "target_draw_no": 5498
+    }
+  ],
+  "persistence_statuses": [
+    {
+      "candidate_batch_hash": "030c7ab1c1779d3473c8ad7ae92a1339b72744ac315cde3bca899b10bdf9375e",
+      "engine_source": "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED",
+      "engine_version": "v2.0",
+      "mode": "ForwardTop50",
+      "rows_existing": 0,
+      "rows_inserted": 50,
+      "rows_intended": 50,
+      "status": "INSERTED",
+      "validation_failures": []
+    },
+    {
+      "candidate_batch_hash": "d0c2d33695a5e1c270e4724790146fabdf6f203c0ac0f73d3b33653c533d182f",
+      "engine_source": "E1_DELTA",
+      "engine_version": "safe-reconstructed-preview",
+      "mode": "ForwardTop50",
+      "rows_existing": 0,
+      "rows_inserted": 5,
+      "rows_intended": 5,
+      "status": "INSERTED",
+      "validation_failures": []
+    },
+    {
+      "candidate_batch_hash": "fcf5521c94b261a535964b100853092169d150c2e819078fcd44ec77d73522e7",
+      "engine_source": "E1_WLS",
+      "engine_version": "safe-reconstructed-preview",
+      "mode": "ForwardTop50",
+      "rows_existing": 0,
+      "rows_inserted": 5,
+      "rows_intended": 5,
+      "status": "INSERTED",
+      "validation_failures": []
+    },
+    {
+      "candidate_batch_hash": "d43fdff9f32ff14b76346486b2af124a8a2b5c7b2602a002a6ee89d2ee1d2881",
+      "engine_source": "E1_LINEAR",
+      "engine_version": "safe-reconstructed-preview",
+      "mode": "ForwardTop50",
+      "rows_existing": 0,
+      "rows_inserted": 5,
+      "rows_intended": 5,
+      "status": "INSERTED",
+      "validation_failures": []
+    }
+  ],
+  "prediction_ledger_count_after": 51664,
+  "prediction_ledger_count_before": 51664,
+  "source_metadata": {
+    "source_date": "2026-06-17",
+    "source_day_type": "Wednesday",
+    "source_draw_no": 5497,
+    "target_available_at_generation": false,
+    "target_draw_no": 5498
+  },
+  "unavailable_batches": [
+    {
+      "engine_source": "E1_TEMPORAL_CONTEXT_MATCH",
+      "engine_version": "persisted-ledger-anchor",
+      "limitation": "NO_SAFE_PERSISTED_FORWARD_CANDIDATES",
+      "mode": "ForwardTop50"
+    }
+  ],
+  "validation": {
+    "all_pass": true,
+    "batch_hash": true,
+    "deep_count_after": 65,
+    "deep_count_before": 0,
+    "idempotency_status": {
+      "E1_DELTA": "INSERTED",
+      "E1_LINEAR": "INSERTED",
+      "E1_WLS": "INSERTED",
+      "E_SHADOW_HYBRID_GUARD_V2_BASELINE_PROTECTED": "INSERTED"
+    },
+    "prediction_ledger_unchanged": true,
+    "row_hash": true,
+    "temporal_cutoff": true,
+    "top20_non_synthetic_count": 20,
+    "top5_lock_match": true,
+    "v2_row_count_50": true,
+    "v2_synthetic_count": 0,
+    "v2_unique": true,
+    "v2_valid_numbers": true,
+    "validation_failures": []
+  }
+}
