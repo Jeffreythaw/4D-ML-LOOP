@@ -1,0 +1,72 @@
+====================================================================================================================================================
+STEP 153 — DEEP CANDIDATE PERSISTENCE LAYER — DESIGN + DRY RUN ONLY
+====================================================================================================================================================
+ProductionMathChanged: NO
+APIChanged: NO
+FrontendChanged: NO
+SQLSchemaChangedLive: NO
+DeploymentChanged: NO
+DBWritePerformed: NO
+
+STEP 152 MOTIVATION
+----------------------------------------------------------------------------------------------------------------------------------------------------
+MaximumPersistedCandidateDepth: 5
+Top10Top15Top20Status: UNAVAILABLE
+MainBottleneck: Data sparsity
+RecommendedResponse: design a hash-locked deeper candidate persistence layer.
+
+PROPOSED SCHEMA SUMMARY
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ProposedTable: dbo.DeepCandidateLedger
+SchemaFile: /Users/kojeffrey/4D-ML-LOOP/sql/step_153_deep_candidate_persistence_schema.sql
+Columns: ['DeepCandidateId', 'EngineSource', 'EngineVersion', 'Mode', 'SourceDrawNo', 'TargetDrawNo', 'CandidateRank', 'CandidateNumber', 'CandidateScore', 'CandidateFamily', 'GenerationMethod', 'FeatureJson', 'CandidateBatchHash', 'CandidateRowHash', 'TemporalCutoffDrawNo', 'TargetAvailableAtGeneration', 'VerificationStatus', 'HitCount', 'CreatedAtUtc']
+Constraints: numeric four-digit candidate; rank 1-50; temporal cutoff equals source; unique batch rank; unique batch candidate number.
+Indexes: Source/Target, Engine/Mode, CandidateBatchHash, VerificationStatus, CandidateNumber.
+Idempotency: table and indexes are guarded by existence checks.
+RollbackNote: commented manual DROP TABLE section is included.
+
+CURRENT DB DISCOVERY
+----------------------------------------------------------------------------------------------------------------------------------------------------
+DeepCandidateLedgerExists: NO
+PredictionLedgerCurrentMaxDepth: 5
+PredictionLedgerColumns: ['LedgerId', 'Mode', 'SourceDrawNo', 'TargetDrawNo', 'DayType', 'RankNo', 'PredictedNumber', 'EngineSource', 'Score', 'VerificationStatus', 'HitCount', 'CreatedAt', 'VerifiedAt']
+AvailableEngines: ['E1_CROSS_PAIR_LINEAR', 'E1_DELTA_ROTATION_LSTS', 'E1_MIRROR_BASE5_LSTS', 'E1_TEMPORAL_CONTEXT_MATCH', 'E1_WLS_DECAY_0.98', 'E2_META_ENSEMBLE_RANKER', 'E2_WEIGHTED_META_ENSEMBLE_RANKER', 'E3_POLYNOMIAL', 'E4_MARKOV_TRANSITION_MASS']
+AvailableModes: ['Current', 'Engine_Grand_Loop', 'Grand_Loop', 'Historical', 'Temporal_Global_Loop', 'Weighted_Grand_Loop']
+
+DRY-RUN PREVIEW SUMMARY
+----------------------------------------------------------------------------------------------------------------------------------------------------
+PreviewSourceDraws: [4050, 4126, 4202, 4278, 4355, 4431, 4507, 4583, 4659, 4735, 4812, 4888, 4964, 5040, 5116, 5192, 5269, 5345, 5421, 5494, 5495, 5496, 5497]
+PreviewSourceDrawCount: 23
+PreviewRowsTotal: 7801
+CandidatePreviewRows: 780
+UnavailableDepthPlaceholders: 7020
+SchemaCheckRows: 1
+SQLReadyRows: 780
+CandidateSourceBreakdown: {'SCHEMA_CHECK': 1, 'PERSISTED_LEDGER_TOP5': 780, 'UNAVAILABLE_DEPTH_PLACEHOLDER': 7020, 'SAFE_RECONSTRUCTED_PREVIEW': 0}
+
+TEMPORAL FIREWALL CHECKS
+----------------------------------------------------------------------------------------------------------------------------------------------------
+CandidateGenerationCutoff: TemporalCutoffDrawNo equals SourceDrawNo.
+TargetWinnersUsed: NO
+TargetAvailabilityUsage: metadata only; no WinningNumbers were queried.
+PersistedRankOrderTreatment: locked and copied without reranking.
+CandidateBatchHashGenerated: YES
+CandidateRowHashGenerated: YES
+HashEncoding: canonical JSON, sorted keys, compact separators, UTF-8, SHA256.
+
+LIMITATIONS
+----------------------------------------------------------------------------------------------------------------------------------------------------
+DEPTH_UNAVAILABLE: Current persisted engine depth stops at rank 5.
+Ranks 6-50 are null preview placeholders and are not SQL-ready.
+SAFE_RECONSTRUCTED_PREVIEW count is zero because no globally locked, reproducible deeper engine ranking exists.
+This dry run does not claim that Top20 or Top50 candidates currently exist.
+
+FINAL RECOMMENDATION
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ExecuteMigrationNow: NO
+ProductionSwitchRecommendedNow: NO
+NextStep: Human review schema, then Step 153B migration execution if approved
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_153_deep_candidate_persistence_report.txt
+PLAN_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_153_deep_candidate_persistence_plan.json
+PREVIEW_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_153_deep_candidate_persistence_preview_rows.jsonl

@@ -1,0 +1,53 @@
+{
+  "candidate_counts_by_source_type": {
+    "PERSISTED_LEDGER_TOP5": 780,
+    "SAFE_RECONSTRUCTED_PREVIEW": 0,
+    "SCHEMA_CHECK": 1,
+    "UNAVAILABLE_DEPTH_PLACEHOLDER": 7020
+  },
+  "current_max_persisted_depth": 5,
+  "db_write_performed": false,
+  "migration_required": true,
+  "next_steps": [
+    "Human review the idempotent migration SQL.",
+    "Approve or revise engine-version and batch-lock conventions.",
+    "If approved, execute migration separately in Step 153B.",
+    "Update candidate-generating engines to emit locked Top20/Top50 before verification."
+  ],
+  "preview_row_counts": {
+    "candidate_preview": 780,
+    "depth_unavailable": 7020,
+    "schema_check": 1
+  },
+  "preview_source_draws": [
+    4050,
+    4126,
+    4202,
+    4278,
+    4355,
+    4431,
+    4507,
+    4583,
+    4659,
+    4735,
+    4812,
+    4888,
+    4964,
+    5040,
+    5116,
+    5192,
+    5269,
+    5345,
+    5421,
+    5494,
+    5495,
+    5496,
+    5497
+  ],
+  "production_write_performed": false,
+  "proposed_table": "dbo.DeepCandidateLedger",
+  "schema_file": "/Users/kojeffrey/4D-ML-LOOP/sql/step_153_deep_candidate_persistence_schema.sql",
+  "sql_ready_row_count": 780,
+  "table_exists": false,
+  "unavailable_depth_row_count": 7020
+}
