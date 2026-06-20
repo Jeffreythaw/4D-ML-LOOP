@@ -1,0 +1,537 @@
+{
+  "candidate_depth_matrix": [
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_CROSS_PAIR_LINEAR",
+      "ledger_rows": 7220,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Engine_Grand_Loop",
+      "source_draws": 1444
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_CROSS_PAIR_LINEAR",
+      "ledger_rows": 270,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Historical",
+      "source_draws": 54
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_DELTA_ROTATION_LSTS",
+      "ledger_rows": 7220,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Engine_Grand_Loop",
+      "source_draws": 1444
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_DELTA_ROTATION_LSTS",
+      "ledger_rows": 270,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Historical",
+      "source_draws": 54
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_MIRROR_BASE5_LSTS",
+      "ledger_rows": 7220,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Engine_Grand_Loop",
+      "source_draws": 1444
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_MIRROR_BASE5_LSTS",
+      "ledger_rows": 270,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Historical",
+      "source_draws": 54
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_TEMPORAL_CONTEXT_MATCH",
+      "ledger_rows": 15,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Current",
+      "source_draws": 3
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_TEMPORAL_CONTEXT_MATCH",
+      "ledger_rows": 7220,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Temporal_Global_Loop",
+      "source_draws": 1444
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_WLS_DECAY_0.98",
+      "ledger_rows": 7220,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Engine_Grand_Loop",
+      "source_draws": 1444
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E1_WLS_DECAY_0.98",
+      "ledger_rows": 270,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Historical",
+      "source_draws": 54
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E2_META_ENSEMBLE_RANKER",
+      "ledger_rows": 7220,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Grand_Loop",
+      "source_draws": 1444
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E2_META_ENSEMBLE_RANKER",
+      "ledger_rows": 25,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Historical",
+      "source_draws": 5
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E2_WEIGHTED_META_ENSEMBLE_RANKER",
+      "ledger_rows": 7220,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Weighted_Grand_Loop",
+      "source_draws": 1444
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E3_POLYNOMIAL",
+      "ledger_rows": 1,
+      "max_rank": 3,
+      "min_rank": 3,
+      "mode": "Historical",
+      "source_draws": 1
+    },
+    {
+      "data_source_type": "PERSISTED_LEDGER",
+      "engine_source": "E4_MARKOV_TRANSITION_MASS",
+      "ledger_rows": 3,
+      "max_rank": 5,
+      "min_rank": 1,
+      "mode": "Historical",
+      "source_draws": 1
+    }
+  ],
+  "data_limitations": [
+    "Top10/Top15/Top20 are unavailable for engine/mode groups whose persisted MaxRank is below the cutoff.",
+    "Independent engine aliases are mapped only when matching persisted EngineSource values exist.",
+    "Step 150B reconstructed Top100 is not mixed with persisted engine rankings."
+  ],
+  "depth_reconstruction": {
+    "reason": "No globally persisted deterministic deeper rank snapshot was found; Step 150B reconstruction is separate experimental output and is not treated as an engine ledger.",
+    "status": "UNAVAILABLE"
+  },
+  "distinct_engine_sources": [
+    "E1_CROSS_PAIR_LINEAR",
+    "E1_DELTA_ROTATION_LSTS",
+    "E1_MIRROR_BASE5_LSTS",
+    "E1_TEMPORAL_CONTEXT_MATCH",
+    "E1_WLS_DECAY_0.98",
+    "E2_META_ENSEMBLE_RANKER",
+    "E2_WEIGHTED_META_ENSEMBLE_RANKER",
+    "E3_POLYNOMIAL",
+    "E4_MARKOV_TRANSITION_MASS"
+  ],
+  "distinct_modes": [
+    "Current",
+    "Engine_Grand_Loop",
+    "Grand_Loop",
+    "Historical",
+    "Temporal_Global_Loop",
+    "Weighted_Grand_Loop"
+  ],
+  "distinct_verification_statuses": [
+    "Pending",
+    "Verified"
+  ],
+  "drawhistory_columns": [
+    {
+      "column_id": 1,
+      "data_type": "int",
+      "max_length": 4,
+      "name": "DrawNo",
+      "nullable": false
+    },
+    {
+      "column_id": 2,
+      "data_type": "date",
+      "max_length": 3,
+      "name": "DrawDate",
+      "nullable": false
+    },
+    {
+      "column_id": 3,
+      "data_type": "varchar",
+      "max_length": 16,
+      "name": "DayType",
+      "nullable": false
+    },
+    {
+      "column_id": 4,
+      "data_type": "varchar",
+      "max_length": -1,
+      "name": "WinningNumbers",
+      "nullable": false
+    },
+    {
+      "column_id": 5,
+      "data_type": "datetime2",
+      "max_length": 7,
+      "name": "CreatedAt",
+      "nullable": false
+    }
+  ],
+  "engine_availability": {
+    "DELTA": {
+      "aliases_checked": [
+        "E1_DELTA",
+        "E1_DELTA_ROTATION_LSTS"
+      ],
+      "persisted_engine_sources": [
+        "E1_DELTA_ROTATION_LSTS"
+      ],
+      "status": "PERSISTED_LEDGER"
+    },
+    "LINEAR": {
+      "aliases_checked": [
+        "E1_LINEAR",
+        "E1_CROSS_PAIR_LINEAR"
+      ],
+      "persisted_engine_sources": [
+        "E1_CROSS_PAIR_LINEAR"
+      ],
+      "status": "PERSISTED_LEDGER"
+    },
+    "TEMPORAL": {
+      "aliases_checked": [
+        "E1_TEMPORAL_CONTEXT_MATCH"
+      ],
+      "persisted_engine_sources": [
+        "E1_TEMPORAL_CONTEXT_MATCH"
+      ],
+      "status": "PERSISTED_LEDGER"
+    },
+    "WLS": {
+      "aliases_checked": [
+        "E1_WLS",
+        "E1_WLS_DECAY_0.98"
+      ],
+      "persisted_engine_sources": [
+        "E1_WLS_DECAY_0.98"
+      ],
+      "status": "PERSISTED_LEDGER"
+    }
+  },
+  "generated_at": "2026-06-20T01:48:28.726733",
+  "maximum_persisted_rank": 5,
+  "predictionledger_columns": [
+    {
+      "column_id": 1,
+      "data_type": "bigint",
+      "max_length": 8,
+      "name": "LedgerId",
+      "nullable": false
+    },
+    {
+      "column_id": 2,
+      "data_type": "varchar",
+      "max_length": 20,
+      "name": "Mode",
+      "nullable": false
+    },
+    {
+      "column_id": 3,
+      "data_type": "int",
+      "max_length": 4,
+      "name": "SourceDrawNo",
+      "nullable": false
+    },
+    {
+      "column_id": 4,
+      "data_type": "int",
+      "max_length": 4,
+      "name": "TargetDrawNo",
+      "nullable": false
+    },
+    {
+      "column_id": 5,
+      "data_type": "varchar",
+      "max_length": 15,
+      "name": "DayType",
+      "nullable": false
+    },
+    {
+      "column_id": 6,
+      "data_type": "int",
+      "max_length": 4,
+      "name": "RankNo",
+      "nullable": false
+    },
+    {
+      "column_id": 7,
+      "data_type": "char",
+      "max_length": 4,
+      "name": "PredictedNumber",
+      "nullable": false
+    },
+    {
+      "column_id": 8,
+      "data_type": "varchar",
+      "max_length": 80,
+      "name": "EngineSource",
+      "nullable": true
+    },
+    {
+      "column_id": 9,
+      "data_type": "float",
+      "max_length": 8,
+      "name": "Score",
+      "nullable": true
+    },
+    {
+      "column_id": 10,
+      "data_type": "varchar",
+      "max_length": 20,
+      "name": "VerificationStatus",
+      "nullable": false
+    },
+    {
+      "column_id": 11,
+      "data_type": "int",
+      "max_length": 4,
+      "name": "HitCount",
+      "nullable": true
+    },
+    {
+      "column_id": 12,
+      "data_type": "datetime2",
+      "max_length": 6,
+      "name": "CreatedAt",
+      "nullable": false
+    },
+    {
+      "column_id": 13,
+      "data_type": "datetime2",
+      "max_length": 6,
+      "name": "VerifiedAt",
+      "nullable": true
+    }
+  ],
+  "rank_score_columns": [
+    "RankNo",
+    "Score"
+  ],
+  "repo_search": {
+    "E1_DELTA": {
+      "match_count_capped": 13,
+      "matches": [
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_global_loop.py:36:    \"E1_DELTA_ROTATION_LSTS\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_global_loop.py:41:TEMPORAL_COLD_START_FALLBACK_ENGINE = \"E1_DELTA_ROTATION_LSTS\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_underlying_grand_ledger.py:36:    \"E1_DELTA_ROTATION_LSTS\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:37:    \"DELTA\": (\"E1_DELTA\", \"E1_DELTA_ROTATION_LSTS\"),",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:150:        \"E1_DELTA\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_weighted_grand_master_loop.py:38:    \"E1_DELTA_ROTATION_LSTS\",",
+        "/Users/kojeffrey/4D-ML-LOOP/backend/app/core/temporal_context_engine.py:14:FALLBACK_ENGINE_SOURCE = \"E1_DELTA_ROTATION_LSTS\"",
+        "/Users/kojeffrey/4D-ML-LOOP/backend/app/core/temporal_context_engine.py:20:    \"E1_DELTA_ROTATION_LSTS\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:58:    \"E1_DELTA_ROTATION_LSTS\",",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1313:                \"E1_DELTA_ROTATION_LSTS\",",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1324:                \"E1_DELTA_ROTATION_LSTS\",",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py:28:ENGINE_1_DELTA_ROTATION_NAME = \"E1_DELTA_ROTATION_LSTS\"",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py:694:    formula_version: str = \"E1_DELTA_ROTATION_LSTS_V1\","
+      ]
+    },
+    "E1_LINEAR": {
+      "match_count_capped": 2,
+      "matches": [
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:35:    \"LINEAR\": (\"E1_LINEAR\", \"E1_CROSS_PAIR_LINEAR\"),",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:148:        \"E1_LINEAR\","
+      ]
+    },
+    "E1_TEMPORAL_CONTEXT_MATCH": {
+      "match_count_capped": 17,
+      "matches": [
+        "/Users/kojeffrey/4D-ML-LOOP/sql/step_144_temporal_global_loop_mode.sql:62:    @EngineSource = 'E1_TEMPORAL_CONTEXT_MATCH',",
+        "/Users/kojeffrey/4D-ML-LOOP/sql/step_144_temporal_global_loop_mode.sql:68:    @EngineSource = 'E1_TEMPORAL_CONTEXT_MATCH',",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:24:BASELINE_ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine.py:25:BASELINE_ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_structural_streak_audit.py:26:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:57:    \"E1_TEMPORAL_CONTEXT_MATCH\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:615:        lines.append(\"  E1_TEMPORAL_CONTEXT_MATCH Current live streak: 3 misses observed.\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:636:        lines.append(\"  1. Temporal Base Stream: existing E1_TEMPORAL_CONTEXT_MATCH candidates.\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_global_loop.py:31:ENGINE_SOURCE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:24:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_shadow_champion_policy_board.py:25:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_step_150b_worker.py:26:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_streak_risk_gated_pruning_audit.py:28:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/backend/app/core/temporal_context_engine.py:13:ENGINE_SOURCE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:38:    \"TEMPORAL\": (\"E1_TEMPORAL_CONTEXT_MATCH\",),",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:40:FINAL_ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:151:        \"E1_TEMPORAL_CONTEXT_MATCH\","
+      ]
+    },
+    "E1_WLS": {
+      "match_count_capped": 11,
+      "matches": [
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_global_loop.py:34:    \"E1_WLS_DECAY_0.98\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:59:    \"E1_WLS_DECAY_0.98\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_weighted_grand_master_loop.py:36:    \"E1_WLS_DECAY_0.98\",",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1311:                \"E1_WLS_DECAY_0.98\",",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1322:                \"E1_WLS_DECAY_0.98\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_underlying_grand_ledger.py:34:    \"E1_WLS_DECAY_0.98\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:36:    \"WLS\": (\"E1_WLS\", \"E1_WLS_DECAY_0.98\"),",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:149:        \"E1_WLS\",",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py:26:ENGINE_1_WLS_NAME = \"E1_WLS_DECAY_0.98\"",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py:1014:    formula_version: str = \"E1_WLS_DECAY_0.98_V1\",",
+        "/Users/kojeffrey/4D-ML-LOOP/backend/app/core/temporal_context_engine.py:18:    \"E1_WLS_DECAY_0.98\","
+      ]
+    },
+    "Top100": {
+      "match_count_capped": 18,
+      "matches": [
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:553:        lines.append(\"Method: uses persisted PredictionLedger candidate rows. If full Top100 pools were not persisted, this section is marked as limited.\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:561:                lines.append(\"  Diagnosis: generation/repair issue likely OR pool depth not persisted. Requires reconstructed Top100 instrumentation.\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:621:        lines.append(\"  If actual prizes are absent from persisted or reconstructed Top100 pools.\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:623:        lines.append(\"  If actual prizes appear below Top5 but inside Top25/Top50/Top100.\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:655:        lines.append(\"CandidateTop100InstrumentationRecommended: YES\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:153:        \"Top100\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:259:            \"Step 150B reconstructed Top100 is not mixed with persisted engine rankings.\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:405:    lines.append(f\"  {label}Top100CoverageDraws: {top100_coverage}\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:408:    lines.append(f\"  {label}Top100RawHits: {top100_raw_hits}\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:413:        lines.append(f\"  {label}Top100CoverageRate: {top100_coverage / total * 100:.4f}%\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:561:                f\"NormHitDraws={norm:<2} NormTop100Coverage={norm100:<2}\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:589:                f\"Top100Hit={r['exact_top100_hit_count']} \"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:597:                f\"Top100Hit={r['normalized_top100_hit_count']} \"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:611:    lines.append(\"  If normalized Top100 remains random-like or live Top100 remains zero, bucket normalization alone is insufficient.\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/merge_step_150b_workers.py:63:    lines.append(f\"ReconstructedPoolTop100Coverage: {pool100} ({pct(pool100,total):.4f}%)\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/merge_step_150b_workers.py:81:            f\"PoolTop100Coverage={c100:<4} ({pct(c100,n):6.3f}%)\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/merge_step_150b_workers.py:127:        lines.append(\"Reconstructed Top100 coverage exceeds baseline Top5 coverage, indicating ranking/repair opportunity.\")",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/merge_step_150b_workers.py:129:        lines.append(\"Reconstructed Top100 coverage does not materially exceed baseline Top5 coverage; generation weakness remains possible.\")"
+      ]
+    },
+    "Top20": {
+      "match_count_capped": 3,
+      "matches": [
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:152:        \"Top20\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:257:            \"Top10/Top15/Top20 are unavailable for engine/mode groups whose persisted MaxRank is below the cutoff.\",",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:1053:        \"Engine/Mode                                              Top5 Rows HitRate Enrich   Top10 HitRate   Top15 HitRate   Top20 HitRate\","
+      ]
+    },
+    "candidate": {
+      "match_count_capped": 40,
+      "matches": [
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1032:        flat_candidates: List[str] = []",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1038:                    flat_candidates.append(value)",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1040:                if len(flat_candidates) == 5:",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1042:            if len(flat_candidates) == 5:",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1045:        if len(flat_candidates) < 5:",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1046:            raise RuntimeError(f\"Unable to produce 5 unique SP candidates: {flat_candidates}\")",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1049:        hit_count = gw.verify_predictions(target_draw_no, flat_candidates)",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1052:        print_kv(\"SP_TOP5_INPUT\", flat_candidates)",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:236:        flat_candidates = []",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:242:                    flat_candidates.append(value)",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:244:                if len(flat_candidates) == 5:",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:246:            if len(flat_candidates) == 5:",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:249:        if len(flat_candidates) < 5:",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:251:                f\"Unable to produce 5 unique SP smoke candidates. \"",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:252:                f\"Produced: {flat_candidates}\"",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:259:            predictions=flat_candidates,",
+        "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:263:        print_kv(\"SP_TOP5_INPUT\", flat_candidates)",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:94:        self.candidate_last_seen: dict[str, int] = {}",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:95:        self.candidate_appearances: Counter[str] = Counter()",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:96:        self.candidate_hits: Counter[str] = Counter()",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:110:            self.candidate_last_seen[number] = pair.source",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:111:            self.candidate_appearances[number] += 1",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:114:                self.candidate_hits[number] += 1",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:260:        candidate = LedgerPair(",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:269:            selected[(source, target)] = candidate",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:379:    appearances = state.candidate_appearances[number]",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:381:        score += 20.0 * state.candidate_hits[number] / appearances",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:424:        for number, draw_no in state.candidate_last_seen.items()",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:427:        and state.candidate_appearances[number] >= 2",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:447:            candidate_supports = support_set(",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:454:            if len(candidate_supports) < MIN_REPLACEMENT_SUPPORTS:",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:456:            appearances = state.candidate_appearances[number]",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:458:                state.candidate_hits[number] / appearances if appearances else 0.0",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:461:                appearances < 5 or state.candidate_hits[number] < 1",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:468:                + len(candidate_supports) * 7.0",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:477:                    supports=candidate_supports,",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:490:    replacement_reason = \"No candidate passed the strict multi-signal and score guards.\"",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:521:    candidate_details = []",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:524:            candidate_details.append(",
+        "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:536:            candidate_details.append("
+      ]
+    },
+    "rank": {
+      "match_count_capped": 40,
+      "matches": [
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:188:    raw_rank: int",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:376:    def _score_by_rank(rank: int, total: int, *, base_weight: float) -> float:",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:379:        rank = max(1, rank)",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:380:        return base_weight * ((total - rank + 1) / total)",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:406:                score = self._score_by_rank(",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:417:                        raw_rank=idx,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:418:                        source_detail=f\"{engine_name}:matrix_rank={idx}\",",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:451:                rank_score = self._score_by_rank(",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:457:                score = 0.70 * normalized_count_score + 0.30 * rank_score",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:464:                        raw_rank=idx,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:467:                            f\"count={t.transition_count} rank={idx}\"",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:497:            for rank, number in enumerate(numbers, start=1):",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:503:                score = self._score_by_rank(",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:504:                    rank,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:514:                        raw_rank=rank,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:517:                            f\"{formula.formula_version}:formula_rank={formula_idx}:output_rank={rank}\"",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:633:        rank_no = 0",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:635:        for raw_rank, number in enumerate(numbers, start=1):",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:640:            rank_no += 1",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:642:            score = self._score_by_rank(",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:643:                rank_no,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:653:                    raw_rank=rank_no,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:656:                        f\"source_draw_no={source_draw_no}:raw_rank={raw_rank}:rank={rank_no}\"",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:661:            if rank_no >= TOP_K:",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:701:        ranked_numbers = []",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:704:        for raw_rank, number in enumerate(numbers, start=1):",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:717:            ranked_numbers.append(",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:721:                    raw_rank,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:726:        ranked_numbers.sort(key=lambda item: (item[0], item[1], item[2], item[3]))",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:728:        total = max(TOP_K, len(ranked_numbers))",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:730:        for rank_no, item in enumerate(ranked_numbers[:TOP_K], start=1):",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:731:            _, nearest_distance, raw_rank, number = item",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:736:                self._score_by_rank(rank_no, total, base_weight=1.04) - distance_penalty,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:744:                    raw_rank=rank_no,",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:747:                        f\"source_draw_no={source_draw_no}:raw_rank={raw_rank}:\"",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:748:                        f\"rank={rank_no}:distance={nearest_distance}\"",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:877:        rank_no = 0",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:879:        for raw_rank, number in enumerate(numbers, start=1):",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:884:            rank_no += 1",
+        "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:886:            score = self._score_by_rank("
+      ]
+    }
+  },
+  "top10_persisted": false,
+  "top15_persisted": false,
+  "top20_persisted": false
+}

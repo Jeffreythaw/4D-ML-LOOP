@@ -1,0 +1,14 @@
+{
+  "completed": true,
+  "pairs_processed": 361,
+  "record_counts": {
+    "consensus_candidate": 7093,
+    "dropped_hit": 14,
+    "recall_depth": 2727
+  },
+  "rows_path": "/Users/kojeffrey/4D-ML-LOOP/reports/tmp_step152/step152_worker_T4_rows.jsonl",
+  "rows_written": 9834,
+  "source_max": 5496,
+  "source_min": 5136,
+  "worker": "T4"
+}

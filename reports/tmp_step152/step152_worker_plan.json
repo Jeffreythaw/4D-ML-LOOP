@@ -1,0 +1,35 @@
+{
+  "eligible_source_count": 1447,
+  "eligible_source_max": 5496,
+  "eligible_source_min": 4050,
+  "workers": [
+    {
+      "command": "PYTHONPATH=\"$PWD/backend:$PWD\" .venv/bin/python scripts/run_global_ml_diagnostics.py --worker T1 --source-min 4050 --source-max 4411",
+      "eligible_source_count": 362,
+      "source_max": 4411,
+      "source_min": 4050,
+      "worker": "T1"
+    },
+    {
+      "command": "PYTHONPATH=\"$PWD/backend:$PWD\" .venv/bin/python scripts/run_global_ml_diagnostics.py --worker T2 --source-min 4412 --source-max 4773",
+      "eligible_source_count": 362,
+      "source_max": 4773,
+      "source_min": 4412,
+      "worker": "T2"
+    },
+    {
+      "command": "PYTHONPATH=\"$PWD/backend:$PWD\" .venv/bin/python scripts/run_global_ml_diagnostics.py --worker T3 --source-min 4774 --source-max 5135",
+      "eligible_source_count": 362,
+      "source_max": 5135,
+      "source_min": 4774,
+      "worker": "T3"
+    },
+    {
+      "command": "PYTHONPATH=\"$PWD/backend:$PWD\" .venv/bin/python scripts/run_global_ml_diagnostics.py --worker T4 --source-min 5136 --source-max 5496",
+      "eligible_source_count": 361,
+      "source_max": 5496,
+      "source_min": 5136,
+      "worker": "T4"
+    }
+  ]
+}

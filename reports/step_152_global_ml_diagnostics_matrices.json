@@ -1,0 +1,5024 @@
+{
+  "consensus": {
+    "by_day_type": {
+      "Saturday": {
+        "2_plus": {
+          "candidate_instances": 170,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 142,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002297058823529412,
+          "unique_candidate_numbers": 151
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 43,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 37,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 88,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 9300,
+          "draw_hit_rate_if_consensus_exists": 0.04564315352697095,
+          "draw_instances": 482,
+          "enrichment_vs_random": 1.0761240817854303,
+          "exact_hits": 23,
+          "hit_probability_per_candidate": 0.0024731182795698927,
+          "random_candidate_hit_probability": 0.0022981720430107527,
+          "unique_candidate_numbers": 4178
+        },
+        "exactly_2": {
+          "candidate_instances": 170,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 142,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002297058823529412,
+          "unique_candidate_numbers": 151
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "Special": {
+        "2_plus": {
+          "candidate_instances": 289,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 261,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002296539792387543,
+          "unique_candidate_numbers": 246
+        },
+        "3_plus": {
+          "candidate_instances": 1,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 2,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 81,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 75,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 2,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 127,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 18661,
+          "draw_hit_rate_if_consensus_exists": 0.0498960498960499,
+          "draw_instances": 962,
+          "enrichment_vs_random": 1.1197085025531688,
+          "exact_hits": 48,
+          "hit_probability_per_candidate": 0.0025722094207170036,
+          "random_candidate_hit_probability": 0.002297213439794223,
+          "unique_candidate_numbers": 6652
+        },
+        "exactly_2": {
+          "candidate_instances": 288,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 260,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022965277777777775,
+          "unique_candidate_numbers": 246
+        },
+        "exactly_3": {
+          "candidate_instances": 1,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "Sunday": {
+        "2_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {},
+        "exactly_1": {
+          "candidate_instances": 20,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 20
+        },
+        "exactly_2": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "Wednesday": {
+        "2_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {},
+        "exactly_1": {
+          "candidate_instances": 40,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 2,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 39
+        },
+        "exactly_2": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      }
+    },
+    "by_month": {
+      "1": {
+        "2_plus": {
+          "candidate_instances": 49,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 43,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022979591836734693,
+          "unique_candidate_numbers": 46
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 14,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 13,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 22,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2542,
+          "draw_hit_rate_if_consensus_exists": 0.022727272727272728,
+          "draw_instances": 132,
+          "enrichment_vs_random": 0.5134524543027316,
+          "exact_hits": 3,
+          "hit_probability_per_candidate": 0.0011801730920535012,
+          "random_candidate_hit_probability": 0.0022985051140833987,
+          "unique_candidate_numbers": 1684
+        },
+        "exactly_2": {
+          "candidate_instances": 49,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 43,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022979591836734693,
+          "unique_candidate_numbers": 46
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "10": {
+        "2_plus": {
+          "candidate_instances": 42,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 35,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022976190476190475,
+          "unique_candidate_numbers": 38
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 12,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 11,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 18,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2296,
+          "draw_hit_rate_if_consensus_exists": 0.058823529411764705,
+          "draw_instances": 119,
+          "enrichment_vs_random": 1.3275175421960934,
+          "exact_hits": 7,
+          "hit_probability_per_candidate": 0.003048780487804878,
+          "random_candidate_hit_probability": 0.002296602787456446,
+          "unique_candidate_numbers": 1531
+        },
+        "exactly_2": {
+          "candidate_instances": 42,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 35,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022976190476190475,
+          "unique_candidate_numbers": 38
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "11": {
+        "2_plus": {
+          "candidate_instances": 30,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 23,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022833333333333334,
+          "unique_candidate_numbers": 25
+        },
+        "3_plus": {
+          "candidate_instances": 1,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 9,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 7,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 12,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2259,
+          "draw_hit_rate_if_consensus_exists": 0.05172413793103448,
+          "draw_instances": 116,
+          "enrichment_vs_random": 1.1559134606122488,
+          "exact_hits": 6,
+          "hit_probability_per_candidate": 0.0026560424966799467,
+          "random_candidate_hit_probability": 0.0022977866312527667,
+          "unique_candidate_numbers": 1500
+        },
+        "exactly_2": {
+          "candidate_instances": 29,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 22,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002282758620689655,
+          "unique_candidate_numbers": 25
+        },
+        "exactly_3": {
+          "candidate_instances": 1,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "12": {
+        "2_plus": {
+          "candidate_instances": 39,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 33,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 33
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 8,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 9,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 22,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2322,
+          "draw_hit_rate_if_consensus_exists": 0.041666666666666664,
+          "draw_instances": 120,
+          "enrichment_vs_random": 0.9365751320570938,
+          "exact_hits": 5,
+          "hit_probability_per_candidate": 0.002153316106804479,
+          "random_candidate_hit_probability": 0.002299138673557278,
+          "unique_candidate_numbers": 1544
+        },
+        "exactly_2": {
+          "candidate_instances": 39,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 33,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 33
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2": {
+        "2_plus": {
+          "candidate_instances": 26,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 24,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002296153846153846,
+          "unique_candidate_numbers": 25
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 8,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 8,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 10,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2368,
+          "draw_hit_rate_if_consensus_exists": 0.04132231404958678,
+          "draw_instances": 121,
+          "enrichment_vs_random": 1.1036309458117206,
+          "exact_hits": 6,
+          "hit_probability_per_candidate": 0.002533783783783784,
+          "random_candidate_hit_probability": 0.0022958614864864867,
+          "unique_candidate_numbers": 1556
+        },
+        "exactly_2": {
+          "candidate_instances": 26,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 24,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002296153846153846,
+          "unique_candidate_numbers": 25
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "3": {
+        "2_plus": {
+          "candidate_instances": 44,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 39,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022931818181818183,
+          "unique_candidate_numbers": 41
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 10,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 17,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 2,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 15,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2572,
+          "draw_hit_rate_if_consensus_exists": 0.045112781954887216,
+          "draw_instances": 133,
+          "enrichment_vs_random": 1.016914680858276,
+          "exact_hits": 6,
+          "hit_probability_per_candidate": 0.0023328149300155523,
+          "random_candidate_hit_probability": 0.0022940124416796267,
+          "unique_candidate_numbers": 1734
+        },
+        "exactly_2": {
+          "candidate_instances": 44,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 39,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022931818181818183,
+          "unique_candidate_numbers": 41
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "4": {
+        "2_plus": {
+          "candidate_instances": 48,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 43,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.00229375,
+          "unique_candidate_numbers": 47
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 13,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 14,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 20,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2264,
+          "draw_hit_rate_if_consensus_exists": 0.05084745762711865,
+          "draw_instances": 118,
+          "enrichment_vs_random": 1.1534468837710026,
+          "exact_hits": 6,
+          "hit_probability_per_candidate": 0.00265017667844523,
+          "random_candidate_hit_probability": 0.002297614840989399,
+          "unique_candidate_numbers": 1515
+        },
+        "exactly_2": {
+          "candidate_instances": 48,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 43,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.00229375,
+          "unique_candidate_numbers": 47
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "5": {
+        "2_plus": {
+          "candidate_instances": 35,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 33,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002297142857142857,
+          "unique_candidate_numbers": 34
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 10,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 8,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 17,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2310,
+          "draw_hit_rate_if_consensus_exists": 0.03361344537815126,
+          "draw_instances": 119,
+          "enrichment_vs_random": 0.7531254707034193,
+          "exact_hits": 4,
+          "hit_probability_per_candidate": 0.0017316017316017316,
+          "random_candidate_hit_probability": 0.002299220779220779,
+          "unique_candidate_numbers": 1597
+        },
+        "exactly_2": {
+          "candidate_instances": 35,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 33,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002297142857142857,
+          "unique_candidate_numbers": 34
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "6": {
+        "2_plus": {
+          "candidate_instances": 32,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 27,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 27
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 6,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 7,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 19,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2216,
+          "draw_hit_rate_if_consensus_exists": 0.03508771929824561,
+          "draw_instances": 114,
+          "enrichment_vs_random": 0.7854225573358468,
+          "exact_hits": 4,
+          "hit_probability_per_candidate": 0.0018050541516245488,
+          "random_candidate_hit_probability": 0.0022981949458483752,
+          "unique_candidate_numbers": 1517
+        },
+        "exactly_2": {
+          "candidate_instances": 32,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 27,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 27
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "7": {
+        "2_plus": {
+          "candidate_instances": 32,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 30,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 29
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 11,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 5,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 15,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2316,
+          "draw_hit_rate_if_consensus_exists": 0.03361344537815126,
+          "draw_instances": 119,
+          "enrichment_vs_random": 0.7509198768491402,
+          "exact_hits": 4,
+          "hit_probability_per_candidate": 0.0017271157167530224,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1522
+        },
+        "exactly_2": {
+          "candidate_instances": 32,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 30,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 29
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "8": {
+        "2_plus": {
+          "candidate_instances": 45,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 41,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 42
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 14,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 6,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 24,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2310,
+          "draw_hit_rate_if_consensus_exists": 0.10833333333333334,
+          "draw_instances": 120,
+          "enrichment_vs_random": 2.450518378887842,
+          "exact_hits": 13,
+          "hit_probability_per_candidate": 0.005627705627705628,
+          "random_candidate_hit_probability": 0.0022965367965367962,
+          "unique_candidate_numbers": 1544
+        },
+        "exactly_2": {
+          "candidate_instances": 45,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 41,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 42
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "9": {
+        "2_plus": {
+          "candidate_instances": 37,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 32,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 28
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 9,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 7,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 21,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2246,
+          "draw_hit_rate_if_consensus_exists": 0.0603448275862069,
+          "draw_instances": 116,
+          "enrichment_vs_random": 1.356641730299624,
+          "exact_hits": 7,
+          "hit_probability_per_candidate": 0.003116651825467498,
+          "random_candidate_hit_probability": 0.0022973285841495993,
+          "unique_candidate_numbers": 1472
+        },
+        "exactly_2": {
+          "candidate_instances": 37,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 32,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 28
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      }
+    },
+    "by_risk_bucket": {
+      "EXTREME_RISK": {
+        "2_plus": {
+          "candidate_instances": 230,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 199,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002296086956521739,
+          "unique_candidate_numbers": 203
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 2,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 70,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 53,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 2,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 102,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 14500,
+          "draw_hit_rate_if_consensus_exists": 0.04679144385026738,
+          "draw_instances": 748,
+          "enrichment_vs_random": 1.0506156607772155,
+          "exact_hits": 35,
+          "hit_probability_per_candidate": 0.002413793103448276,
+          "random_candidate_hit_probability": 0.002297503448275862,
+          "unique_candidate_numbers": 5890
+        },
+        "exactly_2": {
+          "candidate_instances": 230,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 199,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002296086956521739,
+          "unique_candidate_numbers": 203
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "HIGH_RISK": {
+        "2_plus": {
+          "candidate_instances": 132,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 118,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022962121212121212,
+          "unique_candidate_numbers": 115
+        },
+        "3_plus": {
+          "candidate_instances": 1,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 32,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 35,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 62,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 7395,
+          "draw_hit_rate_if_consensus_exists": 0.04699738903394256,
+          "draw_instances": 383,
+          "enrichment_vs_random": 1.1186011598127816,
+          "exact_hits": 19,
+          "hit_probability_per_candidate": 0.0025693035835023664,
+          "random_candidate_hit_probability": 0.002296889790398918,
+          "unique_candidate_numbers": 4065
+        },
+        "exactly_2": {
+          "candidate_instances": 131,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 117,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.00229618320610687,
+          "unique_candidate_numbers": 115
+        },
+        "exactly_3": {
+          "candidate_instances": 1,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "LOW_RISK": {
+        "2_plus": {
+          "candidate_instances": 36,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 31,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 34
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 4,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 6,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 26,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2528,
+          "draw_hit_rate_if_consensus_exists": 0.05384615384615385,
+          "draw_instances": 130,
+          "enrichment_vs_random": 1.2047363348478592,
+          "exact_hits": 7,
+          "hit_probability_per_candidate": 0.002768987341772152,
+          "random_candidate_hit_probability": 0.002298417721518987,
+          "unique_candidate_numbers": 1844
+        },
+        "exactly_2": {
+          "candidate_instances": 36,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 31,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 34
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "MEDIUM_RISK": {
+        "2_plus": {
+          "candidate_instances": 61,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 55,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022983606557377047,
+          "unique_candidate_numbers": 54
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 18,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 18,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 25,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3598,
+          "draw_hit_rate_if_consensus_exists": 0.053763440860215055,
+          "draw_instances": 186,
+          "enrichment_vs_random": 1.209248331237303,
+          "exact_hits": 10,
+          "hit_probability_per_candidate": 0.0027793218454697055,
+          "random_candidate_hit_probability": 0.0022983879933296276,
+          "unique_candidate_numbers": 2507
+        },
+        "exactly_2": {
+          "candidate_instances": 61,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 55,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022983606557377047,
+          "unique_candidate_numbers": 54
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      }
+    },
+    "by_year": {
+      "2017": {
+        "2_plus": {
+          "candidate_instances": 52,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 48,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002298076923076923,
+          "unique_candidate_numbers": 49
+        },
+        "3_plus": {
+          "candidate_instances": 1,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 14,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 11,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 25,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3015,
+          "draw_hit_rate_if_consensus_exists": 0.057692307692307696,
+          "draw_instances": 156,
+          "enrichment_vs_random": 1.298944968031521,
+          "exact_hits": 9,
+          "hit_probability_per_candidate": 0.0029850746268656717,
+          "random_candidate_hit_probability": 0.0022980762852404645,
+          "unique_candidate_numbers": 2197
+        },
+        "exactly_2": {
+          "candidate_instances": 51,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 47,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022980392156862744,
+          "unique_candidate_numbers": 48
+        },
+        "exactly_3": {
+          "candidate_instances": 1,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 1,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 1
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2018": {
+        "2_plus": {
+          "candidate_instances": 38,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 34,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 36
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 11,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 8,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 19,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3044,
+          "draw_hit_rate_if_consensus_exists": 0.04487179487179487,
+          "draw_instances": 156,
+          "enrichment_vs_random": 1.0004001600640255,
+          "exact_hits": 7,
+          "hit_probability_per_candidate": 0.0022996057818659658,
+          "random_candidate_hit_probability": 0.0022986859395532195,
+          "unique_candidate_numbers": 2175
+        },
+        "exactly_2": {
+          "candidate_instances": 38,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 34,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 36
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2019": {
+        "2_plus": {
+          "candidate_instances": 48,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 38,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.00229375,
+          "unique_candidate_numbers": 43
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 11,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 12,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 24,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3044,
+          "draw_hit_rate_if_consensus_exists": 0.044585987261146494,
+          "draw_instances": 157,
+          "enrichment_vs_random": 1.0006003602161297,
+          "exact_hits": 7,
+          "hit_probability_per_candidate": 0.0022996057818659658,
+          "random_candidate_hit_probability": 0.002298226018396846,
+          "unique_candidate_numbers": 2186
+        },
+        "exactly_2": {
+          "candidate_instances": 48,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 38,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.00229375,
+          "unique_candidate_numbers": 43
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2020": {
+        "2_plus": {
+          "candidate_instances": 30,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 26,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023000000000000004,
+          "unique_candidate_numbers": 28
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 7,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 8,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 14,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 2400,
+          "draw_hit_rate_if_consensus_exists": 0.04878048780487805,
+          "draw_instances": 123,
+          "enrichment_vs_random": 1.0893246187363834,
+          "exact_hits": 6,
+          "hit_probability_per_candidate": 0.0025,
+          "random_candidate_hit_probability": 0.002295,
+          "unique_candidate_numbers": 1792
+        },
+        "exactly_2": {
+          "candidate_instances": 30,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 26,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023000000000000004,
+          "unique_candidate_numbers": 28
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2021": {
+        "2_plus": {
+          "candidate_instances": 48,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 39,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 45
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 14,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 11,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 22,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3044,
+          "draw_hit_rate_if_consensus_exists": 0.025477707006369428,
+          "draw_instances": 157,
+          "enrichment_vs_random": 0.5719842132357147,
+          "exact_hits": 4,
+          "hit_probability_per_candidate": 0.001314060446780552,
+          "random_candidate_hit_probability": 0.002297371879106439,
+          "unique_candidate_numbers": 2189
+        },
+        "exactly_2": {
+          "candidate_instances": 48,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 39,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0023,
+          "unique_candidate_numbers": 45
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2022": {
+        "2_plus": {
+          "candidate_instances": 63,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 58,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022936507936507935,
+          "unique_candidate_numbers": 58
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+LINEAR": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 16,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 15,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 30,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3014,
+          "draw_hit_rate_if_consensus_exists": 0.03821656050955414,
+          "draw_instances": 157,
+          "enrichment_vs_random": 0.8671773377655732,
+          "exact_hits": 6,
+          "hit_probability_per_candidate": 0.0019907100199071004,
+          "random_candidate_hit_probability": 0.0022956204379562042,
+          "unique_candidate_numbers": 2211
+        },
+        "exactly_2": {
+          "candidate_instances": 63,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 58,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022936507936507935,
+          "unique_candidate_numbers": 58
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2023": {
+        "2_plus": {
+          "candidate_instances": 47,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 44,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002297872340425532,
+          "unique_candidate_numbers": 45
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 9,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 22,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 16,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3026,
+          "draw_hit_rate_if_consensus_exists": 0.07692307692307693,
+          "draw_instances": 156,
+          "enrichment_vs_random": 1.725129384703853,
+          "exact_hits": 12,
+          "hit_probability_per_candidate": 0.0039656311962987445,
+          "random_candidate_hit_probability": 0.0022987442167878387,
+          "unique_candidate_numbers": 2223
+        },
+        "exactly_2": {
+          "candidate_instances": 47,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 44,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002297872340425532,
+          "unique_candidate_numbers": 45
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2024": {
+        "2_plus": {
+          "candidate_instances": 44,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 39,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022931818181818183,
+          "unique_candidate_numbers": 40
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 18,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 7,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 19,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3052,
+          "draw_hit_rate_if_consensus_exists": 0.03821656050955414,
+          "draw_instances": 157,
+          "enrichment_vs_random": 0.8554076017222206,
+          "exact_hits": 6,
+          "hit_probability_per_candidate": 0.001965923984272608,
+          "random_candidate_hit_probability": 0.0022982306684141544,
+          "unique_candidate_numbers": 2215
+        },
+        "exactly_2": {
+          "candidate_instances": 44,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 39,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022931818181818183,
+          "unique_candidate_numbers": 40
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2025": {
+        "2_plus": {
+          "candidate_instances": 58,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 50,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022982758620689655,
+          "unique_candidate_numbers": 50
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 16,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "DELTA+WLS": {
+            "candidate_instances": 1,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 11,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 30,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 3004,
+          "draw_hit_rate_if_consensus_exists": 0.0641025641025641,
+          "draw_instances": 156,
+          "enrichment_vs_random": 1.593879502709595,
+          "exact_hits": 11,
+          "hit_probability_per_candidate": 0.0036617842876165113,
+          "random_candidate_hit_probability": 0.002297403462050599,
+          "unique_candidate_numbers": 2186
+        },
+        "exactly_2": {
+          "candidate_instances": 58,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 50,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.0022982758620689655,
+          "unique_candidate_numbers": 50
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      },
+      "2026": {
+        "2_plus": {
+          "candidate_instances": 31,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 27,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002293548387096774,
+          "unique_candidate_numbers": 30
+        },
+        "3_plus": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "engine_combinations": {
+          "DELTA+TEMPORAL": {
+            "candidate_instances": 8,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "LINEAR+TEMPORAL": {
+            "candidate_instances": 7,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          },
+          "TEMPORAL+WLS": {
+            "candidate_instances": 16,
+            "exact_hits": 0,
+            "hit_probability": 0.0
+          }
+        },
+        "exactly_1": {
+          "candidate_instances": 1378,
+          "draw_hit_rate_if_consensus_exists": 0.041666666666666664,
+          "draw_instances": 72,
+          "enrichment_vs_random": 0.9476277718112326,
+          "exact_hits": 3,
+          "hit_probability_per_candidate": 0.0021770682148040637,
+          "random_candidate_hit_probability": 0.002297387518142235,
+          "unique_candidate_numbers": 1114
+        },
+        "exactly_2": {
+          "candidate_instances": 31,
+          "draw_hit_rate_if_consensus_exists": 0.0,
+          "draw_instances": 27,
+          "enrichment_vs_random": 0.0,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": 0.0,
+          "random_candidate_hit_probability": 0.002293548387096774,
+          "unique_candidate_numbers": 30
+        },
+        "exactly_3": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        },
+        "exactly_4": {
+          "candidate_instances": 0,
+          "draw_hit_rate_if_consensus_exists": null,
+          "draw_instances": 0,
+          "enrichment_vs_random": null,
+          "exact_hits": 0,
+          "hit_probability_per_candidate": null,
+          "random_candidate_hit_probability": null,
+          "unique_candidate_numbers": 0
+        }
+      }
+    },
+    "global": {
+      "2_plus": {
+        "candidate_instances": 459,
+        "draw_hit_rate_if_consensus_exists": 0.0,
+        "draw_instances": 403,
+        "enrichment_vs_random": 0.0,
+        "exact_hits": 0,
+        "hit_probability_per_candidate": 0.0,
+        "random_candidate_hit_probability": 0.002296732026143791,
+        "unique_candidate_numbers": 381
+      },
+      "3_plus": {
+        "candidate_instances": 1,
+        "draw_hit_rate_if_consensus_exists": 0.0,
+        "draw_instances": 1,
+        "enrichment_vs_random": 0.0,
+        "exact_hits": 0,
+        "hit_probability_per_candidate": 0.0,
+        "random_candidate_hit_probability": 0.0023,
+        "unique_candidate_numbers": 1
+      },
+      "engine_combinations": {
+        "DELTA+LINEAR": {
+          "candidate_instances": 3,
+          "exact_hits": 0,
+          "hit_probability": 0.0
+        },
+        "DELTA+TEMPORAL": {
+          "candidate_instances": 124,
+          "exact_hits": 0,
+          "hit_probability": 0.0
+        },
+        "DELTA+WLS": {
+          "candidate_instances": 1,
+          "exact_hits": 0,
+          "hit_probability": 0.0
+        },
+        "LINEAR+TEMPORAL": {
+          "candidate_instances": 112,
+          "exact_hits": 0,
+          "hit_probability": 0.0
+        },
+        "LINEAR+TEMPORAL+WLS": {
+          "candidate_instances": 1,
+          "exact_hits": 0,
+          "hit_probability": 0.0
+        },
+        "LINEAR+WLS": {
+          "candidate_instances": 3,
+          "exact_hits": 0,
+          "hit_probability": 0.0
+        },
+        "TEMPORAL+WLS": {
+          "candidate_instances": 215,
+          "exact_hits": 0,
+          "hit_probability": 0.0
+        }
+      },
+      "exactly_1": {
+        "candidate_instances": 28021,
+        "draw_hit_rate_if_consensus_exists": 0.04837595024187975,
+        "draw_instances": 1447,
+        "enrichment_vs_random": 1.1028389559998322,
+        "exact_hits": 71,
+        "hit_probability_per_candidate": 0.002533813925270333,
+        "random_candidate_hit_probability": 0.002297537561114878,
+        "unique_candidate_numbers": 7673
+      },
+      "exactly_2": {
+        "candidate_instances": 458,
+        "draw_hit_rate_if_consensus_exists": 0.0,
+        "draw_instances": 402,
+        "enrichment_vs_random": 0.0,
+        "exact_hits": 0,
+        "hit_probability_per_candidate": 0.0,
+        "random_candidate_hit_probability": 0.0022967248908296943,
+        "unique_candidate_numbers": 381
+      },
+      "exactly_3": {
+        "candidate_instances": 1,
+        "draw_hit_rate_if_consensus_exists": 0.0,
+        "draw_instances": 1,
+        "enrichment_vs_random": 0.0,
+        "exact_hits": 0,
+        "hit_probability_per_candidate": 0.0,
+        "random_candidate_hit_probability": 0.0023,
+        "unique_candidate_numbers": 1
+      },
+      "exactly_4": {
+        "candidate_instances": 0,
+        "draw_hit_rate_if_consensus_exists": null,
+        "draw_instances": 0,
+        "enrichment_vs_random": null,
+        "exact_hits": 0,
+        "hit_probability_per_candidate": null,
+        "random_candidate_hit_probability": null,
+        "unique_candidate_numbers": 0
+      }
+    }
+  },
+  "discovery": {
+    "candidate_depth_matrix": [
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_CROSS_PAIR_LINEAR",
+        "ledger_rows": 7220,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Engine_Grand_Loop",
+        "source_draws": 1444
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_CROSS_PAIR_LINEAR",
+        "ledger_rows": 270,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Historical",
+        "source_draws": 54
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_DELTA_ROTATION_LSTS",
+        "ledger_rows": 7220,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Engine_Grand_Loop",
+        "source_draws": 1444
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_DELTA_ROTATION_LSTS",
+        "ledger_rows": 270,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Historical",
+        "source_draws": 54
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_MIRROR_BASE5_LSTS",
+        "ledger_rows": 7220,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Engine_Grand_Loop",
+        "source_draws": 1444
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_MIRROR_BASE5_LSTS",
+        "ledger_rows": 270,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Historical",
+        "source_draws": 54
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_TEMPORAL_CONTEXT_MATCH",
+        "ledger_rows": 15,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Current",
+        "source_draws": 3
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_TEMPORAL_CONTEXT_MATCH",
+        "ledger_rows": 7220,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Temporal_Global_Loop",
+        "source_draws": 1444
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_WLS_DECAY_0.98",
+        "ledger_rows": 7220,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Engine_Grand_Loop",
+        "source_draws": 1444
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E1_WLS_DECAY_0.98",
+        "ledger_rows": 270,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Historical",
+        "source_draws": 54
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E2_META_ENSEMBLE_RANKER",
+        "ledger_rows": 7220,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Grand_Loop",
+        "source_draws": 1444
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E2_META_ENSEMBLE_RANKER",
+        "ledger_rows": 25,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Historical",
+        "source_draws": 5
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E2_WEIGHTED_META_ENSEMBLE_RANKER",
+        "ledger_rows": 7220,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Weighted_Grand_Loop",
+        "source_draws": 1444
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E3_POLYNOMIAL",
+        "ledger_rows": 1,
+        "max_rank": 3,
+        "min_rank": 3,
+        "mode": "Historical",
+        "source_draws": 1
+      },
+      {
+        "data_source_type": "PERSISTED_LEDGER",
+        "engine_source": "E4_MARKOV_TRANSITION_MASS",
+        "ledger_rows": 3,
+        "max_rank": 5,
+        "min_rank": 1,
+        "mode": "Historical",
+        "source_draws": 1
+      }
+    ],
+    "data_limitations": [
+      "Top10/Top15/Top20 are unavailable for engine/mode groups whose persisted MaxRank is below the cutoff.",
+      "Independent engine aliases are mapped only when matching persisted EngineSource values exist.",
+      "Step 150B reconstructed Top100 is not mixed with persisted engine rankings."
+    ],
+    "depth_reconstruction": {
+      "reason": "No globally persisted deterministic deeper rank snapshot was found; Step 150B reconstruction is separate experimental output and is not treated as an engine ledger.",
+      "status": "UNAVAILABLE"
+    },
+    "distinct_engine_sources": [
+      "E1_CROSS_PAIR_LINEAR",
+      "E1_DELTA_ROTATION_LSTS",
+      "E1_MIRROR_BASE5_LSTS",
+      "E1_TEMPORAL_CONTEXT_MATCH",
+      "E1_WLS_DECAY_0.98",
+      "E2_META_ENSEMBLE_RANKER",
+      "E2_WEIGHTED_META_ENSEMBLE_RANKER",
+      "E3_POLYNOMIAL",
+      "E4_MARKOV_TRANSITION_MASS"
+    ],
+    "distinct_modes": [
+      "Current",
+      "Engine_Grand_Loop",
+      "Grand_Loop",
+      "Historical",
+      "Temporal_Global_Loop",
+      "Weighted_Grand_Loop"
+    ],
+    "distinct_verification_statuses": [
+      "Pending",
+      "Verified"
+    ],
+    "drawhistory_columns": [
+      {
+        "column_id": 1,
+        "data_type": "int",
+        "max_length": 4,
+        "name": "DrawNo",
+        "nullable": false
+      },
+      {
+        "column_id": 2,
+        "data_type": "date",
+        "max_length": 3,
+        "name": "DrawDate",
+        "nullable": false
+      },
+      {
+        "column_id": 3,
+        "data_type": "varchar",
+        "max_length": 16,
+        "name": "DayType",
+        "nullable": false
+      },
+      {
+        "column_id": 4,
+        "data_type": "varchar",
+        "max_length": -1,
+        "name": "WinningNumbers",
+        "nullable": false
+      },
+      {
+        "column_id": 5,
+        "data_type": "datetime2",
+        "max_length": 7,
+        "name": "CreatedAt",
+        "nullable": false
+      }
+    ],
+    "engine_availability": {
+      "DELTA": {
+        "aliases_checked": [
+          "E1_DELTA",
+          "E1_DELTA_ROTATION_LSTS"
+        ],
+        "persisted_engine_sources": [
+          "E1_DELTA_ROTATION_LSTS"
+        ],
+        "status": "PERSISTED_LEDGER"
+      },
+      "LINEAR": {
+        "aliases_checked": [
+          "E1_LINEAR",
+          "E1_CROSS_PAIR_LINEAR"
+        ],
+        "persisted_engine_sources": [
+          "E1_CROSS_PAIR_LINEAR"
+        ],
+        "status": "PERSISTED_LEDGER"
+      },
+      "TEMPORAL": {
+        "aliases_checked": [
+          "E1_TEMPORAL_CONTEXT_MATCH"
+        ],
+        "persisted_engine_sources": [
+          "E1_TEMPORAL_CONTEXT_MATCH"
+        ],
+        "status": "PERSISTED_LEDGER"
+      },
+      "WLS": {
+        "aliases_checked": [
+          "E1_WLS",
+          "E1_WLS_DECAY_0.98"
+        ],
+        "persisted_engine_sources": [
+          "E1_WLS_DECAY_0.98"
+        ],
+        "status": "PERSISTED_LEDGER"
+      }
+    },
+    "generated_at": "2026-06-20T01:48:28.726733",
+    "maximum_persisted_rank": 5,
+    "predictionledger_columns": [
+      {
+        "column_id": 1,
+        "data_type": "bigint",
+        "max_length": 8,
+        "name": "LedgerId",
+        "nullable": false
+      },
+      {
+        "column_id": 2,
+        "data_type": "varchar",
+        "max_length": 20,
+        "name": "Mode",
+        "nullable": false
+      },
+      {
+        "column_id": 3,
+        "data_type": "int",
+        "max_length": 4,
+        "name": "SourceDrawNo",
+        "nullable": false
+      },
+      {
+        "column_id": 4,
+        "data_type": "int",
+        "max_length": 4,
+        "name": "TargetDrawNo",
+        "nullable": false
+      },
+      {
+        "column_id": 5,
+        "data_type": "varchar",
+        "max_length": 15,
+        "name": "DayType",
+        "nullable": false
+      },
+      {
+        "column_id": 6,
+        "data_type": "int",
+        "max_length": 4,
+        "name": "RankNo",
+        "nullable": false
+      },
+      {
+        "column_id": 7,
+        "data_type": "char",
+        "max_length": 4,
+        "name": "PredictedNumber",
+        "nullable": false
+      },
+      {
+        "column_id": 8,
+        "data_type": "varchar",
+        "max_length": 80,
+        "name": "EngineSource",
+        "nullable": true
+      },
+      {
+        "column_id": 9,
+        "data_type": "float",
+        "max_length": 8,
+        "name": "Score",
+        "nullable": true
+      },
+      {
+        "column_id": 10,
+        "data_type": "varchar",
+        "max_length": 20,
+        "name": "VerificationStatus",
+        "nullable": false
+      },
+      {
+        "column_id": 11,
+        "data_type": "int",
+        "max_length": 4,
+        "name": "HitCount",
+        "nullable": true
+      },
+      {
+        "column_id": 12,
+        "data_type": "datetime2",
+        "max_length": 6,
+        "name": "CreatedAt",
+        "nullable": false
+      },
+      {
+        "column_id": 13,
+        "data_type": "datetime2",
+        "max_length": 6,
+        "name": "VerifiedAt",
+        "nullable": true
+      }
+    ],
+    "rank_score_columns": [
+      "RankNo",
+      "Score"
+    ],
+    "repo_search": {
+      "E1_DELTA": {
+        "match_count_capped": 13,
+        "matches": [
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_global_loop.py:36:    \"E1_DELTA_ROTATION_LSTS\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_global_loop.py:41:TEMPORAL_COLD_START_FALLBACK_ENGINE = \"E1_DELTA_ROTATION_LSTS\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_underlying_grand_ledger.py:36:    \"E1_DELTA_ROTATION_LSTS\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:37:    \"DELTA\": (\"E1_DELTA\", \"E1_DELTA_ROTATION_LSTS\"),",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:150:        \"E1_DELTA\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_weighted_grand_master_loop.py:38:    \"E1_DELTA_ROTATION_LSTS\",",
+          "/Users/kojeffrey/4D-ML-LOOP/backend/app/core/temporal_context_engine.py:14:FALLBACK_ENGINE_SOURCE = \"E1_DELTA_ROTATION_LSTS\"",
+          "/Users/kojeffrey/4D-ML-LOOP/backend/app/core/temporal_context_engine.py:20:    \"E1_DELTA_ROTATION_LSTS\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:58:    \"E1_DELTA_ROTATION_LSTS\",",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1313:                \"E1_DELTA_ROTATION_LSTS\",",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1324:                \"E1_DELTA_ROTATION_LSTS\",",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py:28:ENGINE_1_DELTA_ROTATION_NAME = \"E1_DELTA_ROTATION_LSTS\"",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py:694:    formula_version: str = \"E1_DELTA_ROTATION_LSTS_V1\","
+        ]
+      },
+      "E1_LINEAR": {
+        "match_count_capped": 2,
+        "matches": [
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:35:    \"LINEAR\": (\"E1_LINEAR\", \"E1_CROSS_PAIR_LINEAR\"),",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:148:        \"E1_LINEAR\","
+        ]
+      },
+      "E1_TEMPORAL_CONTEXT_MATCH": {
+        "match_count_capped": 17,
+        "matches": [
+          "/Users/kojeffrey/4D-ML-LOOP/sql/step_144_temporal_global_loop_mode.sql:62:    @EngineSource = 'E1_TEMPORAL_CONTEXT_MATCH',",
+          "/Users/kojeffrey/4D-ML-LOOP/sql/step_144_temporal_global_loop_mode.sql:68:    @EngineSource = 'E1_TEMPORAL_CONTEXT_MATCH',",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:24:BASELINE_ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine.py:25:BASELINE_ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_structural_streak_audit.py:26:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:57:    \"E1_TEMPORAL_CONTEXT_MATCH\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:615:        lines.append(\"  E1_TEMPORAL_CONTEXT_MATCH Current live streak: 3 misses observed.\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:636:        lines.append(\"  1. Temporal Base Stream: existing E1_TEMPORAL_CONTEXT_MATCH candidates.\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_global_loop.py:31:ENGINE_SOURCE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:24:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_shadow_champion_policy_board.py:25:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_step_150b_worker.py:26:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_streak_risk_gated_pruning_audit.py:28:ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/backend/app/core/temporal_context_engine.py:13:ENGINE_SOURCE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:38:    \"TEMPORAL\": (\"E1_TEMPORAL_CONTEXT_MATCH\",),",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:40:FINAL_ENGINE = \"E1_TEMPORAL_CONTEXT_MATCH\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:151:        \"E1_TEMPORAL_CONTEXT_MATCH\","
+        ]
+      },
+      "E1_WLS": {
+        "match_count_capped": 11,
+        "matches": [
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_global_loop.py:34:    \"E1_WLS_DECAY_0.98\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:59:    \"E1_WLS_DECAY_0.98\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_weighted_grand_master_loop.py:36:    \"E1_WLS_DECAY_0.98\",",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1311:                \"E1_WLS_DECAY_0.98\",",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1322:                \"E1_WLS_DECAY_0.98\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_underlying_grand_ledger.py:34:    \"E1_WLS_DECAY_0.98\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:36:    \"WLS\": (\"E1_WLS\", \"E1_WLS_DECAY_0.98\"),",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:149:        \"E1_WLS\",",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py:26:ENGINE_1_WLS_NAME = \"E1_WLS_DECAY_0.98\"",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step2_matrix_core.py:1014:    formula_version: str = \"E1_WLS_DECAY_0.98_V1\",",
+          "/Users/kojeffrey/4D-ML-LOOP/backend/app/core/temporal_context_engine.py:18:    \"E1_WLS_DECAY_0.98\","
+        ]
+      },
+      "Top100": {
+        "match_count_capped": 18,
+        "matches": [
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:553:        lines.append(\"Method: uses persisted PredictionLedger candidate rows. If full Top100 pools were not persisted, this section is marked as limited.\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:561:                lines.append(\"  Diagnosis: generation/repair issue likely OR pool depth not persisted. Requires reconstructed Top100 instrumentation.\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:621:        lines.append(\"  If actual prizes are absent from persisted or reconstructed Top100 pools.\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:623:        lines.append(\"  If actual prizes appear below Top5 but inside Top25/Top50/Top100.\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_master_forensic_audit.py:655:        lines.append(\"CandidateTop100InstrumentationRecommended: YES\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:153:        \"Top100\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:259:            \"Step 150B reconstructed Top100 is not mixed with persisted engine rankings.\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:405:    lines.append(f\"  {label}Top100CoverageDraws: {top100_coverage}\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:408:    lines.append(f\"  {label}Top100RawHits: {top100_raw_hits}\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:413:        lines.append(f\"  {label}Top100CoverageRate: {top100_coverage / total * 100:.4f}%\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:561:                f\"NormHitDraws={norm:<2} NormTop100Coverage={norm100:<2}\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:589:                f\"Top100Hit={r['exact_top100_hit_count']} \"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:597:                f\"Top100Hit={r['normalized_top100_hit_count']} \"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_temporal_bucket_audit.py:611:    lines.append(\"  If normalized Top100 remains random-like or live Top100 remains zero, bucket normalization alone is insufficient.\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/merge_step_150b_workers.py:63:    lines.append(f\"ReconstructedPoolTop100Coverage: {pool100} ({pct(pool100,total):.4f}%)\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/merge_step_150b_workers.py:81:            f\"PoolTop100Coverage={c100:<4} ({pct(c100,n):6.3f}%)\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/merge_step_150b_workers.py:127:        lines.append(\"Reconstructed Top100 coverage exceeds baseline Top5 coverage, indicating ranking/repair opportunity.\")",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/merge_step_150b_workers.py:129:        lines.append(\"Reconstructed Top100 coverage does not materially exceed baseline Top5 coverage; generation weakness remains possible.\")"
+        ]
+      },
+      "Top20": {
+        "match_count_capped": 3,
+        "matches": [
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:152:        \"Top20\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:257:            \"Top10/Top15/Top20 are unavailable for engine/mode groups whose persisted MaxRank is below the cutoff.\",",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/run_global_ml_diagnostics.py:1053:        \"Engine/Mode                                              Top5 Rows HitRate Enrich   Top10 HitRate   Top15 HitRate   Top20 HitRate\","
+        ]
+      },
+      "candidate": {
+        "match_count_capped": 40,
+        "matches": [
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1032:        flat_candidates: List[str] = []",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1038:                    flat_candidates.append(value)",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1040:                if len(flat_candidates) == 5:",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1042:            if len(flat_candidates) == 5:",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1045:        if len(flat_candidates) < 5:",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1046:            raise RuntimeError(f\"Unable to produce 5 unique SP candidates: {flat_candidates}\")",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1049:        hit_count = gw.verify_predictions(target_draw_no, flat_candidates)",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration_standalone.py:1052:        print_kv(\"SP_TOP5_INPUT\", flat_candidates)",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:236:        flat_candidates = []",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:242:                    flat_candidates.append(value)",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:244:                if len(flat_candidates) == 5:",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:246:            if len(flat_candidates) == 5:",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:249:        if len(flat_candidates) < 5:",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:251:                f\"Unable to produce 5 unique SP smoke candidates. \"",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:252:                f\"Produced: {flat_candidates}\"",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:259:            predictions=flat_candidates,",
+          "/Users/kojeffrey/4D-ML-LOOP/audit_step2_sql_integration.py:263:        print_kv(\"SP_TOP5_INPUT\", flat_candidates)",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:94:        self.candidate_last_seen: dict[str, int] = {}",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:95:        self.candidate_appearances: Counter[str] = Counter()",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:96:        self.candidate_hits: Counter[str] = Counter()",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:110:            self.candidate_last_seen[number] = pair.source",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:111:            self.candidate_appearances[number] += 1",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:114:                self.candidate_hits[number] += 1",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:260:        candidate = LedgerPair(",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:269:            selected[(source, target)] = candidate",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:379:    appearances = state.candidate_appearances[number]",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:381:        score += 20.0 * state.candidate_hits[number] / appearances",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:424:        for number, draw_no in state.candidate_last_seen.items()",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:427:        and state.candidate_appearances[number] >= 2",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:447:            candidate_supports = support_set(",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:454:            if len(candidate_supports) < MIN_REPLACEMENT_SUPPORTS:",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:456:            appearances = state.candidate_appearances[number]",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:458:                state.candidate_hits[number] / appearances if appearances else 0.0",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:461:                appearances < 5 or state.candidate_hits[number] < 1",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:468:                + len(candidate_supports) * 7.0",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:477:                    supports=candidate_supports,",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:490:    replacement_reason = \"No candidate passed the strict multi-signal and score guards.\"",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:521:    candidate_details = []",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:524:            candidate_details.append(",
+          "/Users/kojeffrey/4D-ML-LOOP/scripts/shadow_hybrid_engine_v2.py:536:            candidate_details.append("
+        ]
+      },
+      "rank": {
+        "match_count_capped": 40,
+        "matches": [
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:188:    raw_rank: int",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:376:    def _score_by_rank(rank: int, total: int, *, base_weight: float) -> float:",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:379:        rank = max(1, rank)",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:380:        return base_weight * ((total - rank + 1) / total)",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:406:                score = self._score_by_rank(",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:417:                        raw_rank=idx,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:418:                        source_detail=f\"{engine_name}:matrix_rank={idx}\",",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:451:                rank_score = self._score_by_rank(",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:457:                score = 0.70 * normalized_count_score + 0.30 * rank_score",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:464:                        raw_rank=idx,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:467:                            f\"count={t.transition_count} rank={idx}\"",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:497:            for rank, number in enumerate(numbers, start=1):",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:503:                score = self._score_by_rank(",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:504:                    rank,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:514:                        raw_rank=rank,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:517:                            f\"{formula.formula_version}:formula_rank={formula_idx}:output_rank={rank}\"",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:633:        rank_no = 0",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:635:        for raw_rank, number in enumerate(numbers, start=1):",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:640:            rank_no += 1",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:642:            score = self._score_by_rank(",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:643:                rank_no,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:653:                    raw_rank=rank_no,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:656:                        f\"source_draw_no={source_draw_no}:raw_rank={raw_rank}:rank={rank_no}\"",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:661:            if rank_no >= TOP_K:",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:701:        ranked_numbers = []",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:704:        for raw_rank, number in enumerate(numbers, start=1):",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:717:            ranked_numbers.append(",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:721:                    raw_rank,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:726:        ranked_numbers.sort(key=lambda item: (item[0], item[1], item[2], item[3]))",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:728:        total = max(TOP_K, len(ranked_numbers))",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:730:        for rank_no, item in enumerate(ranked_numbers[:TOP_K], start=1):",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:731:            _, nearest_distance, raw_rank, number = item",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:736:                self._score_by_rank(rank_no, total, base_weight=1.04) - distance_penalty,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:744:                    raw_rank=rank_no,",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:747:                        f\"source_draw_no={source_draw_no}:raw_rank={raw_rank}:\"",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:748:                        f\"rank={rank_no}:distance={nearest_distance}\"",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:877:        rank_no = 0",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:879:        for raw_rank, number in enumerate(numbers, start=1):",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:884:            rank_no += 1",
+          "/Users/kojeffrey/4D-ML-LOOP/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:886:            score = self._score_by_rank("
+        ]
+      }
+    },
+    "top10_persisted": false,
+    "top15_persisted": false,
+    "top20_persisted": false
+  },
+  "dropped_signals": {
+    "day_type": {
+      "Saturday": 16,
+      "Special": 34
+    },
+    "digit_sum_band": {
+      "00_09": 10,
+      "10_14": 6,
+      "15_19": 13,
+      "20_24": 15,
+      "25_36": 6
+    },
+    "first_pair": {
+      "00": 3,
+      "01": 1,
+      "09": 2,
+      "11": 1,
+      "13": 1,
+      "14": 1,
+      "16": 1,
+      "17": 3,
+      "20": 2,
+      "21": 1,
+      "22": 1,
+      "23": 1,
+      "30": 1,
+      "34": 1,
+      "38": 1,
+      "40": 1,
+      "43": 1,
+      "44": 1,
+      "46": 2,
+      "47": 2,
+      "49": 1,
+      "53": 1,
+      "54": 1,
+      "55": 1,
+      "58": 1,
+      "59": 1,
+      "66": 1,
+      "70": 2,
+      "71": 1,
+      "76": 1,
+      "83": 1,
+      "84": 1,
+      "85": 1,
+      "86": 2,
+      "87": 1,
+      "88": 1,
+      "92": 1,
+      "97": 2,
+      "98": 1
+    },
+    "last_pair": {
+      "00": 7,
+      "01": 2,
+      "08": 1,
+      "22": 1,
+      "23": 1,
+      "24": 1,
+      "25": 1,
+      "28": 1,
+      "29": 1,
+      "32": 2,
+      "37": 1,
+      "43": 1,
+      "46": 1,
+      "47": 1,
+      "48": 1,
+      "51": 1,
+      "52": 3,
+      "53": 1,
+      "54": 1,
+      "56": 1,
+      "58": 1,
+      "64": 1,
+      "66": 1,
+      "68": 1,
+      "69": 1,
+      "70": 3,
+      "73": 1,
+      "74": 2,
+      "75": 1,
+      "76": 1,
+      "81": 1,
+      "82": 1,
+      "85": 1,
+      "87": 1,
+      "89": 1,
+      "91": 1,
+      "98": 1
+    },
+    "mirror_signature": {
+      "0000": 3,
+      "0032": 1,
+      "0102": 1,
+      "0323": 1,
+      "0332": 1,
+      "0401": 2,
+      "0402": 1,
+      "0420": 1,
+      "1101": 1,
+      "1103": 1,
+      "1132": 1,
+      "1201": 1,
+      "1223": 2,
+      "1324": 1,
+      "1443": 1,
+      "2000": 2,
+      "2003": 1,
+      "2020": 1,
+      "2132": 1,
+      "2141": 1,
+      "2142": 1,
+      "2200": 1,
+      "2334": 1,
+      "3002": 1,
+      "3024": 1,
+      "3120": 1,
+      "3141": 1,
+      "3211": 1,
+      "3303": 1,
+      "3314": 1,
+      "3330": 1,
+      "3443": 2,
+      "4013": 1,
+      "4131": 1,
+      "4132": 1,
+      "4204": 1,
+      "4220": 2,
+      "4222": 1,
+      "4224": 1,
+      "4314": 1,
+      "4321": 1,
+      "4400": 1,
+      "4424": 1
+    },
+    "month": {
+      "1": 2,
+      "10": 3,
+      "11": 5,
+      "12": 5,
+      "2": 5,
+      "3": 5,
+      "4": 4,
+      "5": 1,
+      "6": 3,
+      "7": 3,
+      "8": 10,
+      "9": 4
+    },
+    "rank_bucket": {
+      "01_05": 50
+    },
+    "removed_by": {
+      "unknown": 50
+    },
+    "risk_bucket": {
+      "EXTREME_RISK": 25,
+      "HIGH_RISK": 12,
+      "LOW_RISK": 5,
+      "MEDIUM_RISK": 8
+    },
+    "source_engine": {
+      "E1_CROSS_PAIR_LINEAR": 14,
+      "E1_DELTA_ROTATION_LSTS": 18,
+      "E1_WLS_DECAY_0.98": 18
+    },
+    "total_dropped_hits": 50,
+    "weekday": {
+      "Friday": 16,
+      "Saturday": 16,
+      "Tuesday": 18
+    },
+    "year": {
+      "2017": 7,
+      "2018": 6,
+      "2019": 4,
+      "2020": 6,
+      "2021": 2,
+      "2022": 4,
+      "2023": 7,
+      "2024": 4,
+      "2025": 8,
+      "2026": 2
+    }
+  },
+  "multi_tier_recall": {
+    "by_day_type": {
+      "Saturday": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 43,
+          "enrichment_vs_random": 1.0919363639905693,
+          "hit_rate": 0.012489108335753703,
+          "random_expected_hit_rate": 0.011437578917246836,
+          "raw_hits": 43,
+          "raw_hits_per_draw": 0.012489108335753703,
+          "rows": 3443
+        }
+      },
+      "Special": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 63,
+          "enrichment_vs_random": 0.8030060497048787,
+          "hit_rate": 0.009180996793937628,
+          "random_expected_hit_rate": 0.011433284714743848,
+          "raw_hits": 63,
+          "raw_hits_per_draw": 0.009180996793937628,
+          "rows": 6862
+        }
+      },
+      "Sunday": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": 0.0,
+          "hit_rate": 0.0,
+          "random_expected_hit_rate": 0.011447221530143659,
+          "raw_hits": 0,
+          "raw_hits_per_draw": 0.0,
+          "rows": 6
+        }
+      },
+      "Wednesday": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": 0.0,
+          "hit_rate": 0.0,
+          "random_expected_hit_rate": 0.011447221530143659,
+          "raw_hits": 0,
+          "raw_hits_per_draw": 0.0,
+          "rows": 17
+        }
+      }
+    },
+    "by_decade": {
+      "2010s": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 31,
+          "enrichment_vs_random": 0.8254894211441042,
+          "hit_rate": 0.009442583003350593,
+          "random_expected_hit_rate": 0.011438769245841394,
+          "raw_hits": 31,
+          "raw_hits_per_draw": 0.009442583003350593,
+          "rows": 3283
+        }
+      },
+      "2020s": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 75,
+          "enrichment_vs_random": 0.9311612295074456,
+          "hit_rate": 0.0106458481192335,
+          "random_expected_hit_rate": 0.01143287304268973,
+          "raw_hits": 75,
+          "raw_hits_per_draw": 0.0106458481192335,
+          "rows": 7045
+        }
+      }
+    },
+    "by_risk_bucket": {
+      "EXTREME_RISK": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 56,
+          "enrichment_vs_random": 0.9110076439217383,
+          "hit_rate": 0.010416666666666666,
+          "random_expected_hit_rate": 0.011434225317610538,
+          "raw_hits": 56,
+          "raw_hits_per_draw": 0.010416666666666666,
+          "rows": 5376
+        }
+      },
+      "HIGH_RISK": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 27,
+          "enrichment_vs_random": 0.8816187427667497,
+          "hit_rate": 0.010078387458006719,
+          "random_expected_hit_rate": 0.01143168466039879,
+          "raw_hits": 27,
+          "raw_hits_per_draw": 0.010078387458006719,
+          "rows": 2679
+        }
+      },
+      "LOW_RISK": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 9,
+          "enrichment_vs_random": 0.8423206058737615,
+          "hit_rate": 0.009635974304068522,
+          "random_expected_hit_rate": 0.011439794107936932,
+          "raw_hits": 9,
+          "raw_hits_per_draw": 0.009635974304068522,
+          "rows": 934
+        }
+      },
+      "MEDIUM_RISK": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 14,
+          "enrichment_vs_random": 0.9139918156824461,
+          "hit_rate": 0.010455563853622106,
+          "random_expected_hit_rate": 0.011439450194436694,
+          "raw_hits": 14,
+          "raw_hits_per_draw": 0.010455563853622106,
+          "rows": 1339
+        }
+      }
+    },
+    "by_year": {
+      "2017": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 12,
+          "enrichment_vs_random": 0.9607716847147352,
+          "hit_rate": 0.01098901098901099,
+          "random_expected_hit_rate": 0.0114376923923125,
+          "raw_hits": 12,
+          "raw_hits_per_draw": 0.01098901098901099,
+          "rows": 1092
+        }
+      },
+      "2018": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 11,
+          "enrichment_vs_random": 0.8804628629492208,
+          "hit_rate": 0.010073260073260074,
+          "random_expected_hit_rate": 0.011440868771589554,
+          "raw_hits": 11,
+          "raw_hits_per_draw": 0.010073260073260074,
+          "rows": 1092
+        }
+      },
+      "2019": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 8,
+          "enrichment_vs_random": 0.6364313692822121,
+          "hit_rate": 0.007279344858962694,
+          "random_expected_hit_rate": 0.011437753087457921,
+          "raw_hits": 8,
+          "raw_hits_per_draw": 0.007279344858962694,
+          "rows": 1099
+        }
+      },
+      "2020": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 11,
+          "enrichment_vs_random": 1.1184265129388664,
+          "hit_rate": 0.012775842044134728,
+          "random_expected_hit_rate": 0.01142305005857194,
+          "raw_hits": 11,
+          "raw_hits_per_draw": 0.012775842044134728,
+          "rows": 861
+        }
+      },
+      "2021": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 7,
+          "enrichment_vs_random": 0.5570311559797124,
+          "hit_rate": 0.006369426751592357,
+          "random_expected_hit_rate": 0.01143459693989601,
+          "raw_hits": 7,
+          "raw_hits_per_draw": 0.006369426751592357,
+          "rows": 1099
+        }
+      },
+      "2022": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 7,
+          "enrichment_vs_random": 0.5574927890874584,
+          "hit_rate": 0.006369426751592357,
+          "random_expected_hit_rate": 0.011425128497210273,
+          "raw_hits": 7,
+          "raw_hits_per_draw": 0.006369426751592357,
+          "rows": 1099
+        }
+      },
+      "2023": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 16,
+          "enrichment_vs_random": 1.2806732551988664,
+          "hit_rate": 0.014652014652014652,
+          "random_expected_hit_rate": 0.011440868771589554,
+          "raw_hits": 16,
+          "raw_hits_per_draw": 0.014652014652014652,
+          "rows": 1092
+        }
+      },
+      "2024": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 9,
+          "enrichment_vs_random": 0.7159852904424886,
+          "hit_rate": 0.00818926296633303,
+          "random_expected_hit_rate": 0.011437753087457921,
+          "raw_hits": 9,
+          "raw_hits_per_draw": 0.00818926296633303,
+          "rows": 1099
+        }
+      },
+      "2025": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 20,
+          "enrichment_vs_random": 1.601730960378125,
+          "hit_rate": 0.018315018315018316,
+          "random_expected_hit_rate": 0.011434516013035448,
+          "raw_hits": 20,
+          "raw_hits_per_draw": 0.018315018315018316,
+          "rows": 1092
+        }
+      },
+      "2026": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 5,
+          "enrichment_vs_random": 0.622161744626659,
+          "hit_rate": 0.007112375533428165,
+          "random_expected_hit_rate": 0.011431714654355827,
+          "raw_hits": 5,
+          "raw_hits_per_draw": 0.007112375533428165,
+          "rows": 703
+        }
+      }
+    },
+    "global_by_engine_mode": {
+      "E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 14,
+          "enrichment_vs_random": 0.8478708182026242,
+          "hit_rate": 0.009695290858725761,
+          "random_expected_hit_rate": 0.011434867966417945,
+          "raw_hits": 14,
+          "raw_hits_per_draw": 0.009695290858725761,
+          "rows": 1444
+        }
+      },
+      "E1_CROSS_PAIR_LINEAR::Historical": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": 0.0,
+          "hit_rate": 0.0,
+          "random_expected_hit_rate": 0.011428522844588177,
+          "raw_hits": 0,
+          "raw_hits_per_draw": 0.0,
+          "rows": 53
+        }
+      },
+      "E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 18,
+          "enrichment_vs_random": 1.090119623403374,
+          "hit_rate": 0.012465373961218837,
+          "random_expected_hit_rate": 0.011434867966417945,
+          "raw_hits": 18,
+          "raw_hits_per_draw": 0.012465373961218837,
+          "rows": 1444
+        }
+      },
+      "E1_DELTA_ROTATION_LSTS::Historical": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 1,
+          "enrichment_vs_random": 1.650950414579303,
+          "hit_rate": 0.018867924528301886,
+          "random_expected_hit_rate": 0.011428522844588177,
+          "raw_hits": 1,
+          "raw_hits_per_draw": 0.018867924528301886,
+          "rows": 53
+        }
+      },
+      "E1_MIRROR_BASE5_LSTS::Engine_Grand_Loop": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 13,
+          "enrichment_vs_random": 0.7873086169024369,
+          "hit_rate": 0.009002770083102494,
+          "random_expected_hit_rate": 0.011434867966417945,
+          "raw_hits": 13,
+          "raw_hits_per_draw": 0.009002770083102494,
+          "rows": 1444
+        }
+      },
+      "E1_MIRROR_BASE5_LSTS::Historical": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": 0.0,
+          "hit_rate": 0.0,
+          "random_expected_hit_rate": 0.011428522844588177,
+          "raw_hits": 0,
+          "raw_hits_per_draw": 0.0,
+          "rows": 53
+        }
+      },
+      "E1_TEMPORAL_CONTEXT_MATCH::Current": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": 0.0,
+          "hit_rate": 0.0,
+          "random_expected_hit_rate": 0.011447221530143659,
+          "raw_hits": 0,
+          "raw_hits_per_draw": 0.0,
+          "rows": 3
+        }
+      },
+      "E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 21,
+          "enrichment_vs_random": 1.2718062273039363,
+          "hit_rate": 0.014542936288088643,
+          "random_expected_hit_rate": 0.011434867966417945,
+          "raw_hits": 21,
+          "raw_hits_per_draw": 0.014542936288088643,
+          "rows": 1444
+        }
+      },
+      "E1_WLS_DECAY_0.98::Engine_Grand_Loop": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 18,
+          "enrichment_vs_random": 1.090119623403374,
+          "hit_rate": 0.012465373961218837,
+          "random_expected_hit_rate": 0.011434867966417945,
+          "raw_hits": 18,
+          "raw_hits_per_draw": 0.012465373961218837,
+          "rows": 1444
+        }
+      },
+      "E1_WLS_DECAY_0.98::Historical": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 1,
+          "enrichment_vs_random": 1.650950414579303,
+          "hit_rate": 0.018867924528301886,
+          "random_expected_hit_rate": 0.011428522844588177,
+          "raw_hits": 1,
+          "raw_hits_per_draw": 0.018867924528301886,
+          "rows": 53
+        }
+      },
+      "E2_META_ENSEMBLE_RANKER::Grand_Loop": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 9,
+          "enrichment_vs_random": 0.545059811701687,
+          "hit_rate": 0.006232686980609419,
+          "random_expected_hit_rate": 0.011434867966417945,
+          "raw_hits": 9,
+          "raw_hits_per_draw": 0.006232686980609419,
+          "rows": 1444
+        }
+      },
+      "E2_META_ENSEMBLE_RANKER::Historical": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": 0.0,
+          "hit_rate": 0.0,
+          "random_expected_hit_rate": 0.011447221530143659,
+          "raw_hits": 0,
+          "raw_hits_per_draw": 0.0,
+          "rows": 4
+        }
+      },
+      "E2_WEIGHTED_META_ENSEMBLE_RANKER::Weighted_Grand_Loop": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 11,
+          "enrichment_vs_random": 0.666184214302062,
+          "hit_rate": 0.007617728531855956,
+          "random_expected_hit_rate": 0.011434867966417945,
+          "raw_hits": 11,
+          "raw_hits_per_draw": 0.007617728531855956,
+          "rows": 1444
+        }
+      },
+      "E3_POLYNOMIAL::Historical": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        }
+      },
+      "E4_MARKOV_TRANSITION_MASS::Historical": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": 0.0,
+          "hit_rate": 0.0,
+          "random_expected_hit_rate": 0.011447221530143659,
+          "raw_hits": 0,
+          "raw_hits_per_draw": 0.0,
+          "rows": 1
+        }
+      }
+    },
+    "recent_windows": {
+      "FULL_VERIFIED": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 106,
+          "enrichment_vs_random": 0.897559121687481,
+          "hit_rate": 0.010263361735089079,
+          "random_expected_hit_rate": 0.01143474729084493,
+          "raw_hits": 106,
+          "raw_hits_per_draw": 0.010263361735089079,
+          "rows": 10328
+        }
+      },
+      "RECENT_365": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 34,
+          "enrichment_vs_random": 1.0796918483722953,
+          "hit_rate": 0.012345679012345678,
+          "random_expected_hit_rate": 0.011434446810872549,
+          "raw_hits": 34,
+          "raw_hits_per_draw": 0.012345679012345678,
+          "rows": 2754
+        }
+      },
+      "RECENT_47": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 5,
+          "enrichment_vs_random": 0.8682819242637083,
+          "hit_rate": 0.00992063492063492,
+          "random_expected_hit_rate": 0.01142559189982849,
+          "raw_hits": 5,
+          "raw_hits_per_draw": 0.00992063492063492,
+          "rows": 504
+        }
+      },
+      "RECENT_90": {
+        "marginal_lift_top10_minus_top5": null,
+        "marginal_lift_top15_minus_top10": null,
+        "marginal_lift_top20_minus_top15": null,
+        "top10": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top15": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top20": {
+          "draws_with_hit": 0,
+          "enrichment_vs_random": null,
+          "hit_rate": null,
+          "random_expected_hit_rate": null,
+          "raw_hits": 0,
+          "raw_hits_per_draw": null,
+          "rows": 0
+        },
+        "top5": {
+          "draws_with_hit": 5,
+          "enrichment_vs_random": 0.527490409848522,
+          "hit_rate": 0.006031363088057901,
+          "random_expected_hit_rate": 0.01143407154983142,
+          "raw_hits": 5,
+          "raw_hits_per_draw": 0.006031363088057901,
+          "rows": 829
+        }
+      }
+    }
+  },
+  "true_matrix_strength": {
+    "average_top5_enrichment": 0.6857406974555786,
+    "candidate_generation_strength": "random-like",
+    "consensus_strength": "harmful",
+    "guard_layer_strength": "over-suppressing",
+    "main_bottleneck": "Data sparsity",
+    "persisted_max_depth": 5,
+    "recommended_next_engineering_step": "Build deeper candidate persistence",
+    "reranking_strength": "harmful"
+  },
+  "worker_plan": {
+    "eligible_source_count": 1447,
+    "eligible_source_max": 5496,
+    "eligible_source_min": 4050,
+    "workers": [
+      {
+        "command": "PYTHONPATH=\"$PWD/backend:$PWD\" .venv/bin/python scripts/run_global_ml_diagnostics.py --worker T1 --source-min 4050 --source-max 4411",
+        "eligible_source_count": 362,
+        "source_max": 4411,
+        "source_min": 4050,
+        "worker": "T1"
+      },
+      {
+        "command": "PYTHONPATH=\"$PWD/backend:$PWD\" .venv/bin/python scripts/run_global_ml_diagnostics.py --worker T2 --source-min 4412 --source-max 4773",
+        "eligible_source_count": 362,
+        "source_max": 4773,
+        "source_min": 4412,
+        "worker": "T2"
+      },
+      {
+        "command": "PYTHONPATH=\"$PWD/backend:$PWD\" .venv/bin/python scripts/run_global_ml_diagnostics.py --worker T3 --source-min 4774 --source-max 5135",
+        "eligible_source_count": 362,
+        "source_max": 5135,
+        "source_min": 4774,
+        "worker": "T3"
+      },
+      {
+        "command": "PYTHONPATH=\"$PWD/backend:$PWD\" .venv/bin/python scripts/run_global_ml_diagnostics.py --worker T4 --source-min 5136 --source-max 5496",
+        "eligible_source_count": 361,
+        "source_max": 5496,
+        "source_min": 5136,
+        "worker": "T4"
+      }
+    ]
+  },
+  "worker_summaries": [
+    {
+      "completed": true,
+      "pairs_processed": 362,
+      "record_counts": {
+        "consensus_candidate": 7137,
+        "dropped_hit": 13,
+        "recall_depth": 2534
+      },
+      "rows_path": "/Users/kojeffrey/4D-ML-LOOP/reports/tmp_step152/step152_worker_T1_rows.jsonl",
+      "rows_written": 9684,
+      "source_max": 4411,
+      "source_min": 4050,
+      "worker": "T1"
+    },
+    {
+      "completed": true,
+      "pairs_processed": 362,
+      "record_counts": {
+        "consensus_candidate": 7134,
+        "dropped_hit": 12,
+        "recall_depth": 2534
+      },
+      "rows_path": "/Users/kojeffrey/4D-ML-LOOP/reports/tmp_step152/step152_worker_T2_rows.jsonl",
+      "rows_written": 9680,
+      "source_max": 4773,
+      "source_min": 4412,
+      "worker": "T2"
+    },
+    {
+      "completed": true,
+      "pairs_processed": 362,
+      "record_counts": {
+        "consensus_candidate": 7116,
+        "dropped_hit": 11,
+        "recall_depth": 2534
+      },
+      "rows_path": "/Users/kojeffrey/4D-ML-LOOP/reports/tmp_step152/step152_worker_T3_rows.jsonl",
+      "rows_written": 9661,
+      "source_max": 5135,
+      "source_min": 4774,
+      "worker": "T3"
+    },
+    {
+      "completed": true,
+      "pairs_processed": 361,
+      "record_counts": {
+        "consensus_candidate": 7093,
+        "dropped_hit": 14,
+        "recall_depth": 2727
+      },
+      "rows_path": "/Users/kojeffrey/4D-ML-LOOP/reports/tmp_step152/step152_worker_T4_rows.jsonl",
+      "rows_written": 9834,
+      "source_max": 5496,
+      "source_min": 5136,
+      "worker": "T4"
+    }
+  ]
+}
