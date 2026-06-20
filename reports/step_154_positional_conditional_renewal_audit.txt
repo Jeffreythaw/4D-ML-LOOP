@@ -1,0 +1,236 @@
+============================================================================================================================================================================
+STEP 154 — POSITIONAL COLUMN & CONDITIONAL RENEWAL STREAK AUDIT — REPORT ONLY
+============================================================================================================================================================================
+ProductionMathChanged: NO
+APIChanged: NO
+FrontendChanged: NO
+SQLSchemaChanged: NO
+DBWritePerformed: NO
+UsesExistingTablesOnly: YES
+DeepCandidateLedgerUsed: NO
+
+SOURCE DISCOVERY SUMMARY
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DrawHistoryColumns: ['DrawNo', 'DrawDate', 'DayType', 'WinningNumbers', 'CreatedAt']
+DrawRange: [69, 5497]
+DrawRows: 5429
+WinnerPrizeColumns: ['WinningNumbers']
+DayTypeValues: ['Saturday', 'Special', 'Sunday', 'Wednesday']
+PredictionLedgerColumns: ['LedgerId', 'Mode', 'SourceDrawNo', 'TargetDrawNo', 'DayType', 'RankNo', 'PredictedNumber', 'EngineSource', 'Score', 'VerificationStatus', 'HitCount', 'CreatedAt', 'VerifiedAt']
+PredictionLedgerRows: 51664
+EngineAliases: {'Temporal': ['E1_TEMPORAL_CONTEXT_MATCH'], 'Delta': ['E1_DELTA_ROTATION_LSTS'], 'WLS': ['E1_WLS_DECAY_0.98'], 'Linear': ['E1_CROSS_PAIR_LINEAR']}
+LedgerVolumeByEngineMode: {'E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop': 7220, 'E1_CROSS_PAIR_LINEAR::Historical': 270, 'E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop': 7220, 'E1_DELTA_ROTATION_LSTS::Historical': 270, 'E1_MIRROR_BASE5_LSTS::Engine_Grand_Loop': 7220, 'E1_MIRROR_BASE5_LSTS::Historical': 270, 'E1_TEMPORAL_CONTEXT_MATCH::Current': 15, 'E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop': 7220, 'E1_WLS_DECAY_0.98::Engine_Grand_Loop': 7220, 'E1_WLS_DECAY_0.98::Historical': 270, 'E2_META_ENSEMBLE_RANKER::Grand_Loop': 7220, 'E2_META_ENSEMBLE_RANKER::Historical': 25, 'E2_WEIGHTED_META_ENSEMBLE_RANKER::Weighted_Grand_Loop': 7220, 'E3_POLYNOMIAL::Historical': 1, 'E4_MARKOV_TRANSITION_MASS::Historical': 3}
+
+POSITIONAL FREQUENCY MATRIX — FULL HISTORY
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Position  D0 Count      Pct D1 Count      Pct D2 Count      Pct D3 Count      Pct D4 Count      Pct D5 Count      Pct D6 Count      Pct D7 Count      Pct D8 Count      Pct D9 Count      Pct
+Pos_1       12530  10.054%   12482  10.015%   12392   9.943%   12556  10.075%   12542  10.063%   12495  10.026%   12441   9.982%   12441   9.982%   12395   9.945%   12356   9.914%
+Pos_2       12358   9.916%   12540  10.062%   12610  10.118%   12440   9.982%   12515  10.042%   12590  10.102%   12232   9.815%   12588  10.100%   12347   9.907%   12410   9.957%
+Pos_3       12414   9.961%   12330   9.893%   12459   9.997%   12613  10.120%   12691  10.183%   12376   9.930%   12267   9.843%   12439   9.981%   12455   9.994%   12586  10.099%
+Pos_4       12371   9.926%   12447   9.987%   12453   9.992%   12380   9.933%   12366   9.922%   12505  10.034%   12614  10.121%   12556  10.075%   12527  10.051%   12411   9.958%
+
+POSITIONAL TRANSITION MATRIX — TOP TRANSITIONS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TransitionMethod: same prize-list slot across consecutive draws
+ConsecutiveDrawPairs: 5428
+PrizeSlotPairs: 124444
+OrderingArtifactAssessment: {'suspected': True, 'evidence': 'Same prize-list slots show extreme thousands-digit persistence while unconditional positional frequencies remain uniform. Starter and consolation lists are commonly stored in ordered numeric sequence, so this is not treated as a predictive draw-to-draw transition.', 'strongest_same_slot_transition': {'previous_digit': 0, 'next_digit': 0, 'count': 6918, 'probability': 0.5521589911405539, 'lift_vs_uniform': 5.521589911405538}}
+Position Prev Next Count Probability LiftVsUniform
+Pos_1       0    0    6918    55.2159%        5.5216
+Pos_1       9    9    6168    50.3592%        5.0359
+Pos_1       1    1    3575    28.6458%        2.8646
+Pos_1       8    8    3426    27.7252%        2.7725
+Pos_1       1    0    3149    25.2324%        2.5232
+Pos_2       0    2    1333    10.7961%        1.0796
+Pos_2       8    7    1326    10.7682%        1.0768
+Pos_3       5    9    1330    10.7623%        1.0762
+Pos_2       1    0    1337    10.6729%        1.0673
+Pos_3       5    4    1316    10.6490%        1.0649
+Pos_2       1    2    1329    10.6091%        1.0609
+Pos_2       7    7    1332    10.6043%        1.0604
+Pos_3       1    7    1303    10.5901%        1.0590
+Pos_3       9    4    1330    10.5883%        1.0588
+Pos_3       4    2    1339    10.5699%        1.0570
+Pos_4       5    5    1315    10.5335%        1.0533
+Pos_4       4    3    1289    10.4482%        1.0448
+Pos_4       8    4    1302    10.4052%        1.0405
+Pos_4       2    8    1289    10.3692%        1.0369
+Pos_4       3    6    1281    10.3599%        1.0360
+
+TOP POSITIONAL TRENDS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PositionalStrength: [{'position': 'Pos_1', 'max_absolute_deviation_from_uniform': 0.0008585412821952992, 'classification': 'random-like'}, {'position': 'Pos_2', 'max_absolute_deviation_from_uniform': 0.0018534863195057427, 'classification': 'random-like'}, {'position': 'Pos_3', 'max_absolute_deviation_from_uniform': 0.0018294150686030547, 'classification': 'random-like'}, {'position': 'Pos_4', 'max_absolute_deviation_from_uniform': 0.001211586295434483, 'classification': 'random-like'}]
+MeanDigitContribution: {'Pos_1': 4.490684425900666, 'Pos_2': 4.4938136885180135, 'Pos_3': 4.503891518895932, 'Pos_4': 4.509131027842414}
+LargestContextShifts: [{'dimension': 'weekday', 'context': 'Thursday', 'position': 'Pos_4', 'sample_count': 23, 'total_variation_from_global': 0.33880948477057304, 'classification': 'data-limited'}, {'dimension': 'weekday', 'context': 'Thursday', 'position': 'Pos_2', 'sample_count': 23, 'total_variation_from_global': 0.27997690555348176, 'classification': 'data-limited'}, {'dimension': 'weekday', 'context': 'Thursday', 'position': 'Pos_3', 'sample_count': 23, 'total_variation_from_global': 0.2230229304829251, 'classification': 'data-limited'}, {'dimension': 'weekday', 'context': 'Thursday', 'position': 'Pos_1', 'sample_count': 23, 'total_variation_from_global': 0.19633419268861918, 'classification': 'data-limited'}, {'dimension': 'year', 'context': '1986', 'position': 'Pos_1', 'sample_count': 1375, 'total_variation_from_global': 0.04748647998074301, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '2026', 'position': 'Pos_4', 'sample_count': 1656, 'total_variation_from_global': 0.04478008528432566, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '2026', 'position': 'Pos_3', 'sample_count': 1656, 'total_variation_from_global': 0.04434127917185593, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '1986', 'position': 'Pos_3', 'sample_count': 1375, 'total_variation_from_global': 0.03970633073898739, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '1986', 'position': 'Pos_2', 'sample_count': 1375, 'total_variation_from_global': 0.03857209339645349, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '1995', 'position': 'Pos_2', 'sample_count': 2392, 'total_variation_from_global': 0.03835010493938311, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '2007', 'position': 'Pos_3', 'sample_count': 3587, 'total_variation_from_global': 0.03762317502461314, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '1986', 'position': 'Pos_4', 'sample_count': 1375, 'total_variation_from_global': 0.03750782315654336, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '2000', 'position': 'Pos_2', 'sample_count': 2921, 'total_variation_from_global': 0.03704639955425197, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '1998', 'position': 'Pos_2', 'sample_count': 2392, 'total_variation_from_global': 0.036806244141521775, 'classification': 'weak trend'}, {'dimension': 'year', 'context': '1989', 'position': 'Pos_1', 'sample_count': 2368, 'total_variation_from_global': 0.03544467976561976, 'classification': 'weak trend'}]
+
+COLUMN ALIGNMENT FINDINGS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HighLowProfilesTop20: [('LHHH', 7930), ('LLLH', 7916), ('LHLH', 7903), ('HLLH', 7887), ('HLHH', 7846), ('HLHL', 7827), ('HHLL', 7818), ('LLHH', 7810), ('LHLL', 7796), ('LLLL', 7751), ('HLLL', 7725), ('HHLH', 7711), ('HHHL', 7704), ('LLHL', 7701), ('LHHL', 7695), ('HHHH', 7610)]
+OddEvenProfilesTop20: [('OEEE', 7939), ('EOEO', 7934), ('OOOE', 7895), ('EOOE', 7877), ('OOEO', 7834), ('EOEE', 7793), ('EOOO', 7783), ('EEOO', 7777), ('EEEO', 7770), ('EEOE', 7763), ('OEOE', 7755), ('OEOO', 7748), ('OOOO', 7746), ('OEEO', 7707), ('OOEE', 7706), ('EEEE', 7603)]
+RepeatedPositionPatterns: {'unique_4': 63195, 'unique_2': 7796, 'unique_3': 53523, 'unique_1': 116}
+FirstPairsTop20: [('61', 1334), ('92', 1327), ('35', 1325), ('67', 1319), ('55', 1314), ('52', 1306), ('08', 1306), ('44', 1300), ('11', 1300), ('57', 1299), ('75', 1299), ('21', 1298), ('78', 1296), ('23', 1290), ('54', 1288), ('04', 1286), ('02', 1283), ('17', 1282), ('49', 1279), ('74', 1278)]
+LastPairsTop20: [('47', 1324), ('07', 1320), ('46', 1320), ('45', 1315), ('06', 1314), ('81', 1302), ('39', 1302), ('91', 1300), ('32', 1299), ('85', 1297), ('70', 1290), ('78', 1289), ('23', 1286), ('98', 1282), ('89', 1281), ('27', 1281), ('48', 1281), ('40', 1279), ('31', 1275), ('90', 1275)]
+EdgePairsTop20: [('76', 1329), ('46', 1328), ('58', 1321), ('31', 1315), ('35', 1311), ('37', 1308), ('28', 1307), ('57', 1305), ('41', 1301), ('02', 1297), ('65', 1295), ('93', 1290), ('12', 1287), ('61', 1285), ('25', 1281), ('50', 1281), ('47', 1280), ('94', 1280), ('40', 1279), ('87', 1278)]
+InnerPairsTop20: [('18', 1329), ('43', 1316), ('73', 1310), ('04', 1310), ('52', 1309), ('94', 1307), ('19', 1295), ('22', 1295), ('37', 1293), ('76', 1292), ('74', 1292), ('87', 1291), ('75', 1291), ('54', 1290), ('28', 1289), ('31', 1288), ('58', 1286), ('33', 1284), ('50', 1281), ('27', 1280)]
+
+CONDITIONAL MISS-TO-HIT MATRIX — TEMPORAL
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PrimaryStream: E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop
+State   Samples Hit Miss RawHits HitRate RandomTop5 Enrich Interpretation
+0            22   0   22       0   0.0000%    1.1425%  0.0000 data-limited
+1            22   0   22       0   0.0000%    1.1447%  0.0000 data-limited
+2            22   0   22       0   0.0000%    1.1447%  0.0000 data-limited
+3            22   1   21       1   4.5455%    1.1447%  3.9708 LOW_SAMPLE_SPIKE
+4            21   0   21       0   0.0000%    1.1424%  0.0000 data-limited
+5            21   1   20       1   4.7619%    1.1447%  4.1599 LOW_SAMPLE_SPIKE
+6            20   1   19       1   5.0000%    1.1447%  4.3679 LOW_SAMPLE_SPIKE
+7            19   0   19       0   0.0000%    1.1421%  0.0000 data-limited
+8            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+9            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+10           19   1   18       1   5.2632%    1.1447%  4.5978 LOW_SAMPLE_SPIKE
+11           18   0   18       0   0.0000%    1.1420%  0.0000 data-limited
+12           18   0   18       0   0.0000%    1.1420%  0.0000 data-limited
+13           18   0   18       0   0.0000%    1.1447%  0.0000 data-limited
+14           18   0   18       0   0.0000%    1.1447%  0.0000 data-limited
+15           17   0   17       0   0.0000%    1.1447%  0.0000 data-limited
+16-20        84   1   83       1   1.1905%    1.1447%  1.0400 NO_RENEWAL_EDGE
+21-30       160   0  160       0   0.0000%    1.1426%  0.0000 STREAK_RISK
+31-50       235   7  228       7   2.9787%    1.1437%  2.6045 RENEWAL_SIGNAL
+51+         650   9  641       9   1.3846%    1.1433%  1.2111 NO_RENEWAL_EDGE
+
+CONDITIONAL MISS-TO-HIT MATRIX — DELTA
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PrimaryStream: E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop
+State   Samples Hit Miss RawHits HitRate RandomTop5 Enrich Interpretation
+0            19   0   19       0   0.0000%    1.1395%  0.0000 data-limited
+1            19   0   19       0   0.0000%    1.1421%  0.0000 data-limited
+2            19   0   19       0   0.0000%    1.1421%  0.0000 data-limited
+3            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+4            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+5            19   0   19       0   0.0000%    1.1421%  0.0000 data-limited
+6            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+7            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+8            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+9            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+10           19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+11           19   1   18       1   5.2632%    1.1421%  4.6083 LOW_SAMPLE_SPIKE
+12           18   1   17       1   5.5556%    1.1420%  4.8649 LOW_SAMPLE_SPIKE
+13           17   0   17       0   0.0000%    1.1447%  0.0000 data-limited
+14           17   0   17       0   0.0000%    1.1447%  0.0000 data-limited
+15           17   0   17       0   0.0000%    1.1447%  0.0000 data-limited
+16-20        83   1   82       1   1.2048%    1.1429%  1.0541 NO_RENEWAL_EDGE
+21-30       145   2  143       2   1.3793%    1.1444%  1.2053 NO_RENEWAL_EDGE
+31-50       237   4  233       4   1.6878%    1.1430%  1.4765 RENEWAL_SIGNAL
+51+         682   9  673       9   1.3196%    1.1435%  1.1541 NO_RENEWAL_EDGE
+
+CONDITIONAL MISS-TO-HIT MATRIX — WLS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PrimaryStream: E1_WLS_DECAY_0.98::Engine_Grand_Loop
+State   Samples Hit Miss RawHits HitRate RandomTop5 Enrich Interpretation
+0            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+1            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+2            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+3            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+4            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+5            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+6            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+7            19   0   19       0   0.0000%    1.1447%  0.0000 data-limited
+8            19   0   19       0   0.0000%    1.1421%  0.0000 data-limited
+9            19   1   18       1   5.2632%    1.1447%  4.5978 LOW_SAMPLE_SPIKE
+10           18   1   17       1   5.5556%    1.1447%  4.8532 LOW_SAMPLE_SPIKE
+11           17   0   17       0   0.0000%    1.1447%  0.0000 data-limited
+12           17   0   17       0   0.0000%    1.1389%  0.0000 data-limited
+13           17   1   16       1   5.8824%    1.1418%  5.1518 LOW_SAMPLE_SPIKE
+14           16   0   16       0   0.0000%    1.1447%  0.0000 data-limited
+15           16   0   16       0   0.0000%    1.1447%  0.0000 data-limited
+16-20        80   0   80       0   0.0000%    1.1416%  0.0000 STREAK_RISK
+21-30       160   0  160       0   0.0000%    1.1435%  0.0000 STREAK_RISK
+31-50       277   3  274       3   1.0830%    1.1436%  0.9470 NO_RENEWAL_EDGE
+51+         636  12  624      12   1.8868%    1.1434%  1.6502 RENEWAL_SIGNAL
+
+CONDITIONAL MISS-TO-HIT MATRIX — LINEAR
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PrimaryStream: E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop
+State   Samples Hit Miss RawHits HitRate RandomTop5 Enrich Interpretation
+0            15   0   15       0   0.0000%    1.1414%  0.0000 data-limited
+1            15   0   15       0   0.0000%    1.1414%  0.0000 data-limited
+2            15   0   15       0   0.0000%    1.1447%  0.0000 data-limited
+3            15   0   15       0   0.0000%    1.1447%  0.0000 data-limited
+4            15   1   14       1   6.6667%    1.1447%  5.8238 LOW_SAMPLE_SPIKE
+5            14   0   14       0   0.0000%    1.1447%  0.0000 data-limited
+6            14   0   14       0   0.0000%    1.1447%  0.0000 data-limited
+7            14   0   14       0   0.0000%    1.1447%  0.0000 data-limited
+8            14   0   14       0   0.0000%    1.1447%  0.0000 data-limited
+9            14   0   14       0   0.0000%    1.1412%  0.0000 data-limited
+10           14   0   14       0   0.0000%    1.1447%  0.0000 data-limited
+11           14   0   14       0   0.0000%    1.1412%  0.0000 data-limited
+12           14   0   14       0   0.0000%    1.1376%  0.0000 data-limited
+13           14   0   14       0   0.0000%    1.1412%  0.0000 data-limited
+14           14   0   14       0   0.0000%    1.1447%  0.0000 data-limited
+15           14   0   14       0   0.0000%    1.1447%  0.0000 data-limited
+16-20        68   2   66       2   2.9412%    1.1440%  2.5710 RENEWAL_SIGNAL
+21-30       112   1  111       1   0.8929%    1.1430%  0.7812 STREAK_RISK
+31-50       209   2  207       2   0.9569%    1.1431%  0.8372 NO_RENEWAL_EDGE
+51+         826   8  818       8   0.9685%    1.1437%  0.8468 NO_RENEWAL_EDGE
+
+ENGINE RENEWAL STRENGTH SUMMARY
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+{'E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop': {'engine_label': 'Linear', 'engine_source': 'E1_CROSS_PAIR_LINEAR', 'mode': 'Engine_Grand_Loop', 'outcome_rows': 1444, 'hit_draws': 14, 'raw_hits': 14, 'maximum_pre_miss_streak': 248, 'renewal_signal_states': ['16-20'], 'streak_risk_states': ['21-30'], 'low_sample_spikes': ['4'], 'ledger_actual_mismatch_count': 0}, 'E1_CROSS_PAIR_LINEAR::Historical': {'engine_label': 'Linear', 'engine_source': 'E1_CROSS_PAIR_LINEAR', 'mode': 'Historical', 'outcome_rows': 53, 'hit_draws': 0, 'raw_hits': 0, 'maximum_pre_miss_streak': 52, 'renewal_signal_states': [], 'streak_risk_states': [], 'low_sample_spikes': [], 'ledger_actual_mismatch_count': 0}, 'E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop': {'engine_label': 'Delta', 'engine_source': 'E1_DELTA_ROTATION_LSTS', 'mode': 'Engine_Grand_Loop', 'outcome_rows': 1444, 'hit_draws': 18, 'raw_hits': 18, 'maximum_pre_miss_streak': 311, 'renewal_signal_states': ['31-50'], 'streak_risk_states': [], 'low_sample_spikes': ['11', '12'], 'ledger_actual_mismatch_count': 0}, 'E1_DELTA_ROTATION_LSTS::Historical': {'engine_label': 'Delta', 'engine_source': 'E1_DELTA_ROTATION_LSTS', 'mode': 'Historical', 'outcome_rows': 53, 'hit_draws': 1, 'raw_hits': 1, 'maximum_pre_miss_streak': 45, 'renewal_signal_states': [], 'streak_risk_states': [], 'low_sample_spikes': ['6'], 'ledger_actual_mismatch_count': 0}, 'E1_TEMPORAL_CONTEXT_MATCH::Current': {'engine_label': 'Temporal', 'engine_source': 'E1_TEMPORAL_CONTEXT_MATCH', 'mode': 'Current', 'outcome_rows': 3, 'hit_draws': 0, 'raw_hits': 0, 'maximum_pre_miss_streak': 2, 'renewal_signal_states': [], 'streak_risk_states': [], 'low_sample_spikes': [], 'ledger_actual_mismatch_count': 0}, 'E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop': {'engine_label': 'Temporal', 'engine_source': 'E1_TEMPORAL_CONTEXT_MATCH', 'mode': 'Temporal_Global_Loop', 'outcome_rows': 1444, 'hit_draws': 21, 'raw_hits': 21, 'maximum_pre_miss_streak': 318, 'renewal_signal_states': ['31-50'], 'streak_risk_states': ['21-30'], 'low_sample_spikes': ['3', '5', '6', '10'], 'ledger_actual_mismatch_count': 0}, 'E1_WLS_DECAY_0.98::Engine_Grand_Loop': {'engine_label': 'WLS', 'engine_source': 'E1_WLS_DECAY_0.98', 'mode': 'Engine_Grand_Loop', 'outcome_rows': 1444, 'hit_draws': 18, 'raw_hits': 18, 'maximum_pre_miss_streak': 167, 'renewal_signal_states': ['51+'], 'streak_risk_states': ['16-20', '21-30'], 'low_sample_spikes': ['9', '10', '13'], 'ledger_actual_mismatch_count': 0}, 'E1_WLS_DECAY_0.98::Historical': {'engine_label': 'WLS', 'engine_source': 'E1_WLS_DECAY_0.98', 'mode': 'Historical', 'outcome_rows': 53, 'hit_draws': 1, 'raw_hits': 1, 'maximum_pre_miss_streak': 36, 'renewal_signal_states': [], 'streak_risk_states': [], 'low_sample_spikes': ['15'], 'ledger_actual_mismatch_count': 0}}
+
+STREAK STATES WITH REAL SIGNAL
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+{'E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop': ['16-20'], 'E1_CROSS_PAIR_LINEAR::Historical': [], 'E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop': ['31-50'], 'E1_DELTA_ROTATION_LSTS::Historical': [], 'E1_TEMPORAL_CONTEXT_MATCH::Current': [], 'E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop': ['31-50'], 'E1_WLS_DECAY_0.98::Engine_Grand_Loop': ['51+'], 'E1_WLS_DECAY_0.98::Historical': []}
+
+STREAK STATES TO SUPPRESS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+{'E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop': ['21-30'], 'E1_CROSS_PAIR_LINEAR::Historical': [], 'E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop': [], 'E1_DELTA_ROTATION_LSTS::Historical': [], 'E1_TEMPORAL_CONTEXT_MATCH::Current': [], 'E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop': ['21-30'], 'E1_WLS_DECAY_0.98::Engine_Grand_Loop': ['16-20', '21-30'], 'E1_WLS_DECAY_0.98::Historical': []}
+
+DROPPED WINNER MATRIX
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TotalDroppedWinnerEvents: 52
+UniqueSourceTargetPairs: 49
+BySourceEngine: {'E1_DELTA_ROTATION_LSTS': 19, 'E1_WLS_DECAY_0.98': 19, 'E1_CROSS_PAIR_LINEAR': 14}
+BySourceEngineMode: {'E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop': 18, 'E1_WLS_DECAY_0.98::Engine_Grand_Loop': 18, 'E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop': 14, 'E1_DELTA_ROTATION_LSTS::Historical': 1, 'E1_WLS_DECAY_0.98::Historical': 1}
+ByFinalEngineMode: {'E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop': 52}
+RemovalReasons: {'unknown': 52}
+
+DROPPED WINNER PATTERN BY DATE CONTEXT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ByYear: {'2025': 8, '2017': 7, '2023': 7, '2018': 6, '2020': 6, '2019': 4, '2022': 4, '2024': 4, '2026': 4, '2021': 2}
+ByMonth: {'8': 10, '2': 6, '3': 6, '12': 5, '11': 5, '4': 4, '9': 4, '7': 3, '6': 3, '10': 3, '1': 2, '5': 1}
+ByWeekday: {'Tuesday': 18, 'Saturday': 18, 'Friday': 16}
+ByDayType: {'Special': 34, 'Saturday': 18}
+ByFinalPreMissStreak: {'35': 3, '15': 2, '3': 2, '73': 2, '106': 2, '11': 2, '16': 2, '58': 2, '47': 2, '55': 2, '64': 2, '21': 1, '40': 1, '33': 1, '1': 1, '50': 1, '57': 1, '27': 1, '59': 1, '6': 1, '112': 1, '122': 1, '164': 1, '168': 1, '185': 1, '187': 1, '228': 1, '295': 1, '31': 1, '39': 1, '23': 1, '63': 1, '9': 1, '13': 1, '56': 1, '14': 1, '43': 1, '5': 1, '0': 1, '52': 1}
+
+DROPPED WINNER PATTERN BY POSITIONAL STRUCTURE
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ByDigitSumBand: {'20_24': 15, '15_19': 13, '00_09': 11, '25_36': 7, '10_14': 6}
+TopMirrorSignatures: [('0000', 4), ('4220', 2), ('0401', 2), ('1223', 2), ('2000', 2), ('3443', 2), ('3314', 2), ('4013', 1), ('4132', 1), ('4321', 1), ('4424', 1), ('1324', 1), ('1103', 1), ('2003', 1), ('2141', 1), ('1443', 1), ('3303', 1), ('2020', 1), ('2334', 1), ('0032', 1)]
+TopFirstPairs: [('00', 4), ('17', 3), ('47', 2), ('46', 2), ('09', 2), ('20', 2), ('70', 2), ('97', 2), ('86', 2), ('38', 2), ('40', 1), ('92', 1), ('98', 1), ('49', 1), ('13', 1), ('66', 1), ('71', 1), ('14', 1), ('88', 1), ('59', 1)]
+TopLastPairs: [('00', 8), ('70', 3), ('52', 3), ('01', 2), ('32', 2), ('74', 2), ('69', 2), ('75', 1), ('68', 1), ('82', 1), ('25', 1), ('76', 1), ('29', 1), ('24', 1), ('58', 1), ('28', 1), ('53', 1), ('46', 1), ('43', 1), ('08', 1)]
+TopPositionalPatterns: [('0000', 4), ('2000', 2), ('3869', 2), ('4775', 1), ('4068', 1), ('4682', 1), ('9225', 1), ('9876', 1), ('4929', 1), ('1324', 1), ('0901', 1), ('6658', 1), ('1728', 1), ('7053', 1), ('7146', 1), ('1443', 1), ('8808', 1), ('7070', 1), ('5951', 1), ('2389', 1)]
+RemovalCause: unknown unless persisted metadata proves otherwise.
+
+MOST DAMAGING FILTER / META OMISSION SOURCES
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MostDamagingSources: [('E1_DELTA_ROTATION_LSTS', 19), ('E1_WLS_DECAY_0.98', 19), ('E1_CROSS_PAIR_LINEAR', 14)]
+RemovalCauseLimitation: Exact guard/reranker cause is not persisted in PredictionLedger; all events are marked unknown.
+
+CAUSE-EFFECT SYNTHESIS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+StrongestPosition: {'position': 'Pos_2', 'max_absolute_deviation_from_uniform': 0.0018534863195057427, 'classification': 'random-like'}
+StrongestTransition: {'position': 'Pos_1', 'previous_digit': 0, 'next_digit': 0, 'count': 6918, 'probability': 0.5521589911405539, 'lift_vs_uniform': 5.521589911405538}
+TransitionOrderingArtifact: {'suspected': True, 'evidence': 'Same prize-list slots show extreme thousands-digit persistence while unconditional positional frequencies remain uniform. Starter and consolation lists are commonly stored in ordered numeric sequence, so this is not treated as a predictive draw-to-draw transition.', 'strongest_same_slot_transition': {'previous_digit': 0, 'next_digit': 0, 'count': 6918, 'probability': 0.5521589911405539, 'lift_vs_uniform': 5.521589911405538}}
+EngineRenewalFindings: {'Temporal': {'primary_stream': 'E1_TEMPORAL_CONTEXT_MATCH::Temporal_Global_Loop', 'renewal_signal_states': ['31-50'], 'streak_risk_states': ['21-30'], 'low_sample_spikes': ['3', '5', '6', '10']}, 'Delta': {'primary_stream': 'E1_DELTA_ROTATION_LSTS::Engine_Grand_Loop', 'renewal_signal_states': ['31-50'], 'streak_risk_states': [], 'low_sample_spikes': ['11', '12']}, 'WLS': {'primary_stream': 'E1_WLS_DECAY_0.98::Engine_Grand_Loop', 'renewal_signal_states': ['51+'], 'streak_risk_states': ['16-20', '21-30'], 'low_sample_spikes': ['9', '10', '13']}, 'Linear': {'primary_stream': 'E1_CROSS_PAIR_LINEAR::Engine_Grand_Loop', 'renewal_signal_states': ['16-20'], 'streak_risk_states': ['21-30'], 'low_sample_spikes': ['4']}}
+LargestDroppedSource: ('E1_DELTA_ROTATION_LSTS', 19)
+KeyDiagnosis: mixed: miss-streak renewal associations and guard/meta over-suppression
+CausalityWarning: Associations are descriptive. No removal rule is claimed causal because rule metadata is not persisted.
+
+FINAL RECOMMENDATION
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ProductionSwitchRecommendedNow: NO
+NextStep: build renewal-aware suppression layer and reduce final meta over-filtering
+
+REPORT_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_154_positional_conditional_renewal_audit.txt
+MATRICES_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_154_positional_conditional_renewal_matrices.json
+ROWS_WRITTEN: /Users/kojeffrey/4D-ML-LOOP/reports/step_154_positional_conditional_renewal_rows.jsonl
