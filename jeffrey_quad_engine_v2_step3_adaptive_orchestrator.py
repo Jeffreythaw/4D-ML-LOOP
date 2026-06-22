@@ -31,10 +31,12 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import logging
 import os
 import sys
+from bisect import bisect_right
 from collections import Counter, defaultdict, deque
 from dataclasses import dataclass, field
 from datetime import date
@@ -269,6 +271,38 @@ class RollingWindowMetrics:
         return snapshot
 
 
+class ChronologicalDrawCache:
+    """
+    In-memory DrawHistory cache with an enforced source-draw cutoff.
+
+    The cache may contain later rows for offline evaluation, but training callers
+    can only retrieve records with DrawNo <= source_draw_no.
+    """
+
+    def __init__(self, records: Sequence[Any]) -> None:
+        ordered = sorted(records, key=lambda record: int(record.draw_no))
+        draw_numbers = [int(record.draw_no) for record in ordered]
+        if len(draw_numbers) != len(set(draw_numbers)):
+            raise ValueError("ChronologicalDrawCache requires unique DrawNo values")
+        self._records = tuple(ordered)
+        self._draw_numbers = tuple(draw_numbers)
+        self._by_draw_no = {
+            int(record.draw_no): record
+            for record in ordered
+        }
+
+    @classmethod
+    def load(cls, gateway: Any, *, max_draw_no: int) -> "ChronologicalDrawCache":
+        return cls(gateway.load_draw_history(max_draw_no=int(max_draw_no)))
+
+    def records_through(self, source_draw_no: int) -> Tuple[Any, ...]:
+        end = bisect_right(self._draw_numbers, int(source_draw_no))
+        return self._records[:end]
+
+    def get(self, draw_no: int) -> Optional[Any]:
+        return self._by_draw_no.get(int(draw_no))
+
+
 # ============================================================
 # FORMULA REGISTRY READER FOR ADAPTIVE FORMULAS
 # ============================================================
@@ -288,6 +322,7 @@ class FormulaRegistryReader:
         day_type: str,
         engine_name: Optional[str] = None,
         top_n: int = ADAPTIVE_FORMULA_TOP_N,
+        max_training_end_draw_no: Optional[int] = None,
     ) -> List[Any]:
         if day_type not in self.core.VALID_DAY_TYPES:
             raise ValueError(f"Invalid DayType: {day_type}")
@@ -298,6 +333,10 @@ class FormulaRegistryReader:
         if engine_name is not None:
             clauses.append("EngineName = ?")
             params.append(engine_name)
+
+        if max_training_end_draw_no is not None:
+            clauses.append("TrainingEndDrawNo <= ?")
+            params.append(int(max_training_end_draw_no))
 
         where_sql = " AND ".join(clauses)
 
@@ -320,7 +359,12 @@ class FormulaRegistryReader:
                 CreatedAt DESC;
         """
 
-        rows = self.gateway.conn.cursor().execute(sql, params).fetchall()
+        cursor = self.gateway.conn.cursor()
+        try:
+            cursor.execute(sql, params)
+            rows = cursor.fetchall()
+        finally:
+            cursor.close()
 
         formulas: List[Any] = []
 
@@ -365,12 +409,34 @@ class CandidatePoolBuilder:
         phase2_layer: Any,
         matrix_core: Any,
         formula_reader: FormulaRegistryReader,
+        history_cache: Optional[ChronologicalDrawCache] = None,
+        training_window_size: int = 64,
+        enrichment_window_size: int = 64,
     ) -> None:
+        if training_window_size < 0:
+            raise ValueError("training_window_size must be >= 0")
+        if enrichment_window_size <= 0:
+            raise ValueError("enrichment_window_size must be positive")
         self.core = core
         self.gateway = gateway
         self.phase2_layer = phase2_layer
         self.matrix_core = matrix_core
         self.formula_reader = formula_reader
+        self.history_cache = history_cache
+        self.training_window_size = int(training_window_size)
+        self.enrichment_window_size = int(enrichment_window_size)
+
+    def _history_through(self, source_draw_no: int) -> Sequence[Any]:
+        if self.history_cache is not None:
+            return self.history_cache.records_through(source_draw_no)
+        return self.gateway.load_draw_history(max_draw_no=source_draw_no)
+
+    def _resolved_training_window(self, requested: Optional[int]) -> int:
+        if requested is None:
+            return self.training_window_size
+        if requested < 0:
+            raise ValueError("training window must be >= 0")
+        return int(requested)
 
     @staticmethod
     def _score_by_rank(rank: int, total: int, *, base_weight: float) -> float:
@@ -476,6 +542,7 @@ class CandidatePoolBuilder:
         *,
         src_vectors: np.ndarray,
         day_type: str,
+        source_draw_no: int,
     ) -> List[CandidateVote]:
         votes: List[CandidateVote] = []
 
@@ -483,6 +550,7 @@ class CandidatePoolBuilder:
             day_type=day_type,
             engine_name=self.core.ENGINE_4_NAME,
             top_n=ADAPTIVE_FORMULA_TOP_N,
+            max_training_end_draw_no=source_draw_no,
         )
 
         for formula_idx, formula in enumerate(adaptive_formulas, start=1):
@@ -527,7 +595,7 @@ class CandidatePoolBuilder:
         *,
         source_draw_no: int,
         day_type: str,
-        max_pairs: int = 64,
+        max_pairs: Optional[int] = None,
     ) -> Tuple[np.ndarray, np.ndarray]:
         """
         Build temporally safe WLS training pairs using only rows up to source_draw_no.
@@ -539,7 +607,7 @@ class CandidatePoolBuilder:
 
         This prevents future leakage for current prediction N -> N+1.
         """
-        records = self.gateway.load_draw_history(max_draw_no=source_draw_no)
+        records = self._history_through(source_draw_no)
 
         by_draw_no = {record.draw_no: record for record in records}
         src_numbers: List[str] = []
@@ -567,9 +635,10 @@ class CandidatePoolBuilder:
                 f"No WLS training pairs available for day_type={day_type} source_draw_no={source_draw_no}"
             )
 
-        if len(src_numbers) > max_pairs:
-            src_numbers = src_numbers[-max_pairs:]
-            tgt_numbers = tgt_numbers[-max_pairs:]
+        window_size = self._resolved_training_window(max_pairs)
+        if window_size and len(src_numbers) > window_size:
+            src_numbers = src_numbers[-window_size:]
+            tgt_numbers = tgt_numbers[-window_size:]
 
         return (
             self.core.vectors_from_4d_strings(src_numbers, dtype=np.int16),
@@ -609,7 +678,7 @@ class CandidatePoolBuilder:
         # candidates, enrich with recent temporally eligible historical source
         # vectors transformed by the same fitted formula. This does not read the
         # hidden target draw N+1.
-        recent_training_src = training_src[-64:]
+        recent_training_src = training_src[-self.enrichment_window_size:]
         enrichment_vectors = self.core.affine_mod10_transform(
             recent_training_src,
             formula.matrix_m,
@@ -626,7 +695,13 @@ class CandidatePoolBuilder:
         # collapses to fewer than Top-K unique numbers, append recent historical
         # target-side training states. Every fallback target state is <=
         # source_draw_no by construction in _build_wls_training_pairs().
-        numbers += list(reversed(self.core.strings_from_vectors(training_tgt[-64:])))
+        numbers += list(
+            reversed(
+                self.core.strings_from_vectors(
+                    training_tgt[-self.enrichment_window_size:]
+                )
+            )
+        )
 
         total = len(numbers)
         seen_local = set()
@@ -758,7 +833,7 @@ class CandidatePoolBuilder:
         *,
         source_draw_no: int,
         day_type: str,
-        max_deltas: int = 64,
+        max_deltas: Optional[int] = None,
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
         """
         Build temporally safe delta rotation training sets.
@@ -773,7 +848,7 @@ class CandidatePoolBuilder:
 
         Only uses records with target draw <= source_draw_no.
         """
-        records = self.gateway.load_draw_history(max_draw_no=source_draw_no)
+        records = self._history_through(source_draw_no)
 
         by_draw_no = {record.draw_no: record for record in records}
         delta_vectors: List[np.ndarray] = []
@@ -818,8 +893,9 @@ class CandidatePoolBuilder:
 
         delta_matrix = np.vstack(delta_vectors)
 
-        if delta_matrix.shape[0] > max_deltas:
-            delta_matrix = delta_matrix[-max_deltas:]
+        window_size = self._resolved_training_window(max_deltas)
+        if window_size and delta_matrix.shape[0] > window_size:
+            delta_matrix = delta_matrix[-window_size:]
 
         if delta_matrix.shape[0] < 2:
             raise RuntimeError("Delta rotation training matrix is too small after windowing")
@@ -856,7 +932,7 @@ class CandidatePoolBuilder:
 
         # Enrich with recent temporally safe delta momentum projections if the
         # primary source draw collapses to fewer than Top-K unique candidates.
-        recent_delta_inputs = training_delta_src[-64:]
+        recent_delta_inputs = training_delta_src[-self.enrichment_window_size:]
         recent_base_vectors = np.repeat(src_vectors[:1], recent_delta_inputs.shape[0], axis=0)
         recent_projected = delta_engine.predict_absolute_vectors(
             base_vectors=recent_base_vectors,
@@ -982,6 +1058,7 @@ class CandidatePoolBuilder:
             self._votes_from_adaptive_formulas(
                 src_vectors=src_vectors,
                 day_type=day_type,
+                source_draw_no=source_draw_no,
             )
         )
 
@@ -1350,6 +1427,8 @@ class Step3AdaptiveOrchestrator:
         gateway: Any,
         start_draw_no: int = SIM_START_DRAW_NO,
         end_draw_no: int = SIM_END_DRAW_NO,
+        history_cache: Optional[ChronologicalDrawCache] = None,
+        training_window_size: int = 64,
     ) -> None:
         if start_draw_no >= end_draw_no:
             raise ValueError("start_draw_no must be less than end_draw_no")
@@ -1368,6 +1447,8 @@ class Step3AdaptiveOrchestrator:
             phase2_layer=self.phase2_layer,
             matrix_core=self.matrix_core,
             formula_reader=self.formula_reader,
+            history_cache=history_cache,
+            training_window_size=training_window_size,
         )
         self.ranker = DiversityGuardRanker()
         self.metrics = RollingWindowMetrics(WINDOW_DRAW_COUNTS)
@@ -1431,10 +1512,15 @@ class Step3AdaptiveOrchestrator:
         # Do NOT call load_phase2_draw(target_draw_no) here because that would
         # load Draw N+1 WinningNumbers into Python memory before the Top 5 is
         # locked and before SP_Verify_Predictions returns HitCount.
-        target_exists_row = self.gateway.conn.cursor().execute(
-            "SELECT 1 AS ExistsFlag FROM dbo.DrawHistory WHERE DrawNo = ?;",
-            (target_draw_no,),
-        ).fetchone()
+        cursor = self.gateway.conn.cursor()
+        try:
+            cursor.execute(
+                "SELECT 1 AS ExistsFlag FROM dbo.DrawHistory WHERE DrawNo = ?;",
+                (target_draw_no,),
+            )
+            target_exists_row = cursor.fetchone()
+        finally:
+            cursor.close()
 
         if target_exists_row is None:
             logger.warning(
@@ -1572,28 +1658,89 @@ def print_result_summary(results: Sequence[DrawStepResult]) -> None:
         print(f"LAST_ROLLING_METRICS: {last.rolling_metrics}")
 
 
-def main() -> int:
+def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Jeffrey Quad-Engine V2 Step 3 adaptive orchestrator"
+    )
+    parser.add_argument(
+        "--start-draw-no",
+        type=int,
+        default=SIM_START_DRAW_NO,
+        help=f"Inclusive source draw start. Default: {SIM_START_DRAW_NO}",
+    )
+    parser.add_argument(
+        "--end-draw-no",
+        type=int,
+        default=SIM_END_DRAW_NO,
+        help=f"Exclusive source draw end. Default: {SIM_END_DRAW_NO}",
+    )
+    parser.add_argument(
+        "--training-window-size",
+        type=int,
+        default=int(os.getenv("J4D_TRAINING_WINDOW", "64")),
+        help="Training window size. Use 0 for full causal history.",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Run inside one transaction and rollback at the end.",
+    )
+    return parser.parse_args(argv)
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    args = parse_args(argv)
+
     print_header("STEP 3 ADAPTIVE ORCHESTRATOR — START")
 
     load_env_file()
     conn_str = get_sql_connection_string_from_env()
     core = import_step2_core()
 
+    if args.start_draw_no < SIM_START_DRAW_NO:
+        raise ValueError(f"start_draw_no must be >= {SIM_START_DRAW_NO}")
+    if args.end_draw_no > SIM_END_DRAW_NO:
+        raise ValueError(f"end_draw_no must be <= {SIM_END_DRAW_NO}")
+    if args.start_draw_no >= args.end_draw_no:
+        raise ValueError("start_draw_no must be less than end_draw_no")
+    if args.training_window_size < 0:
+        raise ValueError("training_window_size must be >= 0")
+
     print(f"PROJECT_ROOT: {PROJECT_ROOT}")
     print(f"DB_SERVER: {os.getenv('DB_SERVER', '<not set>')}")
     print(f"DB_DATABASE: {os.getenv('DB_DATABASE', '<not set>')}")
     print("STEP2_IMPORT: OK")
     print("STEP3_SCOPE: DiversityGuard + AdaptiveFeedback only")
+    print(f"START_DRAW_NO: {args.start_draw_no}")
+    print(f"END_DRAW_NO: {args.end_draw_no}")
+    print(f"TRAINING_WINDOW_SIZE: {args.training_window_size}")
+    print(f"DRY_RUN: {args.dry_run}")
 
-    with core.SqlServerGateway(conn_str) as gateway:
+    gateway = core.SqlServerGateway(conn_str, autocommit=False)
+    gateway.connect()
+    try:
         orchestrator = Step3AdaptiveOrchestrator(
             core=core,
             gateway=gateway,
-            start_draw_no=SIM_START_DRAW_NO,
-            end_draw_no=SIM_END_DRAW_NO,
+            start_draw_no=args.start_draw_no,
+            end_draw_no=args.end_draw_no,
+            training_window_size=args.training_window_size,
         )
 
         results = orchestrator.run_loop()
+
+        if args.dry_run:
+            gateway.rollback()
+            print("TRANSACTION: ROLLBACK")
+        else:
+            gateway.commit()
+            print("TRANSACTION: COMMIT")
+    except Exception:
+        gateway.rollback()
+        print("TRANSACTION: ROLLBACK_ON_ERROR")
+        raise
+    finally:
+        gateway.close()
 
     print_result_summary(results)
 

@@ -368,7 +368,12 @@ class SqlServerGateway:
             ORDER BY DrawNo ASC;
         """
 
-        rows = self.conn.cursor().execute(sql, params).fetchall()
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute(sql, params)
+            rows = cursor.fetchall()
+        finally:
+            cursor.close()
 
         records: List[DrawRecord] = []
 
@@ -437,7 +442,12 @@ class SqlServerGateway:
             ORDER BY TransitionCount DESC, LastSeenDrawNo DESC;
         """
 
-        rows = self.conn.cursor().execute(sql, params).fetchall()
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute(sql, params)
+            rows = cursor.fetchall()
+        finally:
+            cursor.close()
 
         transitions: List[MarkovTransition] = []
 
@@ -497,21 +507,47 @@ class SqlServerGateway:
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         """
 
-        formula_id = self.conn.cursor().execute(
-            sql,
-            (
-                formula.engine_name,
-                formula.formula_version,
-                formula.day_type,
-                json.dumps(payload, separators=(",", ":"), sort_keys=True),
-                int(training_start_draw_no),
-                int(training_end_draw_no),
-                float(historical_confidence),
-                float(hit_rate_top5),
-                int(sample_size),
-                1 if is_active else 0,
-            ),
-        ).fetchval()
+        cursor = self.conn.cursor()
+        try:
+            existing = cursor.execute(
+                """
+                SELECT TOP (1) FormulaId
+                FROM dbo.FormulaRegistry
+                WHERE EngineName = ?
+                  AND FormulaVersion = ?
+                  AND DayType = ?
+                  AND IsActive = ?
+                ORDER BY FormulaId DESC
+                """,
+                (
+                    formula.engine_name,
+                    formula.formula_version,
+                    formula.day_type,
+                    1 if is_active else 0,
+                ),
+            ).fetchone()
+
+            if existing is not None:
+                return int(existing.FormulaId)
+
+            cursor.execute(
+                sql,
+                (
+                    formula.engine_name,
+                    formula.formula_version,
+                    formula.day_type,
+                    json.dumps(payload, separators=(",", ":"), sort_keys=True),
+                    int(training_start_draw_no),
+                    int(training_end_draw_no),
+                    float(historical_confidence),
+                    float(hit_rate_top5),
+                    int(sample_size),
+                    1 if is_active else 0,
+                ),
+            )
+            formula_id = cursor.fetchval()
+        finally:
+            cursor.close()
 
         return int(formula_id)
 
@@ -533,10 +569,15 @@ class SqlServerGateway:
         if not clean:
             raise ValueError("No valid predictions supplied")
 
-        row = self.conn.cursor().execute(
-            "EXEC dbo.SP_Verify_Predictions @TargetDrawNo = ?, @Top5Predictions = ?;",
-            (int(target_draw_no), ",".join(clean)),
-        ).fetchone()
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute(
+                "EXEC dbo.SP_Verify_Predictions @TargetDrawNo = ?, @Top5Predictions = ?;",
+                (int(target_draw_no), ",".join(clean)),
+            )
+            row = cursor.fetchone()
+        finally:
+            cursor.close()
 
         if row is None:
             raise RuntimeError("SP_Verify_Predictions returned no result")
@@ -1471,7 +1512,6 @@ class MatrixComputationCore:
             is_active=True,
         )
 
-        self.gateway.commit()
         return int(formula_id)
 
 
