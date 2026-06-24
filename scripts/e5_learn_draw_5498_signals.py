@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from dataclasses import dataclass
@@ -12,6 +13,19 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 BACKEND_ROOT = PROJECT_ROOT / "backend"
 MEMORY_PATH = PROJECT_ROOT / "reports" / "patches" / "e5_segment_memory_observation.json"
 REPORT_PATH = PROJECT_ROOT / "reports" / "patches" / "e5_draw_5498_memory_learning_report.txt"
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Legacy 5498 E5 observation script. Defaults to no memory write.",
+    )
+    parser.add_argument(
+        "--write-memory",
+        action="store_true",
+        help="Persist memory JSON. Default is report-only/no memory write.",
+    )
+    return parser.parse_args()
+
 
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(BACKEND_ROOT))
@@ -148,13 +162,16 @@ def _build_locked_prediction(core: Any) -> Any:
 
 
 def main() -> int:
+    args = parse_args()
     load_env_file()
     core = import_step2_core()
 
+    # FIREWALL CLARITY: lock prediction before loading completed actuals.
+    locked = _build_locked_prediction(core)
+
+    # POST-PREDICTION ONLY: completed actuals are loaded after locked Top5.
     actuals = _completed_actuals_from_sql(core) or ACTUAL_5498
     actual_source = "sql_drawhistory_or_fallback_completed_draw"
-
-    locked = _build_locked_prediction(core)
 
     rows: list[MemoryAttributionRow] = []
     report_lines: list[str] = [
@@ -166,6 +183,7 @@ def main() -> int:
         f"ActualCount: {len(actuals)}",
         f"ExactHitCount: {sum(1 for n in locked.top5 if n in set(actuals))}",
         "UseForFuturePrediction: false",
+        f"WriteMemory: {bool(args.write_memory)}",
         "MemoryMode: observation_only",
         "",
         "LearnedHighMediumRows:",
@@ -213,12 +231,12 @@ def main() -> int:
     memory = load_memory(MEMORY_PATH)
     memory = update_memory(memory, rows, target_draw_no=TARGET_DRAW_NO)
     # This is observation file under reports/patches, not SQL or production registry.
-    write_memory(MEMORY_PATH, memory, no_write=False)
+    write_memory(MEMORY_PATH, memory, no_write=not args.write_memory)
 
     report_lines.extend(
         [
             "",
-            f"AttributionRowsWrittenToMemory: {len(rows)}",
+            f"AttributionRowsGenerated: {len(rows)}",
             f"MemoryEntryCount: {len(memory.get('entries', {}))}",
             f"MemoryPath: {MEMORY_PATH}",
             "FinalDecision: E5_MEMORY_LEARNS_5498_SEGMENT_SIGNALS_OBSERVATION_ONLY",
@@ -229,7 +247,10 @@ def main() -> int:
     REPORT_PATH.write_text("\n".join(report_lines) + "\n", encoding="utf-8")
 
     print(f"WROTE {REPORT_PATH}")
-    print(f"WROTE {MEMORY_PATH}")
+    if args.write_memory:
+        print(f"WROTE {MEMORY_PATH}")
+    else:
+        print(f"MEMORY_NOT_WRITTEN {MEMORY_PATH}")
     print("E5_MEMORY_LEARNS_5498_SEGMENT_SIGNALS_OBSERVATION_ONLY")
     return 0
 

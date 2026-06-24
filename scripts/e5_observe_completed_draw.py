@@ -154,14 +154,16 @@ def main() -> int:
     if args.target_draw <= args.source_draw:
         raise ValueError("--target-draw must be greater than --source-draw")
 
-    actuals = _parse_actuals(args.actuals)
-    actual_set = set(actuals)
-
+    # FIREWALL CLARITY: lock prediction before parsing completed actuals.
     locked = _build_locked_prediction(
         source_draw_no=args.source_draw,
         target_draw_no=args.target_draw,
         training_window_size=args.training_window_size,
     )
+
+    # POST-PREDICTION ONLY: explicit completed actuals are parsed after locked Top5.
+    actuals = _parse_actuals(args.actuals)
+    actual_set = set(actuals)
 
     report_path = Path(args.report_path) if args.report_path else (
         PROJECT_ROOT / "reports" / "patches" / f"e5_draw_{args.target_draw}_observation_report.txt"
