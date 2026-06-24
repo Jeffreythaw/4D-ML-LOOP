@@ -76,6 +76,26 @@ class BackendCorsTests(unittest.TestCase):
         self.assertEqual(status_code, 200)
         self.assertEqual(headers["access-control-allow-origin"], origin)
 
+    def test_current_vercel_preview_origin_can_preflight_latest_draw(self):
+        origin = "https://4-d-ml-loop-2f55lm0yl-jeffreythaws-projects.vercel.app"
+        status_code, headers = options_preflight(
+            "/api/latest-draw",
+            origin=origin,
+        )
+
+        self.assertEqual(status_code, 200)
+        self.assertEqual(headers["access-control-allow-origin"], origin)
+
+    def test_unrelated_vercel_origin_is_not_allowed(self):
+        origin = "https://other-project-2f55lm0yl-jeffreythaws-projects.vercel.app"
+        status_code, headers = options_preflight(
+            "/api/latest-draw",
+            origin=origin,
+        )
+
+        self.assertEqual(status_code, 400)
+        self.assertNotIn("access-control-allow-origin", headers)
+
     def test_localhost_origin_still_allowed(self):
         origin = "http://localhost:3000"
         status_code, headers = options_preflight(

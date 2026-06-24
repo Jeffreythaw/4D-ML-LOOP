@@ -1,0 +1,45 @@
+CORS Vercel Preview Regex Fix Report
+
+Root cause:
+- Vercel preview deployment URLs change per deployment.
+- The previous backend CORS fix allowed one exact preview origin, but the active preview moved from:
+  https://4-d-ml-loop-h0odv3i1q-jeffreythaws-projects.vercel.app
+  to:
+  https://4-d-ml-loop-2f55lm0yl-jeffreythaws-projects.vercel.app
+- FastAPI/Starlette CORSMiddleware was using exact allow_origins only, so the new preview origin did not receive Access-Control-Allow-Origin.
+
+Files changed:
+- backend/app/core/config.py
+- backend/app/main.py
+- tests/test_backend_cors.py
+
+Exact regex added:
+- ^https://4-d-ml-loop-[a-z0-9]+-jeffreythaws-projects\.vercel\.app$
+
+Allowed exact origins preserved:
+- http://localhost:3000
+- http://127.0.0.1:3000
+- https://4-d-ml-loop.vercel.app
+- https://4-d-ml-loop-h0odv3i1q-jeffreythaws-projects.vercel.app
+- Any additional comma-separated exact origins configured through FRONTEND_URL.
+
+Behavior after fix:
+- Existing fixed preview origin is allowed.
+- Current preview origin https://4-d-ml-loop-2f55lm0yl-jeffreythaws-projects.vercel.app is allowed by regex.
+- Unrelated Vercel origins are not allowed.
+- Localhost dev origins remain allowed.
+- allow_origins=["*"] was not used with credentials enabled.
+
+Tests / validation run:
+- PASS: .venv/bin/python -m py_compile backend/app/core/config.py backend/app/main.py
+- PASS: .venv/bin/python -m unittest tests.test_backend_cors
+- CORS test result: Ran 5 tests, OK.
+
+Operational actions:
+- Deploy performed: no
+- Restart performed: no
+- Push performed: no
+- Pull request created: no
+- Prediction engine logic changed: no
+- E5 logic changed: no
+- SQL/firewall logic changed: no

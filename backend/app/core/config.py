@@ -15,6 +15,7 @@ DEFAULT_CORS_ORIGINS = (
     "https://4-d-ml-loop.vercel.app",
     "https://4-d-ml-loop-h0odv3i1q-jeffreythaws-projects.vercel.app",
 )
+DEFAULT_CORS_ORIGIN_REGEX = r"^https://4-d-ml-loop-[a-z0-9]+-jeffreythaws-projects\.vercel\.app$"
 
 
 class Settings(BaseSettings):
@@ -37,6 +38,10 @@ class Settings(BaseSettings):
         validation_alias="SQL_VERIFY_PROCEDURE",
     )
     frontend_url: str = Field(default="", validation_alias="FRONTEND_URL")
+    cors_origin_regex: str = Field(
+        default=DEFAULT_CORS_ORIGIN_REGEX,
+        validation_alias="CORS_ORIGIN_REGEX",
+    )
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
