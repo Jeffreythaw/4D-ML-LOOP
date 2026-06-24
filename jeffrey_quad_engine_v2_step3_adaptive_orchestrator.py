@@ -200,6 +200,114 @@ class CandidateVote:
     internal_score: float
     raw_rank: int
     source_detail: str
+    provenance: Dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        if self.provenance:
+            return
+
+        parsed_source_draw_no = None
+        marker = "source_draw_no="
+        if marker in self.source_detail:
+            tail = self.source_detail.split(marker, 1)[1]
+            digits = []
+            for ch in tail:
+                if ch.isdigit():
+                    digits.append(ch)
+                else:
+                    break
+            if digits:
+                parsed_source_draw_no = int("".join(digits))
+
+        object.__setattr__(
+            self,
+            "provenance",
+            {
+                "candidate_number": str(self.number).zfill(4),
+                "engine_name": self.engine_name,
+                "method_name": self.engine_name,
+                "internal_score": float(self.internal_score),
+                "raw_rank": int(self.raw_rank),
+                "source_detail": self.source_detail,
+                "source_draw_no": parsed_source_draw_no,
+                "provenance_level": "candidate_vote_minimum",
+                "source_prize_available": False,
+                "source_prize_status": "SOURCE_PRIZE_METADATA_NOT_YET_CAPTURED",
+            },
+        )
+
+
+def _infer_source_prize_metadata(index_zero_based: int, number: str) -> Dict[str, Any]:
+    if index_zero_based < 0:
+        raise ValueError("source prize index cannot be negative")
+
+    if index_zero_based == 0:
+        prize_type = "1st"
+        prize_rank = 1
+    elif index_zero_based == 1:
+        prize_type = "2nd"
+        prize_rank = 2
+    elif index_zero_based == 2:
+        prize_type = "3rd"
+        prize_rank = 3
+    elif 3 <= index_zero_based <= 12:
+        prize_type = "Starter"
+        prize_rank = index_zero_based - 2
+    elif 13 <= index_zero_based <= 22:
+        prize_type = "Consolation"
+        prize_rank = index_zero_based - 12
+    else:
+        prize_type = "Unknown"
+        prize_rank = None
+
+    return {
+        "source_prize_available": True,
+        "source_prize_status": "INFERRED_FROM_23_PRIZE_ORDER",
+        "source_prize_index": int(index_zero_based),
+        "source_prize_number": str(number).zfill(4),
+        "source_prize_type": prize_type,
+        "source_prize_rank": prize_rank,
+    }
+
+
+def _source_prize_lookup(source_states: Sequence[str]) -> Dict[str, Tuple[Dict[str, Any], ...]]:
+    lookup: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    for index_zero_based, number in enumerate(source_states):
+        normalized = str(number).zfill(4)
+        lookup[normalized].append(_infer_source_prize_metadata(index_zero_based, normalized))
+    return {number: tuple(items) for number, items in lookup.items()}
+
+
+def _merge_vote_provenance(
+    base: Dict[str, Any],
+    extra: Optional[Dict[str, Any]],
+) -> Dict[str, Any]:
+    merged = dict(base)
+    if extra:
+        merged.update(extra)
+    return merged
+
+
+def _source_prize_metadata_from_detail(
+    detail: str,
+    source_states: Sequence[str],
+) -> Optional[Dict[str, Any]]:
+    if not detail or "src_idx=" not in detail:
+        return None
+    tail = detail.split("src_idx=", 1)[1]
+    digits = []
+    for ch in tail:
+        if ch.isdigit():
+            digits.append(ch)
+        else:
+            break
+    if not digits:
+        return None
+    idx = int("".join(digits))
+    if idx < 0 or idx >= len(source_states):
+        return None
+    return _infer_source_prize_metadata(idx, str(source_states[idx]).zfill(4))
+
 
 
 @dataclass
@@ -234,6 +342,7 @@ class LockedPrediction:
     engine_sources: Tuple[str, ...]
     candidate_scores: Tuple[Tuple[str, float, str], ...]
     engine_candidate_scores: Tuple[Tuple[str, int, str, float], ...] = ()
+    candidate_provenance: Tuple[Dict[str, Any], ...] = ()
     raw_vote_count: int = 0
     candidate_pool_count_before_ranking: int = 0
     engine_names_invoked: Tuple[str, ...] = ()
@@ -482,8 +591,10 @@ class CandidatePoolBuilder:
     def _votes_from_static_engine_outputs(
         self,
         engine_outputs: Dict[str, np.ndarray],
+        source_states: Sequence[str] = (),
     ) -> List[CandidateVote]:
         votes: List[CandidateVote] = []
+        prize_lookup = _source_prize_lookup(source_states) if source_states else {}
 
         engine_base_weight = {
             self.core.ENGINE_1_NAME: 1.00,
@@ -516,6 +627,25 @@ class CandidatePoolBuilder:
                         internal_score=score,
                         raw_rank=idx,
                         source_detail=f"{engine_name}:matrix_rank={idx}",
+                        provenance=_merge_vote_provenance(
+                            {
+                                "candidate_number": number,
+                                "engine_name": engine_name,
+                                "method_name": engine_name,
+                                "internal_score": float(score),
+                                "raw_rank": int(idx),
+                                "source_detail": f"{engine_name}:matrix_rank={idx}",
+                                "source_draw_no": None,
+                                "provenance_level": "candidate_vote_with_inferred_source_prize",
+                                "source_prize_available": False,
+                                "source_prize_status": "SOURCE_PRIZE_METADATA_NOT_AVAILABLE",
+                            },
+                            (
+                                prize_lookup.get(source_states[idx - 1].zfill(4), (None,))[0]
+                                if source_states and 0 <= idx - 1 < len(source_states)
+                                else None
+                            ),
+                        ),
                     )
                 )
 
@@ -581,6 +711,29 @@ class CandidatePoolBuilder:
                             f"count={t.transition_count} "
                             f"last_seen={t.last_seen_draw_no} rank={idx}"
                         ),
+                        provenance=_merge_vote_provenance(
+                            {
+                                "candidate_number": t.target_state,
+                                "engine_name": "E4_MARKOV_TRANSITION_MASS",
+                                "method_name": "E4_MARKOV_TRANSITION_MASS",
+                                "internal_score": float(score),
+                                "raw_rank": int(idx),
+                                "source_detail": (
+                                    f"E4_MARKOV source={source_state} "
+                                    f"count={t.transition_count} "
+                                    f"last_seen={t.last_seen_draw_no} rank={idx}"
+                                ),
+                                "source_draw_no": int(source_draw_no) if source_draw_no is not None else None,
+                                "provenance_level": "candidate_vote_with_inferred_source_prize",
+                                "source_prize_available": False,
+                                "source_prize_status": "SOURCE_PRIZE_METADATA_NOT_AVAILABLE",
+                            },
+                            (
+                                _source_prize_lookup(source_states).get(str(source_state).zfill(4), (None,))[0]
+                                if source_states
+                                else None
+                            ),
+                        ),
                     )
                 )
 
@@ -601,20 +754,40 @@ class CandidatePoolBuilder:
             source_draw_no=source_draw_no,
             top_n=max(25, TOP_K),
         )
-        return [
-            CandidateVote(
-                number=item.number,
-                engine_name=self.core.ENGINE_2_NAME,
-                internal_score=1.05 * float(item.score),
-                raw_rank=rank,
-                source_detail=(
-                    f"{self.core.ENGINE_2_NAME}:trained_pack:"
-                    f"{item.source_details[0]}:pack_cutoff="
-                    f"{self.full_history_pack.minimum_source_draw_no}"
-                ),
+        votes: List[CandidateVote] = []
+        for rank, item in enumerate(ranked, start=1):
+            detail = (
+                f"{self.core.ENGINE_2_NAME}:trained_pack:"
+                f"{item.source_details[0]}:pack_cutoff="
+                f"{self.full_history_pack.minimum_source_draw_no}"
             )
-            for rank, item in enumerate(ranked, start=1)
-        ]
+            votes.append(
+                CandidateVote(
+                    number=item.number,
+                    engine_name=self.core.ENGINE_2_NAME,
+                    internal_score=1.05 * float(item.score),
+                    raw_rank=rank,
+                    source_detail=detail,
+                    provenance=_merge_vote_provenance(
+                        {
+                            "candidate_number": item.number,
+                            "engine_name": self.core.ENGINE_2_NAME,
+                            "method_name": self.core.ENGINE_2_NAME,
+                            "internal_score": 1.05 * float(item.score),
+                            "raw_rank": int(rank),
+                            "source_detail": detail,
+                            "source_draw_no": int(source_draw_no),
+                            "provenance_level": "candidate_vote_with_pack_source_detail",
+                            "source_prize_available": False,
+                            "source_prize_status": "SOURCE_PRIZE_METADATA_NOT_AVAILABLE",
+                            "support_count": int(item.support_count),
+                            "source_details": tuple(item.source_details),
+                        },
+                        _source_prize_metadata_from_detail(item.source_details[0], self.core.strings_from_vectors(src_vectors)),
+                    ),
+                )
+            )
+        return votes
 
     def _votes_from_adaptive_formulas(
         self,
@@ -653,15 +826,42 @@ class CandidatePoolBuilder:
                     base_weight=0.95 * formula_weight,
                 )
 
+                detail = (
+                    f"{self.core.ENGINE_4_NAME}:"
+                    f"{formula.formula_version}:formula_rank={formula_idx}:output_rank={rank}"
+                )
+                source_states = self.core.strings_from_vectors(src_vectors)
+                source_prize_meta = None
+                source_index = rank - 1
+                if 0 <= source_index < len(source_states):
+                    source_prize_meta = _infer_source_prize_metadata(
+                        source_index,
+                        source_states[source_index],
+                    )
+
                 votes.append(
                     CandidateVote(
                         number=number,
                         engine_name=self.core.ENGINE_4_NAME,
                         internal_score=score,
                         raw_rank=rank,
-                        source_detail=(
-                            f"{self.core.ENGINE_4_NAME}:"
-                            f"{formula.formula_version}:formula_rank={formula_idx}:output_rank={rank}"
+                        source_detail=detail,
+                        provenance=_merge_vote_provenance(
+                            {
+                                "candidate_number": number,
+                                "engine_name": self.core.ENGINE_4_NAME,
+                                "method_name": self.core.ENGINE_4_NAME,
+                                "formula_version": formula.formula_version,
+                                "formula_rank": int(formula_idx),
+                                "internal_score": float(score),
+                                "raw_rank": int(rank),
+                                "source_detail": detail,
+                                "source_draw_no": int(source_draw_no),
+                                "provenance_level": "candidate_vote_with_adaptive_formula_source_index",
+                                "source_prize_available": False,
+                                "source_prize_status": "SOURCE_PRIZE_METADATA_NOT_AVAILABLE",
+                            },
+                            source_prize_meta,
                         ),
                     )
                 )
@@ -1117,15 +1317,40 @@ class CandidatePoolBuilder:
         votes: List[CandidateVote] = []
         for rank_no, item in enumerate(ranked, start=1):
             normalized = float(item.score) / maximum_score
+            detail = (
+                f"{FULL_HISTORY_ENGINE_NAME}:support={item.support_count}:"
+                f"details={';'.join(item.source_details[:5])}:"
+                f"pack_cutoff={self.full_history_pack.minimum_source_draw_no}"
+            )
+            source_states = self.core.strings_from_vectors(src_vectors)
+            source_prize_meta = None
+            for source_detail in item.source_details:
+                source_prize_meta = _source_prize_metadata_from_detail(source_detail, source_states)
+                if source_prize_meta:
+                    break
             votes.append(
                 CandidateVote(
                     number=str(item.number).zfill(4),
                     engine_name=FULL_HISTORY_ENGINE_NAME,
                     internal_score=1.08 * normalized,
                     raw_rank=rank_no,
-                    source_detail=(
-                        f"{FULL_HISTORY_ENGINE_NAME}:support={item.support_count}:"
-                        f"pack_cutoff={self.full_history_pack.minimum_source_draw_no}"
+                    source_detail=detail,
+                    provenance=_merge_vote_provenance(
+                        {
+                            "candidate_number": str(item.number).zfill(4),
+                            "engine_name": FULL_HISTORY_ENGINE_NAME,
+                            "method_name": FULL_HISTORY_ENGINE_NAME,
+                            "internal_score": 1.08 * normalized,
+                            "raw_rank": int(rank_no),
+                            "source_detail": detail,
+                            "source_draw_no": int(source_draw_no),
+                            "provenance_level": "candidate_vote_with_pack_source_detail",
+                            "source_prize_available": False,
+                            "source_prize_status": "SOURCE_PRIZE_METADATA_NOT_AVAILABLE",
+                            "support_count": int(item.support_count),
+                            "source_details": tuple(item.source_details),
+                        },
+                        source_prize_meta,
                     ),
                 )
             )
@@ -1170,7 +1395,8 @@ class CandidatePoolBuilder:
         )
 
         votes: List[CandidateVote] = []
-        votes.extend(self._votes_from_static_engine_outputs(static_outputs))
+        prize_lookup = _source_prize_lookup(source_states)
+        votes.extend(self._votes_from_static_engine_outputs(static_outputs, source_states=source_states))
 
         if source_draw_no is not None:
             votes.extend(
@@ -1552,6 +1778,25 @@ class DiversityGuardRanker:
             for idx, c in enumerate(selected)
         )
 
+        candidate_provenance = tuple(
+            {
+                "candidate_number": c.number,
+                "final_rank": idx + 1,
+                "selected_engine_source": selected_engine_sources[idx],
+                "total_score": float(c.total_score),
+                "engine_count": int(c.engine_count),
+                "votes": tuple(
+                    vote.provenance
+                    for vote in sorted(
+                        c.votes,
+                        key=lambda v: (-float(v.internal_score), v.engine_name, int(v.raw_rank), v.source_detail),
+                    )
+                ),
+                "provenance_level": "locked_prediction_final_top5_snapshot",
+            }
+            for idx, c in enumerate(selected)
+        )
+
         engine_candidate_scores = self.build_engine_rank_snapshots(
             aggregates,
             engine_names=(
@@ -1585,6 +1830,7 @@ class DiversityGuardRanker:
             engine_sources=sources,
             candidate_scores=score_snapshot,
             engine_candidate_scores=engine_candidate_scores,
+            candidate_provenance=candidate_provenance,
             raw_vote_count=int(raw_vote_count),
             candidate_pool_count_before_ranking=len(aggregates),
             engine_names_invoked=tuple(engine_names_invoked),

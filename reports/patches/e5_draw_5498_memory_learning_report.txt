@@ -1,0 +1,21 @@
+E5 Draw 5498 Memory Learning Report
+SourceDrawNo: 5497
+TargetDrawNo: 5498
+PredictedTop5: 4445, 4640, 9917, 9373, 5335
+ActualSource: sql_drawhistory_or_fallback_completed_draw
+ActualCount: 23
+ExactHitCount: 0
+UseForFuturePrediction: false
+MemoryMode: observation_only
+
+LearnedHighMediumRows:
+HIGH: 4445 -> 0445: LAST3_MATCH, MIDDLE2_MATCH, PAIR_24_MATCH, SAME_POSITION_3, SUFFIX2_MATCH | votes=1 | selected=E40_FULL_HISTORY_KNOWLEDGE
+MEDIUM: 4640 -> 4693: PREFIX2_MATCH, SAME_POSITION_2 | votes=1 | selected=E2_SET_PROJECTOR
+MEDIUM: 9917 -> 9954: PREFIX2_MATCH, SAME_POSITION_2 | votes=1 | selected=E4_MARKOV_TRANSITION_MASS
+MEDIUM: 9917 -> 8916: MIDDLE2_MATCH, SAME_POSITION_2 | votes=1 | selected=E4_MARKOV_TRANSITION_MASS
+MEDIUM: 5335 -> 1835: SAME_POSITION_2, SUFFIX2_MATCH | votes=2 | selected=E4_ADAPTIVE_4_UNKNOWNS_AFFINE
+
+AttributionRowsWrittenToMemory: 15
+MemoryEntryCount: 13
+MemoryPath: /Users/kojeffrey/4D-ML-LOOP/reports/patches/e5_segment_memory_observation.json
+FinalDecision: E5_MEMORY_LEARNS_5498_SEGMENT_SIGNALS_OBSERVATION_ONLY

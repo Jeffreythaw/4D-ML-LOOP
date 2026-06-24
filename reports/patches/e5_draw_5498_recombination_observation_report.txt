@@ -1,0 +1,25 @@
+E5 Draw 5498 Recombination Observation Report
+Mode: observation_only
+ProductionRankingChanged: false
+MemoryEntries: 13
+
+MemoryBoostByOriginalCandidate:
+4445: boost=0.058333 provenance={'engine_family': 'E40', 'formula_id': 'E40_FULL_HISTORY_KNOWLEDGE', 'method_name': 'E40_FULL_HISTORY_KNOWLEDGE', 'source_prize_type': '3rd', 'day_type': 'Wednesday'}
+4640: boost=0.058333 provenance={'engine_family': 'E2', 'formula_id': 'E2_SET_PROJECTOR', 'method_name': 'E2_SET_PROJECTOR', 'source_prize_type': '1st', 'day_type': 'Wednesday'}
+9917: boost=0.13125 provenance={'engine_family': 'E4', 'formula_id': 'E4_MARKOV_TRANSITION_MASS', 'method_name': 'E4_MARKOV_TRANSITION_MASS', 'source_prize_type': 'Starter', 'day_type': 'Wednesday'}
+9373: boost=0.0 provenance=None
+5335: boost=0.058333 provenance={'engine_family': 'E4', 'formula_id': 'E4_FIX_5493_TO_5494', 'method_name': 'E4_ADAPTIVE_4_UNKNOWNS_AFFINE', 'source_prize_type': '2nd', 'day_type': 'Wednesday'}
+
+PrefixSuffixRecombinationCandidates:
+4645: prefix_from=4640 suffix_from=4445 post_result_hit=False
+4635: prefix_from=4640 suffix_from=5335 post_result_hit=False
+4617: prefix_from=4640 suffix_from=9917 post_result_hit=False
+9945: prefix_from=9917 suffix_from=4445 post_result_hit=False
+9935: prefix_from=9917 suffix_from=5335 post_result_hit=False
+9917: prefix_from=9917 suffix_from=9917 post_result_hit=False
+
+UniqueGeneratedCount: 6
+GeneratedNumbers: 4617, 4635, 4645, 9917, 9935, 9945
+PostResultHits: (none)
+
+FinalDecision: E5_RECOMBINATION_OBSERVATION_READY

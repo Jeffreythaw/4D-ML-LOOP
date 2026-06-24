@@ -130,6 +130,10 @@ class CurrentModeAggregateMetadataTests(unittest.TestCase):
         self.assertEqual(result.metadata["candidate_pool_count_before_ranking"], 638)
         self.assertEqual(result.metadata["engine_family_count"], 8)
         self.assertEqual(result.metadata["final_selection_mode"], "aggregate_23_source_prize_8_engine")
+        self.assertFalse(result.metadata["provenance_available"])
+        self.assertEqual(result.metadata["provenance_status"], "PROVENANCE_MISSING_NEEDS_IMPLEMENTATION")
+        self.assertTrue(result.metadata["e5_observation_only"])
+        self.assertFalse(result.metadata["segment_signal_enabled"])
         self.assertFalse(result.metadata["target_winner_read"])
         self.assertFalse(result.metadata["sql_verifier_called"])
 

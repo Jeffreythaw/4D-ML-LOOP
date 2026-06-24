@@ -162,6 +162,7 @@ class FullHistoryKnowledgePack:
         ) or self.models_by_engine_name.get(f"{E2_PACK_ENGINE_PREFIX}ALL")
         if model is None:
             return []
+        source_numbers = _numbers_from_vectors(source_vectors)
         numbers = _numbers_from_vectors(
             _affine(
                 source_vectors,
@@ -181,7 +182,9 @@ class FullHistoryKnowledgePack:
                     number=number,
                     score=1.0 / rank,
                     support_count=1,
-                    source_details=(str(model["engine_name"]),),
+                    source_details=(
+                        f"{model['engine_name']}:src_idx={rank - 1}:src_num={source_numbers[rank - 1]}",
+                    ),
                 )
             )
             if len(output) >= top_n:
@@ -239,15 +242,21 @@ class FullHistoryKnowledgePack:
         support: dict[str, set[str]] = {}
         details: dict[str, list[str]] = {}
 
-        def add(number: str, score: float, model_name: str) -> None:
+        def add(
+            number: str,
+            score: float,
+            model_name: str,
+            detail_suffix: str | None = None,
+        ) -> None:
             value = str(number).zfill(4)
             if len(value) != 4 or not value.isdigit():
                 return
+            detail = model_name if not detail_suffix else f"{model_name}:{detail_suffix}"
             contributions[value] = contributions.get(value, 0.0) + float(score)
             support.setdefault(value, set()).add(model_name)
             bucket = details.setdefault(value, [])
-            if model_name not in bucket:
-                bucket.append(model_name)
+            if detail not in bucket:
+                bucket.append(detail)
 
         for model in self.models:
             model_name = str(model["engine_name"])
@@ -299,15 +308,21 @@ class FullHistoryKnowledgePack:
                         int(model["modulus"]),
                     )
                 )
+            source_numbers = _numbers_from_vectors(source)
             seen: set[str] = set()
             for raw_rank, number in enumerate(predictions, start=1):
                 if number in seen:
                     continue
                 seen.add(number)
+                src_idx = raw_rank - 1
+                detail_suffix = None
+                if 0 <= src_idx < len(source_numbers):
+                    detail_suffix = f"src_idx={src_idx}:src_num={source_numbers[src_idx]}"
                 add(
                     number,
                     weight / (1.0 + 0.015 * (raw_rank - 1)),
                     model_name,
+                    detail_suffix,
                 )
 
         structural, temporal = self._profile_maps(self.models)
