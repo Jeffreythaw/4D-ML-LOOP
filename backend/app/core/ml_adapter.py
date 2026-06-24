@@ -13,6 +13,17 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 FALLBACK_ENGINE_SOURCE = "E0_STABILIZED_BASELINE_FALLBACK"
 FALLBACK_TOP_K = 5
+AGGREGATE_SELECTION_MODE = "aggregate_23_source_prize_8_engine"
+REQUIRED_ENGINE_FAMILIES = (
+    "E1_CROSS_PAIR_LINEAR",
+    "E1_WLS_DECAY",
+    "E1_MIRROR_BASE5",
+    "E1_DELTA_ROTATION",
+    "E2_SET_PROJECTOR",
+    "E3_POLYNOMIAL",
+    "E4_MARKOV_TRANSITION_MASS",
+    "E40_FULL_HISTORY_KNOWLEDGE",
+)
 
 
 class PredictionAdapterError(RuntimeError):
@@ -26,6 +37,7 @@ class PredictionAdapterResult:
     day_type: str
     predictions: list[PredictionCandidate]
     ledger_predictions: list[PredictionCandidate]
+    metadata: dict[str, Any]
 
 
 def run_existing_engine_prediction(request: PredictionRequest, *, allow_fallback: bool = False) -> PredictionAdapterResult:
@@ -118,23 +130,31 @@ def run_existing_engine_prediction(request: PredictionRequest, *, allow_fallback
             )
         )
 
+    metadata = _prediction_metadata(
+        source_draw_no=source_draw_no,
+        target_draw_no=int(locked.target_draw_no),
+        source_record=source_record,
+        locked=locked,
+        candidates=candidates,
+    )
+
     if request.mode == "Current":
         from app.core.temporal_context_engine import run_temporal_context_prediction
 
         log_memory("prediction_temporal_context_loaded")
-        temporal_result = run_temporal_context_prediction(
-            source_draw_no=source_draw_no,
-            target_draw_no=int(locked.target_draw_no),
-            underlying_candidates=ledger_candidates or candidates,
-        )
-
-        return PredictionAdapterResult(
-            source_draw_number=temporal_result.source_draw_number,
-            target_draw_number=temporal_result.target_draw_number,
-            day_type=temporal_result.day_type,
-            predictions=temporal_result.predictions,
-            ledger_predictions=temporal_result.predictions,
-        )
+        try:
+            temporal_result = run_temporal_context_prediction(
+                source_draw_no=source_draw_no,
+                target_draw_no=int(locked.target_draw_no),
+                underlying_candidates=ledger_candidates or candidates,
+            )
+            metadata["overlay_engine"] = "E1_TEMPORAL_CONTEXT_MATCH"
+            metadata["overlay_top5"] = [item.number for item in temporal_result.predictions]
+            day_type = temporal_result.day_type
+        except Exception as exc:
+            metadata["overlay_engine"] = "E1_TEMPORAL_CONTEXT_MATCH"
+            metadata["overlay_top5"] = []
+            metadata["overlay_error"] = str(exc)
 
     return PredictionAdapterResult(
         source_draw_number=source_draw_no,
@@ -142,7 +162,52 @@ def run_existing_engine_prediction(request: PredictionRequest, *, allow_fallback
         day_type=day_type,
         predictions=candidates,
         ledger_predictions=ledger_candidates or candidates,
+        metadata=metadata,
     )
+
+
+def _prediction_metadata(
+    *,
+    source_draw_no: int,
+    target_draw_no: int,
+    source_record: Any,
+    locked: Any,
+    candidates: list[PredictionCandidate],
+) -> dict[str, Any]:
+    source_prize_count = len(tuple(getattr(source_record, "winning_numbers", ())))
+    invoked = _required_families(getattr(locked, "engine_names_invoked", ()))
+    return {
+        "source_draw_no": int(source_draw_no),
+        "target_draw_no": int(target_draw_no),
+        "source_prize_count": source_prize_count,
+        "source_input_shape": [source_prize_count, 4],
+        "raw_vote_count": int(getattr(locked, "raw_vote_count", 0)),
+        "unique_candidate_count": int(getattr(locked, "candidate_pool_count_before_ranking", 0)),
+        "candidate_pool_count_before_ranking": int(getattr(locked, "candidate_pool_count_before_ranking", 0)),
+        "engine_families_invoked": invoked,
+        "engine_family_count": len(invoked),
+        "final_top5_source_families": [candidate.source for candidate in candidates],
+        "final_selection_mode": AGGREGATE_SELECTION_MODE,
+        "overlay_engine": None,
+        "overlay_top5": [],
+        "target_winner_read": False,
+        "sql_verifier_called": False,
+    }
+
+
+def _required_families(engine_names: Any) -> list[str]:
+    found = {_engine_family(str(name)) for name in engine_names}
+    return [name for name in REQUIRED_ENGINE_FAMILIES if name in found]
+
+
+def _engine_family(engine_name: str) -> str:
+    if engine_name == "E1_WLS_DECAY_0.98":
+        return "E1_WLS_DECAY"
+    if engine_name == "E1_MIRROR_BASE5_LSTS":
+        return "E1_MIRROR_BASE5"
+    if engine_name == "E1_DELTA_ROTATION_LSTS":
+        return "E1_DELTA_ROTATION"
+    return engine_name
 
 
 def _build_stabilized_fallback_result(
@@ -191,6 +256,24 @@ def _build_stabilized_fallback_result(
         day_type="Special",
         predictions=candidates,
         ledger_predictions=candidates,
+        metadata={
+            "source_draw_no": int(source_draw_no),
+            "target_draw_no": int(source_draw_no) + 1,
+            "source_prize_count": 0,
+            "source_input_shape": [0, 4],
+            "raw_vote_count": 0,
+            "unique_candidate_count": len(candidates),
+            "candidate_pool_count_before_ranking": len(candidates),
+            "engine_families_invoked": [],
+            "engine_family_count": 0,
+            "final_top5_source_families": [candidate.source for candidate in candidates],
+            "final_selection_mode": "fallback",
+            "overlay_engine": None,
+            "overlay_top5": [],
+            "target_winner_read": False,
+            "sql_verifier_called": False,
+            "fallback_reason": str(reason),
+        },
     )
 
 

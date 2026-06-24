@@ -234,6 +234,9 @@ class LockedPrediction:
     engine_sources: Tuple[str, ...]
     candidate_scores: Tuple[Tuple[str, float, str], ...]
     engine_candidate_scores: Tuple[Tuple[str, int, str, float], ...] = ()
+    raw_vote_count: int = 0
+    candidate_pool_count_before_ranking: int = 0
+    engine_names_invoked: Tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -455,6 +458,7 @@ class CandidatePoolBuilder:
         self.full_history_pack = full_history_pack
         self.training_window_size = int(training_window_size)
         self.enrichment_window_size = int(enrichment_window_size)
+        self.last_pool_metadata: Dict[str, Any] = {}
 
     def _history_through(self, source_draw_no: int) -> Sequence[Any]:
         if self.history_cache is not None:
@@ -1224,7 +1228,13 @@ class CandidatePoolBuilder:
         if not votes:
             raise RuntimeError("Candidate pool is empty")
 
-        return self.aggregate_votes(votes)
+        aggregates = self.aggregate_votes(votes)
+        self.last_pool_metadata = {
+            "raw_vote_count": len(votes),
+            "unique_candidate_count": len(aggregates),
+            "engine_names_invoked": tuple(sorted({vote.engine_name for vote in votes})),
+        }
+        return aggregates
 
 
 # ============================================================
@@ -1427,6 +1437,8 @@ class DiversityGuardRanker:
         *,
         target_draw_no: int,
         source_draw_no: int,
+        raw_vote_count: int = 0,
+        engine_names_invoked: Sequence[str] = (),
     ) -> LockedPrediction:
         if len(aggregates) < self.top_k:
             raise RuntimeError(
@@ -1573,6 +1585,9 @@ class DiversityGuardRanker:
             engine_sources=sources,
             candidate_scores=score_snapshot,
             engine_candidate_scores=engine_candidate_scores,
+            raw_vote_count=int(raw_vote_count),
+            candidate_pool_count_before_ranking=len(aggregates),
+            engine_names_invoked=tuple(engine_names_invoked),
         )
 
 
@@ -1679,11 +1694,14 @@ class Step3AdaptiveOrchestrator:
             day_type=source_record.day_type,
             source_draw_no=source_draw_no,
         )
+        pool_metadata = getattr(self.pool_builder, "last_pool_metadata", {})
 
         return self.ranker.select_top5(
             candidate_pool,
             target_draw_no=target_draw_no,
             source_draw_no=source_draw_no,
+            raw_vote_count=int(pool_metadata.get("raw_vote_count", 0)),
+            engine_names_invoked=tuple(pool_metadata.get("engine_names_invoked", ())),
         )
 
     def run_one_step(self, source_draw_no: int) -> Optional[DrawStepResult]:
@@ -1723,11 +1741,14 @@ class Step3AdaptiveOrchestrator:
             day_type=source_record.day_type,
             source_draw_no=source_draw_no,
         )
+        pool_metadata = getattr(self.pool_builder, "last_pool_metadata", {})
 
         locked = self.ranker.select_top5(
             candidate_pool,
             target_draw_no=target_draw_no,
             source_draw_no=source_draw_no,
+            raw_vote_count=int(pool_metadata.get("raw_vote_count", 0)),
+            engine_names_invoked=tuple(pool_metadata.get("engine_names_invoked", ())),
         )
 
         hit_count = self.gateway.verify_predictions(

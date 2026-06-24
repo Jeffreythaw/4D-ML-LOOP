@@ -33,6 +33,7 @@ class PredictionResponse(BaseModel):
     day_type: DayType | None = None
     predictions: list[PredictionCandidate]
     verification_status: str
+    metadata: dict[str, Any] = Field(default_factory=dict)
 
 
 class VerificationRequest(BaseModel):
@@ -56,4 +57,3 @@ class LatestDrawResponse(BaseModel):
     target_draw_number: int
     draw_date: str
     day_type: DayType | None = None
-

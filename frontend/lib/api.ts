@@ -16,6 +16,7 @@ export type PredictionResponse = {
   day_type?: string | null;
   predictions: PredictionCandidate[];
   verification_status: string;
+  metadata?: Record<string, unknown>;
 };
 
 export type LatestDrawResponse = {

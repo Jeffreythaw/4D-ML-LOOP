@@ -73,6 +73,7 @@ def predict(request: PredictionRequest) -> PredictionResponse:
         day_type=adapter_result.day_type,
         predictions=predictions,
         verification_status="not_verified",
+        metadata=adapter_result.metadata,
     )
 
 
