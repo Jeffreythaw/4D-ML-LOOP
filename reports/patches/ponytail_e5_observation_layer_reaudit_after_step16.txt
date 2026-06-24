@@ -1,0 +1,47 @@
+Ponytail E5 Observation Layer Re-audit After Step 16
+
+Decision: PASS
+
+Commit audited:
+- 7bb47c66 Harden E5 observer firewall no-write defaults
+- Scope touched by commit: scripts/e5_learn_draw_5498_signals.py and scripts/e5_observe_completed_draw.py
+
+Previous warnings rechecked:
+- FIXED: scripts/e5_observe_completed_draw.py now builds the locked prediction before parsing explicit --actuals. Evidence: locked = _build_locked_prediction(...) at lines 157-162, then actuals = _parse_actuals(args.actuals) at line 165.
+- FIXED: scripts/e5_learn_draw_5498_signals.py now builds the locked prediction before loading completed Draw 5498 actuals. Evidence: locked = _build_locked_prediction(core) at line 170, then actuals = _completed_actuals_from_sql(core) or ACTUAL_5498 at line 173.
+- FIXED: scripts/e5_learn_draw_5498_signals.py defaults to no memory write. Evidence: --write-memory uses action="store_true" at lines 22-25, and write_memory(..., no_write=not args.write_memory) at line 234.
+- FIXED: --write-memory is required to persist reports/patches/e5_segment_memory_observation.json. Without it, the script prints MEMORY_NOT_WRITTEN.
+
+Observation-only / production ranking:
+- PASS: E5 remains observation-only.
+- PASS: E5 is not wired into DiversityGuardRanker.select_top5 or backend prediction scoring.
+- PASS: j4d_e5/recombiner.py keeps E5_RECOMBINATION_ENABLED_DEFAULT = False.
+- PASS: score_boost_from_memory is used only by scripts/e5_recombine_5498_observation.py, a local observation report script.
+- PASS: API metadata still reports e5_observation_only=true and segment_signal_enabled=false in backend/app/core/ml_adapter.py.
+
+Temporal firewall:
+- PASS: scripts/e5_observe_completed_draw.py locks prediction before explicit actual parsing.
+- PASS: scripts/e5_learn_draw_5498_signals.py locks prediction before completed actual loading.
+- PASS: scripts/e5_sequential_observation_replay.py still locks prediction before gateway.load_phase2_draw(target_draw_no).
+- PASS: Step3AdaptiveOrchestrator.predict_one_step_locked still does not load target winners.
+
+SQL / memory write safety:
+- PASS: E5 SQL gateways remain autocommit=False and no_sql_write=True.
+- PASS: E5 scripts use rollback/close and do not call SQL commit.
+- PASS: No E5 production SQL write path was introduced.
+- PASS: E5 memory persistence in the hardened 5498 learner is gated by --write-memory.
+
+Validation:
+- PASS: .venv/bin/python -m py_compile j4d_e5/*.py scripts/e5_observe_completed_draw.py scripts/e5_sequential_observation_replay.py scripts/e5_sequential_replay_2017_2026_scaffold.py scripts/e5_learn_draw_5498_signals.py scripts/e5_recombine_5498_observation.py scripts/e5_analyze_draw_5498_segments.py full_history_live_knowledge.py jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py backend/app/core/ml_adapter.py
+- PASS: .venv/bin/python -m unittest tests.test_e5_segments tests.test_e5_memory tests.test_e5_analyzer tests.test_e5_observe_completed_draw tests.test_e5_sequential_observation_replay tests.test_current_mode_aggregate_metadata
+- Unit result: Ran 18 tests in 0.133s, OK.
+
+Operational actions:
+- No deploy performed.
+- No restart performed.
+- No push performed.
+- No commit performed by this audit.
+- No production changes performed by this audit.
+
+Final decision:
+- PASS. All three previous warnings are fixed, and no temporal firewall, SQL write, or production ranking risk remains in the audited E5 observation layer.
