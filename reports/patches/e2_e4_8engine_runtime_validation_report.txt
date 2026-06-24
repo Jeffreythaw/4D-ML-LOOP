@@ -1,0 +1,202 @@
+E2/E4 8-ENGINE RUNTIME VALIDATION REPORT
+
+Final decision: PASS_READY_FOR_PONYTAIL_REAUDIT
+
+SCOPE
+
+Runtime candidate generation only. No commit, push, deployment, or service
+restart was performed.
+
+INITIAL READ-ONLY AUDIT
+
+Initial decision: FAIL — missing runtime integrations.
+
+The rebuilt pack was present and correct, but runtime validation still required
+exactly 20 artifacts and the old A=8/B=9/C=2/D=1 group counts. The 26-model pack
+therefore failed closed before prediction. Even if loaded, the new E2 and E4
+model names received no direct runtime handling. Static E2 and causal E4 were
+already active, but trained E2, E40 pack voting, and pack availability were not.
+
+Evidence:
+
+- Pack uses `models`: live_knowledge/full_history_engine_pack.json:11.
+- E2 models: live_knowledge/full_history_engine_pack.json:210,339,468,597,726.
+- E4 model: live_knowledge/full_history_engine_pack.json:3540.
+- Pack cutoff/counts: live_knowledge/full_history_engine_pack.json:7280025,
+  7280029-7280030.
+- Pack builder emits `models` and current counts:
+  scripts/build_live_40year_knowledge_pack.py:24-25,78-100,125-127.
+- E2 training semantics: scripts/run_full_history_engine_training.py:684-773.
+- E4 artifact explicitly does not replace causal runtime:
+  scripts/run_full_history_engine_training.py:972-980.
+
+IMPLEMENTATION
+
+Files changed:
+
+- full_history_live_knowledge.py
+- backend/full_history_live_knowledge.py.source
+- jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py
+- backend/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source
+- scripts/run_step3_resumable_dryrun.py
+- tests/test_full_history_live_knowledge.py
+
+Changes:
+
+1. The loader now validates the 26-model schema and required group counts,
+   indexes `models` by engine name, and requires the five E2 plus one E4 models
+   (full_history_live_knowledge.py:101-143).
+2. Eligible trained E2 uses the matching day model first and `__ALL` fallback,
+   applies its matrix/bias read-only, and remains gated by the pack cutoff
+   (full_history_live_knowledge.py:145-189).
+3. `_votes_from_trained_e2` records both the E2 family and exact trained model
+   provenance (jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:574-602).
+4. Candidate construction invokes trained E2 before aggregation/ranking
+   (jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1144-1203).
+5. E4 candidate provenance now includes `last_seen`. Actual E4 votes still use
+   the causal DrawHistory cache, not the retrospective pack profile
+   (jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:509-572).
+6. The immutable pack is loaded once by the replay runner and reused across
+   draw orchestrators (scripts/run_step3_resumable_dryrun.py:143,168-170,
+   183-190).
+
+ENGINE AUDIT TABLE
+
+| Engine | Trained artifact exists | Live pack contains it | Runtime candidate source exists | Actually used before Top5 ranker | Temporal firewall risk | Notes |
+| E1_CROSS_PAIR_LINEAR | Yes | Yes, learned variants at pack lines 886-1266 | Yes, static votes at orchestrator lines 467-507; core class at step2 lines 758+ | Yes | Low | Static E1 always runs; eligible learned E1 also contributes inside E40. |
+| E1_WLS_DECAY | Yes | Yes, pack lines 1473-2265 | Yes, `_votes_from_wls_decay` at orchestrator line 715 | Yes | Low | Training pairs are source-cutoff bounded. |
+| E1_MIRROR_BASE5 | Yes | Yes, pack line 7278587 | Yes, `_votes_from_mirror_base5` at orchestrator line 809 | Yes | Low | Runtime training/history uses source cutoff. |
+| E1_DELTA_ROTATION | Yes | Yes, pack lines 53,147 | Yes, `_votes_from_delta_rotation` at orchestrator line 975 | Yes | Low | Delta targets are restricted to <= source_draw_no. |
+| E2_SET_PROJECTOR | Yes; retrospective files have engine_name at line 15 | Yes, pack lines 210,339,468,597,726 | Yes, static E2 plus `_votes_from_trained_e2` at orchestrator lines 467-507 and 574-602 | Yes; trained E2 produced 23 votes at source 5497 | Low when eligible | Day-scoped model selected first; ALL fallback. Trained model is prohibited before cutoff 5497. |
+| E3_POLYNOMIAL | Yes | Yes, pack line 1404 | Yes, static votes at orchestrator lines 467-507; core class at step2 line 1353 | Yes | Low | Static E3 always runs; learned E3 also contributes inside eligible E40. |
+| E4_MARKOV_TRANSITION_MASS | Yes; retrospective artifact line 10 | Yes, pack line 3540 | Yes, `_votes_from_markov` at orchestrator lines 509-572 | Yes; 508 votes at source 5497 | Low; verified | Retrospective E4 model is evidence-only because its final Top-25 profile cannot be prefix-truncated. Actual votes use causal cache. |
+| E40_FULL_HISTORY_KNOWLEDGE | Pack ensemble itself | Yes, all eligible weighted models | Yes, `_votes_from_full_history_knowledge` at orchestrator lines 1052-1117 | Yes; 25 votes at source 5497 | Gated | Ineligible before source 5497 by loader policy lines 145-147 and orchestrator lines 1066-1069. |
+
+ALL-EIGHT RUNTIME VALIDATION
+
+Read-only source draw 5497 candidate pool:
+
+- Unique candidates: 638
+- Total votes: 658
+- E1_CROSS_PAIR_LINEAR: 23
+- E1_WLS_DECAY_0.98: 5
+- E1_MIRROR_BASE5_LSTS: 5
+- E1_DELTA_ROTATION_LSTS: 5
+- E2_SET_PROJECTOR: 46 total, including 23 trained-pack votes
+- E3_POLYNOMIAL: 22
+- E4_MARKOV_TRANSITION_MASS: 508
+- E40_FULL_HISTORY_KNOWLEDGE: 25
+- Trained E2 model used:
+  E2_SET_PROJECTOR_LEARNED_BIAS__Wednesday
+- E4 future-observation violations: 0
+- E4 maximum selected last_seen: 4013 <= source 5497
+
+Locked result:
+
+- Top 5: 4445, 4640, 9917, 9373, 5335
+- Unique 4-digit candidates: PASS
+- Represented sources: E40_FULL_HISTORY_KNOWLEDGE, E2_SET_PROJECTOR,
+  E4_MARKOV_TRANSITION_MASS, E1_CROSS_PAIR_LINEAR,
+  E4_ADAPTIVE_4_UNKNOWNS_AFFINE
+- Distinct represented sources: 5
+
+FINAL TOP-5 CONTRACT
+
+The existing ranker still rejects pools with fewer than five unique candidates,
+forces distinct-engine representation, fills to exactly five, and raises if
+either contract fails
+(jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1413-1525).
+
+TEMPORAL FIREWALL
+
+- Causal Markov observations are built from previous/current consecutive draws,
+  bisected through source_draw_no, and sorted count DESC, last_seen DESC,
+  target_state ASC
+  (jeffrey_quad_engine_v2_step2_matrix_core.py:90-152).
+- Full replay-range audit: 589,252 selected Markov rows; 0 future violations.
+- Retrospective E2 and E40 produce no votes before source 5497
+  (full_history_live_knowledge.py:145-159).
+- The E4 pack profile is not used to generate runtime E4 votes because its
+  retrospective aggregate cannot enforce a historical prefix cutoff.
+- Python locks Top 5 before SQL verification
+  (jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1709-1725).
+- Target winners are loaded only in the zero-hit adaptive branch after verifier
+  return (jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1630-1641,
+  1722-1735).
+- SQL verification remains dbo.SP_Verify_Predictions
+  (jeffrey_quad_engine_v2_step2_matrix_core.py:695-726).
+
+TESTS
+
+Syntax:
+
+.venv/bin/python -m py_compile \
+  full_history_live_knowledge.py \
+  backend/full_history_live_knowledge.py.source \
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py \
+  backend/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source \
+  scripts/run_step3_resumable_dryrun.py
+
+Tests:
+
+.venv/bin/python -m unittest discover -s tests -p 'test_*.py'
+
+Result: 60 tests run, 60 passed.
+
+New/updated coverage:
+
+- 26 models and A=13/B=9/C=3/D=1; `models`, not `artifacts`
+  (tests/test_full_history_live_knowledge.py:25-38).
+- E2 day model generation and cutoff
+  (tests/test_full_history_live_knowledge.py:139-161).
+- All eight families enter the pre-rank pool; final Top 5 and diversity contract
+  (tests/test_full_history_live_knowledge.py:163-250).
+- Causal E4 cutoff and deterministic ordering
+  (tests/test_causal_offline_foundation.py:90-149).
+
+DETERMINISTIC REPLAY
+
+A full replay was attempted after enabling the 26-model pack. Before pack
+preloading was added, it processed 467/1,443 rows in approximately 20 minutes
+because every draw re-read the 7-million-line pack. The attempt was stopped
+without persisted database writes. The runner now preloads the pack once.
+
+The permitted bounded replay was run twice for source draws 4051..4060:
+
+- reports/patches/e2_e4_8engine_runtime_replay_a.jsonl
+- reports/patches/e2_e4_8engine_runtime_replay_a.log
+- reports/patches/e2_e4_8engine_runtime_replay_b.jsonl
+- reports/patches/e2_e4_8engine_runtime_replay_b.log
+- Rows: 10 and 10
+- SHA256 for both JSONLs:
+  997c85b354339755c6d8950e3804b65a8e86cd89abe958780584332627f86635
+- Byte-identical: PASS
+- Exactly five unique four-digit candidates per row: PASS
+- At least three distinct sources per row: PASS
+- E40 before cutoff: 0
+
+DATABASE WRITE CHECK
+
+- User tables checked: 151
+- Before snapshot SHA256:
+  c65f4c99a6f8b284424ef698aa82f09ebe3bd4f8ccb2b9e918cfb39f4decaaec
+- After snapshot SHA256:
+  c65f4c99a6f8b284424ef698aa82f09ebe3bd4f8ccb2b9e918cfb39f4decaaec
+- Persisted row-count changes: 0
+
+REMAINING RISKS / CAVEATS
+
+1. “All eight” is true for policy-eligible predictions at source draw 5497 or
+   later. Historical replay before 5497 intentionally excludes trained
+   retrospective E2 and E40 to preserve the temporal firewall. Static E2 and
+   causal E4 remain active there.
+2. The E4 retrospective pack model is loaded and validated but deliberately not
+   used directly for votes. It lacks prefix observations needed to enforce
+   source_draw_no on old replay rows; causal runtime E4 is the safe source.
+3. Two complete 1,443-row reruns were not completed after the pack expansion.
+   Two bounded clean runs are byte-identical, and the prior full attempt exposed
+   and led to removal of repeated pack deserialization.
+
+FINAL DECISION
+
+PASS_READY_FOR_PONYTAIL_REAUDIT

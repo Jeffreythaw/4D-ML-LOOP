@@ -1,0 +1,142 @@
+PONYTAIL NO-DB-WRITE FINAL REAUDIT REPORT
+Generated: 2026-06-24 00:23:27 +08
+
+Final decision: PONYTAIL_PASS_READY_FOR_CONTROLLED_PRODUCTION_REVIEW
+
+Scope
+- Primary report verified: reports/patches/no_db_write_formula_registry_blocker_fix_report.txt
+- Changed source inspected:
+  - jeffrey_quad_engine_v2_step2_matrix_core.py
+  - backend/jeffrey_quad_engine_v2_step2_matrix_core.py.source
+  - jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py
+  - backend/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source
+  - scripts/run_step3_resumable_dryrun.py
+  - tests/test_no_sql_write_formula_registry.py
+- Mirror check:
+  - jeffrey_quad_engine_v2_step2_matrix_core.py == backend/jeffrey_quad_engine_v2_step2_matrix_core.py.source, cmp exit 0.
+  - jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py == backend/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source, cmp exit 0.
+- No commit, push, deploy, or service restart was performed.
+
+Primary report verdict
+- The primary report's root cause is supported: the old replay path reached MatrixComputationCore.solve_and_register_adaptive_formula(), then SqlServerGateway.register_formula(), then dbo.FormulaRegistry INSERT before rollback.
+- The reported fix is supported: register_formula() now branches to in-memory storage before constructing/executing the SQL INSERT when no-write mode is active.
+- The report's validation claims were independently rerun and passed.
+
+No-write guard audit
+| Requirement | Result | Evidence |
+|---|---:|---|
+| Hard guard, not rollback-based | PASS | jeffrey_quad_engine_v2_step2_matrix_core.py:119-145 blocks write SQL before pyodbc delegation; register_formula no-write branch returns before SQL path at lines 740-765. |
+| J4D_NO_SQL_WRITE=1 activates guard | PASS | jeffrey_quad_engine_v2_step2_matrix_core.py:110-111 parses env; line 427 ORs env with constructor flag. Test at tests/test_no_sql_write_formula_registry.py:76-80 passed. |
+| --no-sql-write activates guard | PASS | jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1873-1877 defines flag; lines 1910-1914 pass no_sql_write into SqlServerGateway. Direct command log reported NO_SQL_WRITE=True and SQL_WRITE_EXECUTED=0. |
+| --dry-run activates guard | PASS | jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1868-1872 defines dry-run as no-write; lines 1910-1914 pass it into SqlServerGateway. Direct dry-run log reported SQL_WRITE_ATTEMPTED=0 and SQL_WRITE_EXECUTED=0. |
+| Validation/bounded replay activates guard | PASS | scripts/run_step3_resumable_dryrun.py:37-42 makes no-write explicit; lines 131-136 and 191-196 create guarded gateways. Bounded replay logs reported attempted=0/executed=0. |
+| FormulaRegistry INSERT/UPDATE/DELETE/MERGE absent in no-write execution | PASS | Replay log/jsonl scan found no FormulaRegistry or persisted-write tokens; counters were zero. |
+| Adaptive loop still logical in no-write mode | PASS | jeffrey_quad_engine_v2_step2_matrix_core.py:91-101 stores in-memory entries; lines 492-521 expose filtered reads; register_formula returns negative in-memory ids at lines 750-765; FormulaRegistryReader prepends in-memory formulas at jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:406-417. |
+| Production/write-enabled path still explicit | PASS | With no no-write guard active, register_formula proceeds past line 740 to the existing SQL INSERT at jeffrey_quad_engine_v2_step2_matrix_core.py:779-793. |
+
+SQL verifier and hidden-target firewall
+- SQL verifier behavior is unchanged: jeffrey_quad_engine_v2_step2_matrix_core.py:858-871 still calls dbo.SP_Verify_Predictions and returns HitCount.
+- Python target-winner access remains after Top5 lock and after SQL verifier returns zero: jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1696-1708 performs only target existence check, lines 1720-1736 build/rank/verify, and lines 1744-1753 load target winners only after HitCount == 0.
+
+Temporal firewall audit
+- Causal Markov cache remains source_draw_no bounded: jeffrey_quad_engine_v2_step2_matrix_core.py:181-225, especially bisect cutoff at line 197.
+- Markov deterministic ordering remains count DESC, last_seen_draw_no DESC, target_state ASC:
+  - In-memory cache: jeffrey_quad_engine_v2_step2_matrix_core.py:209-212.
+  - SQL single-source path: jeffrey_quad_engine_v2_step2_matrix_core.py:616-627.
+  - SQL bulk path: jeffrey_quad_engine_v2_step2_matrix_core.py:682-699.
+- Phase2 Markov path still prefers causal cache when present: jeffrey_quad_engine_v2_step2_matrix_core.py:1728-1736.
+- Retrospective E4 remains evidence-only by code comment/policy: scripts/run_full_history_engine_training.py:972-980.
+
+8-engine runtime invariants
+- Candidate pool still invokes all relevant runtime sources before ranking:
+  - Static E1/E2/E3: jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1163-1169.
+  - WLS: lines 1171-1178.
+  - Mirror base5: lines 1179-1185.
+  - Delta rotation: lines 1186-1192.
+  - Trained E2: lines 1193-1199 and _votes_from_trained_e2 at lines 585-613.
+  - E40: lines 1200-1206 and _votes_from_full_history_knowledge at lines 1063-1128.
+  - Causal Markov E4: lines 1208-1215 and vote creation at lines 569-583.
+  - Adaptive E4 formula path remains separate at lines 1216-1222.
+- Knowledge pack loader still uses models, validates 26 artifacts, required groups, E2 models, and E4 model: full_history_live_knowledge.py:104-143.
+- E2 trained pack model is actually used: full_history_live_knowledge.py:149-189 and runtime votes at jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:585-613.
+- E40 is actually used when eligible: full_history_live_knowledge.py:222-280 and runtime votes at jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1063-1128.
+- Top5 and diversity remain enforced:
+  - DiversityGuard contract: jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1234-1241.
+  - Exact Top5 error if not 5: lines 1523-1526.
+  - At least 3 distinct engines error if unmet: lines 1528-1534.
+
+Eligible runtime sample, source_draw_no=5497
+- Command: J4D_NO_SQL_WRITE=1 inline Python candidate-pool inspection.
+- Result:
+  - unique_candidates: 638
+  - vote_counts:
+    - E1_CROSS_PAIR_LINEAR: 23
+    - E1_WLS_DECAY_0.98: 5
+    - E1_MIRROR_BASE5_LSTS: 5
+    - E1_DELTA_ROTATION_LSTS: 5
+    - E2_SET_PROJECTOR: 46
+    - E3_POLYNOMIAL: 22
+    - E40_FULL_HISTORY_KNOWLEDGE: 25
+    - E4_ADAPTIVE_4_UNKNOWNS_AFFINE: 19
+    - E4_MARKOV_TRANSITION_MASS: 508
+  - trained_e2 votes: 23
+  - e40 votes: 25
+  - markov votes: 508
+  - top5: ["4445", "4640", "9917", "9373", "5335"]
+  - unique_top5: 5
+  - all_4digit: true
+  - distinct_engine_sources: 5
+  - SQL write counters: attempted=0, executed=0, blocked=0
+
+Commands run
+1. Syntax:
+   .venv/bin/python -m py_compile jeffrey_quad_engine_v2_step2_matrix_core.py backend/jeffrey_quad_engine_v2_step2_matrix_core.py.source jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py backend/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source scripts/run_step3_resumable_dryrun.py tests/test_no_sql_write_formula_registry.py
+   Result: PASS
+
+2. Targeted no-write tests:
+   .venv/bin/python -m unittest tests.test_no_sql_write_formula_registry -v
+   Result: PASS, 3/3
+
+3. Full suite:
+   .venv/bin/python -m unittest discover -s tests -p 'test_*.py'
+   Result: PASS, 63/63
+
+4. Direct dry-run prediction/orchestrator path:
+   J4D_NO_SQL_WRITE=1 .venv/bin/python jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py --start-draw-no 4051 --end-draw-no 4052 --training-window-size 64 --dry-run > reports/patches/ponytail_no_db_write_step3_dry_run.log 2>&1
+   Result: PASS; NO_SQL_WRITE=True; SQL_WRITE_ATTEMPTED=0; SQL_WRITE_EXECUTED=0; SQL_WRITE_BLOCKED=0.
+
+5. Direct --no-sql-write path:
+   J4D_NO_SQL_WRITE=1 .venv/bin/python jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py --start-draw-no 4051 --end-draw-no 4052 --training-window-size 64 --no-sql-write > reports/patches/ponytail_no_db_write_step3_no_sql_write.log 2>&1
+   Result: PASS; NO_SQL_WRITE=True; SQL_WRITE_ATTEMPTED=0; SQL_WRITE_EXECUTED=0; SQL_WRITE_BLOCKED=0.
+
+6. Bounded deterministic replay A:
+   J4D_NO_SQL_WRITE=1 .venv/bin/python scripts/run_step3_resumable_dryrun.py --start-draw-no 4051 --end-draw-no 4061 --training-window-size 64 --output-jsonl reports/patches/ponytail_no_db_write_reaudit_replay_a.jsonl --progress-every 10 > reports/patches/ponytail_no_db_write_reaudit_replay_a.log 2>&1
+   Result: PASS; SQL_WRITE_ATTEMPTED=0; SQL_WRITE_EXECUTED=0; SQL_WRITE_BLOCKED=0.
+
+7. Bounded deterministic replay B:
+   J4D_NO_SQL_WRITE=1 .venv/bin/python scripts/run_step3_resumable_dryrun.py --start-draw-no 4051 --end-draw-no 4061 --training-window-size 64 --output-jsonl reports/patches/ponytail_no_db_write_reaudit_replay_b.jsonl --progress-every 10 > reports/patches/ponytail_no_db_write_reaudit_replay_b.log 2>&1
+   Result: PASS; SQL_WRITE_ATTEMPTED=0; SQL_WRITE_EXECUTED=0; SQL_WRITE_BLOCKED=0.
+
+Replay output comparison
+- reports/patches/ponytail_no_db_write_reaudit_replay_a.jsonl sha256: 997c85b354339755c6d8950e3804b65a8e86cd89abe958780584332627f86635
+- reports/patches/ponytail_no_db_write_reaudit_replay_b.jsonl sha256: 997c85b354339755c6d8950e3804b65a8e86cd89abe958780584332627f86635
+- cmp exit: 0
+- Result: byte-identical.
+
+DB persisted-change check
+- Snapshot before guarded replay C:
+  {"sha256": "d5c0bd5f2fa0a5e5facdfc6bce708a9c52dc821e4cbf63da6b6629ccc0843d3e", "table_count": 151}
+- Snapshot after guarded replay C:
+  {"sha256": "d5c0bd5f2fa0a5e5facdfc6bce708a9c52dc821e4cbf63da6b6629ccc0843d3e", "table_count": 151}
+- cmp exit: 0
+- Result: persisted DB row-count changes = 0.
+
+Conclusion
+- The previous Ponytail blocker is fixed: validation/replay/no-write modes no longer execute FormulaRegistry INSERT statements before rollback.
+- The fix is hard-guarded before SQL execution and does not rely on rollback.
+- Adaptive feedback still creates formulas in memory for the run.
+- Production write-enabled FormulaRegistry insertion remains present when no guard is active.
+- The prior 8-engine, Top5, diversity, E2, E40, E4 causal, and temporal-firewall invariants remain verified.
+
+Final decision
+PONYTAIL_PASS_READY_FOR_CONTROLLED_PRODUCTION_REVIEW

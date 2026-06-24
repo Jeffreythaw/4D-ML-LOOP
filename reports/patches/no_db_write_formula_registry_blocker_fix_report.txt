@@ -1,0 +1,109 @@
+NO-DB-WRITE FORMULA REGISTRY BLOCKER FIX REPORT
+Generated: 2026-06-23 / 2026-06-24 Asia/Singapore
+
+Final decision: NO_DB_WRITE_BLOCKER_FIXED_READY_FOR_PONYTAIL_REAUDIT
+
+Summary
+- Fixed the blocker where replay/validation dry-run still executed dbo.FormulaRegistry INSERT statements and relied on rollback.
+- The adaptive formula path now registers formulas in memory when no-write mode is active.
+- A guarded SQL cursor now counts client-submitted persisted-write SQL statements and blocks them before execution when no-write mode is active.
+- Candidate generation, SQL verifier call order, temporal firewall, and E2/E4/E40 candidate sources were not changed.
+- No commit, push, deploy, or service restart was performed.
+
+Files changed
+- jeffrey_quad_engine_v2_step2_matrix_core.py
+- backend/jeffrey_quad_engine_v2_step2_matrix_core.py.source
+- jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py
+- backend/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source
+- scripts/run_step3_resumable_dryrun.py
+- tests/test_no_sql_write_formula_registry.py
+
+Exact code paths fixed
+- No-write activation and counters:
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:104-111 defines persisted-write SQL detection and J4D_NO_SQL_WRITE parsing.
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:119-145 counts attempted/executed/blocked write SQL in execute/executemany and blocks in no-write mode before delegation to pyodbc.
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:151-160 wraps SQL connection cursors.
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:413-432 adds no_sql_write constructor state and write counters.
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:463-469 wraps pyodbc connections with the guarded connection.
+- In-memory adaptive FormulaRegistry:
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:91-101 defines in-memory formula registry entries.
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:492-521 exposes temporally filtered in-memory formula reads.
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:727-765 short-circuits register_formula() to in-memory storage when no-write is active; the SQL INSERT path remains only after that guard at jeffrey_quad_engine_v2_step2_matrix_core.py:779-793.
+  - jeffrey_quad_engine_v2_step2_matrix_core.py:1728-1754 leaves causal Markov loading unchanged.
+- Replay/runtime readers:
+  - jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:336-416 still reads SQL FormulaRegistry rows, then prepends in-memory formulas from the current no-write run with max_training_end_draw_no cutoff preserved.
+  - jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1908-1914 activates no-write for --dry-run/--no-sql-write/J4D_NO_SQL_WRITE.
+  - jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1933-1935 prints write counters.
+  - scripts/run_step3_resumable_dryrun.py:37-42 accepts --no-sql-write and documents that this dry-run runner always blocks writes.
+  - scripts/run_step3_resumable_dryrun.py:131-136 and 191-196 construct gateways with no_sql_write=True.
+  - scripts/run_step3_resumable_dryrun.py:185-187, 252-264 aggregate and print write counters.
+- Tests:
+  - tests/test_no_sql_write_formula_registry.py:37-63 proves adaptive formula solving/registering stays in memory and leaves attempted/executed/blocked write counters at zero.
+  - tests/test_no_sql_write_formula_registry.py:65-74 proves accidental INSERT SQL is blocked before execution in no-write mode.
+  - tests/test_no_sql_write_formula_registry.py:76-80 proves J4D_NO_SQL_WRITE=1 forces no-write mode.
+
+Why replay was writing before this fix
+- scripts/run_step3_resumable_dryrun.py created a normal SqlServerGateway and called Step3AdaptiveOrchestrator.run_one_step().
+- On HitCount=0, Step3AdaptiveOrchestrator.run_one_step() loaded target winners after SQL verification, then called MatrixComputationCore.solve_and_register_adaptive_formula().
+- MatrixComputationCore.solve_and_register_adaptive_formula() called gateway.register_formula().
+- gateway.register_formula() executed INSERT INTO dbo.FormulaRegistry before the dry-run script rolled back.
+- Rollback made persisted changes zero, but SQL write execution still happened. This patch moves the safety condition before the SQL path.
+
+Validation commands and results
+1. Syntax check
+   Command:
+   .venv/bin/python -m py_compile jeffrey_quad_engine_v2_step2_matrix_core.py backend/jeffrey_quad_engine_v2_step2_matrix_core.py.source jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py backend/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source scripts/run_step3_resumable_dryrun.py tests/test_no_sql_write_formula_registry.py
+   Result: PASS
+
+2. Targeted no-write tests
+   Command:
+   .venv/bin/python -m unittest tests.test_no_sql_write_formula_registry -v
+   Result: PASS, 3/3 tests
+
+3. Full test suite
+   Command:
+   .venv/bin/python -m unittest discover -s tests -p 'test_*.py'
+   Result: PASS, 63/63 tests
+
+4. Bounded deterministic replay A
+   Command:
+   J4D_NO_SQL_WRITE=1 .venv/bin/python scripts/run_step3_resumable_dryrun.py --start-draw-no 4051 --end-draw-no 4061 --training-window-size 64 --output-jsonl reports/patches/no_db_write_replay_a.jsonl --progress-every 10 > reports/patches/no_db_write_replay_a.log 2>&1
+   Result: PASS
+   SQL_WRITE_ATTEMPTED: 0
+   SQL_WRITE_EXECUTED: 0
+   SQL_WRITE_BLOCKED: 0
+
+5. Bounded deterministic replay B
+   Command:
+   J4D_NO_SQL_WRITE=1 .venv/bin/python scripts/run_step3_resumable_dryrun.py --start-draw-no 4051 --end-draw-no 4061 --training-window-size 64 --output-jsonl reports/patches/no_db_write_replay_b.jsonl --progress-every 10 > reports/patches/no_db_write_replay_b.log 2>&1
+   Result: PASS
+   SQL_WRITE_ATTEMPTED: 0
+   SQL_WRITE_EXECUTED: 0
+   SQL_WRITE_BLOCKED: 0
+
+Replay output comparison
+- reports/patches/no_db_write_replay_a.jsonl sha256: 997c85b354339755c6d8950e3804b65a8e86cd89abe958780584332627f86635
+- reports/patches/no_db_write_replay_b.jsonl sha256: 997c85b354339755c6d8950e3804b65a8e86cd89abe958780584332627f86635
+- cmp result: 0
+- Outputs are byte-identical.
+
+SQL write counter evidence
+- Final bounded replay A: attempted=0, executed=0, blocked=0.
+- Final bounded replay B: attempted=0, executed=0, blocked=0.
+- Additional row-count replay C: attempted=0, executed=0, blocked=0.
+- No FormulaRegistry INSERT appeared in no_db_write_replay_a.log, no_db_write_replay_b.log, or their JSONL outputs.
+
+DB persisted-change evidence
+- Read-only user-table row-count snapshot before replay C:
+  {"table_count": 151, "sha256": "d5c0bd5f2fa0a5e5facdfc6bce708a9c52dc821e4cbf63da6b6629ccc0843d3e"}
+- Read-only user-table row-count snapshot after replay C:
+  {"table_count": 151, "sha256": "d5c0bd5f2fa0a5e5facdfc6bce708a9c52dc821e4cbf63da6b6629ccc0843d3e"}
+- cmp result: 0
+- Persisted DB row-count changes: 0
+
+Remaining risks / scope notes
+- The guard counts and blocks client-submitted INSERT/UPDATE/DELETE/MERGE/CREATE/DROP/ALTER/TRUNCATE SQL routed through SqlServerGateway cursors. It intentionally does not change SP_Verify_Predictions or candidate generation.
+- Production/write-enabled mode still uses the existing dbo.FormulaRegistry INSERT path when no no-write guard is active.
+
+Final decision
+NO_DB_WRITE_BLOCKER_FIXED_READY_FOR_PONYTAIL_REAUDIT

@@ -1,0 +1,74 @@
+{
+  "all_8_engine_families_invoked": true,
+  "candidate_pool_count_before_ranking": 638,
+  "candidate_pool_vote_counts_by_engine": {
+    "E1_CROSS_PAIR_LINEAR": 23,
+    "E1_DELTA_ROTATION_LSTS": 5,
+    "E1_MIRROR_BASE5_LSTS": 5,
+    "E1_WLS_DECAY_0.98": 5,
+    "E2_SET_PROJECTOR": 46,
+    "E3_POLYNOMIAL": 22,
+    "E40_FULL_HISTORY_KNOWLEDGE": 25,
+    "E4_ADAPTIVE_4_UNKNOWNS_AFFINE": 19,
+    "E4_MARKOV_TRANSITION_MASS": 508
+  },
+  "commit_push_deploy_restart_performed": false,
+  "decision": "LIVE_CONTROLLED_PREDICTION_GENERATED",
+  "dry_run_run": false,
+  "engine_sources_used_in_candidate_pool": [
+    "E1_CROSS_PAIR_LINEAR",
+    "E1_DELTA_ROTATION_LSTS",
+    "E1_MIRROR_BASE5_LSTS",
+    "E1_WLS_DECAY_0.98",
+    "E2_SET_PROJECTOR",
+    "E3_POLYNOMIAL",
+    "E40_FULL_HISTORY_KNOWLEDGE",
+    "E4_ADAPTIVE_4_UNKNOWNS_AFFINE",
+    "E4_MARKOV_TRANSITION_MASS"
+  ],
+  "final_distinct_source_family_count": 5,
+  "final_top5_candidates": [
+    "4445",
+    "4640",
+    "9917",
+    "9373",
+    "5335"
+  ],
+  "final_top5_source_families": [
+    "E40_FULL_HISTORY_KNOWLEDGE",
+    "E2_SET_PROJECTOR",
+    "E4_MARKOV_TRANSITION_MASS",
+    "E1_CROSS_PAIR_LINEAR",
+    "E4_ADAPTIVE_4_UNKNOWNS_AFFINE"
+  ],
+  "live_knowledge_pack_model_count": 26,
+  "live_knowledge_pack_path": "/Users/kojeffrey/4D-ML-LOOP/live_knowledge/full_history_engine_pack.json",
+  "live_knowledge_pack_schema_key": "models",
+  "replay_run": false,
+  "required_8_engine_families_invoked": {
+    "E1_CROSS_PAIR_LINEAR": true,
+    "E1_DELTA_ROTATION": true,
+    "E1_MIRROR_BASE5": true,
+    "E1_WLS_DECAY": true,
+    "E2_SET_PROJECTOR": true,
+    "E3_POLYNOMIAL": true,
+    "E40_FULL_HISTORY_KNOWLEDGE": true,
+    "E4_MARKOV_TRANSITION_MASS": true
+  },
+  "required_engine_family_count_invoked": 8,
+  "source_draw_no": 5497,
+  "sql_verifier_called": false,
+  "sql_write_attempted": 0,
+  "sql_write_executed": 0,
+  "target_draw_no": 5498,
+  "target_winner_read": false,
+  "top5": [
+    "4445",
+    "4640",
+    "9917",
+    "9373",
+    "5335"
+  ],
+  "top5_all_4_digit_strings": true,
+  "top5_unique_count": 5
+}

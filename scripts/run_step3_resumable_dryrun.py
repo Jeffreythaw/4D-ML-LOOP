@@ -34,6 +34,12 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         default=10,
         help="Print progress every N newly processed draws.",
     )
+    parser.add_argument(
+        "--no-sql-write",
+        action="store_true",
+        default=True,
+        help="Accepted for audit clarity; this dry-run runner always blocks SQL writes.",
+    )
     return parser.parse_args(argv)
 
 
@@ -99,9 +105,8 @@ def result_to_row(result: Any) -> Dict[str, Any]:
         "engine_sources": list(result.engine_sources),
         "hit_count": int(result.hit_count),
         "adaptive_triggered": bool(result.adaptive_triggered),
-        "adaptive_formula_id": (
-            None if result.adaptive_formula_id is None else int(result.adaptive_formula_id)
-        ),
+        # ponytail: rolled-back identity values are neither persisted nor reproducible.
+        "adaptive_formula_id": None,
         "rolling_metrics": result.rolling_metrics,
     }
 
@@ -123,6 +128,26 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     step3.load_env_file()
     conn_str = core.get_sql_connection_string_from_env()
 
+    cache_gateway = core.SqlServerGateway(
+        conn_str,
+        autocommit=False,
+        timeout_seconds=60,
+        no_sql_write=True,
+    )
+    cache_gateway.connect()
+    try:
+        history_cache = step3.ChronologicalDrawCache.load(
+            cache_gateway,
+            max_draw_no=args.end_draw_no - 1,
+        )
+        cache_gateway.rollback()
+    except Exception:
+        cache_gateway.rollback()
+        raise
+    finally:
+        cache_gateway.close()
+
+    full_history_pack = step3.load_default_pack()
     args.output_jsonl.parent.mkdir(parents=True, exist_ok=True)
     completed = load_completed(args.output_jsonl)
     binary_history = load_binary_hit_history(args.output_jsonl)
@@ -145,15 +170,30 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     print(f"ALREADY_COMPLETED: {len(completed)}")
     print(f"TO_PROCESS: {len(to_process)}")
     print(f"TRAINING_WINDOW_SIZE: {args.training_window_size}")
+    print("NO_SQL_WRITE: True")
+    print(f"HISTORY_CACHE_MAX_DRAW_NO: {args.end_draw_no - 1}")
+    print("HISTORY_CACHE_PRELOADED: YES")
+    print(
+        "FULL_HISTORY_PACK_PRELOADED: "
+        f"{'YES' if full_history_pack is not None else 'NO'}"
+    )
     print(f"OUTPUT_JSONL: {args.output_jsonl}")
     print("-" * 96)
 
     newly_processed = 0
     skipped = total_requested - len(to_process)
+    sql_write_attempted = 0
+    sql_write_executed = 0
+    sql_write_blocked = 0
 
     with args.output_jsonl.open("a", encoding="utf-8") as out:
         for source_draw_no in to_process:
-            gateway = core.SqlServerGateway(conn_str, autocommit=False, timeout_seconds=60)
+            gateway = core.SqlServerGateway(
+                conn_str,
+                autocommit=False,
+                timeout_seconds=60,
+                no_sql_write=True,
+            )
             gateway.connect()
             try:
                 orchestrator = step3.Step3AdaptiveOrchestrator(
@@ -161,6 +201,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     gateway=gateway,
                     start_draw_no=source_draw_no,
                     end_draw_no=source_draw_no + 1,
+                    history_cache=history_cache,
+                    full_history_pack=full_history_pack,
                     training_window_size=args.training_window_size,
                 )
                 hydrate_rolling_metrics(orchestrator.metrics, binary_history)
@@ -207,6 +249,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 print(f"{type(exc).__name__}: {exc}")
                 raise
             finally:
+                sql_write_attempted += gateway.sql_write_statements_attempted
+                sql_write_executed += gateway.sql_write_statements_executed
+                sql_write_blocked += gateway.sql_write_statements_blocked
                 gateway.close()
 
     print("-" * 96)
@@ -214,6 +259,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     print(f"TOTAL_REQUESTED: {total_requested}")
     print(f"SKIPPED_ALREADY_COMPLETED: {skipped}")
     print(f"NEWLY_PROCESSED: {newly_processed}")
+    print(f"SQL_WRITE_ATTEMPTED: {sql_write_attempted}")
+    print(f"SQL_WRITE_EXECUTED: {sql_write_executed}")
+    print(f"SQL_WRITE_BLOCKED: {sql_write_blocked}")
     print(f"OUTPUT_JSONL: {args.output_jsonl}")
     print("RESULT: COMPLETED")
     return 0

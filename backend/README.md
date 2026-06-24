@@ -34,6 +34,15 @@ self-contained when Render configures the service root directory as `backend`.
 
 When either root engine module changes, update its matching backend
 `*.py.source` deployment copy before release and verify both pairs with `cmp`.
+
+The backend image also includes the validated 40-year knowledge pack:
+
+- `/app/full_history_live_knowledge.py`
+- `/app/live_knowledge/full_history_engine_pack.json`
+
+Set `J4D_FULL_HISTORY_KNOWLEDGE_ENABLED=0` to fail back to the existing engines.
+The pack is only eligible when the source DrawNo is at or beyond its training
+cutoff, preventing future-data leakage during historical replay.
 The Docker image restores the `.py` filenames under `/app` so the existing
 runtime imports remain unchanged.
 

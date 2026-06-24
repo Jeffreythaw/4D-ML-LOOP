@@ -31,6 +31,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import logging
 import os
@@ -43,6 +44,17 @@ from pathlib import Path
 from typing import Any, Deque, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
+
+try:
+    from full_history_live_knowledge import (
+        FULL_HISTORY_ENGINE_NAME,
+        load_default_pack,
+    )
+except ImportError:
+    FULL_HISTORY_ENGINE_NAME = "E40_FULL_HISTORY_KNOWLEDGE"
+
+    def load_default_pack() -> None:
+        return None
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -289,6 +301,7 @@ class ChronologicalDrawCache:
             int(record.draw_no): record
             for record in ordered
         }
+        self._causal_markov_cache: Optional[Any] = None
 
     @classmethod
     def load(cls, gateway: Any, *, max_draw_no: int) -> "ChronologicalDrawCache":
@@ -300,6 +313,11 @@ class ChronologicalDrawCache:
 
     def get(self, draw_no: int) -> Optional[Any]:
         return self._by_draw_no.get(int(draw_no))
+
+    def causal_markov_cache(self, core: Any) -> Any:
+        if self._causal_markov_cache is None:
+            self._causal_markov_cache = core.CausalMarkovTransitionCache(self._records)
+        return self._causal_markov_cache
 
 
 # ============================================================
@@ -321,6 +339,7 @@ class FormulaRegistryReader:
         day_type: str,
         engine_name: Optional[str] = None,
         top_n: int = ADAPTIVE_FORMULA_TOP_N,
+        max_training_end_draw_no: Optional[int] = None,
     ) -> List[Any]:
         if day_type not in self.core.VALID_DAY_TYPES:
             raise ValueError(f"Invalid DayType: {day_type}")
@@ -331,6 +350,10 @@ class FormulaRegistryReader:
         if engine_name is not None:
             clauses.append("EngineName = ?")
             params.append(engine_name)
+
+        if max_training_end_draw_no is not None:
+            clauses.append("TrainingEndDrawNo <= ?")
+            params.append(int(max_training_end_draw_no))
 
         where_sql = " AND ".join(clauses)
 
@@ -380,7 +403,18 @@ class FormulaRegistryReader:
             formula.validate()
             formulas.append(formula)
 
-        return formulas
+        if hasattr(self.gateway, "load_in_memory_formulas"):
+            formulas = (
+                self.gateway.load_in_memory_formulas(
+                    day_type=day_type,
+                    engine_name=engine_name,
+                    top_n=top_n,
+                    max_training_end_draw_no=max_training_end_draw_no,
+                )
+                + formulas
+            )
+
+        return formulas[: int(top_n)]
 
 
 # ============================================================
@@ -404,6 +438,7 @@ class CandidatePoolBuilder:
         matrix_core: Any,
         formula_reader: FormulaRegistryReader,
         history_cache: Optional[ChronologicalDrawCache] = None,
+        full_history_pack: Optional[Any] = None,
         training_window_size: int = 64,
         enrichment_window_size: int = 64,
     ) -> None:
@@ -417,6 +452,7 @@ class CandidatePoolBuilder:
         self.matrix_core = matrix_core
         self.formula_reader = formula_reader
         self.history_cache = history_cache
+        self.full_history_pack = full_history_pack
         self.training_window_size = int(training_window_size)
         self.enrichment_window_size = int(enrichment_window_size)
 
@@ -487,13 +523,27 @@ class CandidatePoolBuilder:
         source_states: Sequence[str],
         day_type: str,
         top_n_per_source: int,
+        source_draw_no: int,
     ) -> List[CandidateVote]:
         votes: List[CandidateVote] = []
+
+        if self.phase2_layer.causal_markov_cache is None:
+            if self.history_cache is not None:
+                cache = self.history_cache
+            else:
+                cache = ChronologicalDrawCache.load(
+                    self.gateway,
+                    max_draw_no=source_draw_no,
+                )
+            self.phase2_layer.causal_markov_cache = cache.causal_markov_cache(
+                self.core
+            )
 
         markov_mass = self.phase2_layer.load_markov_input_mass(
             source_states=source_states,
             day_type=day_type,
             top_n_per_source=top_n_per_source,
+            source_draw_no=source_draw_no,
         )
 
         for source_state, transitions in markov_mass.items():
@@ -524,18 +574,50 @@ class CandidatePoolBuilder:
                         raw_rank=idx,
                         source_detail=(
                             f"E4_MARKOV source={source_state} "
-                            f"count={t.transition_count} rank={idx}"
+                            f"count={t.transition_count} "
+                            f"last_seen={t.last_seen_draw_no} rank={idx}"
                         ),
                     )
                 )
 
         return votes
 
+    def _votes_from_trained_e2(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: int,
+    ) -> List[CandidateVote]:
+        if self.full_history_pack is None:
+            return []
+        ranked = self.full_history_pack.rank_e2_set_projector_candidates(
+            source_vectors=src_vectors,
+            day_type=day_type,
+            source_draw_no=source_draw_no,
+            top_n=max(25, TOP_K),
+        )
+        return [
+            CandidateVote(
+                number=item.number,
+                engine_name=self.core.ENGINE_2_NAME,
+                internal_score=1.05 * float(item.score),
+                raw_rank=rank,
+                source_detail=(
+                    f"{self.core.ENGINE_2_NAME}:trained_pack:"
+                    f"{item.source_details[0]}:pack_cutoff="
+                    f"{self.full_history_pack.minimum_source_draw_no}"
+                ),
+            )
+            for rank, item in enumerate(ranked, start=1)
+        ]
+
     def _votes_from_adaptive_formulas(
         self,
         *,
         src_vectors: np.ndarray,
         day_type: str,
+        source_draw_no: int,
     ) -> List[CandidateVote]:
         votes: List[CandidateVote] = []
 
@@ -543,6 +625,7 @@ class CandidatePoolBuilder:
             day_type=day_type,
             engine_name=self.core.ENGINE_4_NAME,
             top_n=ADAPTIVE_FORMULA_TOP_N,
+            max_training_end_draw_no=source_draw_no,
         )
 
         for formula_idx, formula in enumerate(adaptive_formulas, start=1):
@@ -602,8 +685,13 @@ class CandidatePoolBuilder:
         records = self._history_through(source_draw_no)
 
         by_draw_no = {record.draw_no: record for record in records}
-        src_numbers: List[str] = []
-        tgt_numbers: List[str] = []
+        window_size = self._resolved_training_window(max_pairs)
+        src_numbers: Any = (
+            deque(maxlen=window_size) if window_size else []
+        )
+        tgt_numbers: Any = (
+            deque(maxlen=window_size) if window_size else []
+        )
 
         for record in records:
             if record.day_type != day_type:
@@ -627,14 +715,12 @@ class CandidatePoolBuilder:
                 f"No WLS training pairs available for day_type={day_type} source_draw_no={source_draw_no}"
             )
 
-        window_size = self._resolved_training_window(max_pairs)
-        if window_size and len(src_numbers) > window_size:
-            src_numbers = src_numbers[-window_size:]
-            tgt_numbers = tgt_numbers[-window_size:]
+        src_values = list(src_numbers)
+        tgt_values = list(tgt_numbers)
 
         return (
-            self.core.vectors_from_4d_strings(src_numbers, dtype=np.int16),
-            self.core.vectors_from_4d_strings(tgt_numbers, dtype=np.int16),
+            self.core.vectors_from_4d_strings(src_values, dtype=np.int16),
+            self.core.vectors_from_4d_strings(tgt_values, dtype=np.int16),
         )
 
     def _votes_from_wls_decay(
@@ -843,7 +929,10 @@ class CandidatePoolBuilder:
         records = self._history_through(source_draw_no)
 
         by_draw_no = {record.draw_no: record for record in records}
-        delta_vectors: List[np.ndarray] = []
+        window_size = self._resolved_training_window(max_deltas)
+        delta_vectors: Any = (
+            deque(maxlen=window_size) if window_size else []
+        )
 
         for record in records:
             if record.day_type != day_type:
@@ -883,11 +972,7 @@ class CandidatePoolBuilder:
                 f"got {len(delta_vectors)} for day_type={day_type} source_draw_no={source_draw_no}"
             )
 
-        delta_matrix = np.vstack(delta_vectors)
-
-        window_size = self._resolved_training_window(max_deltas)
-        if window_size and delta_matrix.shape[0] > window_size:
-            delta_matrix = delta_matrix[-window_size:]
+        delta_matrix = np.vstack(list(delta_vectors))
 
         if delta_matrix.shape[0] < 2:
             raise RuntimeError("Delta rotation training matrix is too small after windowing")
@@ -975,6 +1060,73 @@ class CandidatePoolBuilder:
 
         return votes
 
+    def _votes_from_full_history_knowledge(
+        self,
+        *,
+        src_vectors: np.ndarray,
+        day_type: str,
+        source_draw_no: int,
+    ) -> List[CandidateVote]:
+        """
+        Rank one live vote stream from all promoted 40-year A/B/C/D artifacts.
+
+        The pack rejects source draws older than its training cutoff, preventing
+        retrospective full-history knowledge from leaking into historical replay.
+        Any pack error fails closed to the existing live engines.
+        """
+        if self.full_history_pack is None:
+            return []
+        if not self.full_history_pack.eligible_for(source_draw_no):
+            return []
+
+        latest_delta: Optional[np.ndarray] = None
+        try:
+            _, _, latest_delta = self._build_delta_rotation_training_sets(
+                source_draw_no=source_draw_no,
+                day_type=day_type,
+            )
+        except (RuntimeError, ValueError):
+            latest_delta = None
+
+        try:
+            ranked = self.full_history_pack.rank_candidates(
+                source_vectors=src_vectors,
+                day_type=day_type,
+                source_draw_no=source_draw_no,
+                latest_delta_vectors=latest_delta,
+                top_n=max(25, TOP_K),
+            )
+        except (KeyError, TypeError, ValueError, RuntimeError) as exc:
+            logger.warning(
+                "Full-history knowledge pack skipped at source_draw_no=%d: %s",
+                source_draw_no,
+                exc,
+            )
+            return []
+
+        if not ranked:
+            return []
+        maximum_score = max(float(item.score) for item in ranked)
+        if maximum_score <= 0:
+            return []
+
+        votes: List[CandidateVote] = []
+        for rank_no, item in enumerate(ranked, start=1):
+            normalized = float(item.score) / maximum_score
+            votes.append(
+                CandidateVote(
+                    number=str(item.number).zfill(4),
+                    engine_name=FULL_HISTORY_ENGINE_NAME,
+                    internal_score=1.08 * normalized,
+                    raw_rank=rank_no,
+                    source_detail=(
+                        f"{FULL_HISTORY_ENGINE_NAME}:support={item.support_count}:"
+                        f"pack_cutoff={self.full_history_pack.minimum_source_draw_no}"
+                    ),
+                )
+            )
+        return votes
+
     @staticmethod
     def aggregate_votes(votes: Sequence[CandidateVote]) -> Dict[str, CandidateAggregate]:
         aggregates: Dict[str, CandidateAggregate] = {}
@@ -1038,18 +1190,34 @@ class CandidatePoolBuilder:
                     source_draw_no=source_draw_no,
                 )
             )
+            votes.extend(
+                self._votes_from_trained_e2(
+                    src_vectors=src_vectors,
+                    day_type=day_type,
+                    source_draw_no=source_draw_no,
+                )
+            )
+            votes.extend(
+                self._votes_from_full_history_knowledge(
+                    src_vectors=src_vectors,
+                    day_type=day_type,
+                    source_draw_no=source_draw_no,
+                )
+            )
 
         votes.extend(
             self._votes_from_markov(
                 source_states=source_states,
                 day_type=day_type,
                 top_n_per_source=MARKOV_TOP_N_PER_SOURCE,
+                source_draw_no=source_draw_no,
             )
         )
         votes.extend(
             self._votes_from_adaptive_formulas(
                 src_vectors=src_vectors,
                 day_type=day_type,
+                source_draw_no=source_draw_no,
             )
         )
 
@@ -1379,6 +1547,7 @@ class DiversityGuardRanker:
                 "E1_WLS_DECAY_0.98",
                 "E1_MIRROR_BASE5_LSTS",
                 "E1_DELTA_ROTATION_LSTS",
+                FULL_HISTORY_ENGINE_NAME,
             ),
             top_k=self.top_k,
         )
@@ -1390,6 +1559,7 @@ class DiversityGuardRanker:
                 "E1_WLS_DECAY_0.98",
                 "E1_MIRROR_BASE5_LSTS",
                 "E1_DELTA_ROTATION_LSTS",
+                FULL_HISTORY_ENGINE_NAME,
             ),
             top_k=self.top_k,
         )
@@ -1419,6 +1589,7 @@ class Step3AdaptiveOrchestrator:
         start_draw_no: int = SIM_START_DRAW_NO,
         end_draw_no: int = SIM_END_DRAW_NO,
         history_cache: Optional[ChronologicalDrawCache] = None,
+        full_history_pack: Optional[Any] = None,
         training_window_size: int = 64,
     ) -> None:
         if start_draw_no >= end_draw_no:
@@ -1429,9 +1600,31 @@ class Step3AdaptiveOrchestrator:
         self.start_draw_no = start_draw_no
         self.end_draw_no = end_draw_no
 
-        self.phase2_layer = core.Phase2SequentialInputLayer(gateway)
+        self.phase2_layer = core.Phase2SequentialInputLayer(
+            gateway,
+            causal_markov_cache=(
+                history_cache.causal_markov_cache(core)
+                if history_cache is not None
+                else None
+            ),
+        )
         self.matrix_core = core.MatrixComputationCore(gateway)
         self.formula_reader = FormulaRegistryReader(gateway, core)
+        self.full_history_pack = (
+            full_history_pack
+            if full_history_pack is not None
+            else load_default_pack()
+        )
+        if self.full_history_pack is None:
+            logger.warning(
+                "40-year live knowledge pack unavailable or disabled; using existing engines only"
+            )
+        else:
+            logger.info(
+                "40-year live knowledge pack loaded: models=%d cutoff=%d",
+                len(self.full_history_pack.models),
+                self.full_history_pack.minimum_source_draw_no,
+            )
         self.pool_builder = CandidatePoolBuilder(
             core=core,
             gateway=gateway,
@@ -1439,6 +1632,7 @@ class Step3AdaptiveOrchestrator:
             matrix_core=self.matrix_core,
             formula_reader=self.formula_reader,
             history_cache=history_cache,
+            full_history_pack=self.full_history_pack,
             training_window_size=training_window_size,
         )
         self.ranker = DiversityGuardRanker()
@@ -1649,28 +1843,102 @@ def print_result_summary(results: Sequence[DrawStepResult]) -> None:
         print(f"LAST_ROLLING_METRICS: {last.rolling_metrics}")
 
 
-def main() -> int:
+def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Jeffrey Quad-Engine V2 Step 3 adaptive orchestrator"
+    )
+    parser.add_argument(
+        "--start-draw-no",
+        type=int,
+        default=SIM_START_DRAW_NO,
+        help=f"Inclusive source draw start. Default: {SIM_START_DRAW_NO}",
+    )
+    parser.add_argument(
+        "--end-draw-no",
+        type=int,
+        default=SIM_END_DRAW_NO,
+        help=f"Exclusive source draw end. Default: {SIM_END_DRAW_NO}",
+    )
+    parser.add_argument(
+        "--training-window-size",
+        type=int,
+        default=int(os.getenv("J4D_TRAINING_WINDOW", "64")),
+        help="Training window size. Use 0 for full causal history.",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Run without executing SQL writes.",
+    )
+    parser.add_argument(
+        "--no-sql-write",
+        action="store_true",
+        help="Block INSERT/UPDATE/DELETE/MERGE/DDL statements.",
+    )
+    return parser.parse_args(argv)
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    args = parse_args(argv)
+
     print_header("STEP 3 ADAPTIVE ORCHESTRATOR — START")
 
     load_env_file()
     conn_str = get_sql_connection_string_from_env()
     core = import_step2_core()
 
+    if args.start_draw_no < SIM_START_DRAW_NO:
+        raise ValueError(f"start_draw_no must be >= {SIM_START_DRAW_NO}")
+    if args.end_draw_no > SIM_END_DRAW_NO:
+        raise ValueError(f"end_draw_no must be <= {SIM_END_DRAW_NO}")
+    if args.start_draw_no >= args.end_draw_no:
+        raise ValueError("start_draw_no must be less than end_draw_no")
+    if args.training_window_size < 0:
+        raise ValueError("training_window_size must be >= 0")
+
     print(f"PROJECT_ROOT: {PROJECT_ROOT}")
     print(f"DB_SERVER: {os.getenv('DB_SERVER', '<not set>')}")
     print(f"DB_DATABASE: {os.getenv('DB_DATABASE', '<not set>')}")
     print("STEP2_IMPORT: OK")
     print("STEP3_SCOPE: DiversityGuard + AdaptiveFeedback only")
+    print(f"START_DRAW_NO: {args.start_draw_no}")
+    print(f"END_DRAW_NO: {args.end_draw_no}")
+    print(f"TRAINING_WINDOW_SIZE: {args.training_window_size}")
+    print(f"DRY_RUN: {args.dry_run}")
+    print(f"NO_SQL_WRITE: {args.dry_run or args.no_sql_write or core.no_sql_write_enabled_from_env()}")
 
-    with core.SqlServerGateway(conn_str) as gateway:
+    gateway = core.SqlServerGateway(
+        conn_str,
+        autocommit=False,
+        no_sql_write=args.dry_run or args.no_sql_write,
+    )
+    gateway.connect()
+    try:
         orchestrator = Step3AdaptiveOrchestrator(
             core=core,
             gateway=gateway,
-            start_draw_no=SIM_START_DRAW_NO,
-            end_draw_no=SIM_END_DRAW_NO,
+            start_draw_no=args.start_draw_no,
+            end_draw_no=args.end_draw_no,
+            training_window_size=args.training_window_size,
         )
 
         results = orchestrator.run_loop()
+
+        if args.dry_run:
+            gateway.rollback()
+            print("TRANSACTION: ROLLBACK")
+        else:
+            gateway.commit()
+            print("TRANSACTION: COMMIT")
+        print(f"SQL_WRITE_ATTEMPTED: {gateway.sql_write_statements_attempted}")
+        print(f"SQL_WRITE_EXECUTED: {gateway.sql_write_statements_executed}")
+        print(f"SQL_WRITE_BLOCKED: {gateway.sql_write_statements_blocked}")
+    except Exception:
+        gateway.rollback()
+        print("TRANSACTION: ROLLBACK_ON_ERROR")
+        raise
+    finally:
+        gateway.close()
 
     print_result_summary(results)
 

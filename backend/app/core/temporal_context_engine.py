@@ -13,12 +13,16 @@ from app.schemas.prediction import PredictionCandidate
 ENGINE_SOURCE = "E1_TEMPORAL_CONTEXT_MATCH"
 FALLBACK_ENGINE_SOURCE = "E1_DELTA_ROTATION_LSTS"
 
-UNDERLYING_ENGINES = (
+REQUIRED_UNDERLYING_ENGINES = (
     "E1_CROSS_PAIR_LINEAR",
     "E1_WLS_DECAY_0.98",
     "E1_MIRROR_BASE5_LSTS",
     "E1_DELTA_ROTATION_LSTS",
 )
+OPTIONAL_UNDERLYING_ENGINES = (
+    "E40_FULL_HISTORY_KNOWLEDGE",
+)
+UNDERLYING_ENGINES = REQUIRED_UNDERLYING_ENGINES + OPTIONAL_UNDERLYING_ENGINES
 
 TOP_K = 5
 TEMPORAL_COLD_START_MIN_MATCHES = 5
@@ -309,11 +313,17 @@ def extract_underlying_candidates(
 
     result: dict[str, list[PredictionCandidate]] = {}
 
-    for engine in UNDERLYING_ENGINES:
+    for engine in REQUIRED_UNDERLYING_ENGINES:
         items = sorted(grouped.get(engine, []), key=lambda item: int(item.rank))
         if len(items) != TOP_K:
             raise RuntimeError(f"{engine} expected {TOP_K} rows, got {len(items)}")
         result[engine] = items
+    for engine in OPTIONAL_UNDERLYING_ENGINES:
+        items = sorted(grouped.get(engine, []), key=lambda item: int(item.rank))
+        if items and len(items) != TOP_K:
+            raise RuntimeError(f"{engine} expected {TOP_K} rows when present, got {len(items)}")
+        if items:
+            result[engine] = items
 
     return result
 
@@ -361,7 +371,7 @@ def build_temporal_candidates(
     best_engine_rank: dict[str, int] = {}
 
     for engine in UNDERLYING_ENGINES:
-        for item in grouped[engine]:
+        for item in grouped.get(engine, []):
             rank_no = int(item.rank)
             number = str(item.number).zfill(4)
             borda_by_number[number] += TOP_K - rank_no + 1

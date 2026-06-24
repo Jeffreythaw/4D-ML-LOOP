@@ -3,7 +3,9 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import sys
+from bisect import bisect_right
 from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
@@ -84,6 +86,143 @@ class MarkovTransition:
     transition_count: int
     first_seen_draw_no: int
     last_seen_draw_no: int
+
+
+@dataclass(frozen=True)
+class InMemoryFormulaRegistryEntry:
+    formula_id: int
+    formula: MatrixFormula
+    training_start_draw_no: int
+    training_end_draw_no: int
+    historical_confidence: float
+    hit_rate_top5: float
+    sample_size: int
+    is_active: bool
+    registered_order: int
+
+
+WRITE_SQL_RE = re.compile(
+    r"\b(INSERT\s+INTO|UPDATE\b|DELETE\s+FROM|MERGE\b|CREATE\b|DROP\b|ALTER\b|TRUNCATE\b)",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def no_sql_write_enabled_from_env() -> bool:
+    return os.getenv("J4D_NO_SQL_WRITE", "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+class _SqlWriteGuardCursor:
+    def __init__(self, cursor: Any, gateway: "SqlServerGateway") -> None:
+        self._cursor = cursor
+        self._gateway = gateway
+
+    def execute(self, sql: Any, *args: Any) -> "_SqlWriteGuardCursor":
+        if isinstance(sql, str) and WRITE_SQL_RE.search(sql):
+            self._gateway.sql_write_statements_attempted += 1
+            if self._gateway.no_sql_write:
+                self._gateway.sql_write_statements_blocked += 1
+                raise RuntimeError(
+                    f"SQL write blocked by no-sql-write guard: {sql.strip().split(None, 1)[0]}"
+                )
+            self._cursor.execute(sql, *args)
+            self._gateway.sql_write_statements_executed += 1
+            return self
+        self._cursor.execute(sql, *args)
+        return self
+
+    def executemany(self, sql: Any, *args: Any) -> "_SqlWriteGuardCursor":
+        if isinstance(sql, str) and WRITE_SQL_RE.search(sql):
+            self._gateway.sql_write_statements_attempted += 1
+            if self._gateway.no_sql_write:
+                self._gateway.sql_write_statements_blocked += 1
+                raise RuntimeError(
+                    f"SQL write blocked by no-sql-write guard: {sql.strip().split(None, 1)[0]}"
+                )
+            self._cursor.executemany(sql, *args)
+            self._gateway.sql_write_statements_executed += 1
+            return self
+        self._cursor.executemany(sql, *args)
+        return self
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._cursor, name)
+
+
+class _SqlWriteGuardConnection:
+    def __init__(self, conn: Any, gateway: "SqlServerGateway") -> None:
+        self._conn = conn
+        self._gateway = gateway
+
+    def cursor(self) -> _SqlWriteGuardCursor:
+        return _SqlWriteGuardCursor(self._conn.cursor(), self._gateway)
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._conn, name)
+
+
+class CausalMarkovTransitionCache:
+    """Source-indexed Markov observations bounded by target draw number."""
+
+    def __init__(self, records: Sequence[DrawRecord]) -> None:
+        ordered = sorted(records, key=lambda record: int(record.draw_no))
+        self._observations: Dict[
+            Tuple[str, str],
+            List[Tuple[int, Tuple[str, ...]]],
+        ] = {}
+
+        for previous, current in zip(ordered, ordered[1:]):
+            targets = tuple(current.winning_numbers)
+            for source_state in previous.winning_numbers:
+                self._observations.setdefault(
+                    (current.day_type, source_state),
+                    [],
+                ).append((int(current.draw_no), targets))
+
+    def load_markov_transitions_bulk(
+        self,
+        *,
+        source_states: Sequence[str],
+        day_type: str,
+        top_n_per_source: int,
+        source_draw_no: int,
+    ) -> Dict[str, List[MarkovTransition]]:
+        validate_day_type(day_type)
+        if top_n_per_source <= 0:
+            raise ValueError("top_n_per_source must be positive")
+
+        output: Dict[str, List[MarkovTransition]] = {}
+        for source_state in dict.fromkeys(str(value) for value in source_states):
+            validate_4d_string(source_state, "source_state")
+            observations = self._observations.get((day_type, source_state), [])
+            end = bisect_right(observations, (int(source_draw_no), ("\uffff",)))
+            counts: Dict[str, List[int]] = {}
+
+            for target_draw_no, target_states in observations[:end]:
+                for target_state in target_states:
+                    stats = counts.setdefault(
+                        target_state,
+                        [0, target_draw_no, target_draw_no],
+                    )
+                    stats[0] += 1
+                    stats[2] = target_draw_no
+
+            ranked = sorted(
+                counts.items(),
+                key=lambda item: (-item[1][0], -item[1][2], item[0]),
+            )
+            output[source_state] = [
+                MarkovTransition(
+                    source_state=source_state,
+                    target_state=target_state,
+                    day_type=day_type,
+                    transition_count=stats[0],
+                    first_seen_draw_no=stats[1],
+                    last_seen_draw_no=stats[2],
+                )
+                for target_state, stats in ranked[:top_n_per_source]
+            ]
+
+        return output
 
 
 def print_header(title: str) -> None:
@@ -271,13 +410,26 @@ def strings_from_vectors(vectors: np.ndarray) -> List[str]:
 
 
 class SqlServerGateway:
-    def __init__(self, connection_string: str, *, autocommit: bool = False, timeout_seconds: int = 30) -> None:
+    def __init__(
+        self,
+        connection_string: str,
+        *,
+        autocommit: bool = False,
+        timeout_seconds: int = 30,
+        no_sql_write: Optional[bool] = None,
+    ) -> None:
         if not connection_string or not connection_string.strip():
             raise ValueError("connection_string cannot be empty")
 
         self.connection_string = connection_string
         self.autocommit = autocommit
         self.timeout_seconds = timeout_seconds
+        self.no_sql_write = no_sql_write_enabled_from_env() or bool(no_sql_write)
+        self.sql_write_statements_attempted = 0
+        self.sql_write_statements_executed = 0
+        self.sql_write_statements_blocked = 0
+        self._in_memory_formula_registry: List[InMemoryFormulaRegistryEntry] = []
+        self._next_in_memory_formula_id = -1
         self._conn: Optional[Any] = None
 
     def __enter__(self) -> "SqlServerGateway":
@@ -309,11 +461,12 @@ class SqlServerGateway:
             ) from exc
 
         try:
-            self._conn = pyodbc.connect(
+            raw_conn = pyodbc.connect(
                 self.connection_string,
                 autocommit=self.autocommit,
                 timeout=self.timeout_seconds,
             )
+            self._conn = _SqlWriteGuardConnection(raw_conn, self)
         except Exception as exc:
             raise ConnectionError(
                 "Failed to open SQL Server connection through pyodbc. "
@@ -335,6 +488,37 @@ class SqlServerGateway:
     def rollback(self) -> None:
         if self._conn is not None and not self.autocommit:
             self._conn.rollback()
+
+    def load_in_memory_formulas(
+        self,
+        *,
+        day_type: str,
+        engine_name: Optional[str] = None,
+        top_n: Optional[int] = None,
+        max_training_end_draw_no: Optional[int] = None,
+    ) -> List[MatrixFormula]:
+        rows = [
+            entry
+            for entry in self._in_memory_formula_registry
+            if entry.is_active
+            and entry.formula.day_type == day_type
+            and (engine_name is None or entry.formula.engine_name == engine_name)
+            and (
+                max_training_end_draw_no is None
+                or entry.training_end_draw_no <= int(max_training_end_draw_no)
+            )
+        ]
+        rows.sort(
+            key=lambda entry: (
+                entry.historical_confidence,
+                entry.hit_rate_top5,
+                entry.sample_size,
+                entry.registered_order,
+            ),
+            reverse=True,
+        )
+        formulas = [entry.formula for entry in rows]
+        return formulas[: int(top_n)] if top_n is not None else formulas
 
     def load_draw_history(
         self,
@@ -439,7 +623,7 @@ class SqlServerGateway:
                 LastSeenDrawNo
             FROM dbo.vw_MarkovTransitionMass
             {where_sql}
-            ORDER BY TransitionCount DESC, LastSeenDrawNo DESC;
+            ORDER BY TransitionCount DESC, LastSeenDrawNo DESC, TargetState ASC;
         """
 
         cursor = self.conn.cursor()
@@ -465,6 +649,81 @@ class SqlServerGateway:
 
         return transitions
 
+    def load_markov_transitions_bulk(
+        self,
+        *,
+        source_states: Sequence[str],
+        day_type: str,
+        top_n_per_source: int,
+    ) -> Dict[str, List[MarkovTransition]]:
+        """Load per-source Top-N Markov rows in one SQL round trip."""
+        validate_day_type(day_type)
+        if top_n_per_source <= 0:
+            raise ValueError("top_n_per_source must be positive")
+        unique_states = list(dict.fromkeys(str(value) for value in source_states))
+        for source_state in unique_states:
+            validate_4d_string(source_state, "source_state")
+        output: Dict[str, List[MarkovTransition]] = {
+            source_state: [] for source_state in unique_states
+        }
+        if not unique_states:
+            return output
+
+        placeholders = ",".join("?" for _ in unique_states)
+        sql = f"""
+            WITH RankedTransitions AS (
+                SELECT
+                    SourceState,
+                    TargetState,
+                    DayType,
+                    TransitionCount,
+                    FirstSeenDrawNo,
+                    LastSeenDrawNo,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY SourceState
+                        ORDER BY TransitionCount DESC, LastSeenDrawNo DESC, TargetState ASC
+                    ) AS RankNo
+                FROM dbo.vw_MarkovTransitionMass
+                WHERE SourceState IN ({placeholders})
+                  AND DayType = ?
+            )
+            SELECT
+                SourceState,
+                TargetState,
+                DayType,
+                TransitionCount,
+                FirstSeenDrawNo,
+                LastSeenDrawNo
+            FROM RankedTransitions
+            WHERE RankNo <= ?
+            ORDER BY SourceState, TransitionCount DESC, LastSeenDrawNo DESC, TargetState ASC;
+        """
+        params: List[Any] = [
+            *unique_states,
+            day_type,
+            int(top_n_per_source),
+        ]
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute(sql, params)
+            rows = cursor.fetchall()
+        finally:
+            cursor.close()
+
+        for row in rows:
+            source_state = str(row.SourceState)
+            output.setdefault(source_state, []).append(
+                MarkovTransition(
+                    source_state=source_state,
+                    target_state=str(row.TargetState),
+                    day_type=str(row.DayType),
+                    transition_count=int(row.TransitionCount),
+                    first_seen_draw_no=int(row.FirstSeenDrawNo),
+                    last_seen_draw_no=int(row.LastSeenDrawNo),
+                )
+            )
+        return output
+
     def register_formula(
         self,
         formula: MatrixFormula,
@@ -477,6 +736,33 @@ class SqlServerGateway:
         is_active: bool = True,
     ) -> int:
         formula.validate()
+
+        if self.no_sql_write:
+            for entry in self._in_memory_formula_registry:
+                if (
+                    entry.formula.engine_name == formula.engine_name
+                    and entry.formula.formula_version == formula.formula_version
+                    and entry.formula.day_type == formula.day_type
+                    and entry.is_active == is_active
+                ):
+                    return int(entry.formula_id)
+
+            formula_id = self._next_in_memory_formula_id
+            self._next_in_memory_formula_id -= 1
+            self._in_memory_formula_registry.append(
+                InMemoryFormulaRegistryEntry(
+                    formula_id=formula_id,
+                    formula=formula,
+                    training_start_draw_no=int(training_start_draw_no),
+                    training_end_draw_no=int(training_end_draw_no),
+                    historical_confidence=float(historical_confidence),
+                    hit_rate_top5=float(hit_rate_top5),
+                    sample_size=int(sample_size),
+                    is_active=bool(is_active),
+                    registered_order=len(self._in_memory_formula_registry) + 1,
+                )
+            )
+            return int(formula_id)
 
         payload = {
             "engine_name": formula.engine_name,
@@ -1412,8 +1698,14 @@ class Phase1BaselineBuilder:
 
 
 class Phase2SequentialInputLayer:
-    def __init__(self, gateway: SqlServerGateway) -> None:
+    def __init__(
+        self,
+        gateway: SqlServerGateway,
+        *,
+        causal_markov_cache: Optional[CausalMarkovTransitionCache] = None,
+    ) -> None:
         self.gateway = gateway
+        self.causal_markov_cache = causal_markov_cache
 
     def load_source_draw_vectors(self, draw_no: int) -> Tuple[DrawRecord, np.ndarray]:
         record = self.gateway.load_phase2_draw(draw_no)
@@ -1429,11 +1721,28 @@ class Phase2SequentialInputLayer:
         source_states: Sequence[str],
         day_type: str,
         top_n_per_source: int = 5,
+        source_draw_no: Optional[int] = None,
     ) -> Dict[str, List[MarkovTransition]]:
         validate_day_type(day_type)
 
-        output: Dict[str, List[MarkovTransition]] = {}
+        if self.causal_markov_cache is not None:
+            if source_draw_no is None:
+                raise ValueError("source_draw_no is required for causal Markov loading")
+            return self.causal_markov_cache.load_markov_transitions_bulk(
+                source_states=source_states,
+                day_type=day_type,
+                top_n_per_source=top_n_per_source,
+                source_draw_no=source_draw_no,
+            )
 
+        if hasattr(self.gateway, "load_markov_transitions_bulk"):
+            return self.gateway.load_markov_transitions_bulk(
+                source_states=source_states,
+                day_type=day_type,
+                top_n_per_source=top_n_per_source,
+            )
+
+        output: Dict[str, List[MarkovTransition]] = {}
         for source_state in source_states:
             validate_4d_string(source_state, "source_state")
             output[source_state] = self.gateway.load_markov_transitions(

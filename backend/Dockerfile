@@ -26,6 +26,8 @@ RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 COPY app /app/backend/app
 COPY jeffrey_quad_engine_v2_step2_matrix_core.py.source /app/jeffrey_quad_engine_v2_step2_matrix_core.py
 COPY jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source /app/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py
+COPY full_history_live_knowledge.py.source /app/full_history_live_knowledge.py
+COPY live_knowledge /app/live_knowledge
 
 EXPOSE 10000
 

@@ -1,0 +1,272 @@
+PONYTAIL E2/E4 8-ENGINE FINAL REAUDIT REPORT
+
+Final decision: PONYTAIL_FAIL_WITH_BLOCKERS
+
+SCOPE
+
+Independent reaudit of:
+
+- reports/patches/e2_e4_8engine_runtime_validation_report.txt
+- runtime candidate construction and diversity ranking
+- live 26-model knowledge pack
+- causal Markov implementation
+- bounded replay determinism
+- database side effects
+
+No source code was modified. No commit, push, deployment, or service restart was
+performed.
+
+EXECUTIVE RESULT
+
+The eight-engine runtime integration itself passes inspection for policy-eligible
+predictions at source_draw_no >= 5497:
+
+- all eight required families contribute before ranking;
+- trained E2 and E40 contribute real votes rather than merely loading;
+- causal E4 contributes real votes without using the retrospective E4 profile;
+- source draw 5497 produced exactly five unique four-digit candidates from five
+  represented engine sources;
+- the Markov replay-range audit found zero future observations;
+- the full test suite passed 60/60;
+- the two bounded JSONL outputs were byte-identical.
+
+The strict no-database-write requirement does not pass. The supplied bounded
+"dry-run" executes the adaptive zero-hit registration path. That path calls
+register_formula(), which contains an INSERT into dbo.FormulaRegistry. The runner
+rolls each transaction back, so persisted table row counts remained unchanged,
+but SQL write statements were still executed. The two logs prove new identity
+values were allocated on some rows (for example source 4054 used FormulaId 2876
+in run A and 2878 in run B). Therefore "persisted changes: 0" is verified, but
+"no DB writes were performed" is false under the literal audit requirement.
+
+PRIMARY REPORT VERIFICATION
+
+The primary report's eight-engine, pack, Top-5, diversity, E2, E40, E4 causal,
+test, deterministic JSONL, and zero-persisted-row-count claims are supported.
+Its wording correctly says "persisted row-count changes: 0". It does not establish
+that no write statements were executed.
+
+LIVE PACK
+
+- Schema key `models`: live_knowledge/full_history_engine_pack.json:11.
+- E2 models:
+  live_knowledge/full_history_engine_pack.json:210,339,468,597,726.
+- E4 model:
+  live_knowledge/full_history_engine_pack.json:3540.
+- minimum_source_draw_no 5497:
+  live_knowledge/full_history_engine_pack.json:7280025.
+- source_artifact_count 26:
+  live_knowledge/full_history_engine_pack.json:7280029.
+- group counts A=13, B=9, C=3, D=1:
+  live_knowledge/full_history_engine_pack.json:7280030.
+- Loader reads and indexes `models`:
+  full_history_live_knowledge.py:104-110.
+- Loader validates count, group coverage, and required E2/E4 names:
+  full_history_live_knowledge.py:115-143.
+- Root/backend loader, Step3 source, and pack mirrors compare byte-identical.
+- Independently computed pack SHA256:
+  31c934f7203f2d0df84631cbeaac9753a1bd452398395c0e74df681459fc402a.
+
+ENGINE SUMMARY
+
+| Engine | Pack/artifact evidence | Runtime source before ranker | Eligible draw 5497 evidence | Temporal assessment |
+| E1_CROSS_PAIR_LINEAR | Present | Static output conversion at orchestrator:467-507; static dispatch at step2:1637-1645 | 23 votes | Source-only input; low risk |
+| E1_WLS_DECAY | Present | `_votes_from_wls_decay` at orchestrator:715+; invoked at 1161-1167 | 5 votes | Training history is source-cutoff bounded |
+| E1_MIRROR_BASE5 | Present | `_votes_from_mirror_base5` at orchestrator:809+; invoked at 1168-1174 | 5 votes | Training history is source-cutoff bounded |
+| E1_DELTA_ROTATION | Present | `_votes_from_delta_rotation` at orchestrator:975+; invoked at 1175-1181 | 5 votes | Training pairs are source-cutoff bounded |
+| E2_SET_PROJECTOR | Five trained models at pack lines 210,339,468,597,726 | Static E2 plus trained E2 at orchestrator:574-602; invoked at 1182-1188 | 46 votes total; 23 trained Wednesday-model votes | Trained path is gated at source 5497 |
+| E3_POLYNOMIAL | Present | Static output conversion at orchestrator:467-507; static dispatch at step2:1637-1645 | 22 votes | Source-only input; low risk |
+| E4_MARKOV_TRANSITION_MASS | Retrospective model at pack line 3540 | Causal `_votes_from_markov` at orchestrator:509-572; invoked at 1197-1203 | 508 votes; maximum last_seen 4013 | PASS: retrospective profile remains evidence-only |
+| E40_FULL_HISTORY_KNOWLEDGE | 26-model promoted ensemble | `_votes_from_full_history_knowledge` at orchestrator:1052-1117; invoked at 1189-1195 | 25 votes and one selected Top-5 slot | Correctly gated before source 5497 |
+
+ELIGIBLE RUNTIME POOL
+
+Independent read-only candidate construction for source draw 5497, day type
+Wednesday:
+
+- unique candidates: 637
+- total votes: 658
+- E1_CROSS_PAIR_LINEAR: 23
+- E1_WLS_DECAY_0.98: 5
+- E1_MIRROR_BASE5_LSTS: 5
+- E1_DELTA_ROTATION_LSTS: 5
+- E2_SET_PROJECTOR: 46
+- trained E2 subset: 23
+- trained E2 model:
+  E2_SET_PROJECTOR_LEARNED_BIAS__Wednesday
+- E3_POLYNOMIAL: 22
+- E4_MARKOV_TRANSITION_MASS: 508
+- E40_FULL_HISTORY_KNOWLEDGE: 25
+
+Locked result:
+
+- Top 5: 4445, 4640, 9917, 9373, 5335
+- exactly five: PASS
+- unique: PASS
+- all four-digit numeric strings: PASS
+- represented sources: 5
+- sources: E40_FULL_HISTORY_KNOWLEDGE, E2_SET_PROJECTOR,
+  E4_MARKOV_TRANSITION_MASS, E1_CROSS_PAIR_LINEAR,
+  E4_ADAPTIVE_4_UNKNOWNS_AFFINE
+
+The pool invokes static engines, WLS, mirror, delta, trained E2, E40, causal
+Markov, and adaptive formulas before aggregation/ranking:
+jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1144-1210.
+
+TOP-5 AND DIVERSITY
+
+- Constants are TOP_K=5 and MIN_DISTINCT_ENGINES=3:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:69-71.
+- Ranker forces distinct-engine representation:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1425-1476.
+- It fills unique candidates and rejects output not exactly five:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1478-1515.
+- It rejects insufficient represented engines:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1517-1523.
+
+E2 AND E40 ACTUAL USE
+
+- E2 day-specific model selection with ALL fallback:
+  full_history_live_knowledge.py:149-189.
+- E2 candidate metadata preserves trained model provenance:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:574-602.
+- E40 is gated by pack eligibility and emits candidates:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1052-1117.
+- Both produced non-zero eligible-draw votes. E40 and E2 each supplied a source
+  represented in the locked Top 5.
+
+MARKOV TEMPORAL FIREWALL
+
+- Causal observations store target draw number:
+  jeffrey_quad_engine_v2_step2_matrix_core.py:90-107.
+- `bisect_right` applies source_draw_no before counting:
+  jeffrey_quad_engine_v2_step2_matrix_core.py:108-135.
+- Deterministic ordering is transition_count DESC, last_seen_draw_no DESC,
+  target_state ASC:
+  jeffrey_quad_engine_v2_step2_matrix_core.py:136-149.
+- SQL fallback ordering states the same order:
+  jeffrey_quad_engine_v2_step2_matrix_core.py:498-509,554-581.
+- Offline E4 artifact explicitly says it does not replace the causal runtime:
+  scripts/run_full_history_engine_training.py:972-980.
+- Replay-range audit, sources 4051 through 5493:
+  selected Markov rows 589,252; future-observation violations 0.
+- Eligible source 5497:
+  E4 votes 508; maximum selected last_seen 4013 <= 5497.
+
+HIDDEN TARGET FIREWALL
+
+- Python checks only target DrawNo existence before candidate locking:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1685-1705.
+- Candidate pool and Top 5 are locked before SQL verification:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1709-1725.
+- Verification is delegated to dbo.SP_Verify_Predictions:
+  jeffrey_quad_engine_v2_step2_matrix_core.py:695-726.
+- Target winning numbers are loaded only after SQL returns HitCount == 0:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1630-1641,1733-1750.
+
+TESTS RUN
+
+1. Syntax:
+
+   .venv/bin/python -m py_compile \
+     full_history_live_knowledge.py \
+     backend/full_history_live_knowledge.py.source \
+     jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py \
+     backend/jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py.source \
+     scripts/run_step3_resumable_dryrun.py
+
+   Result: PASS.
+
+2. Unit tests:
+
+   .venv/bin/python -m unittest discover -s tests -p 'test_*.py'
+
+   Result: 60 tests run, 60 passed.
+
+Relevant coverage:
+
+- pack schema/count/groups: tests/test_full_history_live_knowledge.py:25-38
+- E40 cutoff: tests/test_full_history_live_knowledge.py:122-137
+- trained E2 day model/cutoff: tests/test_full_history_live_knowledge.py:139-161
+- all eight families and Top-5/diversity:
+  tests/test_full_history_live_knowledge.py:163-250
+- Markov cutoff and deterministic tie order:
+  tests/test_causal_offline_foundation.py:90-149
+
+BOUNDED REPLAY
+
+Commands:
+
+  .venv/bin/python scripts/run_step3_resumable_dryrun.py \
+    --start-draw-no 4051 --end-draw-no 4061 \
+    --training-window-size 64 \
+    --output-jsonl reports/patches/ponytail_e2_e4_reaudit_replay_a.jsonl
+
+  .venv/bin/python scripts/run_step3_resumable_dryrun.py \
+    --start-draw-no 4051 --end-draw-no 4061 \
+    --training-window-size 64 \
+    --output-jsonl reports/patches/ponytail_e2_e4_reaudit_replay_b.jsonl
+
+Outputs:
+
+- reports/patches/ponytail_e2_e4_reaudit_replay_a.jsonl
+- reports/patches/ponytail_e2_e4_reaudit_replay_a.log
+- reports/patches/ponytail_e2_e4_reaudit_replay_b.jsonl
+- reports/patches/ponytail_e2_e4_reaudit_replay_b.log
+
+Checks:
+
+- 10 successful rows in each JSONL
+- exactly five unique four-digit candidates per row
+- at least three represented sources per row
+- E40 activations before cutoff: 0
+- error/fallback/traceback markers: 0
+- JSONL SHA256 for both:
+  997c85b354339755c6d8950e3804b65a8e86cd89abe958780584332627f86635
+- JSONLs byte-identical: PASS
+
+The logs are intentionally not byte-identical because they contain timestamps
+and, critically, differing rolled-back identity values.
+
+DATABASE WRITE CHECK
+
+Persisted state:
+
+- user tables counted: 151
+- before row-count snapshot SHA256:
+  9db331bc4e5371a6196897527c39135ecceb02ac9ae7d2386165058829a3b57d
+- after row-count snapshot SHA256:
+  9db331bc4e5371a6196897527c39135ecceb02ac9ae7d2386165058829a3b57d
+- changed table row counts: 0
+- runner rollback:
+  scripts/run_step3_resumable_dryrun.py:178-210
+
+Strict no-write blocker:
+
+- all 10 replay rows returned HitCount 0 and adaptive_triggered=true;
+- zero-hit execution invokes solve_and_register_adaptive_formula:
+  jeffrey_quad_engine_v2_step3_adaptive_orchestrator.py:1733-1750;
+- that calls register_formula:
+  jeffrey_quad_engine_v2_step2_matrix_core.py:1647-1677;
+- register_formula contains an INSERT:
+  jeffrey_quad_engine_v2_step2_matrix_core.py:609-648,674+;
+- run A source 4054 logged FormulaId 2876; run B logged FormulaId 2878;
+- run A source 4057 logged FormulaId 2877; run B logged FormulaId 2879.
+
+This proves write statements were executed and rolled back. It does not indicate
+persisted data corruption, but it violates the reaudit's literal "no DB writes
+are performed" requirement.
+
+BLOCKERS
+
+1. The bounded replay harness is transactionally non-persistent but not
+   read-only. A controlled production review should not rely on the claim that
+   the current validation replay performs zero DB writes.
+2. Re-run validation through a genuinely read-only replay path, or add an
+   explicit validation mode that suppresses adaptive formula registration while
+   retaining candidate locking and SQL verification. Confirm no DML with
+   database-side evidence, then repeat the before/after check.
+
+FINAL DECISION
+
+PONYTAIL_FAIL_WITH_BLOCKERS
