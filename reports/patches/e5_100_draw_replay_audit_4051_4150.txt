@@ -1,0 +1,36 @@
+E5 100-Draw Sequential Observation Replay Audit
+
+Range: 4051-4150
+Mode: observation_only
+MemoryWrite: false
+SQLWrite: false
+ProductionRankingChanged: false
+FirewallOrder: predict_locked_before_actual_load
+
+Results:
+- Rows: 100
+- Observed: 100
+- Skipped: 0
+- ExactHitCountTotal: 3
+- DrawsWithHit: 3
+- AttributionRowsTotal: 1949
+- FinalInMemoryEntryCount: 420
+
+FirstRow:
+TargetDrawNo: 4051
+SourceDrawNo: 4050
+DayType: Special
+Top5: 9354, 4719, 3300, 6416, 0925
+ExactHitCount: 0
+AttributionRows: 25
+
+LastRow:
+TargetDrawNo: 4150
+SourceDrawNo: 4149
+DayType: Special
+Top5: 0555, 5698, 0000, 4882, 9225
+ExactHitCount: 1
+AttributionRows: 26
+
+Decision:
+E5_100_DRAW_SEQUENTIAL_OBSERVATION_REPLAY_VALIDATED
