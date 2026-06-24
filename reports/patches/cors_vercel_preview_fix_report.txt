@@ -1,0 +1,38 @@
+CORS Vercel Preview Fix Report
+
+Root cause:
+- The backend CORS middleware uses an exact-origin allowlist from backend/app/core/config.py.
+- Existing defaults allowed localhost and https://4-d-ml-loop.vercel.app, but did not include the deployed Vercel preview origin:
+  https://4-d-ml-loop-h0odv3i1q-jeffreythaws-projects.vercel.app
+- Because allow_credentials=True is enabled, wildcard CORS was not used.
+
+Files changed:
+- backend/app/core/config.py
+- tests/test_backend_cors.py
+
+Allowed origins after fix:
+- http://localhost:3000
+- http://127.0.0.1:3000
+- https://4-d-ml-loop.vercel.app
+- https://4-d-ml-loop-h0odv3i1q-jeffreythaws-projects.vercel.app
+- Any additional comma-separated origins configured through FRONTEND_URL.
+
+Tests / validation run:
+- PASS: .venv/bin/python -m py_compile backend/app/core/config.py backend/app/main.py
+- PASS: .venv/bin/python -m unittest tests.test_backend_cors
+- CORS test result: Ran 3 tests, OK.
+
+Exact Render env var change required:
+- None required after this code change is deployed, because the preview origin is now in DEFAULT_CORS_ORIGINS.
+- Optional immediate env-only workaround on Render before deploying this code:
+  FRONTEND_URL=https://4-d-ml-loop-h0odv3i1q-jeffreythaws-projects.vercel.app
+  If adding multiple custom origins, use comma-separated exact origins.
+
+Operational actions:
+- Deploy performed: no
+- Restart performed: no
+- Push performed: no
+- Pull request created: no
+- Prediction engine logic changed: no
+- E5 logic changed: no
+- SQL/firewall logic changed: no

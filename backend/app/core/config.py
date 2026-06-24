@@ -13,6 +13,7 @@ DEFAULT_CORS_ORIGINS = (
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://4-d-ml-loop.vercel.app",
+    "https://4-d-ml-loop-h0odv3i1q-jeffreythaws-projects.vercel.app",
 )
 
 
