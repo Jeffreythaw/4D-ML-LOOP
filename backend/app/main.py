@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes_health import router as health_router
 from app.api.routes_predictions import router as predictions_router
 from app.core.config import get_settings
+from app.core.memory import log_memory
 
 
 settings = get_settings()
@@ -24,3 +25,5 @@ app.add_middleware(
 
 app.include_router(health_router)
 app.include_router(predictions_router, prefix="/api")
+
+log_memory("backend_app_imported")

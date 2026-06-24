@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from app.core.config import get_settings
-from app.core.temporal_context_engine import run_temporal_context_prediction
+from app.core.memory import log_memory
 from app.schemas.prediction import PredictionCandidate, PredictionRequest
 
 
@@ -42,19 +42,24 @@ def run_existing_engine_prediction(request: PredictionRequest, *, allow_fallback
     winners, and must not register adaptive formulas. Verification remains only
     in the SQL stored procedure path in app.core.db.
     """
+    log_memory("prediction_request_start")
     step2, step3 = _load_existing_engine_modules()
+    log_memory("prediction_engine_modules_loaded")
     settings = get_settings()
     source_draw_no = int(request.draw_number)
 
     try:
         with step2.SqlServerGateway(settings.sql_connection_string()) as gateway:
+            log_memory("prediction_sql_gateway_open")
             orchestrator = step3.Step3AdaptiveOrchestrator(
                 core=step2,
                 gateway=gateway,
                 start_draw_no=source_draw_no,
                 end_draw_no=source_draw_no + 1,
             )
+            log_memory("prediction_orchestrator_ready")
             locked = orchestrator.predict_one_step_locked(source_draw_no)
+            log_memory("prediction_locked_top5_ready")
 
             source_record = gateway.load_phase2_draw(source_draw_no)
             if source_record is None:
@@ -114,6 +119,9 @@ def run_existing_engine_prediction(request: PredictionRequest, *, allow_fallback
         )
 
     if request.mode == "Current":
+        from app.core.temporal_context_engine import run_temporal_context_prediction
+
+        log_memory("prediction_temporal_context_loaded")
         temporal_result = run_temporal_context_prediction(
             source_draw_no=source_draw_no,
             target_draw_no=int(locked.target_draw_no),
@@ -191,8 +199,10 @@ def _load_existing_engine_modules() -> tuple[Any, Any]:
         sys.path.insert(0, str(PROJECT_ROOT))
 
     try:
+        log_memory("prediction_engine_import_start")
         step2 = import_module("jeffrey_quad_engine_v2_step2_matrix_core")
         step3 = import_module("jeffrey_quad_engine_v2_step3_adaptive_orchestrator")
+        log_memory("prediction_engine_import_done")
     except Exception as exc:
         raise PredictionAdapterError("Could not import existing Step 2 / Step 3 engine modules.") from exc
 
