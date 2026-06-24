@@ -1,0 +1,48 @@
+E5 Full Sequential Observation Replay Audit
+
+Range: 4051-5494
+Mode: observation_only
+MemoryWrite: false
+SQLWrite: false
+ProductionRankingChanged: false
+FirewallOrder: predict_locked_before_actual_load
+
+Runtime:
+- Total wall time: 1:17:23.55
+
+Results:
+- Rows: 1444
+- Observed: 1444
+- Skipped: 0
+- ExactHitCountTotal: 18
+- DrawsWithAtLeastOneHit: 17
+- AttributionRowsTotal: 29595
+- FinalInMemoryEntryCount: 2610
+
+Day Breakdown:
+- Special: rows=962 exact_hits=11 attribution_rows=19895
+- Saturday: rows=481 exact_hits=7 attribution_rows=9676
+- Wednesday: rows=1 exact_hits=0 attribution_rows=24
+
+First Row:
+TargetDrawNo: 4051
+SourceDrawNo: 4050
+DayType: Special
+Top5: 9354, 4719, 3300, 6416, 0925
+ExactHitCount: 0
+AttributionRows: 25
+
+Last Row:
+TargetDrawNo: 5494
+SourceDrawNo: 5493
+DayType: Wednesday
+Top5: 7976, 1484, 0000, 5223, 4181
+ExactHitCount: 0
+AttributionRows: 24
+
+Decision:
+E5_FULL_SEQUENTIAL_OBSERVATION_REPLAY_4051_5494_VALIDATED
+
+Important Boundary:
+This replay validates E5 observation-memory behavior only.
+It does not enable E5 production scoring, does not alter Top5 ranking, does not write SQL, and does not persist memory unless a future run explicitly uses --write-memory.
